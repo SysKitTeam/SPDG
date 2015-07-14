@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1A548AB3-5D2E-44E0-8DAE-4178C4D303C4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Acceleratio.SPDG.UI</RootNamespace>
+    <AssemblyName>Acceleratio.SPDG</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common.cs" />
+    <Compile Include="frm01Connect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm01Connect.Designer.cs">
+      <DependentUpon>frm01Connect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm02UsersGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm02UsersGroups.Designer.cs">
+      <DependentUpon>frm02UsersGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm03WebApplications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm03WebApplications.Designer.cs">
+      <DependentUpon>frm03WebApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm04Collections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm04Collections.Designer.cs">
+      <DependentUpon>frm04Collections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm05Sites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm05Sites.Designer.cs">
+      <DependentUpon>frm05Sites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm06Lists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm06Lists.Designer.cs">
+      <DependentUpon>frm06Lists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm07ViewsColumns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm07ViewsColumns.Designer.cs">
+      <DependentUpon>frm07ViewsColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm08ListItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm08ListItems.Designer.cs">
+      <DependentUpon>frm08ListItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm09ContentTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm09ContentTypes.Designer.cs">
+      <DependentUpon>frm09ContentTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm10Workflows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm10Workflows.Designer.cs">
+      <DependentUpon>frm10Workflows.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm11Permissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm11Permissions.Designer.cs">
+      <DependentUpon>frm11Permissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm12Finalize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm12Finalize.Designer.cs">
+      <DependentUpon>frm12Finalize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataGeneration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataGeneration.Designer.cs">
+      <DependentUpon>frmDataGeneration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTest.Designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWizardMaster.Designer.cs">
+      <DependentUpon>frmWizardMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucSteps.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucSteps.Designer.cs">
+      <DependentUpon>ucSteps.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frm01Connect.resx">
+      <DependentUpon>frm01Connect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm02UsersGroups.resx">
+      <DependentUpon>frm02UsersGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm03WebApplications.resx">
+      <DependentUpon>frm03WebApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm04Collections.resx">
+      <DependentUpon>frm04Collections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm05Sites.resx">
+      <DependentUpon>frm05Sites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm06Lists.resx">
+      <DependentUpon>frm06Lists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm07ViewsColumns.resx">
+      <DependentUpon>frm07ViewsColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm08ListItems.resx">
+      <DependentUpon>frm08ListItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm09ContentTypes.resx">
+      <DependentUpon>frm09ContentTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm10Workflows.resx">
+      <DependentUpon>frm10Workflows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm11Permissions.resx">
+      <DependentUpon>frm11Permissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm12Finalize.resx">
+      <DependentUpon>frm12Finalize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataGeneration.resx">
+      <DependentUpon>frmDataGeneration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWizardMaster.resx">
+      <DependentUpon>frmWizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ucSteps.resx">
+      <DependentUpon>ucSteps.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Acceleratio.SPDG.Generator\Acceleratio.SPDG.Generator.csproj">
+      <Project>{919b54d3-24bb-4b71-a6b4-ac9fa74339a8}</Project>
+      <Name>Acceleratio.SPDG.Generator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
