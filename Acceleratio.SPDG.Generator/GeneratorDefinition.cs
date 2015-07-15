@@ -13,12 +13,19 @@ namespace Acceleratio.SPDG.Generator
         public string Username { get; set; }
         public string Password { get; set; }
         public string Domain { get; set; }
+
+        public string OwnerLogin { get; set; }
+        public string OwnerPassword { get; set; }
+        public string OwnerEmail { get; set; }
+        public string DatabaseServer { get; set; }
+
         public bool GenerateUsersAndSecurityGroupsActiveInDirectory { get; set; }
         public string OrganizationalUnit { get; set; }
         public int NumberOfUsersToCreate { get; set; }
         public int NumberOfSecurityGroupsToCreate { get; set; }
         public int CreateNewWebApplications { get; set; }
         public string UseExistingWebApplication { get; set; }
+        public string UseExistingWebApplicationName { get; set; }
         public int CreateNewSiteCollections { get; set; }
         public bool UseExistingSiteCollection { get; set; }
         public string SiteCollection { get; set; }
