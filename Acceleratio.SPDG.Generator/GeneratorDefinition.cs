@@ -32,6 +32,7 @@ namespace Acceleratio.SPDG.Generator
         public int NumberOfSitesToCreate { get; set; }
         public int MaxNumberOfLevelsForSites { get; set; }
         public int MaxNumberOfListsAndLibrariesPerSite { get; set; }
+        public bool LibTypeList { get; set; }
         public bool LibTypeDocument { get; set; }
         public bool LibTypeTasks { get; set; }
         public bool LibTypeCalendar { get; set; }

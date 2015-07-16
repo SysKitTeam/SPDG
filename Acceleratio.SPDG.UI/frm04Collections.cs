@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.SharePoint;
+using Microsoft.SharePoint.Administration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +24,7 @@ namespace Acceleratio.SPDG.UI
 
             this.Text = Common.APP_TITLE;
             ucSteps1.showStep(4);
+            loadSiteCollections();
             loadData();
         }
 
@@ -46,13 +49,11 @@ namespace Acceleratio.SPDG.UI
             {
                 trackNumSiteColls.Enabled = true;
                 cboSiteCollection.Enabled = false;
-                cboWebApplication.Enabled = false;
             }
             else
             {
                 trackNumSiteColls.Enabled = false;
                 cboSiteCollection.Enabled = true;
-                cboWebApplication.Enabled = true;
             }
         }
 
@@ -66,21 +67,73 @@ namespace Acceleratio.SPDG.UI
             changeRadio();
         }
 
+        private void loadSiteCollections()
+        {
+            if (Common.WorkingDefinition.UseExistingWebApplication != string.Empty)
+            {
+                SPWebService spWebService = SPWebService.ContentService;
+                SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == new Guid( Common.WorkingDefinition.UseExistingWebApplication));
+
+                foreach (SPSite siteColl in webApp.Sites)
+                {
+                    ComboboxItem item = new ComboboxItem();
+                    item.Text = siteColl.Url;
+                    item.Value = siteColl.Url;
+                    cboSiteCollection.Items.Add(item);
+                }
+            }
+        }
+
         public override void loadData()
         {
+            if (Common.WorkingDefinition.CreateNewWebApplications > 0 )
+            {
+                Common.WorkingDefinition.UseExistingSiteCollection = false;
+                trackNumSiteColls.Minimum = 1;
+                Common.WorkingDefinition.CreateNewSiteCollections = 1;
+                radioCreateNewSiteColl.Checked = true;
+                radioUseExisting.Enabled = false;
+            }
+            else
+            {
+                trackNumSiteColls.Minimum = 0;
+                radioUseExisting.Enabled = true;
+            }
+
             trackNumSiteColls.Value = Common.WorkingDefinition.CreateNewSiteCollections;
             radioUseExisting.Checked = Common.WorkingDefinition.UseExistingSiteCollection;
             radioCreateNewSiteColl.Checked = !Common.WorkingDefinition.UseExistingSiteCollection;
-            if (!string.IsNullOrEmpty(Common.WorkingDefinition.SiteCollection)) cboSiteCollection.SelectedValue = Common.WorkingDefinition.SiteCollection;
+            if (!string.IsNullOrEmpty(Common.WorkingDefinition.SiteCollection)) 
+            {
+                cboSiteCollection.Text = Common.WorkingDefinition.SiteCollection;
+            }
+
         }
 
         public override bool saveData()
         {
-            Common.WorkingDefinition.CreateNewSiteCollections = trackNumSiteColls.Value;
-            Common.WorkingDefinition.UseExistingSiteCollection = radioUseExisting.Checked;
-            if (cboSiteCollection.SelectedItem != null) Common.WorkingDefinition.SiteCollection = cboSiteCollection.SelectedText;
+            if( radioCreateNewSiteColl.Checked )
+            {
+                Common.WorkingDefinition.CreateNewSiteCollections = trackNumSiteColls.Value;
+                Common.WorkingDefinition.UseExistingSiteCollection = false;
+                Common.WorkingDefinition.SiteCollection = string.Empty;
+            }
+            else
+            {
+                Common.WorkingDefinition.CreateNewSiteCollections = 0;
+                Common.WorkingDefinition.UseExistingSiteCollection = true;
+                if (cboSiteCollection.SelectedItem != null)
+                {
+                    Common.WorkingDefinition.SiteCollection = ((ComboboxItem)cboSiteCollection.SelectedItem).Value.ToString();
+                }
+            }
 
             return true;
+        }
+
+        private void trackNumSiteColls_ValueChanged(object sender, EventArgs e)
+        {
+            lblCreateSiteColls.Text = trackNumSiteColls.Value.ToString();
         }
     }
 }

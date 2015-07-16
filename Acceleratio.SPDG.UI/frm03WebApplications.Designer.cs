@@ -30,12 +30,10 @@
         {
             this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
             this.radioCreateNewWebApp = new System.Windows.Forms.RadioButton();
-            this.radioUseExistingWebApp = new System.Windows.Forms.RadioButton();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.cboUseExistingWebApp = new System.Windows.Forms.ComboBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioUseExistingWebApp = new System.Windows.Forms.RadioButton();
             this.trackCreateNewWebApplication = new System.Windows.Forms.TrackBar();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.lblCreateNewApps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackCreateNewWebApplication)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,24 +54,7 @@
             this.radioCreateNewWebApp.TabStop = true;
             this.radioCreateNewWebApp.Text = "Create new Web Applications";
             this.radioCreateNewWebApp.UseVisualStyleBackColor = true;
-            // 
-            // radioUseExistingWebApp
-            // 
-            this.radioUseExistingWebApp.AutoSize = true;
-            this.radioUseExistingWebApp.Location = new System.Drawing.Point(271, 217);
-            this.radioUseExistingWebApp.Name = "radioUseExistingWebApp";
-            this.radioUseExistingWebApp.Size = new System.Drawing.Size(83, 17);
-            this.radioUseExistingWebApp.TabIndex = 9;
-            this.radioUseExistingWebApp.TabStop = true;
-            this.radioUseExistingWebApp.Text = "Use Existing";
-            this.radioUseExistingWebApp.UseVisualStyleBackColor = true;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(263, 139);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(409, 45);
-            this.trackBar1.TabIndex = 10;
+            this.radioCreateNewWebApp.CheckedChanged += new System.EventHandler(this.radioCreateNewWebApp_CheckedChanged);
             // 
             // cboUseExistingWebApp
             // 
@@ -83,33 +64,43 @@
             this.cboUseExistingWebApp.Size = new System.Drawing.Size(401, 21);
             this.cboUseExistingWebApp.TabIndex = 11;
             // 
-            // radioButton1
+            // radioUseExistingWebApp
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(265, 217);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 17);
-            this.radioButton1.TabIndex = 9;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Use Existing";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioUseExistingWebApp.AutoSize = true;
+            this.radioUseExistingWebApp.Location = new System.Drawing.Point(265, 215);
+            this.radioUseExistingWebApp.Name = "radioUseExistingWebApp";
+            this.radioUseExistingWebApp.Size = new System.Drawing.Size(83, 17);
+            this.radioUseExistingWebApp.TabIndex = 9;
+            this.radioUseExistingWebApp.TabStop = true;
+            this.radioUseExistingWebApp.Text = "Use Existing";
+            this.radioUseExistingWebApp.UseVisualStyleBackColor = true;
+            this.radioUseExistingWebApp.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // trackCreateNewWebApplication
             // 
-            this.trackCreateNewWebApplication.Location = new System.Drawing.Point(257, 139);
+            this.trackCreateNewWebApplication.Location = new System.Drawing.Point(257, 140);
             this.trackCreateNewWebApplication.Name = "trackCreateNewWebApplication";
-            this.trackCreateNewWebApplication.Size = new System.Drawing.Size(409, 45);
+            this.trackCreateNewWebApplication.Size = new System.Drawing.Size(389, 45);
             this.trackCreateNewWebApplication.TabIndex = 10;
+            this.trackCreateNewWebApplication.ValueChanged += new System.EventHandler(this.trackCreateNewWebApplication_ValueChanged);
+            // 
+            // lblCreateNewApps
+            // 
+            this.lblCreateNewApps.AutoSize = true;
+            this.lblCreateNewApps.Location = new System.Drawing.Point(652, 144);
+            this.lblCreateNewApps.Name = "lblCreateNewApps";
+            this.lblCreateNewApps.Size = new System.Drawing.Size(13, 13);
+            this.lblCreateNewApps.TabIndex = 12;
+            this.lblCreateNewApps.Text = "0";
             // 
             // frm03WebApplications
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.lblCreateNewApps);
             this.Controls.Add(this.trackCreateNewWebApplication);
             this.Controls.Add(this.cboUseExistingWebApp);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.radioUseExistingWebApp);
             this.Controls.Add(this.radioCreateNewWebApp);
             this.Controls.Add(this.ucSteps1);
@@ -124,11 +115,9 @@
             this.Controls.SetChildIndex(this.ucSteps1, 0);
             this.Controls.SetChildIndex(this.radioCreateNewWebApp, 0);
             this.Controls.SetChildIndex(this.radioUseExistingWebApp, 0);
-            this.Controls.SetChildIndex(this.trackBar1, 0);
-            this.Controls.SetChildIndex(this.radioButton1, 0);
             this.Controls.SetChildIndex(this.cboUseExistingWebApp, 0);
             this.Controls.SetChildIndex(this.trackCreateNewWebApplication, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.Controls.SetChildIndex(this.lblCreateNewApps, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackCreateNewWebApplication)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -139,10 +128,9 @@
 
         private ucSteps ucSteps1;
         private System.Windows.Forms.RadioButton radioCreateNewWebApp;
-        private System.Windows.Forms.RadioButton radioUseExistingWebApp;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.ComboBox cboUseExistingWebApp;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioUseExistingWebApp;
         private System.Windows.Forms.TrackBar trackCreateNewWebApplication;
+        private System.Windows.Forms.Label lblCreateNewApps;
     }
 }

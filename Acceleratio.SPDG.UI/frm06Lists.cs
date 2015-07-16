@@ -46,6 +46,7 @@ namespace Acceleratio.SPDG.UI
             chkDocLib.Checked = Common.WorkingDefinition.LibTypeDocument;
             chkTasks.Checked = Common.WorkingDefinition.LibTypeTasks;
             chkCalendar.Checked = Common.WorkingDefinition.LibTypeCalendar;
+            chkList.Checked = Common.WorkingDefinition.LibTypeList;
             chkCreateFolders.Checked = Common.WorkingDefinition.CreateSomeFoldersInDocumentLibraries;
             trackMaxFoldersInLib.Value = Common.WorkingDefinition.MaxNumberOfFoldersToGenerate;
             trackMaxNumberNestedFolders.Value = Common.WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary;
@@ -57,10 +58,16 @@ namespace Acceleratio.SPDG.UI
             Common.WorkingDefinition.LibTypeDocument = chkDocLib.Checked;
             Common.WorkingDefinition.LibTypeTasks = chkTasks.Checked;
             Common.WorkingDefinition.LibTypeCalendar = chkCalendar.Checked;
+            Common.WorkingDefinition.LibTypeList = chkList.Checked;
             Common.WorkingDefinition.CreateSomeFoldersInDocumentLibraries = chkCreateFolders.Checked;
             Common.WorkingDefinition.MaxNumberOfFoldersToGenerate = trackMaxFoldersInLib.Value;
             Common.WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = trackMaxNumberNestedFolders.Value;
             return true;
+        }
+
+        private void trackMaxNumberListLibraries_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumOfLists.Text = trackMaxNumberListLibraries.Value.ToString();
         }
     }
 }

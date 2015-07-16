@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Acceleratio.SPDG.Generator;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -22,7 +23,16 @@ namespace Acceleratio.SPDG.UI
 
             btnClose.Text = "Cancel";
             btnClose.Click += btnClose_Click;
-           
+
+            startDataGeneration();
+        }
+
+        private void startDataGeneration()
+        {
+            DataGenerator generator = new DataGenerator(Common.WorkingDefinition);
+            generator.startDataGeneration();
+
+            MessageBox.Show("SharePoint Data Generation Done!");
         }
 
         void btnClose_Click(object sender, EventArgs e)

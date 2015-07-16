@@ -53,5 +53,10 @@ namespace Acceleratio.SPDG.UI
 
             return true;
         }
+
+        private void trackNumSitesToCreate_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumSites.Text = trackNumSitesToCreate.Value.ToString();
+        }
     }
 }

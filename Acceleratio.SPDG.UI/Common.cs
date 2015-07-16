@@ -49,18 +49,34 @@ namespace Acceleratio.SPDG.UI
 
             WorkingDefinition.NumberOfSecurityGroupsToCreate = 0;
             WorkingDefinition.NumberOfUsersToCreate = 0;
-            WorkingDefinition.NumberOfSitesToCreate = 0;
+            WorkingDefinition.NumberOfSitesToCreate = 1;
             WorkingDefinition.MinDocumentSizeKB = 0;
             WorkingDefinition.MaxDocumentSizeMB = 0;
             WorkingDefinition.MaxNumberOfColumnsPerList = 0;
             WorkingDefinition.MaxNumberOfContentTypesPerSiteCollection = 0;
             WorkingDefinition.MaxNumberOfFoldersToGenerate = 0;
             WorkingDefinition.MaxNumberofItemsToGenerate = 0;
-            WorkingDefinition.MaxNumberOfLevelsForSites = 0;
-            WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite = 0;
-            WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 0;
+            WorkingDefinition.MaxNumberOfLevelsForSites = 1;
+            WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite = 1;
+            WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 1;
             WorkingDefinition.MaxNumberOfViewsPerList = 0;
+            WorkingDefinition.CreateNewWebApplications = 0;
+            WorkingDefinition.OwnerLogin = "acceleratio\\kresimir.korovljevic";
+            WorkingDefinition.OwnerPassword = "12Kres.1";
+            WorkingDefinition.OwnerEmail = "kresimir.korovljevic@acceleratio.net";
+            WorkingDefinition.DatabaseServer = "SQL-KRESO";
 
+        }
+    }
+
+    public class ComboboxItem
+    {
+        public string Text { get; set; }
+        public object Value { get; set; }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

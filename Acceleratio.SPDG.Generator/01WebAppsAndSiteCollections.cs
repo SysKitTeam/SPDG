@@ -24,7 +24,9 @@ namespace Acceleratio.SPDG.Generator
             }
             else
             {
-                workingSiteCollections.Add(workingDefinition.SiteCollection);
+                SiteCollInfo siteCollInfo = new SiteCollInfo();
+                siteCollInfo.URL = workingDefinition.SiteCollection;
+                workingSiteCollections.Add(siteCollInfo);
             }
 
         }
@@ -42,7 +44,9 @@ namespace Acceleratio.SPDG.Generator
                     SPSiteCollection siteCollections = webApp.Sites;
                     SPSite site = siteCollections.Add("/sites/SPDGSiteCollection" + siteCollNumber.ToString("00"), workingDefinition.OwnerLogin, workingDefinition.OwnerEmail);
 
-                    workingSiteCollections.Add(site.Url);
+                    SiteCollInfo siteCollInfo = new SiteCollInfo();
+                    siteCollInfo.URL = site.Url;
+                    workingSiteCollections.Add(siteCollInfo);
                 }
             }
             catch (Exception ex)
@@ -94,7 +98,9 @@ namespace Acceleratio.SPDG.Generator
                         SPSiteCollection siteCollections = newApplication.Sites;
                         SPSite site = siteCollections.Add("/sites/SPDGSiteCollection" + siteCollNumber.ToString("00"), workingDefinition.OwnerLogin, workingDefinition.OwnerEmail);
 
-                        workingSiteCollections.Add(site.Url);
+                        SiteCollInfo siteCollInfo = new SiteCollInfo();
+                        siteCollInfo.URL = site.Url;
+                        workingSiteCollections.Add(siteCollInfo);
                     }
 
                 }

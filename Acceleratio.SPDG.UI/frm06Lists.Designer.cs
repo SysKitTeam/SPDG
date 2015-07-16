@@ -40,6 +40,8 @@
             this.chkTasks = new System.Windows.Forms.CheckBox();
             this.chkCalendar = new System.Windows.Forms.CheckBox();
             this.chkCreateFolders = new System.Windows.Forms.CheckBox();
+            this.chkList = new System.Windows.Forms.CheckBox();
+            this.lblNumOfLists = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberListLibraries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxFoldersInLib)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberNestedFolders)).BeginInit();
@@ -55,9 +57,12 @@
             // trackMaxNumberListLibraries
             // 
             this.trackMaxNumberListLibraries.Location = new System.Drawing.Point(259, 134);
+            this.trackMaxNumberListLibraries.Minimum = 1;
             this.trackMaxNumberListLibraries.Name = "trackMaxNumberListLibraries";
-            this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(424, 45);
+            this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(405, 45);
             this.trackMaxNumberListLibraries.TabIndex = 14;
+            this.trackMaxNumberListLibraries.Value = 1;
+            this.trackMaxNumberListLibraries.ValueChanged += new System.EventHandler(this.trackMaxNumberListLibraries_ValueChanged);
             // 
             // label3
             // 
@@ -105,14 +110,14 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(264, 182);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 13);
+            this.label5.Size = new System.Drawing.Size(116, 13);
             this.label5.TabIndex = 19;
-            this.label5.Text = "Types of Libraries";
+            this.label5.Text = "Types of Lists/Libraries";
             // 
             // chkDocLib
             // 
             this.chkDocLib.AutoSize = true;
-            this.chkDocLib.Location = new System.Drawing.Point(267, 207);
+            this.chkDocLib.Location = new System.Drawing.Point(268, 230);
             this.chkDocLib.Name = "chkDocLib";
             this.chkDocLib.Size = new System.Drawing.Size(109, 17);
             this.chkDocLib.TabIndex = 20;
@@ -122,7 +127,7 @@
             // chkTasks
             // 
             this.chkTasks.AutoSize = true;
-            this.chkTasks.Location = new System.Drawing.Point(267, 230);
+            this.chkTasks.Location = new System.Drawing.Point(492, 207);
             this.chkTasks.Name = "chkTasks";
             this.chkTasks.Size = new System.Drawing.Size(55, 17);
             this.chkTasks.TabIndex = 21;
@@ -132,7 +137,7 @@
             // chkCalendar
             // 
             this.chkCalendar.AutoSize = true;
-            this.chkCalendar.Location = new System.Drawing.Point(267, 253);
+            this.chkCalendar.Location = new System.Drawing.Point(492, 230);
             this.chkCalendar.Name = "chkCalendar";
             this.chkCalendar.Size = new System.Drawing.Size(68, 17);
             this.chkCalendar.TabIndex = 22;
@@ -149,11 +154,32 @@
             this.chkCreateFolders.Text = "Create some folders in Document Libraries";
             this.chkCreateFolders.UseVisualStyleBackColor = true;
             // 
+            // chkList
+            // 
+            this.chkList.AutoSize = true;
+            this.chkList.Location = new System.Drawing.Point(268, 207);
+            this.chkList.Name = "chkList";
+            this.chkList.Size = new System.Drawing.Size(42, 17);
+            this.chkList.TabIndex = 24;
+            this.chkList.Text = "List";
+            this.chkList.UseVisualStyleBackColor = true;
+            // 
+            // lblNumOfLists
+            // 
+            this.lblNumOfLists.AutoSize = true;
+            this.lblNumOfLists.Location = new System.Drawing.Point(666, 137);
+            this.lblNumOfLists.Name = "lblNumOfLists";
+            this.lblNumOfLists.Size = new System.Drawing.Size(13, 13);
+            this.lblNumOfLists.TabIndex = 25;
+            this.lblNumOfLists.Text = "1";
+            // 
             // frm06Lists
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.lblNumOfLists);
+            this.Controls.Add(this.chkList);
             this.Controls.Add(this.chkCreateFolders);
             this.Controls.Add(this.chkCalendar);
             this.Controls.Add(this.chkTasks);
@@ -186,6 +212,8 @@
             this.Controls.SetChildIndex(this.chkTasks, 0);
             this.Controls.SetChildIndex(this.chkCalendar, 0);
             this.Controls.SetChildIndex(this.chkCreateFolders, 0);
+            this.Controls.SetChildIndex(this.chkList, 0);
+            this.Controls.SetChildIndex(this.lblNumOfLists, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberListLibraries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxFoldersInLib)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberNestedFolders)).EndInit();
@@ -208,5 +236,7 @@
         private System.Windows.Forms.CheckBox chkTasks;
         private System.Windows.Forms.CheckBox chkCalendar;
         private System.Windows.Forms.CheckBox chkCreateFolders;
+        private System.Windows.Forms.CheckBox chkList;
+        private System.Windows.Forms.Label lblNumOfLists;
     }
 }

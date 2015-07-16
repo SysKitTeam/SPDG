@@ -45,11 +45,14 @@
   <ItemGroup>
     <Compile Include="01WebAppsAndSiteCollections.cs" />
     <Compile Include="02Sites.cs" />
+    <Compile Include="03Lists.cs" />
+    <Compile Include="04Folders.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DataGenerator.cs" />
     <Compile Include="ErrorLog.cs" />
     <Compile Include="GeneratorDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structures\Structures.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

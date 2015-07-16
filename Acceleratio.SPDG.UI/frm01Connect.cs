@@ -313,7 +313,7 @@ namespace Acceleratio.SPDG.UI
                 frm.Show();
             }
 
-            
+            ((Form)fromForm).Close();
         }
 
         internal void MoveAt(int stepNumber, Form currentForm)

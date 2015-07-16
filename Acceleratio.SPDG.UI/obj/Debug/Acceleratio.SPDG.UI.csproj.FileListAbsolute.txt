@@ -44,3 +44,4 @@ C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\Acceleratio.SPDG.Gene
 C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\Acceleratio.SPDG.Generator.pdb
 C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\obj\Debug\Acceleratio.SPDG.exe
 C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\obj\Debug\Acceleratio.SPDG.pdb
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\Acceleratio.SPDG.exe.config
