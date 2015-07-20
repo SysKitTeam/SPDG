@@ -26,9 +26,7 @@ namespace Acceleratio.SPDG.UI
             this.Text = Common.APP_TITLE;
             ucSteps1.showStep(3);
 
-            Application.DoEvents();
-            loadWebApplications();
-            loadData();
+            
         }
 
         void btnBack_Click(object sender, EventArgs e)
@@ -155,6 +153,19 @@ namespace Acceleratio.SPDG.UI
         private void trackCreateNewWebApplication_ValueChanged(object sender, EventArgs e)
         {
             lblCreateNewApps.Text = trackCreateNewWebApplication.Value.ToString();
+        }
+
+        private void frm03WebApplications_Load(object sender, EventArgs e)
+        {
+            this.Show();
+            this.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            loadWebApplications();
+            loadData();
+            this.Enabled = true;
+            this.Cursor = Cursors.Default;
+
         }
     }
 }

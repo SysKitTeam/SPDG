@@ -106,6 +106,7 @@
             this.Controls.Add(this.ucSteps1);
             this.Name = "frm03WebApplications";
             this.Text = "frm03WebApplications";
+            this.Load += new System.EventHandler(this.frm03WebApplications_Load);
             this.Controls.SetChildIndex(this.lblTitle, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);

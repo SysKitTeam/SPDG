@@ -106,6 +106,7 @@
             this.Controls.Add(this.radioCreateNewSiteColl);
             this.Name = "frm04Collections";
             this.Text = "frm04Collections";
+            this.Load += new System.EventHandler(this.frm04Collections_Load);
             this.Controls.SetChildIndex(this.lblTitle, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);

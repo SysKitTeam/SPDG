@@ -39,6 +39,7 @@ namespace Acceleratio.SPDG.Generator
 
         internal List<FolderInfo> Folders {get;set;}
         internal string Name {get;set;}
+        internal bool isLib { get; set; }
     }
 
     internal class FolderInfo

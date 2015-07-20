@@ -20,35 +20,48 @@ namespace Acceleratio.SPDG.Generator
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
-                                if(listInfo.Name.StartsWith("Library"))
+                                if(listInfo.isLib)
                                 {
                                     for (int counter = 1; counter <= workingDefinition.MaxNumberOfFoldersToGenerate; counter++)
                                     {
-                                        string folderNumber = (counter).ToString("00");
-                                        SPList list = web.Lists[listInfo.Name];
-                                        SPFolder folder = list.RootFolder.SubFolders.Add("Folder" + folderNumber);
-                                        folder.Update();
-
-                                        FolderInfo folderInfo = new FolderInfo();
-                                        folderInfo.Name = "Folder" + folderNumber;
-                                        listInfo.Folders.Add(folderInfo);
-
-                                        for (int l = 1; l < workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
+                                        try
                                         {
-                                            counter++;
-                                            if (counter >= workingDefinition.MaxNumberOfFoldersToGenerate)
-                                            {
-                                                break;
-                                            }
-
-                                            folderNumber = (counter).ToString("00");
-                                            folder = folder.SubFolders.Add("Folder" + folderNumber);
-                                            //folder.Name = "Folder" + folderNumber;
+                                            
+                                            SPList list = web.Lists[listInfo.Name];
+                                            string folderName = findAvailableListName(list);
+                                            SPFolder folder = list.RootFolder.SubFolders.Add(folderName);
                                             folder.Update();
 
-                                            FolderInfo folderInfo2 = new FolderInfo();
-                                            folderInfo2.Name = "Folder" + folderNumber;
-                                            listInfo.Folders.Add(folderInfo2);
+                                            FolderInfo folderInfo = new FolderInfo();
+                                            folderInfo.Name = folderName;
+                                            listInfo.Folders.Add(folderInfo);
+
+                                            Log.Write("Folder created: " + folderInfo.Name + ", " + folder.Url);
+
+                                            for (int l = 1; l < workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
+                                            {
+                                                counter++;
+                                                if (counter >= workingDefinition.MaxNumberOfFoldersToGenerate)
+                                                {
+                                                    break;
+                                                }
+
+                                                folderName = findAvailableListName(list);
+                                                folder = folder.SubFolders.Add(folderName);
+                                                //folder.Name = "Folder" + folderNumber;
+                                                folder.Update();
+
+                                                FolderInfo folderInfo2 = new FolderInfo();
+                                                folderInfo2.Name = folderName;
+                                                listInfo.Folders.Add(folderInfo2);
+
+                                                Log.Write("Folder created: " + folderInfo2.Name + ", " + folder.Url);
+                                            }
+
+                                       }
+                                        catch(Exception ex)
+                                        {
+                                            Errors.Log(ex);
                                         }
                                     }
 
@@ -60,6 +73,13 @@ namespace Acceleratio.SPDG.Generator
                     }
                 }
             }
+        }
+
+        private string findAvailableListName(SPList list)
+        {
+            string candidate = SampleData.GetSampleValueRandom(SampleData.Countries);
+
+            return candidate;
         }
     }
 }

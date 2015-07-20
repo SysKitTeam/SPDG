@@ -6,6 +6,7 @@ using System.Security;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using System.IO;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -58,6 +59,8 @@ namespace Acceleratio.SPDG.Generator
 
             return 0;
         }
+
+        
     }
 
     

@@ -45,3 +45,15 @@ C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\Acceleratio.SPDG.Gene
 C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\obj\Debug\Acceleratio.SPDG.exe
 C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\obj\Debug\Acceleratio.SPDG.pdb
 C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\Acceleratio.SPDG.exe.config
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\Accounts.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\address.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\BusinessDocsTypes.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\cities.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\companies.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\countries.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\emails.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\firstName.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\lastName.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\phoneNumbers.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\webSites.csv
+C:\Projects\Acceleratio.SPDG\Acceleratio.SPDG.UI\bin\Debug\SampleData\years.csv

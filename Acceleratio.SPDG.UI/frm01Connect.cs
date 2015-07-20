@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Acceleratio.SPDG.Generator;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -490,6 +491,8 @@ namespace Acceleratio.SPDG.UI
 
         public override void loadData()
         {
+            SampleData.PrepareSampleCollections();
+
             txtSharePointSiteURL.Text = Common.WorkingDefinition.SharePointURL;
             radioConnectSPOnPremise.Checked = Common.WorkingDefinition.ConnectToSPOnPremise;
             radioConnectSPOnline.Checked = !Common.WorkingDefinition.ConnectToSPOnPremise;

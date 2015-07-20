@@ -12,6 +12,9 @@ namespace Acceleratio.SPDG.UI
 {
     public partial class frmDataGeneration : frmWizardMaster
     {
+        DataGenerator generator = null;
+        BackgroundWorker bgWorker = null;
+
         public frmDataGeneration()
         {
             InitializeComponent();
@@ -29,11 +32,47 @@ namespace Acceleratio.SPDG.UI
 
         private void startDataGeneration()
         {
-            DataGenerator generator = new DataGenerator(Common.WorkingDefinition);
-            generator.startDataGeneration();
+            generator = new DataGenerator(Common.WorkingDefinition);
 
-            MessageBox.Show("SharePoint Data Generation Done!");
+            progressOverall.Maximum = generator.OverallProgressMaxSteps;
+
+
+            bgWorker = new BackgroundWorker();
+            bgWorker.WorkerReportsProgress = true;
+            //bgWorker.RunWorkerCompleted += bgWorker_RunWorkerCompleted;
+            bgWorker.DoWork += bgWorker_DoWork;
+            bgWorker.ProgressChanged += bgWorker_ProgressChanged;
+            bgWorker.RunWorkerAsync(generator);
+
         }
+
+        void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressOverall.Value = generator.OverallCurrentStep;
+            lblOverview.Text = generator.OverallCurrentStepDescription;
+        }
+
+        void bgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            DataGenerator generator = e.Argument as DataGenerator;
+            bool success = generator.startDataGeneration(bgWorker);
+
+            if (success)
+            {
+                MessageBox.Show("SharePoint Data Generation Done!");
+            }
+            else
+            {
+                MessageBox.Show("Error occured during data generation!");
+            }
+            
+        }
+
+        void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
+        }
+
 
         void btnClose_Click(object sender, EventArgs e)
         {
@@ -43,6 +82,11 @@ namespace Acceleratio.SPDG.UI
                 RootForm.MoveAt(12, this);
                 this.Hide();
             }
+        }
+
+        private void lblDetails_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -23,14 +23,25 @@ namespace Acceleratio.SPDG.Generator
                         {
                             for( int s = 0; s < workingDefinition.MaxNumberOfListsAndLibrariesPerSite; s++ )
                             {
-                                string listNum = (s + 1).ToString("00");
-                                getNextTemplateType();
-                                web.Lists.Add(lastListPrefix + listNum, string.Empty, lastTemplateType);
+                                try
+                                {
+                                    string listName = findAvailableListName(web);
+                                    getNextTemplateType();
+                                    web.Lists.Add(listName, string.Empty, lastTemplateType);
 
-                                ListInfo listInfo = new ListInfo();
-                                listInfo.Name = lastListPrefix + listNum;
+                                    ListInfo listInfo = new ListInfo();
+                                    listInfo.Name = listName;
+                                    listInfo.isLib = (lastTemplateType == SPListTemplateType.DocumentLibrary ? true : false);
 
-                                siteInfo.Lists.Add(listInfo);
+                                    siteInfo.Lists.Add(listInfo);
+
+                                    Log.Write("List created: " + listInfo.Name + " in site " + web.Url);
+                                }
+                                catch(Exception ex )
+                                {
+                                    Errors.Log(ex);
+                                }
+                                
                             }
                         }
                     }
@@ -43,7 +54,9 @@ namespace Acceleratio.SPDG.Generator
         private SPListTemplateType getNextTemplateType()
         {
             bool changed = false;
-            if (workingDefinition.LibTypeList && lastTemplateType != SPListTemplateType.GenericList)
+
+
+            if (!changed && workingDefinition.LibTypeList && lastTemplateType != SPListTemplateType.GenericList)
             {
                 lastTemplateType = SPListTemplateType.GenericList;
                 lastListPrefix = "List";
@@ -65,6 +78,18 @@ namespace Acceleratio.SPDG.Generator
             }
 
             return lastTemplateType;
+        }
+
+        private string findAvailableListName(SPWeb web)
+        {
+            string candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
+
+            while (web.Lists.TryGetList(candidate) != null)
+            {
+                candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
+            }
+
+            return candidate;
         }
     }
 }

@@ -41,11 +41,13 @@ namespace Acceleratio.SPDG.Generator
                 for (int s = 0; s < workingDefinition.CreateNewSiteCollections; s++)
                 {
                     int siteCollNumber = s + 1 + webApp.Sites.Count;
+                    
                     SPSiteCollection siteCollections = webApp.Sites;
-                    SPSite site = siteCollections.Add("/sites/SPDGSiteCollection" + siteCollNumber.ToString("00"), workingDefinition.OwnerLogin, workingDefinition.OwnerEmail);
+                    SPSite site = siteCollections.Add("/sites/" + findAvailableSiteCollectionName(webApp), workingDefinition.OwnerLogin, workingDefinition.OwnerEmail);
 
                     SiteCollInfo siteCollInfo = new SiteCollInfo();
                     siteCollInfo.URL = site.Url;
+                    Log.Write("Site collection created: " + siteCollInfo.URL);
                     workingSiteCollections.Add(siteCollInfo);
                 }
             }
@@ -53,6 +55,18 @@ namespace Acceleratio.SPDG.Generator
             {
                 Errors.Log(ex);
             }
+        }
+
+        private string findAvailableSiteCollectionName(SPWebApplication webApp)
+        {
+            string siteCollCandidate = SampleData.Clean( SampleData.GetSampleValueRandom(SampleData.Accounts) );
+
+            while( webApp.Sites.Any(s => s.Url.Contains(siteCollCandidate)) )
+            {
+                siteCollCandidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Accounts));
+            }
+            
+            return siteCollCandidate;
         }
 
         private void createNewWebApplications()
@@ -92,6 +106,8 @@ namespace Acceleratio.SPDG.Generator
                     newApplication.Update();
                     newApplication.Provision();
 
+                    Log.Write("Web application created: " + newApplication.Name);
+
                     for( int s=0; s<workingDefinition.CreateNewSiteCollections; s++)
                     {
                         int siteCollNumber = s + 1;
@@ -101,6 +117,8 @@ namespace Acceleratio.SPDG.Generator
                         SiteCollInfo siteCollInfo = new SiteCollInfo();
                         siteCollInfo.URL = site.Url;
                         workingSiteCollections.Add(siteCollInfo);
+
+                        Log.Write("Site collection created: " + siteCollInfo.URL);
                     }
 
                 }

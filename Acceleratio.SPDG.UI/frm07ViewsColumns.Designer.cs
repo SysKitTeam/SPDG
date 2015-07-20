@@ -48,7 +48,7 @@
             // 
             // trackNumViewsPerList
             // 
-            this.trackNumViewsPerList.Location = new System.Drawing.Point(256, 169);
+            this.trackNumViewsPerList.Location = new System.Drawing.Point(256, 293);
             this.trackNumViewsPerList.Name = "trackNumViewsPerList";
             this.trackNumViewsPerList.Size = new System.Drawing.Size(424, 45);
             this.trackNumViewsPerList.TabIndex = 16;
@@ -56,7 +56,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 150);
+            this.label3.Location = new System.Drawing.Point(261, 277);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(186, 13);
             this.label3.TabIndex = 15;
@@ -64,7 +64,7 @@
             // 
             // trackNumColumnsPerList
             // 
-            this.trackNumColumnsPerList.Location = new System.Drawing.Point(256, 297);
+            this.trackNumColumnsPerList.Location = new System.Drawing.Point(256, 166);
             this.trackNumColumnsPerList.Name = "trackNumColumnsPerList";
             this.trackNumColumnsPerList.Size = new System.Drawing.Size(424, 45);
             this.trackNumColumnsPerList.TabIndex = 18;
@@ -72,7 +72,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 278);
+            this.label2.Location = new System.Drawing.Point(262, 150);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(197, 13);
             this.label2.TabIndex = 17;
@@ -81,7 +81,7 @@
             // chkCreateViews
             // 
             this.chkCreateViews.AutoSize = true;
-            this.chkCreateViews.Location = new System.Drawing.Point(265, 115);
+            this.chkCreateViews.Location = new System.Drawing.Point(265, 242);
             this.chkCreateViews.Name = "chkCreateViews";
             this.chkCreateViews.Size = new System.Drawing.Size(88, 17);
             this.chkCreateViews.TabIndex = 19;
@@ -91,7 +91,7 @@
             // chkCreateColumns
             // 
             this.chkCreateColumns.AutoSize = true;
-            this.chkCreateColumns.Location = new System.Drawing.Point(264, 244);
+            this.chkCreateColumns.Location = new System.Drawing.Point(265, 115);
             this.chkCreateColumns.Name = "chkCreateColumns";
             this.chkCreateColumns.Size = new System.Drawing.Size(99, 17);
             this.chkCreateColumns.TabIndex = 20;

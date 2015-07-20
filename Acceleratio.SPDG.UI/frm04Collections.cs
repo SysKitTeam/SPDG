@@ -24,8 +24,7 @@ namespace Acceleratio.SPDG.UI
 
             this.Text = Common.APP_TITLE;
             ucSteps1.showStep(4);
-            loadSiteCollections();
-            loadData();
+            
         }
 
 
@@ -134,6 +133,18 @@ namespace Acceleratio.SPDG.UI
         private void trackNumSiteColls_ValueChanged(object sender, EventArgs e)
         {
             lblCreateSiteColls.Text = trackNumSiteColls.Value.ToString();
+        }
+
+        private void frm04Collections_Load(object sender, EventArgs e)
+        {
+            this.Show();
+            this.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            loadSiteCollections();
+            loadData();
+            this.Enabled = true;
+            this.Cursor = Cursors.Default;
         }
     }
 }
