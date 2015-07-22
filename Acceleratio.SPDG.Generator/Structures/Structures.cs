@@ -51,5 +51,6 @@ namespace Acceleratio.SPDG.Generator
         }
 
         internal string Name {get;set;}
+        internal string URL { get; set; }
     }
 }

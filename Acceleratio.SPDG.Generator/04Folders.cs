@@ -34,6 +34,7 @@ namespace Acceleratio.SPDG.Generator
 
                                             FolderInfo folderInfo = new FolderInfo();
                                             folderInfo.Name = folderName;
+                                            folderInfo.URL = folder.Url;
                                             listInfo.Folders.Add(folderInfo);
 
                                             Log.Write("Folder created: " + folderInfo.Name + ", " + folder.Url);
@@ -53,6 +54,7 @@ namespace Acceleratio.SPDG.Generator
 
                                                 FolderInfo folderInfo2 = new FolderInfo();
                                                 folderInfo2.Name = folderName;
+                                                folderInfo2.URL = folder.Url;
                                                 listInfo.Folders.Add(folderInfo2);
 
                                                 Log.Write("Folder created: " + folderInfo2.Name + ", " + folder.Url);

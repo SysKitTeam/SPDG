@@ -33,47 +33,77 @@ namespace Acceleratio.SPDG.Generator
                                     if( c == 0 )
                                     {
                                         list.Fields.Add("First Name", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["First Name"].InternalName);
+                                        view.Update();
                                     }
                                     else if( c == 1)
                                     {
                                         list.Fields.Add("Last Name", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["Last Name"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 2)
                                     {
                                         list.Fields.Add("Address", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["Address"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 3)
                                     {
                                         list.Fields.Add("Birthday", SPFieldType.DateTime, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["Birthday"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 4)
                                     {
                                         list.Fields.Add("Salary", SPFieldType.Integer, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["First Name"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 5)
                                     {
                                         list.Fields.Add("Company", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["Company"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 6)
                                     {
                                         list.Fields.Add("Email", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["Email"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 7)
                                     {
                                         list.Fields.Add("City", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["City"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 8)
                                     {
                                         list.Fields.Add("Phone", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["Phone"].InternalName);
+                                        view.Update();
                                     }
                                     else if (c == 9)
                                     {
                                         list.Fields.Add("Web", SPFieldType.Text, false);
+                                        SPView view = list.DefaultView;
+                                        view.ViewFields.Add(list.Fields["Web"].InternalName);
+                                        view.Update();
                                     }
 
                                 }
+                                list.DefaultView.Update();
 
-                                list.Update();
                                 Log.Write("Columns created in list: " + listInfo.Name + ", " + web.Url);
 
                                 for (int c = 0; c < workingDefinition.MaxNumberOfViewsPerList; c++)

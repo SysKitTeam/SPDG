@@ -48,10 +48,10 @@ namespace Acceleratio.SPDG.UI
             chkPercentOfListItems.Checked = Common.WorkingDefinition.CreateUniquePermissionsForPercentOfListItems;
             txtPercentSites.Text = Common.WorkingDefinition.PermissionsPercentOfSites.ToString();
             txtPercentLists.Text = Common.WorkingDefinition.PermissionsPercentOfLists.ToString();
-            txtPercentLibFolders.Text = Common.WorkingDefinition.PermissionsPercentOfLibraries.ToString();
+            txtPercentLibFolders.Text = Common.WorkingDefinition.PermissionsPercentOfFolders.ToString();
             txtPercentListItems.Text = Common.WorkingDefinition.PermissionsPercentOfListItems.ToString();
-            txtPercentDirectlyToUsers.Text = Common.WorkingDefinition.AssignPercentPermissionsDirectlyToUsers.ToString();
-            txtPercentGroupCases.Text = Common.WorkingDefinition.CreateSPGroupsPercent.ToString();
+            txtPercentDirectlyToUsers.Text = Common.WorkingDefinition.PermissionsPercentForUsers.ToString();
+            txtPercentGroupCases.Text = Common.WorkingDefinition.PermissionsPercentForSPGroups.ToString();
         }
 
         public override bool saveData()
@@ -63,10 +63,10 @@ namespace Acceleratio.SPDG.UI
             Common.WorkingDefinition.CreateUniquePermissionsForPercentOfListItems = chkPercentOfListItems.Checked;
             Common.WorkingDefinition.PermissionsPercentOfSites = Convert.ToInt32(txtPercentSites.Text);
             Common.WorkingDefinition.PermissionsPercentOfLists = Convert.ToInt32(txtPercentLists.Text);
-            Common.WorkingDefinition.PermissionsPercentOfLibraries = Convert.ToInt32(txtPercentLibFolders.Text);
+            Common.WorkingDefinition.PermissionsPercentOfFolders = Convert.ToInt32(txtPercentLibFolders.Text);
             Common.WorkingDefinition.PermissionsPercentOfListItems = Convert.ToInt32(txtPercentListItems.Text);
-            Common.WorkingDefinition.AssignPercentPermissionsDirectlyToUsers = Convert.ToInt32(txtPercentDirectlyToUsers.Text);
-            Common.WorkingDefinition.CreateSPGroupsPercent = Convert.ToInt32(txtPercentGroupCases.Text);
+            Common.WorkingDefinition.PermissionsPercentForUsers = Convert.ToInt32(txtPercentDirectlyToUsers.Text);
+            Common.WorkingDefinition.PermissionsPercentForSPGroups = Convert.ToInt32(txtPercentGroupCases.Text);
             return true;
         }
     }

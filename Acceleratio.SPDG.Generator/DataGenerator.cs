@@ -75,6 +75,20 @@ namespace Acceleratio.SPDG.Generator
                 bgWorker.ReportProgress(1);
                 CreateContentTypes();
 
+                //Create content types
+                OverallCurrentStep = 7;
+                OverallCurrentStepDescription = "Create items and documents";
+                Log.Write("CREATE ITEMS AND DOCUMENTS");
+                bgWorker.ReportProgress(1);
+                CreateItemsAndDocuments();
+
+                //Create content types
+                OverallCurrentStep = 7;
+                OverallCurrentStepDescription = "Add Permissions";
+                Log.Write("CREATE PERMISSIONS");
+                bgWorker.ReportProgress(1);
+                CreatePermissions();
+
                 return true;
             }
             catch(Exception ex)
