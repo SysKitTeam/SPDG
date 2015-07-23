@@ -10,13 +10,31 @@ namespace Acceleratio.SPDG.Generator
     {
         public void CreateFolders()
         {
+            if( workingDefinition.MaxNumberOfFoldersToGenerate > 0 )
+            {
+                int totalProgress = workingDefinition.NumberOfSitesToCreate *
+                        workingDefinition.MaxNumberOfFoldersToGenerate ;
+
+                if (workingDefinition.CreateNewSiteCollections > 0)
+                {
+                    totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+                }
+
+                if (workingDefinition.CreateNewWebApplications > 0)
+                {
+                    totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
+                }
+
+                progressOverall("Creating Folders", totalProgress);
+            }
+
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.URL))
+                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
@@ -26,7 +44,8 @@ namespace Acceleratio.SPDG.Generator
                                     {
                                         try
                                         {
-                                            
+                                            Log.Write("Creating folders in '" + web.Url + "/" + listInfo.Name);
+
                                             SPList list = web.Lists[listInfo.Name];
                                             string folderName = findAvailableListName(list);
                                             SPFolder folder = list.RootFolder.SubFolders.Add(folderName);
@@ -37,7 +56,7 @@ namespace Acceleratio.SPDG.Generator
                                             folderInfo.URL = folder.Url;
                                             listInfo.Folders.Add(folderInfo);
 
-                                            Log.Write("Folder created: " + folderInfo.Name + ", " + folder.Url);
+                                            progressDetail("Folder created '" + folderInfo.Name + "'");
 
                                             for (int l = 1; l < workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
                                             {
@@ -57,7 +76,7 @@ namespace Acceleratio.SPDG.Generator
                                                 folderInfo2.URL = folder.Url;
                                                 listInfo.Folders.Add(folderInfo2);
 
-                                                Log.Write("Folder created: " + folderInfo2.Name + ", " + folder.Url);
+                                                progressDetail("Folder created '" + folderInfo2.Name + "'");
                                             }
 
                                        }

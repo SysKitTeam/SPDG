@@ -492,7 +492,7 @@ namespace Acceleratio.SPDG.UI
         public override void loadData()
         {
             SampleData.PrepareSampleCollections();
-            AD.ListOU();
+            //AD.ListOU();
 
             txtSharePointSiteURL.Text = Common.WorkingDefinition.SharePointURL;
             radioConnectSPOnPremise.Checked = Common.WorkingDefinition.ConnectToSPOnPremise;

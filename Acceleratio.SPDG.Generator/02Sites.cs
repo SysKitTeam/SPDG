@@ -10,6 +10,17 @@ namespace Acceleratio.SPDG.Generator
     {
         internal void CreateSites()
         {
+            int totalProgress = workingDefinition.NumberOfSitesToCreate;
+            if( workingDefinition.CreateNewSiteCollections > 0)
+            {
+                totalProgress = totalProgress * (workingDefinition.CreateNewSiteCollections );
+            }
+            if (workingDefinition.CreateNewWebApplications > 0)
+            {
+                totalProgress = totalProgress * (workingDefinition.CreateNewWebApplications );
+            }
+
+            progressOverall("Creating Sites", totalProgress);
 
             foreach( SiteCollInfo siteCollInfo in workingSiteCollections)
             {
@@ -19,20 +30,27 @@ namespace Acceleratio.SPDG.Generator
                     for (int counter = 1; counter <= workingDefinition.NumberOfSitesToCreate; counter++)
                     {
                         string siteName = findAvailableSiteName(siteColl);
+
+                        progressDetail("Creating Site '" + siteCollInfo.URL + "//" + siteName + "'");
+
                         SPWeb web = siteColl.AllWebs.Add(siteName);
                         web.Title = siteName;
                         web.Update();
 
                         SiteInfo siteInfo = new SiteInfo();
-                        siteInfo.URL = siteName;
+                        siteInfo.URL = web.GetServerRelativeUrlFromUrl(web.Url);
+                        Guid siteID = web.ID;
+                        siteInfo.ID = siteID;
                         siteCollInfo.Sites.Add(siteInfo);
 
-                        Log.Write("Site created: " + web.Url);
+                        Log.Write("Site created '" + web.Url + "'");
+                        
 
                         for (int l = 1; l < workingDefinition.MaxNumberOfLevelsForSites; l++)
                         {
                             counter++;
                             siteName = findAvailableSiteName(siteColl);
+                            progressDetail("Creating Site '" + web.Url + "/" + siteName + "'");
 
                             if (counter >= workingDefinition.NumberOfSitesToCreate)
                             {
@@ -44,10 +62,12 @@ namespace Acceleratio.SPDG.Generator
                             web.Update();
 
                             SiteInfo siteInfoLevel = new SiteInfo();
-                            siteInfoLevel.URL = siteName;
+                            siteInfoLevel.URL = web.Url;
+                            Guid site2ID = web.ID;
+                            siteInfoLevel.ID = site2ID;
                             siteCollInfo.Sites.Add(siteInfoLevel);
 
-                            Log.Write("Site created: " + web.Url);
+                            Log.Write("Site created '" + web.Url + "'");
                         }
                     }
                 }

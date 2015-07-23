@@ -14,13 +14,37 @@ namespace Acceleratio.SPDG.Generator
 
         public void CreateItemsAndDocuments()
         {
+            int totalProgress = 0;
+            if( workingDefinition.MaxNumberofItemsToGenerate > 0 )
+            { 
+                totalProgress = workingDefinition.NumberOfSitesToCreate *
+                                workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
+                            workingDefinition.MaxNumberofItemsToGenerate;
+
+                if (workingDefinition.CreateNewSiteCollections > 0)
+                {
+                    totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+                }
+
+                if (workingDefinition.CreateNewWebApplications > 0)
+                {
+                    totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
+                }
+            }
+            else
+            {
+                return;
+            }
+
+            progressOverall("Creating Items and Documents", totalProgress);
+
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.URL))
+                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
@@ -30,7 +54,7 @@ namespace Acceleratio.SPDG.Generator
                                     
                                     for (int i = 0; i < workingDefinition.MaxNumberofItemsToGenerate; i++ )
                                     {
-                                        addItemToList(list, null);
+                                        addItemToList(list, null, false);
                                     }
 
                                     Log.Write("Items added to list: " + listInfo.Name + " in site: " + web.Url);
@@ -65,9 +89,10 @@ namespace Acceleratio.SPDG.Generator
             SPFile spFile = folder.Files.Add(SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames)  + " " + SampleData.GetRandomNumber(1, 30000) + "." + currentFileType , fileContent, true);
             if (spFile.Item != null)
             { 
-                addItemToList( (SPList) folder.DocumentLibrary, spFile.Item);
+                addItemToList( (SPList) folder.DocumentLibrary, spFile.Item, true);
             }
             docsAdded++;
+            
 
             foreach(SPFolder childFolder in folder.SubFolders)
             {
@@ -113,7 +138,7 @@ namespace Acceleratio.SPDG.Generator
             return content;
         }
 
-        private void addItemToList( SPList list, SPListItem item )
+        private void addItemToList( SPList list, SPListItem item, bool isDocLib )
         {
             List<string> userFields = new List<string>();
             foreach(SPField field in list.Fields)
@@ -129,7 +154,8 @@ namespace Acceleratio.SPDG.Generator
                 item = list.AddItem();
             }
 
-            item["Title"] = getFieldValue("FirstName") + " "  + getFieldValue("Last Name");
+            string title = getFieldValue("First Name") + " "  + getFieldValue("Last Name");
+            item["Title"] = title;
 
             foreach( string fieldName in userFields )
             {
@@ -141,6 +167,15 @@ namespace Acceleratio.SPDG.Generator
             }
 
             item.Update();
+            if (isDocLib)
+            {
+                progressDetail("Item added: " + title);
+            }
+            else
+            {
+                progressDetail("Document added: " + title);
+            }
+            
 
         }
 

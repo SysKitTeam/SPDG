@@ -66,6 +66,7 @@
             // trackMaxNumberOfItems
             // 
             this.trackMaxNumberOfItems.Location = new System.Drawing.Point(257, 170);
+            this.trackMaxNumberOfItems.Maximum = 100;
             this.trackMaxNumberOfItems.Name = "trackMaxNumberOfItems";
             this.trackMaxNumberOfItems.Size = new System.Drawing.Size(424, 45);
             this.trackMaxNumberOfItems.TabIndex = 20;

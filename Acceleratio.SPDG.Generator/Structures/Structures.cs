@@ -15,6 +15,7 @@ namespace Acceleratio.SPDG.Generator
 
         internal List<SiteInfo> Sites {get;set;}
         internal string URL {get;set;}
+        
     }
 
     internal class SiteInfo
@@ -27,6 +28,7 @@ namespace Acceleratio.SPDG.Generator
 
         internal List<ListInfo> Lists {get;set;}
         internal string URL {get;set;}
+        internal Guid ID { get; set; }
     }
 
     internal class ListInfo

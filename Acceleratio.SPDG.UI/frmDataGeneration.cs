@@ -48,8 +48,34 @@ namespace Acceleratio.SPDG.UI
 
         void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressOverall.Value = generator.OverallCurrentStep;
-            lblOverview.Text = generator.OverallCurrentStepDescription;
+            if( e.ProgressPercentage == 1 )
+            {
+                if (generator.OverallCurrentStep <= progressOverall.Maximum)
+                {
+                    progressOverall.Value = generator.OverallCurrentStep;
+                }
+                lblOverview.Text = generator.OverallCurrentStepDescription;
+
+                lblDetails.Text = string.Empty;
+                progressDetails.Value = 0;
+                progressDetails.Maximum = generator.DetailProgressMaxSteps;
+            }
+            else if (e.ProgressPercentage == 2)
+            {
+                if (generator.DetailCurrentStep <= progressDetails.Maximum)
+                { 
+                    progressDetails.Value = generator.DetailCurrentStep;
+                }
+                lblDetails.Text = generator.DetailCurrentStepDescription;
+            }
+            else if (e.ProgressPercentage == 3)
+            {
+                progressOverall.Value = progressOverall.Maximum;
+                if (progressDetails.Maximum == 0) progressDetails.Maximum = 1;
+                progressDetails.Value = progressDetails.Maximum;
+            }
+
+            Application.DoEvents();
         }
 
         void bgWorker_DoWork(object sender, DoWorkEventArgs e)

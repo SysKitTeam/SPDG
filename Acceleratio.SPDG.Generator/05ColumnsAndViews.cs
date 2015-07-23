@@ -16,16 +16,36 @@ namespace Acceleratio.SPDG.Generator
                 return;
             }
 
+            int totalProgress = workingDefinition.MaxNumberOfColumnsPerList * 
+                        workingDefinition.NumberOfSitesToCreate *
+                        workingDefinition.MaxNumberOfListsAndLibrariesPerSite +
+                        (workingDefinition.MaxNumberOfViewsPerList * 
+                        workingDefinition.NumberOfSitesToCreate *
+                        workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
+
+            if( workingDefinition.CreateNewSiteCollections > 0 )
+            {
+                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+            }
+
+            if (workingDefinition.CreateNewWebApplications > 0)
+            {
+                totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
+            }
+
+            progressOverall("Creating Columns and Views", totalProgress);
+
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.URL))
+                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
+                                progressDetail("Creating columns in List '" + listInfo.Name + "'");
                                 SPList list = web.Lists[listInfo.Name];
 
                                 for(int c = 0; c < workingDefinition.MaxNumberOfColumnsPerList; c++)
@@ -104,7 +124,9 @@ namespace Acceleratio.SPDG.Generator
                                 }
                                 list.DefaultView.Update();
 
-                                Log.Write("Columns created in list: " + listInfo.Name + ", " + web.Url);
+                                Log.Write("Columns created in List '" + web.Url + "/" + listInfo.Name + "'");
+
+                                progressDetail("Creating view in list '" + listInfo.Name + "'");
 
                                 for (int c = 0; c < workingDefinition.MaxNumberOfViewsPerList; c++)
                                 {
@@ -169,7 +191,6 @@ namespace Acceleratio.SPDG.Generator
                                 }
                                 
                                 list.Update();
-                                Log.Write("Viewes created in list: " + listInfo.Name + ", " + web.Url);
                             }
                         }
                     }

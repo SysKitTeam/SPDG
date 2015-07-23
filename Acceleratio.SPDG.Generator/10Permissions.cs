@@ -33,6 +33,7 @@ namespace Acceleratio.SPDG.Generator
 
         public void CreatePermissions()
         {
+            //Per site collection
             numSitesPermissions = (int) Math.Floor(Convert.ToDecimal( workingDefinition.NumberOfSitesToCreate * workingDefinition.PermissionsPercentOfSites / 100 ));
             numListsPermissions = (int)Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfLists / 100));
             numFoldersPermissions = (int)Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfFoldersToGenerate * workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfFolders / 100));
@@ -48,13 +49,34 @@ namespace Acceleratio.SPDG.Generator
                 return;
             }
 
+            int totalProgress = totalPermissions;
+            if (workingDefinition.CreateNewSiteCollections > 0)
+            {
+                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+            }
+
+            if (workingDefinition.CreateNewWebApplications > 0)
+            {
+                totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
+            }
+
+            progressOverall("Creating Permissions", totalProgress);
+
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                 {
+                    countSitesPermissions = 0;
+                    countListsPermissions = 0;
+                    countFoldersPermissions = 0;
+                    countItemsPermissions = 0;
+                    countUserPermissions = 0;
+                    countGroupPermissions = 0;
+                    countADPermissions = 0;
+
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.URL))
+                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
                         {
                             if (countSitesPermissions < numSitesPermissions || countListsPermissions < numListsPermissions || countFoldersPermissions < numFoldersPermissions || countItemsPermissions < numItemsPermissions)
                             {
@@ -66,6 +88,7 @@ namespace Acceleratio.SPDG.Generator
                             if( countSitesPermissions < numSitesPermissions)
                             {
                                 setSitePermissions(web);
+                                progressDetail("Adding permissions for site '" + web.Url + "'");
                             }
 
                             foreach(ListInfo listInfo in siteInfo.Lists)
@@ -73,6 +96,7 @@ namespace Acceleratio.SPDG.Generator
                                 if (countListsPermissions < numListsPermissions)
                                 {
                                     setListPermissions(web, listInfo.Name);
+                                    progressDetail("Adding permissions for list '" + web.Url + "/" + listInfo.Name);
                                 }
 
                                 foreach(FolderInfo folderInfo in listInfo.Folders)
@@ -80,12 +104,14 @@ namespace Acceleratio.SPDG.Generator
                                     if( countFoldersPermissions < numFoldersPermissions)
                                     {
                                         setFolderPermissions(web, folderInfo.URL);
+                                        progressDetail("Adding permissions for folder '" + web.Url + "/" + folderInfo.URL);
                                     }
                                 }
 
                                 if( countItemsPermissions < numItemsPermissions)
                                 {
                                     setItemPermissions(web, listInfo.Name);
+                                    
                                     Log.Write("Unique permissions added for items in list:" + listInfo.Name + " in site: " + web.Url);
                                 }
                             }
@@ -258,6 +284,8 @@ namespace Acceleratio.SPDG.Generator
                 SPRoleAssignment roleAssignment = getNextRoleAssignment(web);
                 item.RoleAssignments.Add(roleAssignment);
                 item.Update();
+
+                progressDetail("Adding permissions for item/document '" + item.Url + "'");
             }  
         }
 

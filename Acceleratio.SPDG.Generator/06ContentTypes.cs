@@ -17,49 +17,72 @@ namespace Acceleratio.SPDG.Generator
                 return;
             }
 
+            int totalProgress = workingDefinition.MaxNumberOfContentTypesPerSiteCollection *
+                        workingDefinition.NumberOfSitesToCreate;
+
+            if (workingDefinition.CreateNewSiteCollections > 0)
+            {
+                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+            }
+
+            if (workingDefinition.CreateNewWebApplications > 0)
+            {
+                totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
+            }
+
+            progressOverall("Creating Content Types", totalProgress);
+
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.URL))
+                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
                         {
+                            Log.Write("Creating Content Types for site:" + web.Url);
                             for (int c = 0; c < workingDefinition.MaxNumberOfContentTypesPerSiteCollection; c++)
                             {
-                                string contentTypeName = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
-                                SPContentType contentType = new SPContentType(web.ContentTypes["Document"], web.ContentTypes, contentTypeName + " Document");
-                                web.ContentTypes.Add(contentType);
-                                contentType.Group = "Custom SPDG Content Types";
-                                contentType.Description = contentTypeName + " content type";
-                                List<string> randomSiteColumns = GetRandomSiteColumns();
-                                foreach (string siteColumn in randomSiteColumns)
+                                try
                                 {
-                                    contentType.FieldLinks.Add(new SPFieldLink(siteColl.RootWeb.Fields.GetField(siteColumn)));
-                                }
-
-                                contentType.Update();
-                                Log.Write("Content Type created: '" + contentTypeName + " Document', in site: " + web.Url);
-
-
-                                if (workingDefinition.ContentTypesCanInheritFromOtherContentType)
-                                {
-                                    c++;
-                                    if (c < workingDefinition.MaxNumberOfContentTypesPerSiteCollection)
+                                    string contentTypeName = findAvailableContentTypeName(web);
+                                    progressDetail("Creating Content Type '" + contentTypeName + "'");
+                                    SPContentType contentType = new SPContentType(web.ContentTypes["Document"], web.ContentTypes, contentTypeName + " Document");
+                                    web.ContentTypes.Add(contentType);
+                                    contentType.Group = "Custom SPDG Content Types";
+                                    contentType.Description = contentTypeName + " content type";
+                                    List<string> randomSiteColumns = GetRandomSiteColumns();
+                                    foreach (string siteColumn in randomSiteColumns)
                                     {
-                                        contentTypeName = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
-                                        SPContentType childContentType = new SPContentType(contentType, web.ContentTypes, contentTypeName + " Document");
-                                        web.ContentTypes.Add(childContentType);
-                                        childContentType.Group = "Custom SPDG Content Types";
-                                        childContentType.Description = contentTypeName + " content type";
-                                        randomSiteColumns = GetRandomSiteColumns();
-                                        foreach (string siteColumn in randomSiteColumns)
-                                        {
-                                            contentType.FieldLinks.Add(new SPFieldLink(siteColl.RootWeb.Fields.GetField(siteColumn)));
-                                        }
-                                        childContentType.Update();
-                                        Log.Write("Content Type created: '" + contentTypeName + " Document', in site: " + web.Url);
+                                        contentType.FieldLinks.Add(new SPFieldLink(siteColl.RootWeb.Fields.GetField(siteColumn)));
                                     }
+
+                                    contentType.Update();
+
+
+                                    if (workingDefinition.ContentTypesCanInheritFromOtherContentType)
+                                    {
+                                        c++;
+                                        if (c < workingDefinition.MaxNumberOfContentTypesPerSiteCollection)
+                                        {
+                                            contentTypeName = findAvailableContentTypeName(web);
+                                            progressDetail("Creating Content Type '" + contentTypeName + "'");
+                                            SPContentType childContentType = new SPContentType(contentType, web.ContentTypes, contentTypeName + " Document");
+                                            web.ContentTypes.Add(childContentType);
+                                            childContentType.Group = "Custom SPDG Content Types";
+                                            childContentType.Description = contentTypeName + " content type";
+                                            randomSiteColumns = GetRandomSiteColumns();
+                                            foreach (string siteColumn in randomSiteColumns)
+                                            {
+                                                contentType.FieldLinks.Add(new SPFieldLink(siteColl.RootWeb.Fields.GetField(siteColumn)));
+                                            }
+                                            childContentType.Update();
+                                        }
+                                    }
+                                }
+                                catch(Exception ex )
+                                {
+                                    Errors.Log(ex);
                                 }
                             }
 
@@ -67,6 +90,28 @@ namespace Acceleratio.SPDG.Generator
                         }
                     }
                 }
+            }
+        }
+
+        private string findAvailableContentTypeName(SPWeb web)
+        {
+            string candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
+            bool alreadyExists = false;
+            foreach( SPContentType ct in web.ContentTypes)
+            {
+                if( ct.Name == candidate)
+                {
+                    alreadyExists = true;
+                }
+            }
+
+            if( alreadyExists )
+            {
+                return findAvailableContentTypeName(web);
+            }
+            else
+            {
+                return candidate;
             }
         }
 

@@ -13,19 +13,36 @@ namespace Acceleratio.SPDG.Generator
 
         public void CreateLists()
         {
+            if (workingDefinition.MaxNumberOfListsAndLibrariesPerSite > 0 )
+            {
+                int progressTotal = workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate;
+                if (workingDefinition.CreateNewSiteCollections > 0)
+                {
+                    progressTotal = progressTotal * workingDefinition.CreateNewSiteCollections;
+                }
+                if (workingDefinition.CreateNewWebApplications > 0)
+                {
+                    progressTotal = progressTotal * workingDefinition.CreateNewWebApplications;
+                }
+
+                progressOverall("Creating Lists and Libraries", progressTotal);
+            }
+
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using( SPWeb web = siteColl.OpenWeb(siteInfo.URL)) 
+                        using( SPWeb web = siteColl.OpenWeb(siteInfo.ID)) 
                         {
+                            Log.Write("Creating lists in site '" + web.Url + "'");
                             for( int s = 0; s < workingDefinition.MaxNumberOfListsAndLibrariesPerSite; s++ )
                             {
                                 try
                                 {
                                     string listName = findAvailableListName(web);
+                                    progressDetail("Crating List '" + web.Url +  "/" + listName + "'");
                                     getNextTemplateType();
                                     web.Lists.Add(listName, string.Empty, lastTemplateType);
 
@@ -35,7 +52,7 @@ namespace Acceleratio.SPDG.Generator
 
                                     siteInfo.Lists.Add(listInfo);
 
-                                    Log.Write("List created: " + listInfo.Name + " in site " + web.Url);
+                                    
                                 }
                                 catch(Exception ex )
                                 {
