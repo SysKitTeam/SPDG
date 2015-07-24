@@ -16,6 +16,7 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "Permissions";
+            base.lblDescription.Text = "Set unique permissions density and structure for SharePoint objects.";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;

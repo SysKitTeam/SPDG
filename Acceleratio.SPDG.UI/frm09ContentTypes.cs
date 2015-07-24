@@ -16,6 +16,7 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "Content Types";
+            base.lblDescription.Text = "Define Content Types number and structure.";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;

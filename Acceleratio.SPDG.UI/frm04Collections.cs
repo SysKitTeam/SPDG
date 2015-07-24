@@ -18,6 +18,7 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "Site Collections";
+            base.lblDescription.Text = "Create new or use existing SharePoint Site Collections";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;
@@ -32,14 +33,12 @@ namespace Acceleratio.SPDG.UI
         {
             preventCloseMessage = true;
             RootForm.MovePrevious(this);
-            this.Close();
         }
 
         void btnNext_Click(object sender, EventArgs e)
         {
             preventCloseMessage = true;
             RootForm.MoveNext(this);
-            this.Close();
         }
 
         void changeRadio()
@@ -111,6 +110,12 @@ namespace Acceleratio.SPDG.UI
 
         public override bool saveData()
         {
+            if (trackNumSiteColls.Value == 0 && cboSiteCollection.SelectedItem == null)
+            {
+                MessageBox.Show("Select number of new Site Collections or existing one.");
+                return false;
+            }
+
             if( radioCreateNewSiteColl.Checked )
             {
                 Common.WorkingDefinition.CreateNewSiteCollections = trackNumSiteColls.Value;

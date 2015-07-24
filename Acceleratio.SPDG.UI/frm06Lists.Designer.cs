@@ -42,6 +42,8 @@
             this.chkCreateFolders = new System.Windows.Forms.CheckBox();
             this.chkList = new System.Windows.Forms.CheckBox();
             this.lblNumOfLists = new System.Windows.Forms.Label();
+            this.lblNumOfFolders = new System.Windows.Forms.Label();
+            this.lblNumLevels = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberListLibraries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxFoldersInLib)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberNestedFolders)).BeginInit();
@@ -57,11 +59,9 @@
             // trackMaxNumberListLibraries
             // 
             this.trackMaxNumberListLibraries.Location = new System.Drawing.Point(259, 134);
-            this.trackMaxNumberListLibraries.Minimum = 1;
             this.trackMaxNumberListLibraries.Name = "trackMaxNumberListLibraries";
             this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(405, 45);
             this.trackMaxNumberListLibraries.TabIndex = 14;
-            this.trackMaxNumberListLibraries.Value = 1;
             this.trackMaxNumberListLibraries.ValueChanged += new System.EventHandler(this.trackMaxNumberListLibraries_ValueChanged);
             // 
             // label3
@@ -77,8 +77,9 @@
             // 
             this.trackMaxFoldersInLib.Location = new System.Drawing.Point(258, 354);
             this.trackMaxFoldersInLib.Name = "trackMaxFoldersInLib";
-            this.trackMaxFoldersInLib.Size = new System.Drawing.Size(424, 45);
+            this.trackMaxFoldersInLib.Size = new System.Drawing.Size(406, 45);
             this.trackMaxFoldersInLib.TabIndex = 16;
+            this.trackMaxFoldersInLib.ValueChanged += new System.EventHandler(this.trackMaxFoldersInLib_ValueChanged);
             // 
             // label2
             // 
@@ -93,17 +94,18 @@
             // 
             this.trackMaxNumberNestedFolders.Location = new System.Drawing.Point(258, 418);
             this.trackMaxNumberNestedFolders.Name = "trackMaxNumberNestedFolders";
-            this.trackMaxNumberNestedFolders.Size = new System.Drawing.Size(424, 45);
+            this.trackMaxNumberNestedFolders.Size = new System.Drawing.Size(406, 45);
             this.trackMaxNumberNestedFolders.TabIndex = 18;
+            this.trackMaxNumberNestedFolders.ValueChanged += new System.EventHandler(this.trackMaxNumberNestedFolders_ValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(264, 400);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(269, 13);
+            this.label4.Size = new System.Drawing.Size(270, 13);
             this.label4.TabIndex = 17;
-            this.label4.Text = "Max number of nestes folder level per Document Library";
+            this.label4.Text = "Max number of nested folder level per Document Library";
             // 
             // label5
             // 
@@ -123,6 +125,7 @@
             this.chkDocLib.TabIndex = 20;
             this.chkDocLib.Text = "Document Library";
             this.chkDocLib.UseVisualStyleBackColor = true;
+            this.chkDocLib.CheckedChanged += new System.EventHandler(this.chkDocLib_CheckedChanged);
             // 
             // chkTasks
             // 
@@ -153,6 +156,7 @@
             this.chkCreateFolders.TabIndex = 23;
             this.chkCreateFolders.Text = "Create some folders in Document Libraries";
             this.chkCreateFolders.UseVisualStyleBackColor = true;
+            this.chkCreateFolders.CheckedChanged += new System.EventHandler(this.chkCreateFolders_CheckedChanged);
             // 
             // chkList
             // 
@@ -171,13 +175,33 @@
             this.lblNumOfLists.Name = "lblNumOfLists";
             this.lblNumOfLists.Size = new System.Drawing.Size(13, 13);
             this.lblNumOfLists.TabIndex = 25;
-            this.lblNumOfLists.Text = "1";
+            this.lblNumOfLists.Text = "0";
+            // 
+            // lblNumOfFolders
+            // 
+            this.lblNumOfFolders.AutoSize = true;
+            this.lblNumOfFolders.Location = new System.Drawing.Point(667, 357);
+            this.lblNumOfFolders.Name = "lblNumOfFolders";
+            this.lblNumOfFolders.Size = new System.Drawing.Size(13, 13);
+            this.lblNumOfFolders.TabIndex = 26;
+            this.lblNumOfFolders.Text = "0";
+            // 
+            // lblNumLevels
+            // 
+            this.lblNumLevels.AutoSize = true;
+            this.lblNumLevels.Location = new System.Drawing.Point(667, 421);
+            this.lblNumLevels.Name = "lblNumLevels";
+            this.lblNumLevels.Size = new System.Drawing.Size(13, 13);
+            this.lblNumLevels.TabIndex = 27;
+            this.lblNumLevels.Text = "0";
             // 
             // frm06Lists
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.lblNumLevels);
+            this.Controls.Add(this.lblNumOfFolders);
             this.Controls.Add(this.lblNumOfLists);
             this.Controls.Add(this.chkList);
             this.Controls.Add(this.chkCreateFolders);
@@ -195,7 +219,7 @@
             this.Name = "frm06Lists";
             this.Text = "frm06Lists";
             this.Controls.SetChildIndex(this.lblTitle, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblDescription, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);
             this.Controls.SetChildIndex(this.btnNext, 0);
             this.Controls.SetChildIndex(this.btnHelp, 0);
@@ -214,6 +238,8 @@
             this.Controls.SetChildIndex(this.chkCreateFolders, 0);
             this.Controls.SetChildIndex(this.chkList, 0);
             this.Controls.SetChildIndex(this.lblNumOfLists, 0);
+            this.Controls.SetChildIndex(this.lblNumOfFolders, 0);
+            this.Controls.SetChildIndex(this.lblNumLevels, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberListLibraries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxFoldersInLib)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberNestedFolders)).EndInit();
@@ -238,5 +264,7 @@
         private System.Windows.Forms.CheckBox chkCreateFolders;
         private System.Windows.Forms.CheckBox chkList;
         private System.Windows.Forms.Label lblNumOfLists;
+        private System.Windows.Forms.Label lblNumOfFolders;
+        private System.Windows.Forms.Label lblNumLevels;
     }
 }

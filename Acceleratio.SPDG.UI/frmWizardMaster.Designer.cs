@@ -30,7 +30,7 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -64,22 +64,22 @@
             this.lblTitle.BackColor = System.Drawing.Color.Orange;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(12, 38);
+            this.lblTitle.Location = new System.Drawing.Point(12, 43);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(32, 13);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Title";
             // 
-            // label1
+            // lblDescription
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Orange;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(10, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "-";
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.BackColor = System.Drawing.Color.Orange;
+            this.lblDescription.ForeColor = System.Drawing.Color.White;
+            this.lblDescription.Location = new System.Drawing.Point(12, 65);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(10, 13);
+            this.lblDescription.TabIndex = 2;
+            this.lblDescription.Text = "-";
             // 
             // btnBack
             // 
@@ -191,7 +191,7 @@
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
@@ -214,7 +214,7 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Label lblTitle;
-        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label lblDescription;
         public System.Windows.Forms.Button btnBack;
         public System.Windows.Forms.Button btnNext;
         public System.Windows.Forms.Button btnHelp;

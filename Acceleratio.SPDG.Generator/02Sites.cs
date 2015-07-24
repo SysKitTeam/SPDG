@@ -46,7 +46,7 @@ namespace Acceleratio.SPDG.Generator
                         Log.Write("Site created '" + web.Url + "'");
                         
 
-                        for (int l = 1; l < workingDefinition.MaxNumberOfLevelsForSites; l++)
+                        for (int l = 0; l < workingDefinition.MaxNumberOfLevelsForSites; l++)
                         {
                             counter++;
                             siteName = findAvailableSiteName(siteColl);

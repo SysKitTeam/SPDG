@@ -68,20 +68,19 @@
             // trackMaxNumberLevels
             // 
             this.trackMaxNumberLevels.Location = new System.Drawing.Point(260, 240);
-            this.trackMaxNumberLevels.Minimum = 1;
             this.trackMaxNumberLevels.Name = "trackMaxNumberLevels";
             this.trackMaxNumberLevels.Size = new System.Drawing.Size(394, 45);
             this.trackMaxNumberLevels.TabIndex = 14;
-            this.trackMaxNumberLevels.Value = 1;
+            this.trackMaxNumberLevels.ValueChanged += new System.EventHandler(this.trackMaxNumberLevels_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(265, 215);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 13);
+            this.label3.Size = new System.Drawing.Size(152, 13);
             this.label3.TabIndex = 13;
-            this.label3.Text = "Maximal Number of Levels";
+            this.label3.Text = "Maximal Number of Site Levels";
             // 
             // lblNumSites
             // 
@@ -99,7 +98,7 @@
             this.lblNumberLevels.Name = "lblNumberLevels";
             this.lblNumberLevels.Size = new System.Drawing.Size(13, 13);
             this.lblNumberLevels.TabIndex = 16;
-            this.lblNumberLevels.Text = "1";
+            this.lblNumberLevels.Text = "0";
             // 
             // frm05Sites
             // 
@@ -116,7 +115,7 @@
             this.Name = "frm05Sites";
             this.Text = "frm05Sites";
             this.Controls.SetChildIndex(this.lblTitle, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblDescription, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);
             this.Controls.SetChildIndex(this.btnNext, 0);
             this.Controls.SetChildIndex(this.btnHelp, 0);

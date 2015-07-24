@@ -60,6 +60,7 @@
     <Compile Include="05ColumnsAndViews.cs" />
     <Compile Include="06ContentTypes.cs" />
     <Compile Include="07ItemsAndDocuments.cs" />
+    <Compile Include="09Workflows.cs" />
     <Compile Include="10Permissions.cs" />
     <Compile Include="AD.cs" />
     <Compile Include="Common.cs" />

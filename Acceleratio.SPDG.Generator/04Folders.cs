@@ -58,7 +58,7 @@ namespace Acceleratio.SPDG.Generator
 
                                             progressDetail("Folder created '" + folderInfo.Name + "'");
 
-                                            for (int l = 1; l < workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
+                                            for (int l = 0; l < workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
                                             {
                                                 counter++;
                                                 if (counter >= workingDefinition.MaxNumberOfFoldersToGenerate)

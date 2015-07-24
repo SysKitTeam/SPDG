@@ -110,5 +110,35 @@ namespace Acceleratio.SPDG.Generator
             }
             return ous;
         }
+
+        public static void createUser()
+        {
+            try
+            {
+                ContextType contextType = ContextType.Domain;
+                string strName = System.Security.Principal.WindowsIdentity.GetCurrent().Name; 
+                string domainName = strName.Split('\\')[0];
+
+                using (PrincipalContext ctx = new PrincipalContext(contextType, "test"))
+                {
+                    UserPrincipal userPrincipal = new UserPrincipal(ctx);
+                    userPrincipal.Surname = SampleData.GetSampleValueRandom(SampleData.LastNames);
+                    userPrincipal.GivenName = SampleData.GetSampleValueRandom(SampleData.FirstNames); ;
+                    userPrincipal.SamAccountName = userPrincipal.GivenName.ToLower() + "." + userPrincipal.Surname.ToLower();
+
+                    string pwdOfNewlyCreatedUser = "Acce1234!";
+
+                    userPrincipal.SetPassword(pwdOfNewlyCreatedUser);
+                    userPrincipal.Enabled = true;
+                    userPrincipal.PasswordNeverExpires = true;
+                    userPrincipal.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Errors.Log(ex);
+            }
+
+        }
     }
 }

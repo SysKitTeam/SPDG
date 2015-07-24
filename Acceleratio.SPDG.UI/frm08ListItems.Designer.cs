@@ -41,6 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.trackMaxDocSize = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblNumItems = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOfItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMinDocSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxDocSize)).BeginInit();
@@ -62,23 +63,25 @@
             this.chkPrefil.TabIndex = 8;
             this.chkPrefil.Text = "Prefil generated List and Libraries with Items";
             this.chkPrefil.UseVisualStyleBackColor = true;
+            this.chkPrefil.CheckedChanged += new System.EventHandler(this.chkPrefil_CheckedChanged);
             // 
             // trackMaxNumberOfItems
             // 
             this.trackMaxNumberOfItems.Location = new System.Drawing.Point(257, 170);
             this.trackMaxNumberOfItems.Maximum = 100;
             this.trackMaxNumberOfItems.Name = "trackMaxNumberOfItems";
-            this.trackMaxNumberOfItems.Size = new System.Drawing.Size(424, 45);
+            this.trackMaxNumberOfItems.Size = new System.Drawing.Size(397, 45);
             this.trackMaxNumberOfItems.TabIndex = 20;
+            this.trackMaxNumberOfItems.ValueChanged += new System.EventHandler(this.trackMaxNumberOfItems_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(262, 151);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(161, 13);
+            this.label2.Size = new System.Drawing.Size(226, 13);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Max number of items to generate";
+            this.label2.Text = "Max number of items to generate per list/library";
             // 
             // label3
             // 
@@ -161,11 +164,21 @@
             this.label5.TabIndex = 28;
             this.label5.Text = "Max Document Size";
             // 
+            // lblNumItems
+            // 
+            this.lblNumItems.AutoSize = true;
+            this.lblNumItems.Location = new System.Drawing.Point(658, 174);
+            this.lblNumItems.Name = "lblNumItems";
+            this.lblNumItems.Size = new System.Drawing.Size(13, 13);
+            this.lblNumItems.TabIndex = 30;
+            this.lblNumItems.Text = "0";
+            // 
             // frm08ListItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.lblNumItems);
             this.Controls.Add(this.trackMaxDocSize);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.trackMinDocSize);
@@ -182,7 +195,7 @@
             this.Name = "frm08ListItems";
             this.Text = "frm08ListItems";
             this.Controls.SetChildIndex(this.lblTitle, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblDescription, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);
             this.Controls.SetChildIndex(this.btnNext, 0);
             this.Controls.SetChildIndex(this.btnHelp, 0);
@@ -200,6 +213,7 @@
             this.Controls.SetChildIndex(this.trackMinDocSize, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.trackMaxDocSize, 0);
+            this.Controls.SetChildIndex(this.lblNumItems, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOfItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMinDocSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxDocSize)).EndInit();
@@ -223,5 +237,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar trackMaxDocSize;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblNumItems;
     }
 }

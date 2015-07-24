@@ -16,7 +16,7 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "Sites";
-
+            base.lblDescription.Text = "Define number of SharePoint sites and number of site levels";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;
@@ -57,6 +57,11 @@ namespace Acceleratio.SPDG.UI
         private void trackNumSitesToCreate_ValueChanged(object sender, EventArgs e)
         {
             lblNumSites.Text = trackNumSitesToCreate.Value.ToString();
+        }
+
+        private void trackMaxNumberLevels_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumberLevels.Text = trackMaxNumberLevels.Value.ToString();
         }
     }
 }

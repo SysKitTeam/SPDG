@@ -51,24 +51,26 @@ namespace Acceleratio.SPDG.Generator
                                 if (!listInfo.isLib)
                                 {
                                     SPList list = web.Lists[listInfo.Name];
-                                    
+                                    Log.Write("Start adding items to list: " + listInfo.Name + " in site: " + web.Url);
+
                                     for (int i = 0; i < workingDefinition.MaxNumberofItemsToGenerate; i++ )
                                     {
                                         addItemToList(list, null, false);
                                     }
 
-                                    Log.Write("Items added to list: " + listInfo.Name + " in site: " + web.Url);
+                                    
                                 }
                                 else
                                 {
+                                    docsAdded = 0;
                                     SPList list = web.Lists[listInfo.Name];
+                                    Log.Write("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url);
 
                                     while (docsAdded < workingDefinition.MaxNumberofItemsToGenerate)
                                     {
                                         addDocumentToFolder(list.RootFolder);
                                     }
 
-                                    Log.Write("Documents added to library: " + listInfo.Name + " in site: " + web.Url);
                                 }
                             }
                         }
@@ -101,7 +103,7 @@ namespace Acceleratio.SPDG.Generator
                     break;
                 }
 
-                if( childFolder.Url.IndexOf("/Forms") == 0  )
+                if( childFolder.Url.IndexOf("/Forms") == -1  )
                 {
                     addDocumentToFolder(childFolder);
                 }
@@ -169,11 +171,11 @@ namespace Acceleratio.SPDG.Generator
             item.Update();
             if (isDocLib)
             {
-                progressDetail("Item added: " + title);
+                progressDetail("Document added: " + title);
             }
             else
             {
-                progressDetail("Document added: " + title);
+                progressDetail("Item added: " + title);
             }
             
 

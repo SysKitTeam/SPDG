@@ -16,7 +16,7 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "View Columns";
-
+            base.lblDescription.Text = "Select number of columns and views to create in every list";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;
@@ -24,7 +24,14 @@ namespace Acceleratio.SPDG.UI
             this.Text = Common.APP_TITLE;
             ucSteps1.showStep(7);
 
+            initUI();
             loadData();
+        }
+
+        private void initUI()
+        {
+            trackNumColumnsPerList.Enabled = false;
+            trackNumViewsPerList.Enabled = false;
         }
 
         void btnBack_Click(object sender, EventArgs e)
@@ -56,6 +63,43 @@ namespace Acceleratio.SPDG.UI
             Common.WorkingDefinition.CreateColumns = chkCreateColumns.Checked;
             Common.WorkingDefinition.MaxNumberOfColumnsPerList = trackNumColumnsPerList.Value;
             return true;
+        }
+
+        private void trackNumColumnsPerList_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumColumns.Text = trackNumColumnsPerList.Value.ToString();
+        }
+
+        private void trackNumViewsPerList_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumViews.Text = trackNumViewsPerList.Value.ToString();
+        }
+
+        private void chkCreateColumns_CheckedChanged(object sender, EventArgs e)
+        {
+            if( chkCreateColumns.Checked )
+            {
+                trackNumColumnsPerList.Enabled = true;
+            }
+            else
+            {
+                trackNumColumnsPerList.Enabled = false;
+                trackNumColumnsPerList.Value = 0;
+            }
+            
+        }
+
+        private void chkCreateViews_CheckedChanged(object sender, EventArgs e)
+        {
+            if( chkCreateViews.Checked )
+            {
+                trackNumViewsPerList.Enabled = true;
+            }
+            else
+            {
+                trackNumViewsPerList.Enabled = false;
+                trackNumViewsPerList.Value = 0;
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Acceleratio.SPDG.Generator;
+using System.Diagnostics;
+
 
 namespace Acceleratio.SPDG.UI
 {
@@ -19,7 +21,10 @@ namespace Acceleratio.SPDG.UI
         {
             InitializeComponent();
 
+            this.Text = Common.APP_TITLE;
+
             base.lblTitle.Text = "Data generation in progress";
+            base.lblDescription.Text = "SharePoint data based on prepared definition is being generated ...";
 
             btnNext.Visible = false;
             btnBack.Visible = false;
@@ -27,7 +32,14 @@ namespace Acceleratio.SPDG.UI
             btnClose.Text = "Cancel";
             btnClose.Click += btnClose_Click;
 
+            btnOpenLog.Click += btnOpenLog_Click;
+
             startDataGeneration();
+        }
+
+        void btnOpenLog_Click(object sender, EventArgs e)
+        {
+            Process.Start("notepad.exe", DataGenerator.SessionID + ".log");
         }
 
         private void startDataGeneration()
@@ -36,6 +48,7 @@ namespace Acceleratio.SPDG.UI
 
             progressOverall.Maximum = generator.OverallProgressMaxSteps;
 
+            this.Cursor = Cursors.WaitCursor;
 
             bgWorker = new BackgroundWorker();
             bgWorker.WorkerReportsProgress = true;
@@ -70,6 +83,8 @@ namespace Acceleratio.SPDG.UI
             }
             else if (e.ProgressPercentage == 3)
             {
+                this.Cursor = Cursors.Default;
+                btnOpenLog.Visible = true;
                 progressOverall.Value = progressOverall.Maximum;
                 if (progressDetails.Maximum == 0) progressDetails.Maximum = 1;
                 progressDetails.Value = progressDetails.Maximum;
@@ -86,6 +101,8 @@ namespace Acceleratio.SPDG.UI
             if (success)
             {
                 MessageBox.Show("SharePoint Data Generation Done!");
+                
+                
             }
             else
             {

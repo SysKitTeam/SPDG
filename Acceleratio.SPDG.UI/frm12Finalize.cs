@@ -16,6 +16,7 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "Finalize";
+            base.lblDescription.Text = "SharePoint data generator structure is prepared.";
 
             btnNext.Text = "Start >";
             btnNext.Click += btnNext_Click;

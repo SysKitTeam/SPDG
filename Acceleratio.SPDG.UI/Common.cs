@@ -56,9 +56,9 @@ namespace Acceleratio.SPDG.UI
             WorkingDefinition.MaxNumberOfContentTypesPerSiteCollection = 0;
             WorkingDefinition.MaxNumberOfFoldersToGenerate = 0;
             WorkingDefinition.MaxNumberofItemsToGenerate = 0;
-            WorkingDefinition.MaxNumberOfLevelsForSites = 1;
-            WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite = 1;
-            WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 1;
+            WorkingDefinition.MaxNumberOfLevelsForSites = 0;
+            WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite = 0;
+            WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 0;
             WorkingDefinition.MaxNumberOfViewsPerList = 0;
             WorkingDefinition.CreateNewWebApplications = 0;
             WorkingDefinition.OwnerLogin = "acceleratio\\kresimir.korovljevic";

@@ -17,11 +17,13 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "Connect";
+            base.lblDescription.Text = "Connect to your SharePoint environment";
 
             btnBack.Enabled = false;
             btnNext.Click += btnNext_Click;
             ucSteps1.showStep(1);
             this.Text = Common.APP_TITLE;
+            
 
             if(appStart)
             {
@@ -492,7 +494,7 @@ namespace Acceleratio.SPDG.UI
         public override void loadData()
         {
             SampleData.PrepareSampleCollections();
-            //AD.ListOU();
+            //AD.createUser();
 
             txtSharePointSiteURL.Text = Common.WorkingDefinition.SharePointURL;
             radioConnectSPOnPremise.Checked = Common.WorkingDefinition.ConnectToSPOnPremise;

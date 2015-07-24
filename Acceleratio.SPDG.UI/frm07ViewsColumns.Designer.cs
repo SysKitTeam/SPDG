@@ -35,6 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkCreateViews = new System.Windows.Forms.CheckBox();
             this.chkCreateColumns = new System.Windows.Forms.CheckBox();
+            this.lblNumColumns = new System.Windows.Forms.Label();
+            this.lblNumViews = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumViewsPerList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumColumnsPerList)).BeginInit();
             this.SuspendLayout();
@@ -50,8 +52,9 @@
             // 
             this.trackNumViewsPerList.Location = new System.Drawing.Point(256, 293);
             this.trackNumViewsPerList.Name = "trackNumViewsPerList";
-            this.trackNumViewsPerList.Size = new System.Drawing.Size(424, 45);
+            this.trackNumViewsPerList.Size = new System.Drawing.Size(398, 45);
             this.trackNumViewsPerList.TabIndex = 16;
+            this.trackNumViewsPerList.ValueChanged += new System.EventHandler(this.trackNumViewsPerList_ValueChanged);
             // 
             // label3
             // 
@@ -66,8 +69,9 @@
             // 
             this.trackNumColumnsPerList.Location = new System.Drawing.Point(256, 166);
             this.trackNumColumnsPerList.Name = "trackNumColumnsPerList";
-            this.trackNumColumnsPerList.Size = new System.Drawing.Size(424, 45);
+            this.trackNumColumnsPerList.Size = new System.Drawing.Size(398, 45);
             this.trackNumColumnsPerList.TabIndex = 18;
+            this.trackNumColumnsPerList.ValueChanged += new System.EventHandler(this.trackNumColumnsPerList_ValueChanged);
             // 
             // label2
             // 
@@ -87,6 +91,7 @@
             this.chkCreateViews.TabIndex = 19;
             this.chkCreateViews.Text = "Create Views";
             this.chkCreateViews.UseVisualStyleBackColor = true;
+            this.chkCreateViews.CheckedChanged += new System.EventHandler(this.chkCreateViews_CheckedChanged);
             // 
             // chkCreateColumns
             // 
@@ -97,12 +102,33 @@
             this.chkCreateColumns.TabIndex = 20;
             this.chkCreateColumns.Text = "Create columns";
             this.chkCreateColumns.UseVisualStyleBackColor = true;
+            this.chkCreateColumns.CheckedChanged += new System.EventHandler(this.chkCreateColumns_CheckedChanged);
+            // 
+            // lblNumColumns
+            // 
+            this.lblNumColumns.AutoSize = true;
+            this.lblNumColumns.Location = new System.Drawing.Point(659, 169);
+            this.lblNumColumns.Name = "lblNumColumns";
+            this.lblNumColumns.Size = new System.Drawing.Size(13, 13);
+            this.lblNumColumns.TabIndex = 21;
+            this.lblNumColumns.Text = "0";
+            // 
+            // lblNumViews
+            // 
+            this.lblNumViews.AutoSize = true;
+            this.lblNumViews.Location = new System.Drawing.Point(658, 296);
+            this.lblNumViews.Name = "lblNumViews";
+            this.lblNumViews.Size = new System.Drawing.Size(13, 13);
+            this.lblNumViews.TabIndex = 22;
+            this.lblNumViews.Text = "0";
             // 
             // frm07ViewsColumns
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.lblNumViews);
+            this.Controls.Add(this.lblNumColumns);
             this.Controls.Add(this.chkCreateColumns);
             this.Controls.Add(this.chkCreateViews);
             this.Controls.Add(this.trackNumColumnsPerList);
@@ -113,7 +139,7 @@
             this.Name = "frm07ViewsColumns";
             this.Text = "frm07ViewsColumns";
             this.Controls.SetChildIndex(this.lblTitle, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblDescription, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);
             this.Controls.SetChildIndex(this.btnNext, 0);
             this.Controls.SetChildIndex(this.btnHelp, 0);
@@ -125,6 +151,8 @@
             this.Controls.SetChildIndex(this.trackNumColumnsPerList, 0);
             this.Controls.SetChildIndex(this.chkCreateViews, 0);
             this.Controls.SetChildIndex(this.chkCreateColumns, 0);
+            this.Controls.SetChildIndex(this.lblNumColumns, 0);
+            this.Controls.SetChildIndex(this.lblNumViews, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackNumViewsPerList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumColumnsPerList)).EndInit();
             this.ResumeLayout(false);
@@ -141,5 +169,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkCreateViews;
         private System.Windows.Forms.CheckBox chkCreateColumns;
+        private System.Windows.Forms.Label lblNumColumns;
+        private System.Windows.Forms.Label lblNumViews;
     }
 }

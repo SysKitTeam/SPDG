@@ -114,7 +114,7 @@
             this.Name = "frm09ContentTypes";
             this.Text = "frm09ContentTypes";
             this.Controls.SetChildIndex(this.lblTitle, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblDescription, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);
             this.Controls.SetChildIndex(this.btnNext, 0);
             this.Controls.SetChildIndex(this.btnHelp, 0);

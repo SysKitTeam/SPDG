@@ -215,7 +215,7 @@
             this.Text = "frm01Connect";
             this.VisibleChanged += new System.EventHandler(this.frm01Connect_VisibleChanged);
             this.Controls.SetChildIndex(this.lblTitle, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblDescription, 0);
             this.Controls.SetChildIndex(this.btnBack, 0);
             this.Controls.SetChildIndex(this.btnNext, 0);
             this.Controls.SetChildIndex(this.btnHelp, 0);

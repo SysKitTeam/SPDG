@@ -15,7 +15,8 @@ namespace Acceleratio.SPDG.UI
         {
             InitializeComponent();
 
-            base.lblTitle.Text = "Users & Groups";
+            base.lblTitle.Text = "Users && Groups";
+            base.lblDescription.Text = "Create user and group accounts in your Active Directory";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;

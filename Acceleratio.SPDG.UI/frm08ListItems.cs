@@ -16,13 +16,27 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "List Items";
+            base.lblDescription.Text = "Define list items && documents number, type and size.";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;
             ucSteps1.showStep(8);
             this.Text = Common.APP_TITLE;
 
+            initUI();
             loadData();
+        }
+
+        private void initUI()
+        {
+            trackMaxNumberOfItems.Enabled = false;
+            trackMinDocSize.Enabled = false;
+            trackMaxDocSize.Enabled = false;
+            chkDOCX.Enabled = false;
+            chkImages.Enabled = false;
+            chkPDF.Enabled = false;
+            chkXLSX.Enabled = false;
+
         }
 
         void btnBack_Click(object sender, EventArgs e)
@@ -62,6 +76,35 @@ namespace Acceleratio.SPDG.UI
             Common.WorkingDefinition.MinDocumentSizeKB = trackMinDocSize.Value;
             Common.WorkingDefinition.MaxDocumentSizeMB  = trackMaxDocSize.Value;
             return true;
+        }
+
+        private void chkPrefil_CheckedChanged(object sender, EventArgs e)
+        {
+            if( chkPrefil.Checked )
+            {
+                trackMaxNumberOfItems.Enabled = true;
+                if( Common.WorkingDefinition.LibTypeDocument )
+                {
+                    chkDOCX.Enabled = true;
+                    chkImages.Enabled = true;
+                    chkPDF.Enabled = true;
+                    chkXLSX.Enabled = true;
+                }
+            }
+            else
+            {
+                trackMaxNumberOfItems.Enabled = false;
+                trackMaxNumberOfItems.Value = 0;
+                chkDOCX.Enabled = false;
+                chkImages.Enabled = false;
+                chkPDF.Enabled = false;
+                chkXLSX.Enabled = false;
+            }
+        }
+
+        private void trackMaxNumberOfItems_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumItems.Text = trackMaxNumberOfItems.Value.ToString();
         }
     }
 }

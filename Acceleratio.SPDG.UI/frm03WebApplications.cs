@@ -19,6 +19,7 @@ namespace Acceleratio.SPDG.UI
             InitializeComponent();
 
             base.lblTitle.Text = "Web Applications";
+            base.lblDescription.Text = "Create new or use existing SharePoint Web Applications";
 
             btnNext.Click += btnNext_Click;
             btnBack.Click += btnBack_Click;
