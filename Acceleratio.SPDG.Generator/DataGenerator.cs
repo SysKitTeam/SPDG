@@ -53,6 +53,9 @@ namespace Acceleratio.SPDG.Generator
                 SessionID = "Session " + DateTime.Now.ToString("yy-MM-dd") + " " +  DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString() ;
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION STARTS ***");
 
+                //Create AD users and groups
+                CreateADUsersAndGroups();
+
                 //Creates or sets Web applications and Site Collections
                 ResolveWebAppsAndSiteCollections();
 
@@ -85,6 +88,7 @@ namespace Acceleratio.SPDG.Generator
             catch(Exception ex)
             {
                 Errors.Log(ex);
+                bgWorker.ReportProgress(3);
             }
 
             return false;

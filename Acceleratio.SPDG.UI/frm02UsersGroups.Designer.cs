@@ -37,6 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cboOrganizationalUnit = new System.Windows.Forms.ComboBox();
+            this.cboDomains = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).BeginInit();
@@ -52,7 +54,7 @@
             // chkGenerateUsers
             // 
             this.chkGenerateUsers.AutoSize = true;
-            this.chkGenerateUsers.Location = new System.Drawing.Point(265, 115);
+            this.chkGenerateUsers.Location = new System.Drawing.Point(265, 154);
             this.chkGenerateUsers.Name = "chkGenerateUsers";
             this.chkGenerateUsers.Size = new System.Drawing.Size(288, 17);
             this.chkGenerateUsers.TabIndex = 8;
@@ -68,9 +70,9 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cboOrganizationalUnit);
-            this.groupBox1.Location = new System.Drawing.Point(265, 156);
+            this.groupBox1.Location = new System.Drawing.Point(265, 187);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(457, 313);
+            this.groupBox1.Size = new System.Drawing.Size(457, 282);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Users";
@@ -110,7 +112,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 34);
+            this.label2.Location = new System.Drawing.Point(15, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 1;
@@ -119,16 +121,36 @@
             // cboOrganizationalUnit
             // 
             this.cboOrganizationalUnit.FormattingEnabled = true;
-            this.cboOrganizationalUnit.Location = new System.Drawing.Point(18, 53);
+            this.cboOrganizationalUnit.Location = new System.Drawing.Point(18, 65);
             this.cboOrganizationalUnit.Name = "cboOrganizationalUnit";
             this.cboOrganizationalUnit.Size = new System.Drawing.Size(411, 21);
             this.cboOrganizationalUnit.TabIndex = 0;
+            // 
+            // cboDomains
+            // 
+            this.cboDomains.FormattingEnabled = true;
+            this.cboDomains.Location = new System.Drawing.Point(543, 112);
+            this.cboDomains.Name = "cboDomains";
+            this.cboDomains.Size = new System.Drawing.Size(151, 21);
+            this.cboDomains.TabIndex = 10;
+            this.cboDomains.Leave += new System.EventHandler(this.cboDomains_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(265, 115);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(272, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Use this domain to create SharePoint users and groups: ";
             // 
             // frm02UsersGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboDomains);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkGenerateUsers);
             this.Controls.Add(this.ucSteps1);
@@ -143,6 +165,8 @@
             this.Controls.SetChildIndex(this.ucSteps1, 0);
             this.Controls.SetChildIndex(this.chkGenerateUsers, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.cboDomains, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).EndInit();
@@ -163,5 +187,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar trackNumberOfUsers;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cboDomains;
+        private System.Windows.Forms.Label label1;
     }
 }

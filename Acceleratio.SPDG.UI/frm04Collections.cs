@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Security.Principal;
+using System.Runtime.InteropServices;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -25,7 +27,6 @@ namespace Acceleratio.SPDG.UI
 
             this.Text = Common.APP_TITLE;
             ucSteps1.showStep(4);
-            
         }
 
 
@@ -146,7 +147,25 @@ namespace Acceleratio.SPDG.UI
             this.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            loadSiteCollections();
+
+            if (!string.IsNullOrEmpty(Common.impersonateUserName))
+            {
+                if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
+                {
+                    //Insert your code that runs under the security context of a specific user here.
+                    loadSiteCollections();
+                    Common.undoImpersonation();
+                }
+                else
+                {
+                    MessageBox.Show("Impersonation Failed!");
+                }
+            }
+            else
+            {
+                loadSiteCollections();
+            }
+            
             loadData();
             this.Enabled = true;
             this.Cursor = Cursors.Default;

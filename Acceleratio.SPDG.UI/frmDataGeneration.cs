@@ -34,7 +34,23 @@ namespace Acceleratio.SPDG.UI
 
             btnOpenLog.Click += btnOpenLog_Click;
 
-            startDataGeneration();
+            if (!string.IsNullOrEmpty(Common.impersonateUserName))
+            {
+                if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
+                {
+                    //Insert your code that runs under the security context of a specific user here.
+                    startDataGeneration();
+                    Common.undoImpersonation();
+                }
+                else
+                {
+                    MessageBox.Show("Impersonation Failed!");
+                }
+            }
+            else
+            {
+                startDataGeneration();
+            }
         }
 
         void btnOpenLog_Click(object sender, EventArgs e)

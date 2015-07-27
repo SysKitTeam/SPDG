@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Acceleratio.SPDG.Generator;
+using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -526,6 +528,41 @@ namespace Acceleratio.SPDG.UI
                 return false;
             }
 
+            bool isFarmAdmin = true;
+
+            if( radioCustomCredentials.Checked )
+            {
+                isFarmAdmin = false;
+                if (Common.impersonateValidUser(txtUserName.Text, txtDomain.Text, txtPassword.Text))
+                {
+                    Common.undoImpersonation();
+                }
+                else
+                {
+                    MessageBox.Show("Provided custom credentials are not valid!");
+                    return false;
+                }
+
+                //isFarmAdmin = SPFarm.Local.CurrentUserIsAdministrator();
+                SPSecurity.RunWithElevatedPrivileges(delegate()
+                {
+                    SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
+                    foreach (SPUser user in adminGroup.Users)
+                    {
+                        if (user.LoginName.ToLower() == txtDomain.Text.ToLower() + "\\" + txtUserName.Text.ToLower())
+                        {
+                            isFarmAdmin = true;
+                            break;
+                        }
+                    }
+                });
+            }
+
+            if( !isFarmAdmin )
+            {
+                MessageBox.Show("Provided user is not Farm Admin on SharePoint!");
+                return false;
+            }
 
             Common.WorkingDefinition.SharePointURL = txtSharePointSiteURL.Text;
             Common.WorkingDefinition.ConnectToSPOnPremise = radioConnectSPOnPremise.Checked;
