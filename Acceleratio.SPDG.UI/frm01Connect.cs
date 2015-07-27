@@ -520,12 +520,20 @@ namespace Acceleratio.SPDG.UI
 
         public override bool saveData()
         {
+            if (radioCustomCredentials.Checked && (txtUserName.Text == string.Empty || txtPassword.Text == string.Empty || txtDomain.Text == string.Empty))
+            {
+                MessageBox.Show("Please, provide custom credentials!");
+                return false;
+            }
+
+
             Common.WorkingDefinition.SharePointURL = txtSharePointSiteURL.Text;
             Common.WorkingDefinition.ConnectToSPOnPremise = radioConnectSPOnPremise.Checked;
             Common.WorkingDefinition.CredentialsOfCurrentUser = radioCurrentCredentials.Checked;
-            Common.WorkingDefinition.Username = txtUserName.Text;
-            Common.WorkingDefinition.Password = txtPassword.Text;
-            Common.WorkingDefinition.Domain = txtDomain.Text;
+
+            Common.impersonateUserName = txtUserName.Text;
+            Common.impersonatePassword = txtPassword.Text;
+            Common.impersonateDomain = txtDomain.Text;
 
             return true;
         }

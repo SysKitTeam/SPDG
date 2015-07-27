@@ -14,6 +14,9 @@ namespace Acceleratio.SPDG.UI
         public const string APP_TITLE = "SharePoint Data Generator";
 
         public static GeneratorDefinition WorkingDefinition {get; set;}
+        public static string impersonateUserName { get; set; }
+        public static string impersonateDomain { get; set; }
+        public static string impersonatePassword { get; set; }
 
         public static void SerializeDefinition(string path)
         {

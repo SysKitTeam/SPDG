@@ -31,7 +31,7 @@ namespace Acceleratio.SPDG.Generator
                     {
                         string siteName = findAvailableSiteName(siteColl);
 
-                        progressDetail("Creating Site '" + siteCollInfo.URL + "//" + siteName + "'");
+                        progressDetail("Creating Site '" + siteCollInfo.URL + "/" + siteName + "'");
 
                         SPWeb web = siteColl.AllWebs.Add(siteName);
                         web.Title = siteName;
