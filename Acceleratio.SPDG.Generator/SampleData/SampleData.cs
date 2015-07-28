@@ -95,6 +95,12 @@ namespace Acceleratio.SPDG.Generator
             return randomDate;
         }
 
+        internal static DateTime GetRandomDateCurrentMonth()
+        {
+            DateTime randomDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, GetRandomNumber(1, 28));
+            return randomDate;
+        }
+
         internal static byte[] CreateDocx()
         {
             string text = File.ReadAllText("SampleData\\document.xml");

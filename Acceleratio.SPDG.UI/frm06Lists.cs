@@ -66,7 +66,7 @@ namespace Acceleratio.SPDG.UI
 
         public override bool saveData()
         {
-            if (trackMaxNumberListLibraries.Value > 0 && !chkDocLib.Checked && !chkList.Checked)
+            if (trackMaxNumberListLibraries.Value > 0 && !chkDocLib.Checked && !chkList.Checked && !chkTasks.Checked && !chkCalendar.Checked)
             {
                 MessageBox.Show("If number of lists to create is greater than zero, type of list must be selected.");
                 return false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -36,6 +37,7 @@ namespace Acceleratio.SPDG.Generator
                         SPWeb web = siteColl.AllWebs.Add(siteName);
                         web.Title = siteName;
                         web.Update();
+                        addQuickLaunch(web);
 
                         SiteInfo siteInfo = new SiteInfo();
                         siteInfo.URL = web.GetServerRelativeUrlFromUrl(web.Url);
@@ -60,6 +62,7 @@ namespace Acceleratio.SPDG.Generator
                             web = web.Webs.Add( siteName);
                             web.Title = siteName;
                             web.Update();
+                            addQuickLaunch(web);
 
                             SiteInfo siteInfoLevel = new SiteInfo();
                             siteInfoLevel.URL = web.Url;
@@ -72,6 +75,13 @@ namespace Acceleratio.SPDG.Generator
                     }
                 }
             }
+        }
+
+        private void addQuickLaunch(SPWeb childWeb)
+        {
+            SPNavigationNodeCollection topnav = childWeb.ParentWeb.Navigation.TopNavigationBar;
+            SPNavigationNode node = new SPNavigationNode(childWeb.Title, childWeb.ServerRelativeUrl);
+            node = topnav.AddAsLast(node);
         }
 
         private string findAvailableSiteName(SPSite siteColl)

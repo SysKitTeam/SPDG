@@ -41,13 +41,14 @@ namespace Acceleratio.SPDG.Generator
                             {
                                 try
                                 {
+                                    getNextTemplateType();
                                     string listName = findAvailableListName(web);
                                     progressDetail("Crating List '" + web.Url +  "/" + listName + "'");
-                                    getNextTemplateType();
                                     web.Lists.Add(listName, string.Empty, lastTemplateType);
 
                                     ListInfo listInfo = new ListInfo();
                                     listInfo.Name = listName;
+                                    listInfo.TemplateType = lastTemplateType;
                                     listInfo.isLib = (lastTemplateType == SPListTemplateType.DocumentLibrary ? true : false);
 
                                     siteInfo.Lists.Add(listInfo);
@@ -70,28 +71,120 @@ namespace Acceleratio.SPDG.Generator
 
         private SPListTemplateType getNextTemplateType()
         {
-            bool changed = false;
-
-
-            if (!changed && workingDefinition.LibTypeList && lastTemplateType != SPListTemplateType.GenericList)
+            if (lastTemplateType == SPListTemplateType.NoListTemplate)
             {
-                lastTemplateType = SPListTemplateType.GenericList;
-                lastListPrefix = "List";
-                changed = true;
+                if( workingDefinition.LibTypeList)
+                {
+                    lastTemplateType = SPListTemplateType.GenericList;
+                    lastListPrefix = "List";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeDocument)
+                {
+                    lastTemplateType = SPListTemplateType.DocumentLibrary;
+                    lastListPrefix = "Library";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeTasks)
+                {
+                    lastTemplateType = SPListTemplateType.Tasks;
+                    lastListPrefix = "Tasks";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeCalendar)
+                {
+                    lastTemplateType = SPListTemplateType.Events;
+                    lastListPrefix = "Events";
+                    return lastTemplateType ;
+                }
             }
 
-            if( !changed && workingDefinition.LibTypeDocument && lastTemplateType != SPListTemplateType.DocumentLibrary)
+            if (lastTemplateType == SPListTemplateType.GenericList)
             {
-                lastTemplateType = SPListTemplateType.DocumentLibrary;
-                lastListPrefix = "Library";
-                changed = true;
+                if (workingDefinition.LibTypeDocument)
+                {
+                    lastTemplateType = SPListTemplateType.DocumentLibrary;
+                    lastListPrefix = "Library";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeTasks)
+                {
+                    lastTemplateType = SPListTemplateType.Tasks;
+                    lastListPrefix = "Tasks";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeCalendar)
+                {
+                    lastTemplateType = SPListTemplateType.Events;
+                    lastListPrefix = "Events";
+                    return lastTemplateType;
+                }
             }
 
-            if (!changed && workingDefinition.LibTypeTasks && lastTemplateType != SPListTemplateType.Tasks)
+            if (lastTemplateType == SPListTemplateType.DocumentLibrary)
             {
-                lastTemplateType = SPListTemplateType.DocumentLibrary;
-                lastListPrefix = "Tasks";
-                changed = true;
+                if (workingDefinition.LibTypeTasks)
+                {
+                    lastTemplateType = SPListTemplateType.Tasks;
+                    lastListPrefix = "Tasks";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeCalendar)
+                {
+                    lastTemplateType = SPListTemplateType.Events;
+                    lastListPrefix = "Events";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeList)
+                {
+                    lastTemplateType = SPListTemplateType.GenericList;
+                    lastListPrefix = "List";
+                    return lastTemplateType;
+                }
+            }
+
+            if (lastTemplateType == SPListTemplateType.Tasks)
+            {
+                if (workingDefinition.LibTypeCalendar)
+                {
+                    lastTemplateType = SPListTemplateType.Events;
+                    lastListPrefix = "Events";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeList)
+                {
+                    lastTemplateType = SPListTemplateType.GenericList;
+                    lastListPrefix = "List";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeDocument)
+                {
+                    lastTemplateType = SPListTemplateType.DocumentLibrary;
+                    lastListPrefix = "Library";
+                    return lastTemplateType;
+                }
+            }
+
+            if (lastTemplateType == SPListTemplateType.Events)
+            {
+                if (workingDefinition.LibTypeList)
+                {
+                    lastTemplateType = SPListTemplateType.GenericList;
+                    lastListPrefix = "List";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeDocument)
+                {
+                    lastTemplateType = SPListTemplateType.DocumentLibrary;
+                    lastListPrefix = "Library";
+                    return lastTemplateType;
+                }
+                else if (workingDefinition.LibTypeTasks)
+                {
+                    lastTemplateType = SPListTemplateType.Tasks;
+                    lastListPrefix = "Tasks";
+                    return lastTemplateType;
+                }
             }
 
             return lastTemplateType;
@@ -100,6 +193,15 @@ namespace Acceleratio.SPDG.Generator
         private string findAvailableListName(SPWeb web)
         {
             string candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
+
+            if (lastTemplateType == SPListTemplateType.Tasks)
+            {
+                candidate += " Tasks";
+            }
+            else if (lastTemplateType == SPListTemplateType.Events)
+            {
+                candidate += " Calendar";
+            }
 
             while (web.Lists.TryGetList(candidate) != null)
             {

@@ -51,11 +51,35 @@ namespace Acceleratio.SPDG.Generator
                                 if (!listInfo.isLib)
                                 {
                                     SPList list = web.Lists[listInfo.Name];
-                                    Log.Write("Start adding items to list: " + listInfo.Name + " in site: " + web.Url);
+
+                                    if( listInfo.TemplateType == SPListTemplateType.Tasks )
+                                    {
+                                        Log.Write("Start adding items to tasks list: " + listInfo.Name + " in site: " + web.Url);
+                                    }
+                                    else if (listInfo.TemplateType == SPListTemplateType.Events)
+                                    {
+                                        Log.Write("Start adding events to calendar: " + listInfo.Name + " in site: " + web.Url);
+                                    }
+                                    else
+                                    {
+                                        Log.Write("Start adding items to list: " + listInfo.Name + " in site: " + web.Url);
+                                    }
+                                    
 
                                     for (int i = 0; i < workingDefinition.MaxNumberofItemsToGenerate; i++ )
                                     {
-                                        addItemToList(list, null, false);
+                                        if (listInfo.TemplateType == SPListTemplateType.Tasks)
+                                        {
+                                            addTaskToList(list, null, false);
+                                        }
+                                        else if (listInfo.TemplateType == SPListTemplateType.Events)
+                                        {
+                                            addEventToList(list, null, false);
+                                        }
+                                        else
+                                        {
+                                            addItemToList(list, null, false);
+                                        }
                                     }
 
                                     
@@ -177,8 +201,42 @@ namespace Acceleratio.SPDG.Generator
             {
                 progressDetail("Item added: " + title);
             }
-            
+        }
 
+        private void addTaskToList(SPList list, SPListItem item, bool isDocLib)
+        {
+            if (item == null)
+            {
+                item = list.AddItem();
+            }
+
+            string title = SampleData.GetSampleValueRandom(SampleData.Accounts) + " Task";
+            item["Title"] = title;
+            item["Status"] = "In Progress";
+            item["Due Date"] = SampleData.GetRandomDate(2013, 2015);
+            item["Priority"] = "(2) Normal";
+            item["% Complete"] = SampleData.GetRandomNumber(1, 100) / 100;
+            item.Update();
+
+            progressDetail("task added: " + title);
+        }
+
+        private void addEventToList(SPList list, SPListItem item, bool isDocLib)
+        {
+            if (item == null)
+            {
+                item = list.AddItem();
+            }
+
+            string title = SampleData.GetSampleValueRandom(SampleData.Accounts) + " Event";
+            item["Title"] = title;
+            DateTime time = SampleData.GetRandomDateCurrentMonth();
+            item["Start Time"] = time;
+            item["End Time"] = time;
+            item["Location"] = SampleData.GetSampleValueRandom(SampleData.Cities);
+            item.Update();
+
+            progressDetail("event added: " + title);
         }
 
         private object getFieldValue( string fieldName)

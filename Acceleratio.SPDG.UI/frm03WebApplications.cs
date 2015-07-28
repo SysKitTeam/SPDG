@@ -84,6 +84,20 @@ namespace Acceleratio.SPDG.UI
                 trackCreateNewWebApplication.Enabled = true;
                 radioUseExistingWebApp.Checked = false;
                 cboUseExistingWebApp.Enabled = false;
+
+                label1.Enabled = true;
+                label2.Enabled = true;
+                label3.Enabled = true;
+                label4.Enabled = true;
+                txtOwnerUserName.Enabled = true;
+                txtOwnerPassword.Enabled = true;
+                txtOwnerEmail.Enabled = true;
+                txtSQLServer.Enabled = true;
+
+                txtOwnerUserName.Text = Common.WorkingDefinition.OwnerLogin;
+                txtOwnerPassword.Text = Common.WorkingDefinition.OwnerPassword;
+                txtOwnerEmail.Text =  Common.WorkingDefinition.OwnerEmail;
+                txtSQLServer.Text = Common.WorkingDefinition.DatabaseServer;
             }
             else
             {
@@ -91,6 +105,15 @@ namespace Acceleratio.SPDG.UI
                 trackCreateNewWebApplication.Enabled = false;
                 
                 cboUseExistingWebApp.Enabled = true;
+
+                label1.Enabled = false;
+                label2.Enabled = false;
+                label3.Enabled = false;
+                label4.Enabled = false;
+                txtOwnerUserName.Enabled = false;
+                txtOwnerPassword.Enabled = false;
+                txtOwnerEmail.Enabled = false;
+                txtSQLServer.Enabled = false;
 
             }
             
@@ -102,12 +125,30 @@ namespace Acceleratio.SPDG.UI
             {
                 trackCreateNewWebApplication.Enabled = true;
                 cboUseExistingWebApp.Enabled = false;
+
+                label1.Enabled = true;
+                label2.Enabled = true;
+                label3.Enabled = true;
+                label4.Enabled = true;
+                txtOwnerUserName.Enabled = true;
+                txtOwnerPassword.Enabled = true;
+                txtOwnerEmail.Enabled = true;
+                txtSQLServer.Enabled = true;
             }
             else
             {
                 trackCreateNewWebApplication.Value = 0;
                 trackCreateNewWebApplication.Enabled = false;
                 cboUseExistingWebApp.Enabled = true;
+
+                label1.Enabled = false;
+                label2.Enabled = false;
+                label3.Enabled = false;
+                label4.Enabled = false;
+                txtOwnerUserName.Enabled = false;
+                txtOwnerPassword.Enabled = false;
+                txtOwnerEmail.Enabled = false;
+                txtSQLServer.Enabled = false;
             }
 
 
@@ -121,6 +162,13 @@ namespace Acceleratio.SPDG.UI
                 MessageBox.Show("Select at least one web application to create, if 'Create new web application' is selected.");
                 return false;
             }
+
+            if (radioCreateNewWebApp.Checked && (txtOwnerUserName.Text == string.Empty || txtOwnerPassword.Text == string.Empty || txtOwnerEmail.Text == string.Empty || txtSQLServer.Text == string.Empty))
+            {
+                MessageBox.Show("Provide all details to create new web application.");
+                return false;
+            }
+
 
             if (radioUseExistingWebApp.Checked && cboUseExistingWebApp.SelectedItem == null)
             {
@@ -141,6 +189,10 @@ namespace Acceleratio.SPDG.UI
                 Common.WorkingDefinition.UseExistingWebApplication = string.Empty;
                 Common.WorkingDefinition.UseExistingWebApplicationName = string.Empty;
                 Common.WorkingDefinition.SiteCollection = string.Empty;
+                Common.WorkingDefinition.OwnerLogin = txtOwnerUserName.Text;
+                Common.WorkingDefinition.OwnerPassword = txtOwnerPassword.Text;
+                Common.WorkingDefinition.OwnerEmail = txtOwnerEmail.Text;
+                Common.WorkingDefinition.DatabaseServer = txtSQLServer.Text;
             }
 
             return true;

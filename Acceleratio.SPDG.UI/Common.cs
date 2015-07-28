@@ -90,10 +90,7 @@ namespace Acceleratio.SPDG.UI
             WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 0;
             WorkingDefinition.MaxNumberOfViewsPerList = 0;
             WorkingDefinition.CreateNewWebApplications = 0;
-            WorkingDefinition.OwnerLogin = "acceleratio\\kresimir.korovljevic";
-            WorkingDefinition.OwnerPassword = "12Kres.1";
-            WorkingDefinition.OwnerEmail = "kresimir.korovljevic@acceleratio.net";
-            WorkingDefinition.DatabaseServer = "SQL-KRESO";
+            
 
         }
 
