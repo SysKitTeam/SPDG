@@ -94,9 +94,9 @@ namespace Acceleratio.SPDG.UI
                 txtOwnerEmail.Enabled = true;
                 txtSQLServer.Enabled = true;
 
-                txtOwnerUserName.Text = Common.WorkingDefinition.OwnerLogin;
-                txtOwnerPassword.Text = Common.WorkingDefinition.OwnerPassword;
-                txtOwnerEmail.Text =  Common.WorkingDefinition.OwnerEmail;
+                txtOwnerUserName.Text = Common.WorkingDefinition.WebAppOwnerLogin;
+                txtOwnerPassword.Text = Common.WorkingDefinition.WebAppOwnerPassword;
+                txtOwnerEmail.Text =  Common.WorkingDefinition.WebAppOwnerEmail;
                 txtSQLServer.Text = Common.WorkingDefinition.DatabaseServer;
             }
             else
@@ -189,9 +189,9 @@ namespace Acceleratio.SPDG.UI
                 Common.WorkingDefinition.UseExistingWebApplication = string.Empty;
                 Common.WorkingDefinition.UseExistingWebApplicationName = string.Empty;
                 Common.WorkingDefinition.SiteCollection = string.Empty;
-                Common.WorkingDefinition.OwnerLogin = txtOwnerUserName.Text;
-                Common.WorkingDefinition.OwnerPassword = txtOwnerPassword.Text;
-                Common.WorkingDefinition.OwnerEmail = txtOwnerEmail.Text;
+                Common.WorkingDefinition.WebAppOwnerLogin = txtOwnerUserName.Text;
+                Common.WorkingDefinition.WebAppOwnerPassword = txtOwnerPassword.Text;
+                Common.WorkingDefinition.WebAppOwnerEmail = txtOwnerEmail.Text;
                 Common.WorkingDefinition.DatabaseServer = txtSQLServer.Text;
             }
 

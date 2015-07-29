@@ -56,7 +56,7 @@ namespace Acceleratio.SPDG.Generator
                     int siteCollNumber = s + 1 + webApp.Sites.Count;
                     
                     SPSiteCollection siteCollections = webApp.Sites;
-                    SPSite site = siteCollections.Add("/sites/" + sitCollName, workingDefinition.OwnerLogin, workingDefinition.OwnerEmail);
+                    SPSite site = siteCollections.Add("/sites/" + sitCollName, workingDefinition.SiteCollOwnerLogin, workingDefinition.SiteCollOwnerEmail);
 
                     SiteCollInfo siteCollInfo = new SiteCollInfo();
                     siteCollInfo.URL = site.Url;
@@ -101,8 +101,8 @@ namespace Acceleratio.SPDG.Generator
                     webAppBuilder.RootDirectory = new DirectoryInfo("C:\\inetpub\\wwwroot\\wss\\" + currentPort.ToString());
                     webAppBuilder.ApplicationPoolId = "SPDG Pool " + currentPort.ToString();
                     webAppBuilder.IdentityType = IdentityType.SpecificUser;
-                    webAppBuilder.ApplicationPoolUsername = workingDefinition.OwnerLogin;
-                    webAppBuilder.ApplicationPoolPassword = Common.StringToSecureString(workingDefinition.OwnerPassword);
+                    webAppBuilder.ApplicationPoolUsername = workingDefinition.WebAppOwnerLogin;
+                    webAppBuilder.ApplicationPoolPassword = Common.StringToSecureString(workingDefinition.WebAppOwnerPassword);
                    
 
                     webAppBuilder.ServerComment = "SPDG Site " + currentPort.ToString("00");
@@ -129,7 +129,7 @@ namespace Acceleratio.SPDG.Generator
                         string sitCollName = findAvailableSiteCollectionName(newApplication);
                         progressDetail("Creating site collection '" + sitCollName + "'");
                         SPSiteCollection siteCollections = newApplication.Sites;
-                        SPSite site = siteCollections.Add("/sites/" + sitCollName, workingDefinition.OwnerLogin, workingDefinition.OwnerEmail);
+                        SPSite site = siteCollections.Add("/sites/" + sitCollName, workingDefinition.WebAppOwnerLogin, workingDefinition.WebAppOwnerEmail);
 
                         SiteCollInfo siteCollInfo = new SiteCollInfo();
                         siteCollInfo.URL = site.Url;

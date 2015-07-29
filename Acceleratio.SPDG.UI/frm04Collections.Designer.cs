@@ -34,6 +34,10 @@
             this.cboSiteCollection = new System.Windows.Forms.ComboBox();
             this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
             this.lblCreateSiteColls = new System.Windows.Forms.Label();
+            this.txtOwnerEmail = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtOwnerUserName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumSiteColls)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +56,7 @@
             // radioUseExisting
             // 
             this.radioUseExisting.AutoSize = true;
-            this.radioUseExisting.Location = new System.Drawing.Point(265, 225);
+            this.radioUseExisting.Location = new System.Drawing.Point(265, 295);
             this.radioUseExisting.Name = "radioUseExisting";
             this.radioUseExisting.Size = new System.Drawing.Size(153, 17);
             this.radioUseExisting.TabIndex = 8;
@@ -72,7 +76,7 @@
             // cboSiteCollection
             // 
             this.cboSiteCollection.FormattingEnabled = true;
-            this.cboSiteCollection.Location = new System.Drawing.Point(265, 250);
+            this.cboSiteCollection.Location = new System.Drawing.Point(265, 320);
             this.cboSiteCollection.Name = "cboSiteCollection";
             this.cboSiteCollection.Size = new System.Drawing.Size(409, 21);
             this.cboSiteCollection.TabIndex = 14;
@@ -93,11 +97,51 @@
             this.lblCreateSiteColls.TabIndex = 17;
             this.lblCreateSiteColls.Text = "0";
             // 
+            // txtOwnerEmail
+            // 
+            this.txtOwnerEmail.Enabled = false;
+            this.txtOwnerEmail.Location = new System.Drawing.Point(400, 217);
+            this.txtOwnerEmail.Name = "txtOwnerEmail";
+            this.txtOwnerEmail.Size = new System.Drawing.Size(163, 20);
+            this.txtOwnerEmail.TabIndex = 22;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Enabled = false;
+            this.label3.Location = new System.Drawing.Point(265, 220);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Owner Email:";
+            // 
+            // txtOwnerUserName
+            // 
+            this.txtOwnerUserName.Enabled = false;
+            this.txtOwnerUserName.Location = new System.Drawing.Point(400, 191);
+            this.txtOwnerUserName.Name = "txtOwnerUserName";
+            this.txtOwnerUserName.Size = new System.Drawing.Size(163, 20);
+            this.txtOwnerUserName.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Enabled = false;
+            this.label1.Location = new System.Drawing.Point(265, 194);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Owner UserName:";
+            // 
             // frm04Collections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.txtOwnerEmail);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtOwnerUserName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblCreateSiteColls);
             this.Controls.Add(this.ucSteps1);
             this.Controls.Add(this.cboSiteCollection);
@@ -119,6 +163,10 @@
             this.Controls.SetChildIndex(this.cboSiteCollection, 0);
             this.Controls.SetChildIndex(this.ucSteps1, 0);
             this.Controls.SetChildIndex(this.lblCreateSiteColls, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.txtOwnerUserName, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.txtOwnerEmail, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackNumSiteColls)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -133,5 +181,9 @@
         private System.Windows.Forms.ComboBox cboSiteCollection;
         private ucSteps ucSteps1;
         private System.Windows.Forms.Label lblCreateSiteColls;
+        private System.Windows.Forms.TextBox txtOwnerEmail;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtOwnerUserName;
+        private System.Windows.Forms.Label label1;
     }
 }

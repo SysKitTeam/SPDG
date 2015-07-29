@@ -154,7 +154,7 @@ namespace Acceleratio.SPDG.Generator
             }
             else if (currentFileType == "pdf")
             {
-                content = SampleData.CreatePDF();
+                content = SampleData.CreatePDF(workingDefinition.MinDocumentSizeKB, workingDefinition.MaxDocumentSizeMB * 1024);
             }
             else if (currentFileType == "png")
             {

@@ -59,5 +59,15 @@ namespace Acceleratio.SPDG.UI
             
             return true;
         }
+
+        private void trackMaxNumberContentTypes_ValueChanged(object sender, EventArgs e)
+        {
+            lblMaxContentTypes.Text = trackMaxNumberContentTypes.Value.ToString();
+        }
+
+        private void trackAddSiteColumns_ValueChanged(object sender, EventArgs e)
+        {
+            lblSiteCols.Text = trackAddSiteColumns.Value.ToString();
+        }
     }
 }

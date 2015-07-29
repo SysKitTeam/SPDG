@@ -30,8 +30,6 @@ namespace Acceleratio.SPDG.UI
         private void initUI()
         {
             trackMaxNumberOfItems.Enabled = false;
-            trackMinDocSize.Enabled = false;
-            trackMaxDocSize.Enabled = false;
             chkDOCX.Enabled = false;
             chkImages.Enabled = false;
             chkPDF.Enabled = false;
@@ -61,7 +59,7 @@ namespace Acceleratio.SPDG.UI
             chkXLSX.Checked = Common.WorkingDefinition.IncludeDocTypeXLSX;
             chkPDF.Checked = Common.WorkingDefinition.IncludeDocTypePDF;
             chkImages.Checked = Common.WorkingDefinition.IncludeDocTypeImages;
-            trackMinDocSize.Value = Common.WorkingDefinition.MinDocumentSizeKB;
+            trackMinDocSize.Value = Common.WorkingDefinition.MinDocumentSizeKB > 20 ? Common.WorkingDefinition.MinDocumentSizeKB : 20;
             trackMaxDocSize.Value = Common.WorkingDefinition.MaxDocumentSizeMB;
         }
 
@@ -105,6 +103,16 @@ namespace Acceleratio.SPDG.UI
         private void trackMaxNumberOfItems_ValueChanged(object sender, EventArgs e)
         {
             lblNumItems.Text = trackMaxNumberOfItems.Value.ToString();
+        }
+
+        private void trackMinDocSize_ValueChanged(object sender, EventArgs e)
+        {
+            lblMinSize.Text = trackMinDocSize.Value.ToString() + " kB";
+        }
+
+        private void trackMaxDocSize_ValueChanged(object sender, EventArgs e)
+        {
+            lblMaxSize.Text = trackMaxDocSize.Value.ToString() + " MB";
         }
     }
 }

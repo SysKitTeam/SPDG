@@ -77,6 +77,9 @@ namespace Acceleratio.SPDG.Generator
                 //Create items and documents
                 CreateItemsAndDocuments();
 
+                //AssociateWorkflows
+                AssociateWorkflows();
+
                 //Create permissions
                 CreatePermissions();
 

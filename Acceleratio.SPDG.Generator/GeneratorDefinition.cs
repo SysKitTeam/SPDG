@@ -14,11 +14,12 @@ namespace Acceleratio.SPDG.Generator
         public string Password { get; set; }
         public string Domain { get; set; }
 
-        public string OwnerLogin { get; set; }
-        public string OwnerPassword { get; set; }
-        public string OwnerEmail { get; set; }
+        public string WebAppOwnerLogin { get; set; }
+        public string WebAppOwnerPassword { get; set; }
+        public string WebAppOwnerEmail { get; set; }
         public string DatabaseServer { get; set; }
-
+        public string SiteCollOwnerLogin { get; set; }
+        public string SiteCollOwnerEmail { get; set; }
         public bool GenerateUsersAndSecurityGroupsActiveInDirectory { get; set; }
         public string ADDomainName { get; set; }
         public string ADOrganizationalUnit { get; set; }
@@ -59,11 +60,6 @@ namespace Acceleratio.SPDG.Generator
         public bool ContentTypesCanInheritFromOtherContentType { get; set; }
         public bool CreateOutOfTheBoxWorkflowsToList { get; set; }
         public bool AttachCustomWorkflowToList { get; set; }
-        public bool AssignPermissions { get; set; }
-        public bool CreateUniquePermissionsForPercentOfSites { get; set; }
-        public bool CreateUniquePermissionsForPercentOfLists { get; set; }
-        public bool CreateUniquePermissionsForPercentOfLibraries{ get; set; }
-        public bool CreateUniquePermissionsForPercentOfListItems { get; set; }
         public int PermissionsPercentOfSites { get; set; }
         public int PermissionsPercentOfLists { get; set; }
         public int PermissionsPercentOfFolders { get; set; }

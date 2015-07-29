@@ -35,6 +35,8 @@
             this.chkAddSiteColumns = new System.Windows.Forms.CheckBox();
             this.trackAddSiteColumns = new System.Windows.Forms.TrackBar();
             this.chkContentTypesCanInherit = new System.Windows.Forms.CheckBox();
+            this.lblMaxContentTypes = new System.Windows.Forms.Label();
+            this.lblSiteCols = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberContentTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackAddSiteColumns)).BeginInit();
             this.SuspendLayout();
@@ -60,8 +62,9 @@
             // 
             this.trackMaxNumberContentTypes.Location = new System.Drawing.Point(257, 178);
             this.trackMaxNumberContentTypes.Name = "trackMaxNumberContentTypes";
-            this.trackMaxNumberContentTypes.Size = new System.Drawing.Size(424, 45);
+            this.trackMaxNumberContentTypes.Size = new System.Drawing.Size(405, 45);
             this.trackMaxNumberContentTypes.TabIndex = 31;
+            this.trackMaxNumberContentTypes.ValueChanged += new System.EventHandler(this.trackMaxNumberContentTypes_ValueChanged);
             // 
             // label5
             // 
@@ -86,8 +89,9 @@
             // 
             this.trackAddSiteColumns.Location = new System.Drawing.Point(257, 266);
             this.trackAddSiteColumns.Name = "trackAddSiteColumns";
-            this.trackAddSiteColumns.Size = new System.Drawing.Size(424, 45);
+            this.trackAddSiteColumns.Size = new System.Drawing.Size(405, 45);
             this.trackAddSiteColumns.TabIndex = 33;
+            this.trackAddSiteColumns.ValueChanged += new System.EventHandler(this.trackAddSiteColumns_ValueChanged);
             // 
             // chkContentTypesCanInherit
             // 
@@ -99,11 +103,31 @@
             this.chkContentTypesCanInherit.Text = "Content Types can inherit from other custom content types";
             this.chkContentTypesCanInherit.UseVisualStyleBackColor = true;
             // 
+            // lblMaxContentTypes
+            // 
+            this.lblMaxContentTypes.AutoSize = true;
+            this.lblMaxContentTypes.Location = new System.Drawing.Point(667, 182);
+            this.lblMaxContentTypes.Name = "lblMaxContentTypes";
+            this.lblMaxContentTypes.Size = new System.Drawing.Size(13, 13);
+            this.lblMaxContentTypes.TabIndex = 35;
+            this.lblMaxContentTypes.Text = "0";
+            // 
+            // lblSiteCols
+            // 
+            this.lblSiteCols.AutoSize = true;
+            this.lblSiteCols.Location = new System.Drawing.Point(667, 269);
+            this.lblSiteCols.Name = "lblSiteCols";
+            this.lblSiteCols.Size = new System.Drawing.Size(13, 13);
+            this.lblSiteCols.TabIndex = 36;
+            this.lblSiteCols.Text = "0";
+            // 
             // frm09ContentTypes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.lblSiteCols);
+            this.Controls.Add(this.lblMaxContentTypes);
             this.Controls.Add(this.chkContentTypesCanInherit);
             this.Controls.Add(this.trackAddSiteColumns);
             this.Controls.Add(this.chkAddSiteColumns);
@@ -126,6 +150,8 @@
             this.Controls.SetChildIndex(this.chkAddSiteColumns, 0);
             this.Controls.SetChildIndex(this.trackAddSiteColumns, 0);
             this.Controls.SetChildIndex(this.chkContentTypesCanInherit, 0);
+            this.Controls.SetChildIndex(this.lblMaxContentTypes, 0);
+            this.Controls.SetChildIndex(this.lblSiteCols, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberContentTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackAddSiteColumns)).EndInit();
             this.ResumeLayout(false);
@@ -142,5 +168,7 @@
         private System.Windows.Forms.CheckBox chkAddSiteColumns;
         private System.Windows.Forms.TrackBar trackAddSiteColumns;
         private System.Windows.Forms.CheckBox chkContentTypesCanInherit;
+        private System.Windows.Forms.Label lblMaxContentTypes;
+        private System.Windows.Forms.Label lblSiteCols;
     }
 }

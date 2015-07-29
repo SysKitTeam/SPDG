@@ -48,11 +48,21 @@ namespace Acceleratio.SPDG.UI
             {
                 trackNumSiteColls.Enabled = true;
                 cboSiteCollection.Enabled = false;
+
+                label1.Enabled = true;
+                label3.Enabled = true;
+                txtOwnerEmail.Enabled = true;
+                txtOwnerUserName.Enabled = true;
             }
             else
             {
                 trackNumSiteColls.Enabled = false;
                 cboSiteCollection.Enabled = true;
+
+                label1.Enabled = false;
+                label3.Enabled = false;
+                txtOwnerEmail.Enabled = false;
+                txtOwnerUserName.Enabled = false;
             }
         }
 
@@ -92,6 +102,9 @@ namespace Acceleratio.SPDG.UI
                 Common.WorkingDefinition.CreateNewSiteCollections = 1;
                 radioCreateNewSiteColl.Checked = true;
                 radioUseExisting.Enabled = false;
+
+                txtOwnerUserName.Text = Common.WorkingDefinition.SiteCollOwnerLogin;
+                txtOwnerEmail.Text = Common.WorkingDefinition.SiteCollOwnerEmail;
             }
             else
             {
@@ -113,15 +126,24 @@ namespace Acceleratio.SPDG.UI
         {
             if (trackNumSiteColls.Value == 0 && cboSiteCollection.SelectedItem == null)
             {
-                MessageBox.Show("Select number of new Site Collections or existing one.");
+                MessageBox.Show("Select number of new Site Collections or existing one!");
                 return false;
             }
 
             if( radioCreateNewSiteColl.Checked )
             {
+                if (txtOwnerUserName.Text == string.Empty || txtOwnerEmail.Text == string.Empty )
+                {
+                    MessageBox.Show("Missing user details for site collection creation!");
+                    return false;
+                }
+
                 Common.WorkingDefinition.CreateNewSiteCollections = trackNumSiteColls.Value;
                 Common.WorkingDefinition.UseExistingSiteCollection = false;
                 Common.WorkingDefinition.SiteCollection = string.Empty;
+
+                Common.WorkingDefinition.SiteCollOwnerLogin = txtOwnerUserName.Text;
+                Common.WorkingDefinition.SiteCollOwnerEmail = txtOwnerEmail.Text;
             }
             else
             {

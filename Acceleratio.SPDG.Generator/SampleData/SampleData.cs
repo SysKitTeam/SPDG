@@ -109,8 +109,8 @@ namespace Acceleratio.SPDG.Generator
             text = text.Replace("SPDGUser", "Author: " + SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames));
             text = text.Replace("SPDGIdentity", "ID: " + SampleData.GetRandomNumber(100000, 1000000).ToString());
 
-            string lore = File.ReadAllText("SampleData\\loreIpsum.txt");
-            text = text.Replace("SPDGLoreIpsum", lore ) ;
+            string lorem = File.ReadAllText("SampleData\\loreIpsum.txt");
+            text = text.Replace("SPDGLoreIpsum", getMultipleLoremIpsum(lorem, 1));
 
             File.WriteAllText("SampleData\\SampleDocx\\word\\document.xml", text);
 
@@ -140,6 +140,44 @@ namespace Acceleratio.SPDG.Generator
 
                 return bytes;
             }
+        }
+
+        private static string getMultipleLoremIpsum(string lorem, int repeat)
+        {
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i<repeat; i++)
+            {
+                if( i == 0 )
+                {
+                    sb.Append(lorem);
+                }
+                else
+                {
+                    //string[] sentences = lorem.Split('.');
+                    //foreach(string s in sentences)
+                    //{
+                    //    sb.Append(s + Guid.NewGuid().ToString());
+                    //}
+
+                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    var random = new Random();
+                    //char ch1 = chars[random.Next(chars.Length)];
+                    //char ch2 = chars[random.Next(chars.Length)];
+                    string modifiedLorem = lorem;
+
+                    for (int a = 0; a < 100; a++ )
+                    {
+                        char ch1 = chars[random.Next(chars.Length)];
+                        modifiedLorem = modifiedLorem.Insert(SampleData.GetRandomNumber(0, modifiedLorem.Length), Convert.ToString(ch1));
+                    }
+
+                    sb.Append(modifiedLorem);
+                    sb.Append(Guid.NewGuid().ToString());
+                        
+                }
+            }
+
+            return sb.ToString();
         }
 
         internal static byte[] CreateExcel()
@@ -182,7 +220,7 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
-        internal static byte[] CreatePDF()
+        internal static byte[] CreatePDF(int minKB, int maxKB)
         {
             PdfDocument pdfDoc = new PdfDocument();
             pdfDoc.Info.Title = "SPDG created document";
@@ -204,11 +242,18 @@ namespace Acceleratio.SPDG.Generator
             DrawText(gfx, 30, 120, page.Width, page.Height - 100, XFontStyle.Regular, 12, lore);
             gfx.Dispose();
 
-            page = pdfDoc.AddPage();
-            page.Orientation = PdfSharp.PageOrientation.Portrait;
-            gfx = XGraphics.FromPdfPage(page);
-            DrawText(gfx, 30, 30, page.Width-60, page.Height-100, XFontStyle.Regular, 12, lore);
-            gfx.Dispose();
+            int minRepeat = minKB / 13;
+            int maxRepeat = maxKB / 13;
+            int finalRepeat = SampleData.GetRandomNumber(minRepeat, maxRepeat);
+
+            for (int i = 0; i < finalRepeat; i++ )
+            { 
+                page = pdfDoc.AddPage();
+                page.Orientation = PdfSharp.PageOrientation.Portrait;
+                gfx = XGraphics.FromPdfPage(page);
+                DrawText(gfx, 30, 30, page.Width-60, page.Height-100, XFontStyle.Regular, 12, lore);
+                gfx.Dispose();
+            }
 
             MemoryStream memoryStream = new MemoryStream();
             pdfDoc.Save(memoryStream);

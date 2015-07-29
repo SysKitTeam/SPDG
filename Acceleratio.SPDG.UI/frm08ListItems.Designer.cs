@@ -42,6 +42,8 @@
             this.trackMaxDocSize = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.lblNumItems = new System.Windows.Forms.Label();
+            this.lblMinSize = new System.Windows.Forms.Label();
+            this.lblMaxSize = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOfItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMinDocSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxDocSize)).BeginInit();
@@ -72,6 +74,7 @@
             this.trackMaxNumberOfItems.Name = "trackMaxNumberOfItems";
             this.trackMaxNumberOfItems.Size = new System.Drawing.Size(397, 45);
             this.trackMaxNumberOfItems.TabIndex = 20;
+            this.trackMaxNumberOfItems.TickFrequency = 5;
             this.trackMaxNumberOfItems.ValueChanged += new System.EventHandler(this.trackMaxNumberOfItems_ValueChanged);
             // 
             // label2
@@ -135,34 +138,40 @@
             // trackMinDocSize
             // 
             this.trackMinDocSize.Location = new System.Drawing.Point(257, 355);
+            this.trackMinDocSize.Maximum = 1000;
+            this.trackMinDocSize.Minimum = 20;
             this.trackMinDocSize.Name = "trackMinDocSize";
-            this.trackMinDocSize.Size = new System.Drawing.Size(424, 45);
+            this.trackMinDocSize.Size = new System.Drawing.Size(397, 45);
             this.trackMinDocSize.TabIndex = 27;
+            this.trackMinDocSize.TickFrequency = 100;
+            this.trackMinDocSize.Value = 20;
+            this.trackMinDocSize.ValueChanged += new System.EventHandler(this.trackMinDocSize_ValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(262, 336);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 13);
+            this.label4.Size = new System.Drawing.Size(147, 13);
             this.label4.TabIndex = 26;
-            this.label4.Text = "Minimal Document Size";
+            this.label4.Text = "Minimal Document Size (PDF)";
             // 
             // trackMaxDocSize
             // 
             this.trackMaxDocSize.Location = new System.Drawing.Point(257, 422);
             this.trackMaxDocSize.Name = "trackMaxDocSize";
-            this.trackMaxDocSize.Size = new System.Drawing.Size(424, 45);
+            this.trackMaxDocSize.Size = new System.Drawing.Size(397, 45);
             this.trackMaxDocSize.TabIndex = 29;
+            this.trackMaxDocSize.ValueChanged += new System.EventHandler(this.trackMaxDocSize_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(262, 403);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 13);
+            this.label5.Size = new System.Drawing.Size(132, 13);
             this.label5.TabIndex = 28;
-            this.label5.Text = "Max Document Size";
+            this.label5.Text = "Max Document Size (PDF)";
             // 
             // lblNumItems
             // 
@@ -173,11 +182,31 @@
             this.lblNumItems.TabIndex = 30;
             this.lblNumItems.Text = "0";
             // 
+            // lblMinSize
+            // 
+            this.lblMinSize.AutoSize = true;
+            this.lblMinSize.Location = new System.Drawing.Point(659, 358);
+            this.lblMinSize.Name = "lblMinSize";
+            this.lblMinSize.Size = new System.Drawing.Size(29, 13);
+            this.lblMinSize.TabIndex = 31;
+            this.lblMinSize.Text = "0 kB";
+            // 
+            // lblMaxSize
+            // 
+            this.lblMaxSize.AutoSize = true;
+            this.lblMaxSize.Location = new System.Drawing.Point(659, 425);
+            this.lblMaxSize.Name = "lblMaxSize";
+            this.lblMaxSize.Size = new System.Drawing.Size(32, 13);
+            this.lblMaxSize.TabIndex = 32;
+            this.lblMaxSize.Text = "0 MB";
+            // 
             // frm08ListItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 511);
+            this.Controls.Add(this.lblMaxSize);
+            this.Controls.Add(this.lblMinSize);
             this.Controls.Add(this.lblNumItems);
             this.Controls.Add(this.trackMaxDocSize);
             this.Controls.Add(this.label5);
@@ -214,6 +243,8 @@
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.trackMaxDocSize, 0);
             this.Controls.SetChildIndex(this.lblNumItems, 0);
+            this.Controls.SetChildIndex(this.lblMinSize, 0);
+            this.Controls.SetChildIndex(this.lblMaxSize, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOfItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMinDocSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxDocSize)).EndInit();
@@ -238,5 +269,7 @@
         private System.Windows.Forms.TrackBar trackMaxDocSize;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblNumItems;
+        private System.Windows.Forms.Label lblMinSize;
+        private System.Windows.Forms.Label lblMaxSize;
     }
 }
