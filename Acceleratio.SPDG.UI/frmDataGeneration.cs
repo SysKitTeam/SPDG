@@ -16,6 +16,7 @@ namespace Acceleratio.SPDG.UI
     {
         DataGenerator generator = null;
         BackgroundWorker bgWorker = null;
+        bool isRunning = false;
 
         public frmDataGeneration()
         {
@@ -65,6 +66,7 @@ namespace Acceleratio.SPDG.UI
             progressOverall.Maximum = generator.OverallProgressMaxSteps;
 
             this.Cursor = Cursors.WaitCursor;
+            isRunning = true;
 
             bgWorker = new BackgroundWorker();
             bgWorker.WorkerReportsProgress = true;
@@ -113,6 +115,9 @@ namespace Acceleratio.SPDG.UI
         {
             DataGenerator generator = e.Argument as DataGenerator;
             bool success = generator.startDataGeneration(bgWorker);
+           
+            isRunning = false;
+            btnClose.Text = "Close";
 
             if (success)
             {
@@ -135,12 +140,21 @@ namespace Acceleratio.SPDG.UI
 
         void btnClose_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to cancel data generation?", "SharePoint Data Generation", MessageBoxButtons.YesNo);
-            if( result == System.Windows.Forms.DialogResult.Yes )
+            if( isRunning )
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to cancel data generation?", "SharePoint Data Generation", MessageBoxButtons.YesNo);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    RootForm.MoveAt(12, this);
+                    this.Hide();
+                }
+            }
+            else
             {
                 RootForm.MoveAt(12, this);
                 this.Hide();
             }
+            
         }
 
         private void lblDetails_Click(object sender, EventArgs e)

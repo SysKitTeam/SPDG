@@ -11,24 +11,30 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
     {
-        public static void AddWorklfowTemplate()
-        {
-            try
-            {
-                SPSolution solution = SPFarm.Local.Solutions.Add("SampleData\\SPDG Workflow.wsp");
-                //Collection selectedWebApps = new Collection();
-                //SPWebApplication webApp = SPWebApplication.Lookup(new Uri("http://localhost"));
-                //selectedWebApps.Add(webApp);
+        //public static void AddWorklfowTemplate()
+        //{
+        //    try
+        //    {
+        //        SPSolution solution = SPFarm.Local.Solutions.Add("SampleData\\SPDG Workflow.wsp");
+        //        //Collection selectedWebApps = new Collection();
+        //        //SPWebApplication webApp = SPWebApplication.Lookup(new Uri("http://localhost"));
+        //        //selectedWebApps.Add(webApp);
 
-                solution.DeployLocal(true, true);
+        //        solution.DeployLocal(true, true);
                 
-            }
-            catch { }
-        }
+        //    }
+        //    catch { }
+        //}
 
 
         public void AssociateWorkflows()
         {
+            if( !workingDefinition.CreateOutOfTheBoxWorkflowsToList)
+            {
+                return;
+            }
+
+            progressOverall("Adding Workflow Associations", 20);
 
             //Site Collection feature for more workflows 0af5989a-3aea-4519-8ab0-85d91abe39ff
             //SPFeatureDefinition featureDef = SPFarm.Local.FeatureDefinitions.First(x => x.DisplayName.Contains("SPDG Worfklow"));
@@ -37,6 +43,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                 {
+                    // Activating out-of-the-box workflows
                     if( siteColl.Features[ new Guid("0af5989a-3aea-4519-8ab0-85d91abe39ff") ] == null )
                     {
                         siteColl.Features.Add(new Guid("0af5989a-3aea-4519-8ab0-85d91abe39ff"));
@@ -49,7 +56,73 @@ namespace Acceleratio.SPDG.Generator
 
                            // web.Features.Add(new Guid("17463962-06a6-4aba-b49f-2c13222f6213"));
 
-                            int s = web.WorkflowTemplates.Count;
+                            int workflowCount = web.WorkflowTemplates.Count;
+
+                            foreach (ListInfo listInfo in siteInfo.Lists)
+                            {
+                                try
+                                {
+                                    SPList list = web.Lists[listInfo.Name];
+                                    int randomNumberOfWF = SampleData.GetRandomNumber(0,2);
+                                    List<int> addedTemplates = new List<int>();
+
+                                    for(int i=0; i<randomNumberOfWF; i++)
+                                    {
+                                        progressDetail("Adding Workflow Association to list '" + web.Url + "/" + list.RootFolder.Url + "'");
+                                        int templateIndex = SampleData.GetRandomNumber(0, 5);
+
+                                        if(addedTemplates.Any(x => x == templateIndex ))
+                                        {
+                                            continue;
+                                        }
+                                        
+                                        SPWorkflowTemplate workflowTemplate = web.WorkflowTemplates[templateIndex];
+
+                                        SPList wftasks = web.Lists.TryGetList("Workflow Tasks");
+                                        if(  wftasks == null )
+                                        {
+                                            //Check if Workflow List exists
+                                            Guid listGuid = web.Lists.Add(
+                                                "Workflow Tasks",
+                                                string.Empty,
+                                                SPListTemplateType.Tasks);
+                                                wftasks = web.Lists.GetList(listGuid, false);
+                                        }
+
+                                        SPList wfhistory = web.Lists.TryGetList("Workflow History");
+                                        if(  wfhistory == null )
+                                        {
+                                            //Check if Workflow List exists
+                                            Guid listGuid = web.Lists.Add(
+                                                "Workflow History",
+                                                string.Empty,
+                                                SPListTemplateType.WorkflowHistory);
+                                                wfhistory = web.Lists.GetList(listGuid, false);
+                                                wfhistory.Hidden = true;
+                                                wfhistory.Update();
+                                        }
+                                        
+
+                                        // create the association
+                                        SPWorkflowAssociation assoc =
+                                            SPWorkflowAssociation.CreateListAssociation(
+                                            workflowTemplate, workflowTemplate.Name,
+                                            wftasks, wfhistory
+                                            );
+                                        assoc.AllowManual = true;
+
+                                        //apply the association to the list
+                                        list.WorkflowAssociations.Add(assoc);
+
+                                        addedTemplates.Add(templateIndex);
+                                    }
+
+                                }
+                                catch( Exception ex )
+                                {
+                                    Errors.Log(ex);
+                                }
+                            }
 
                         }
                     }

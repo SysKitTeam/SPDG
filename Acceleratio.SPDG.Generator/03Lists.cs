@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -44,7 +45,21 @@ namespace Acceleratio.SPDG.Generator
                                     getNextTemplateType();
                                     string listName = findAvailableListName(web);
                                     progressDetail("Crating List '" + web.Url +  "/" + listName + "'");
-                                    web.Lists.Add(listName, string.Empty, lastTemplateType);
+                                    Guid listGuid = web.Lists.Add(listName, string.Empty, lastTemplateType);
+
+                                    SPList list = web.Lists.GetList(listGuid, false);
+                                    // Check for an existing link to the list.
+                                    SPNavigationNode listNode = web.Navigation.GetNodeByUrl(list.DefaultViewUrl);
+
+                                    // No link, so create one.
+                                    if (listNode == null)
+                                    {
+                                        // Create the node.
+                                        listNode = new SPNavigationNode(list.Title, list.DefaultViewUrl);
+
+                                        // Add it to Quick Launch.
+                                        listNode = web.Navigation.AddToQuickLaunch(listNode, SPQuickLaunchHeading.Lists);
+                                    }
 
                                     ListInfo listInfo = new ListInfo();
                                     listInfo.Name = listName;

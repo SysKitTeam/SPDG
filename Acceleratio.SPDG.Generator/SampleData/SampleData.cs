@@ -244,7 +244,12 @@ namespace Acceleratio.SPDG.Generator
 
             int minRepeat = minKB / 13;
             int maxRepeat = maxKB / 13;
-            int finalRepeat = SampleData.GetRandomNumber(minRepeat, maxRepeat);
+            int finalRepeat = 1;
+
+            if (minRepeat > 20 && maxRepeat > 20 && minRepeat < maxKB)
+            {
+                finalRepeat = SampleData.GetRandomNumber(minRepeat, maxRepeat);
+            }
 
             for (int i = 0; i < finalRepeat; i++ )
             { 

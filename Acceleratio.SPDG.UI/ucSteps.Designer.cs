@@ -40,12 +40,38 @@
             this.lblStep09 = new System.Windows.Forms.LinkLabel();
             this.lblStep10 = new System.Windows.Forms.LinkLabel();
             this.lblStep11 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             this.SuspendLayout();
             // 
             // lblStep01
             // 
             this.lblStep01.AutoSize = true;
-            this.lblStep01.Location = new System.Drawing.Point(37, 20);
+            this.lblStep01.Location = new System.Drawing.Point(47, 20);
             this.lblStep01.Name = "lblStep01";
             this.lblStep01.Size = new System.Drawing.Size(87, 13);
             this.lblStep01.TabIndex = 0;
@@ -56,7 +82,7 @@
             // lblStep02
             // 
             this.lblStep02.AutoSize = true;
-            this.lblStep02.Location = new System.Drawing.Point(37, 45);
+            this.lblStep02.Location = new System.Drawing.Point(47, 45);
             this.lblStep02.Name = "lblStep02";
             this.lblStep02.Size = new System.Drawing.Size(120, 13);
             this.lblStep02.TabIndex = 1;
@@ -67,7 +93,7 @@
             // lblStep03
             // 
             this.lblStep03.AutoSize = true;
-            this.lblStep03.Location = new System.Drawing.Point(37, 70);
+            this.lblStep03.Location = new System.Drawing.Point(47, 70);
             this.lblStep03.Name = "lblStep03";
             this.lblStep03.Size = new System.Drawing.Size(130, 13);
             this.lblStep03.TabIndex = 2;
@@ -78,7 +104,7 @@
             // lblStep12
             // 
             this.lblStep12.AutoSize = true;
-            this.lblStep12.Location = new System.Drawing.Point(37, 295);
+            this.lblStep12.Location = new System.Drawing.Point(47, 295);
             this.lblStep12.Name = "lblStep12";
             this.lblStep12.Size = new System.Drawing.Size(88, 13);
             this.lblStep12.TabIndex = 3;
@@ -89,7 +115,7 @@
             // lblStep04
             // 
             this.lblStep04.AutoSize = true;
-            this.lblStep04.Location = new System.Drawing.Point(37, 95);
+            this.lblStep04.Location = new System.Drawing.Point(47, 95);
             this.lblStep04.Name = "lblStep04";
             this.lblStep04.Size = new System.Drawing.Size(119, 13);
             this.lblStep04.TabIndex = 3;
@@ -100,7 +126,7 @@
             // lblStep05
             // 
             this.lblStep05.AutoSize = true;
-            this.lblStep05.Location = new System.Drawing.Point(37, 120);
+            this.lblStep05.Location = new System.Drawing.Point(47, 120);
             this.lblStep05.Name = "lblStep05";
             this.lblStep05.Size = new System.Drawing.Size(70, 13);
             this.lblStep05.TabIndex = 3;
@@ -111,19 +137,18 @@
             // lblStep06
             // 
             this.lblStep06.AutoSize = true;
-            this.lblStep06.Location = new System.Drawing.Point(37, 145);
+            this.lblStep06.Location = new System.Drawing.Point(47, 145);
             this.lblStep06.Name = "lblStep06";
             this.lblStep06.Size = new System.Drawing.Size(114, 13);
             this.lblStep06.TabIndex = 3;
             this.lblStep06.TabStop = true;
             this.lblStep06.Text = "Step 6 - List && Libraries";
-            this.lblStep06.Visible = false;
             this.lblStep06.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblStep06_LinkClicked);
             // 
             // lblStep07
             // 
             this.lblStep07.AutoSize = true;
-            this.lblStep07.Location = new System.Drawing.Point(37, 170);
+            this.lblStep07.Location = new System.Drawing.Point(47, 170);
             this.lblStep07.Name = "lblStep07";
             this.lblStep07.Size = new System.Drawing.Size(127, 13);
             this.lblStep07.TabIndex = 3;
@@ -134,7 +159,7 @@
             // lblStep08
             // 
             this.lblStep08.AutoSize = true;
-            this.lblStep08.Location = new System.Drawing.Point(37, 195);
+            this.lblStep08.Location = new System.Drawing.Point(47, 195);
             this.lblStep08.Name = "lblStep08";
             this.lblStep08.Size = new System.Drawing.Size(91, 13);
             this.lblStep08.TabIndex = 3;
@@ -145,7 +170,7 @@
             // lblStep09
             // 
             this.lblStep09.AutoSize = true;
-            this.lblStep09.Location = new System.Drawing.Point(37, 220);
+            this.lblStep09.Location = new System.Drawing.Point(47, 220);
             this.lblStep09.Name = "lblStep09";
             this.lblStep09.Size = new System.Drawing.Size(116, 13);
             this.lblStep09.TabIndex = 3;
@@ -156,7 +181,7 @@
             // lblStep10
             // 
             this.lblStep10.AutoSize = true;
-            this.lblStep10.Location = new System.Drawing.Point(37, 245);
+            this.lblStep10.Location = new System.Drawing.Point(47, 245);
             this.lblStep10.Name = "lblStep10";
             this.lblStep10.Size = new System.Drawing.Size(103, 13);
             this.lblStep10.TabIndex = 3;
@@ -167,7 +192,7 @@
             // lblStep11
             // 
             this.lblStep11.AutoSize = true;
-            this.lblStep11.Location = new System.Drawing.Point(37, 270);
+            this.lblStep11.Location = new System.Drawing.Point(47, 270);
             this.lblStep11.Name = "lblStep11";
             this.lblStep11.Size = new System.Drawing.Size(108, 13);
             this.lblStep11.TabIndex = 3;
@@ -175,10 +200,140 @@
             this.lblStep11.Text = "Step 11 - Permissions";
             this.lblStep11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblStep11_LinkClicked);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox1.Location = new System.Drawing.Point(16, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox2.Location = new System.Drawing.Point(16, 44);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox3.Location = new System.Drawing.Point(16, 69);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox4.Location = new System.Drawing.Point(16, 94);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox4.TabIndex = 7;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox5.Location = new System.Drawing.Point(16, 119);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox5.TabIndex = 8;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox6.Location = new System.Drawing.Point(16, 144);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox6.TabIndex = 9;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox7.Location = new System.Drawing.Point(16, 169);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox7.TabIndex = 10;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox8.Location = new System.Drawing.Point(16, 194);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox8.TabIndex = 11;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox9.Location = new System.Drawing.Point(16, 194);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox9.TabIndex = 12;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox10.Location = new System.Drawing.Point(16, 219);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox10.TabIndex = 13;
+            this.pictureBox10.TabStop = false;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox11.Location = new System.Drawing.Point(16, 244);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox11.TabIndex = 14;
+            this.pictureBox11.TabStop = false;
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox12.Location = new System.Drawing.Point(16, 269);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox12.TabIndex = 15;
+            this.pictureBox12.TabStop = false;
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
+            this.pictureBox13.Location = new System.Drawing.Point(16, 294);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(18, 15);
+            this.pictureBox13.TabIndex = 16;
+            this.pictureBox13.TabStop = false;
+            // 
             // ucSteps
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.pictureBox12);
+            this.Controls.Add(this.pictureBox11);
+            this.Controls.Add(this.pictureBox10);
+            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblStep04);
             this.Controls.Add(this.lblStep05);
             this.Controls.Add(this.lblStep06);
@@ -194,6 +349,19 @@
             this.Name = "ucSteps";
             this.Size = new System.Drawing.Size(265, 365);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ucSteps_Paint);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,5 +381,18 @@
         private System.Windows.Forms.LinkLabel lblStep09;
         private System.Windows.Forms.LinkLabel lblStep10;
         private System.Windows.Forms.LinkLabel lblStep11;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.PictureBox pictureBox13;
     }
 }

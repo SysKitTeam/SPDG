@@ -37,7 +37,6 @@
             this.radioCustomCredentials = new System.Windows.Forms.RadioButton();
             this.radioCurrentCredentials = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -46,6 +45,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             // 
             // ucSteps1
             // 
@@ -57,6 +61,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Enabled = false;
             this.label2.Location = new System.Drawing.Point(265, 115);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(169, 13);
@@ -65,6 +70,7 @@
             // 
             // txtSharePointSiteURL
             // 
+            this.txtSharePointSiteURL.Enabled = false;
             this.txtSharePointSiteURL.Location = new System.Drawing.Point(269, 135);
             this.txtSharePointSiteURL.Name = "txtSharePointSiteURL";
             this.txtSharePointSiteURL.Size = new System.Drawing.Size(368, 20);
@@ -73,6 +79,7 @@
             // radioConnectSPOnline
             // 
             this.radioConnectSPOnline.AutoSize = true;
+            this.radioConnectSPOnline.Enabled = false;
             this.radioConnectSPOnline.Location = new System.Drawing.Point(269, 185);
             this.radioConnectSPOnline.Name = "radioConnectSPOnline";
             this.radioConnectSPOnline.Size = new System.Drawing.Size(165, 17);
@@ -134,15 +141,6 @@
             this.label3.TabIndex = 15;
             this.label3.Text = "Specify credentials";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(289, 346);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Username:";
-            // 
             // txtUserName
             // 
             this.txtUserName.Location = new System.Drawing.Point(424, 346);
@@ -203,7 +201,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radioConnectSPOnPremise);
@@ -227,7 +224,6 @@
             this.Controls.SetChildIndex(this.radioConnectSPOnPremise, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.txtUserName, 0);
             this.Controls.SetChildIndex(this.label6, 0);
@@ -252,7 +248,6 @@
         private System.Windows.Forms.RadioButton radioCustomCredentials;
         private System.Windows.Forms.RadioButton radioCurrentCredentials;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtPassword;

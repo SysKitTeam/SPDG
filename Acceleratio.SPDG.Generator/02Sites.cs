@@ -86,11 +86,11 @@ namespace Acceleratio.SPDG.Generator
 
         private string findAvailableSiteName(SPSite siteColl)
         {
-            string candidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Years));
+            string candidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Accounts));
 
             while (siteColl.AllWebs.Any(s => s.Name.Equals(candidate)))
             {
-                candidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Years));
+                candidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Accounts));
             }
 
             return candidate;

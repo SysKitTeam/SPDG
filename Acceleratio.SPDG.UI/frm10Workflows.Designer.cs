@@ -53,6 +53,7 @@
             // chkAttachCustomWF
             // 
             this.chkAttachCustomWF.AutoSize = true;
+            this.chkAttachCustomWF.Enabled = false;
             this.chkAttachCustomWF.Location = new System.Drawing.Point(265, 155);
             this.chkAttachCustomWF.Name = "chkAttachCustomWF";
             this.chkAttachCustomWF.Size = new System.Drawing.Size(171, 17);

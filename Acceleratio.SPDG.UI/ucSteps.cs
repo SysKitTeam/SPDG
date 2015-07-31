@@ -20,7 +20,7 @@ namespace Acceleratio.SPDG.UI
             {
                 if (ctrl.Name.StartsWith("lblStep"))
                 {
-                    ctrl.Visible = false;
+                    ctrl.Enabled = false;
                 }
             }
         }
@@ -34,11 +34,21 @@ namespace Acceleratio.SPDG.UI
                     int lblNumber = Convert.ToInt32(ctrl.Name.Replace("lblStep", "").TrimStart('0'));
                     if (lblNumber <= stepNumber)
                     {
-                        ctrl.Visible = true;
+                        ctrl.Enabled = true;
+
+                        Control[] ctrls = this.Controls.Find("pictureBox" + lblNumber, false);
+                        if (ctrls.Length > 0)
+                        {
+                            ((PictureBox)ctrls[0]).Image = Properties.Resources.temp_icona_12;
+                        }
                     }
+
+                    
                     
                 }
             }
+
+
         }
 
         private void ucSteps_Paint(object sender, PaintEventArgs e)

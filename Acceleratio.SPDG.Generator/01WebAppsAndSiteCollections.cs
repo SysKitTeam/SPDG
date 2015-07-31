@@ -72,11 +72,11 @@ namespace Acceleratio.SPDG.Generator
 
         private string findAvailableSiteCollectionName(SPWebApplication webApp)
         {
-            string siteCollCandidate = SampleData.Clean( SampleData.GetSampleValueRandom(SampleData.Accounts) );
+            string siteCollCandidate = SampleData.Clean( SampleData.GetSampleValueRandom(SampleData.Countries) );
 
             while( webApp.Sites.Any(s => s.Url.Contains(siteCollCandidate)) )
             {
-                siteCollCandidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Accounts));
+                siteCollCandidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Countries));
             }
             
             return siteCollCandidate;
