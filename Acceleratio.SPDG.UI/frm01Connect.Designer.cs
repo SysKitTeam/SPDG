@@ -49,40 +49,55 @@
             // btnBack
             // 
             this.btnBack.FlatAppearance.BorderSize = 0;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
             // 
             // ucSteps1
             // 
-            this.ucSteps1.Location = new System.Drawing.Point(0, 103);
+            this.ucSteps1.Location = new System.Drawing.Point(0, 135);
             this.ucSteps1.Name = "ucSteps1";
-            this.ucSteps1.Size = new System.Drawing.Size(225, 372);
+            this.ucSteps1.Size = new System.Drawing.Size(225, 461);
             this.ucSteps1.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Enabled = false;
-            this.label2.Location = new System.Drawing.Point(265, 115);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.Location = new System.Drawing.Point(265, 155);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(169, 13);
+            this.label2.Size = new System.Drawing.Size(183, 15);
             this.label2.TabIndex = 8;
             this.label2.Text = "Enter URL to your SharePoint site:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtSharePointSiteURL
             // 
             this.txtSharePointSiteURL.Enabled = false;
-            this.txtSharePointSiteURL.Location = new System.Drawing.Point(269, 135);
+            this.txtSharePointSiteURL.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSharePointSiteURL.Location = new System.Drawing.Point(268, 173);
             this.txtSharePointSiteURL.Name = "txtSharePointSiteURL";
-            this.txtSharePointSiteURL.Size = new System.Drawing.Size(368, 20);
+            this.txtSharePointSiteURL.Size = new System.Drawing.Size(368, 23);
             this.txtSharePointSiteURL.TabIndex = 9;
             // 
             // radioConnectSPOnline
             // 
             this.radioConnectSPOnline.AutoSize = true;
             this.radioConnectSPOnline.Enabled = false;
-            this.radioConnectSPOnline.Location = new System.Drawing.Point(269, 185);
+            this.radioConnectSPOnline.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioConnectSPOnline.Location = new System.Drawing.Point(268, 223);
             this.radioConnectSPOnline.Name = "radioConnectSPOnline";
-            this.radioConnectSPOnline.Size = new System.Drawing.Size(165, 17);
+            this.radioConnectSPOnline.Size = new System.Drawing.Size(182, 19);
             this.radioConnectSPOnline.TabIndex = 12;
             this.radioConnectSPOnline.Text = "Connect to SharePoint Online";
             this.radioConnectSPOnline.UseVisualStyleBackColor = true;
@@ -91,9 +106,10 @@
             // 
             this.radioConnectSPOnPremise.AutoSize = true;
             this.radioConnectSPOnPremise.Checked = true;
-            this.radioConnectSPOnPremise.Location = new System.Drawing.Point(269, 208);
+            this.radioConnectSPOnPremise.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioConnectSPOnPremise.Location = new System.Drawing.Point(268, 246);
             this.radioConnectSPOnPremise.Name = "radioConnectSPOnPremise";
-            this.radioConnectSPOnPremise.Size = new System.Drawing.Size(189, 17);
+            this.radioConnectSPOnPremise.Size = new System.Drawing.Size(210, 19);
             this.radioConnectSPOnPremise.TabIndex = 13;
             this.radioConnectSPOnPremise.TabStop = true;
             this.radioConnectSPOnPremise.Text = "Connect to SharePoint On-Premise";
@@ -103,7 +119,7 @@
             // 
             this.panel1.Controls.Add(this.radioCustomCredentials);
             this.panel1.Controls.Add(this.radioCurrentCredentials);
-            this.panel1.Location = new System.Drawing.Point(269, 253);
+            this.panel1.Location = new System.Drawing.Point(268, 291);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(368, 49);
             this.panel1.TabIndex = 14;
@@ -111,9 +127,10 @@
             // radioCustomCredentials
             // 
             this.radioCustomCredentials.AutoSize = true;
+            this.radioCustomCredentials.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.radioCustomCredentials.Location = new System.Drawing.Point(0, 26);
             this.radioCustomCredentials.Name = "radioCustomCredentials";
-            this.radioCustomCredentials.Size = new System.Drawing.Size(114, 17);
+            this.radioCustomCredentials.Size = new System.Drawing.Size(127, 19);
             this.radioCustomCredentials.TabIndex = 1;
             this.radioCustomCredentials.TabStop = true;
             this.radioCustomCredentials.Text = "Custom credentials";
@@ -123,9 +140,10 @@
             // radioCurrentCredentials
             // 
             this.radioCurrentCredentials.AutoSize = true;
+            this.radioCurrentCredentials.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.radioCurrentCredentials.Location = new System.Drawing.Point(0, 3);
             this.radioCurrentCredentials.Name = "radioCurrentCredentials";
-            this.radioCurrentCredentials.Size = new System.Drawing.Size(166, 17);
+            this.radioCurrentCredentials.Size = new System.Drawing.Size(184, 19);
             this.radioCurrentCredentials.TabIndex = 0;
             this.radioCurrentCredentials.TabStop = true;
             this.radioCurrentCredentials.Text = "Credentials of the current user";
@@ -135,48 +153,53 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(289, 318);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.Location = new System.Drawing.Point(288, 356);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 13);
+            this.label3.Size = new System.Drawing.Size(105, 15);
             this.label3.TabIndex = 15;
             this.label3.Text = "Specify credentials";
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(424, 346);
+            this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtUserName.Location = new System.Drawing.Point(423, 384);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(213, 20);
+            this.txtUserName.Size = new System.Drawing.Size(213, 23);
             this.txtUserName.TabIndex = 17;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(289, 349);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.Location = new System.Drawing.Point(288, 387);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.Size = new System.Drawing.Size(63, 15);
             this.label5.TabIndex = 16;
             this.label5.Text = "Username:";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(424, 372);
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtPassword.Location = new System.Drawing.Point(423, 410);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(213, 20);
+            this.txtPassword.Size = new System.Drawing.Size(213, 23);
             this.txtPassword.TabIndex = 19;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(289, 375);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label6.Location = new System.Drawing.Point(288, 413);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.Size = new System.Drawing.Size(60, 15);
             this.label6.TabIndex = 18;
             this.label6.Text = "Password:";
             // 
             // txtDomain
             // 
-            this.txtDomain.Location = new System.Drawing.Point(424, 398);
+            this.txtDomain.Location = new System.Drawing.Point(423, 436);
             this.txtDomain.Name = "txtDomain";
             this.txtDomain.Size = new System.Drawing.Size(213, 20);
             this.txtDomain.TabIndex = 21;
@@ -184,9 +207,10 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(289, 401);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label7.Location = new System.Drawing.Point(288, 438);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
+            this.label7.Size = new System.Drawing.Size(52, 15);
             this.label7.TabIndex = 20;
             this.label7.Text = "Domain:";
             // 
@@ -194,7 +218,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.txtDomain);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtPassword);

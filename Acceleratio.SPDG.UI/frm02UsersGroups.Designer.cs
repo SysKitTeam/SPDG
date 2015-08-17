@@ -44,19 +44,36 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            // 
             // ucSteps1
             // 
-            this.ucSteps1.Location = new System.Drawing.Point(0, 103);
+            this.ucSteps1.Location = new System.Drawing.Point(0, 135);
             this.ucSteps1.Name = "ucSteps1";
-            this.ucSteps1.Size = new System.Drawing.Size(235, 366);
+            this.ucSteps1.Size = new System.Drawing.Size(235, 480);
             this.ucSteps1.TabIndex = 7;
             // 
             // chkGenerateUsers
             // 
             this.chkGenerateUsers.AutoSize = true;
-            this.chkGenerateUsers.Location = new System.Drawing.Point(265, 154);
+            this.chkGenerateUsers.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkGenerateUsers.Location = new System.Drawing.Point(268, 193);
             this.chkGenerateUsers.Name = "chkGenerateUsers";
-            this.chkGenerateUsers.Size = new System.Drawing.Size(288, 17);
+            this.chkGenerateUsers.Size = new System.Drawing.Size(313, 19);
             this.chkGenerateUsers.TabIndex = 8;
             this.chkGenerateUsers.Text = "Generate Users and Security Groups in Active Directory";
             this.chkGenerateUsers.UseVisualStyleBackColor = true;
@@ -70,34 +87,37 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cboOrganizationalUnit);
-            this.groupBox1.Location = new System.Drawing.Point(265, 187);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.groupBox1.Location = new System.Drawing.Point(268, 226);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(457, 282);
+            this.groupBox1.Size = new System.Drawing.Size(616, 314);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Users";
             // 
             // trackNumberOfSecGroups
             // 
-            this.trackNumberOfSecGroups.Location = new System.Drawing.Point(10, 230);
+            this.trackNumberOfSecGroups.LargeChange = 1;
+            this.trackNumberOfSecGroups.Location = new System.Drawing.Point(10, 225);
             this.trackNumberOfSecGroups.Name = "trackNumberOfSecGroups";
-            this.trackNumberOfSecGroups.Size = new System.Drawing.Size(419, 45);
+            this.trackNumberOfSecGroups.Size = new System.Drawing.Size(546, 45);
             this.trackNumberOfSecGroups.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 214);
+            this.label4.Location = new System.Drawing.Point(15, 209);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(182, 13);
+            this.label4.Size = new System.Drawing.Size(203, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "Number of Security Groups to create:";
             // 
             // trackNumberOfUsers
             // 
+            this.trackNumberOfUsers.LargeChange = 1;
             this.trackNumberOfUsers.Location = new System.Drawing.Point(10, 141);
             this.trackNumberOfUsers.Name = "trackNumberOfUsers";
-            this.trackNumberOfUsers.Size = new System.Drawing.Size(419, 45);
+            this.trackNumberOfUsers.Size = new System.Drawing.Size(554, 45);
             this.trackNumberOfUsers.TabIndex = 3;
             // 
             // label3
@@ -105,7 +125,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(15, 125);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 13);
+            this.label3.Size = new System.Drawing.Size(147, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "Number of users to create:";
             // 
@@ -114,7 +134,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.Size = new System.Drawing.Size(112, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Organizational Unit:";
             // 
@@ -123,24 +143,26 @@
             this.cboOrganizationalUnit.FormattingEnabled = true;
             this.cboOrganizationalUnit.Location = new System.Drawing.Point(18, 65);
             this.cboOrganizationalUnit.Name = "cboOrganizationalUnit";
-            this.cboOrganizationalUnit.Size = new System.Drawing.Size(411, 21);
+            this.cboOrganizationalUnit.Size = new System.Drawing.Size(411, 23);
             this.cboOrganizationalUnit.TabIndex = 0;
             // 
             // cboDomains
             // 
+            this.cboDomains.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cboDomains.FormattingEnabled = true;
-            this.cboDomains.Location = new System.Drawing.Point(543, 112);
+            this.cboDomains.Location = new System.Drawing.Point(580, 152);
             this.cboDomains.Name = "cboDomains";
-            this.cboDomains.Size = new System.Drawing.Size(151, 21);
+            this.cboDomains.Size = new System.Drawing.Size(151, 23);
             this.cboDomains.TabIndex = 10;
             this.cboDomains.Leave += new System.EventHandler(this.cboDomains_Leave);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(262, 115);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.Location = new System.Drawing.Point(265, 155);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(272, 13);
+            this.label1.Size = new System.Drawing.Size(300, 15);
             this.label1.TabIndex = 11;
             this.label1.Text = "Use this domain to create SharePoint users and groups: ";
             // 
@@ -148,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboDomains);
             this.Controls.Add(this.groupBox1);

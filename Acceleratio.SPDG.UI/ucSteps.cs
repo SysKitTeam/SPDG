@@ -57,7 +57,7 @@ namespace Acceleratio.SPDG.UI
             System.Drawing.Pen myPen = new System.Drawing.Pen(System.Drawing.Color.LightGray);
             System.Drawing.Graphics formGraphics;
             formGraphics = this.CreateGraphics();
-            formGraphics.DrawLine(myPen, 220, 10, 220, 400);
+            formGraphics.DrawLine(myPen, 220, 10, 220, 450);
             //formGraphics.DrawLine(myPen, 200, 300, 532, 286);
             myPen.Dispose();
         }

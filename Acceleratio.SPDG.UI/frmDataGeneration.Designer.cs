@@ -35,16 +35,33 @@
             this.btnOpenLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            // 
             // progressOverall
             // 
-            this.progressOverall.Location = new System.Drawing.Point(111, 215);
+            this.progressOverall.Location = new System.Drawing.Point(116, 264);
             this.progressOverall.Name = "progressOverall";
-            this.progressOverall.Size = new System.Drawing.Size(530, 23);
+            this.progressOverall.Size = new System.Drawing.Size(692, 23);
             this.progressOverall.TabIndex = 7;
             // 
             // lblOverview
             // 
-            this.lblOverview.Location = new System.Drawing.Point(113, 185);
+            this.lblOverview.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblOverview.Location = new System.Drawing.Point(118, 234);
             this.lblOverview.Name = "lblOverview";
             this.lblOverview.Size = new System.Drawing.Size(528, 17);
             this.lblOverview.TabIndex = 9;
@@ -52,7 +69,8 @@
             // 
             // lblDetails
             // 
-            this.lblDetails.Location = new System.Drawing.Point(113, 275);
+            this.lblDetails.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblDetails.Location = new System.Drawing.Point(118, 324);
             this.lblDetails.Name = "lblDetails";
             this.lblDetails.Size = new System.Drawing.Size(528, 17);
             this.lblDetails.TabIndex = 11;
@@ -60,14 +78,15 @@
             // 
             // progressDetails
             // 
-            this.progressDetails.Location = new System.Drawing.Point(111, 305);
+            this.progressDetails.Location = new System.Drawing.Point(116, 354);
             this.progressDetails.Name = "progressDetails";
-            this.progressDetails.Size = new System.Drawing.Size(530, 23);
+            this.progressDetails.Size = new System.Drawing.Size(692, 23);
             this.progressDetails.TabIndex = 10;
             // 
             // btnOpenLog
             // 
-            this.btnOpenLog.Location = new System.Drawing.Point(498, 373);
+            this.btnOpenLog.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnOpenLog.Location = new System.Drawing.Point(665, 423);
             this.btnOpenLog.Name = "btnOpenLog";
             this.btnOpenLog.Size = new System.Drawing.Size(143, 23);
             this.btnOpenLog.TabIndex = 12;
@@ -79,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.btnOpenLog);
             this.Controls.Add(this.lblDetails);
             this.Controls.Add(this.progressDetails);

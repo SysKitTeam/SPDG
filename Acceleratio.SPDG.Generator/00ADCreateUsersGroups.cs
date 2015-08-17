@@ -13,6 +13,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 try
                 {
+                    Log.Write("Creating Active Directory users.");
                     AD.createUsers(workingDefinition.ADDomainName, workingDefinition.ADOrganizationalUnit, workingDefinition.NumberOfUsersToCreate);
                 }
                 catch(Exception ex)
@@ -25,6 +26,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 try
                 {
+                    Log.Write("Creating Active Directory groups.");
                     AD.createGroups(workingDefinition.ADDomainName, workingDefinition.ADOrganizationalUnit, workingDefinition.NumberOfSecurityGroupsToCreate);
                 }
                 catch (Exception ex)

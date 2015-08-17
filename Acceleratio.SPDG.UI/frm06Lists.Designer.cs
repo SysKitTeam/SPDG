@@ -49,79 +49,103 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberNestedFolders)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            // 
             // ucSteps1
             // 
-            this.ucSteps1.Location = new System.Drawing.Point(0, 103);
+            this.ucSteps1.Location = new System.Drawing.Point(0, 135);
             this.ucSteps1.Name = "ucSteps1";
             this.ucSteps1.Size = new System.Drawing.Size(238, 365);
             this.ucSteps1.TabIndex = 7;
             // 
             // trackMaxNumberListLibraries
             // 
-            this.trackMaxNumberListLibraries.Location = new System.Drawing.Point(259, 134);
+            this.trackMaxNumberListLibraries.LargeChange = 1;
+            this.trackMaxNumberListLibraries.Location = new System.Drawing.Point(260, 173);
             this.trackMaxNumberListLibraries.Name = "trackMaxNumberListLibraries";
-            this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(405, 45);
+            this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(588, 45);
             this.trackMaxNumberListLibraries.TabIndex = 14;
             this.trackMaxNumberListLibraries.ValueChanged += new System.EventHandler(this.trackMaxNumberListLibraries_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(265, 115);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.Location = new System.Drawing.Point(265, 155);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(218, 13);
+            this.label3.Size = new System.Drawing.Size(246, 15);
             this.label3.TabIndex = 13;
             this.label3.Text = "Maximal Number of List and Libraries per Site";
             // 
             // trackMaxFoldersInLib
             // 
-            this.trackMaxFoldersInLib.Location = new System.Drawing.Point(258, 354);
+            this.trackMaxFoldersInLib.LargeChange = 1;
+            this.trackMaxFoldersInLib.Location = new System.Drawing.Point(259, 393);
             this.trackMaxFoldersInLib.Name = "trackMaxFoldersInLib";
-            this.trackMaxFoldersInLib.Size = new System.Drawing.Size(406, 45);
+            this.trackMaxFoldersInLib.Size = new System.Drawing.Size(589, 45);
             this.trackMaxFoldersInLib.TabIndex = 16;
             this.trackMaxFoldersInLib.ValueChanged += new System.EventHandler(this.trackMaxFoldersInLib_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(264, 336);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.Location = new System.Drawing.Point(265, 375);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(216, 13);
+            this.label2.Size = new System.Drawing.Size(246, 15);
             this.label2.TabIndex = 15;
             this.label2.Text = "Max number of folders in Document Libraries";
             // 
             // trackMaxNumberNestedFolders
             // 
-            this.trackMaxNumberNestedFolders.Location = new System.Drawing.Point(258, 418);
+            this.trackMaxNumberNestedFolders.LargeChange = 1;
+            this.trackMaxNumberNestedFolders.Location = new System.Drawing.Point(259, 457);
             this.trackMaxNumberNestedFolders.Name = "trackMaxNumberNestedFolders";
-            this.trackMaxNumberNestedFolders.Size = new System.Drawing.Size(406, 45);
+            this.trackMaxNumberNestedFolders.Size = new System.Drawing.Size(589, 45);
             this.trackMaxNumberNestedFolders.TabIndex = 18;
             this.trackMaxNumberNestedFolders.ValueChanged += new System.EventHandler(this.trackMaxNumberNestedFolders_ValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(264, 400);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label4.Location = new System.Drawing.Point(265, 439);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(270, 13);
+            this.label4.Size = new System.Drawing.Size(305, 15);
             this.label4.TabIndex = 17;
             this.label4.Text = "Max number of nested folder level per Document Library";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(264, 182);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.Location = new System.Drawing.Point(265, 221);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 13);
+            this.label5.Size = new System.Drawing.Size(127, 15);
             this.label5.TabIndex = 19;
             this.label5.Text = "Types of Lists/Libraries";
             // 
             // chkDocLib
             // 
             this.chkDocLib.AutoSize = true;
-            this.chkDocLib.Location = new System.Drawing.Point(268, 230);
+            this.chkDocLib.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkDocLib.Location = new System.Drawing.Point(269, 269);
             this.chkDocLib.Name = "chkDocLib";
-            this.chkDocLib.Size = new System.Drawing.Size(109, 17);
+            this.chkDocLib.Size = new System.Drawing.Size(121, 19);
             this.chkDocLib.TabIndex = 20;
             this.chkDocLib.Text = "Document Library";
             this.chkDocLib.UseVisualStyleBackColor = true;
@@ -130,9 +154,10 @@
             // chkTasks
             // 
             this.chkTasks.AutoSize = true;
-            this.chkTasks.Location = new System.Drawing.Point(492, 207);
+            this.chkTasks.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkTasks.Location = new System.Drawing.Point(493, 246);
             this.chkTasks.Name = "chkTasks";
-            this.chkTasks.Size = new System.Drawing.Size(55, 17);
+            this.chkTasks.Size = new System.Drawing.Size(55, 19);
             this.chkTasks.TabIndex = 21;
             this.chkTasks.Text = "Tasks";
             this.chkTasks.UseVisualStyleBackColor = true;
@@ -140,9 +165,10 @@
             // chkCalendar
             // 
             this.chkCalendar.AutoSize = true;
-            this.chkCalendar.Location = new System.Drawing.Point(492, 230);
+            this.chkCalendar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCalendar.Location = new System.Drawing.Point(493, 269);
             this.chkCalendar.Name = "chkCalendar";
-            this.chkCalendar.Size = new System.Drawing.Size(68, 17);
+            this.chkCalendar.Size = new System.Drawing.Size(73, 19);
             this.chkCalendar.TabIndex = 22;
             this.chkCalendar.Text = "Calendar";
             this.chkCalendar.UseVisualStyleBackColor = true;
@@ -150,9 +176,10 @@
             // chkCreateFolders
             // 
             this.chkCreateFolders.AutoSize = true;
-            this.chkCreateFolders.Location = new System.Drawing.Point(267, 307);
+            this.chkCreateFolders.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateFolders.Location = new System.Drawing.Point(268, 346);
             this.chkCreateFolders.Name = "chkCreateFolders";
-            this.chkCreateFolders.Size = new System.Drawing.Size(224, 17);
+            this.chkCreateFolders.Size = new System.Drawing.Size(250, 19);
             this.chkCreateFolders.TabIndex = 23;
             this.chkCreateFolders.Text = "Create some folders in Document Libraries";
             this.chkCreateFolders.UseVisualStyleBackColor = true;
@@ -161,9 +188,10 @@
             // chkList
             // 
             this.chkList.AutoSize = true;
-            this.chkList.Location = new System.Drawing.Point(268, 207);
+            this.chkList.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkList.Location = new System.Drawing.Point(269, 246);
             this.chkList.Name = "chkList";
-            this.chkList.Size = new System.Drawing.Size(42, 17);
+            this.chkList.Size = new System.Drawing.Size(44, 19);
             this.chkList.TabIndex = 24;
             this.chkList.Text = "List";
             this.chkList.UseVisualStyleBackColor = true;
@@ -171,27 +199,30 @@
             // lblNumOfLists
             // 
             this.lblNumOfLists.AutoSize = true;
-            this.lblNumOfLists.Location = new System.Drawing.Point(666, 137);
+            this.lblNumOfLists.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumOfLists.Location = new System.Drawing.Point(855, 176);
             this.lblNumOfLists.Name = "lblNumOfLists";
-            this.lblNumOfLists.Size = new System.Drawing.Size(13, 13);
+            this.lblNumOfLists.Size = new System.Drawing.Size(13, 15);
             this.lblNumOfLists.TabIndex = 25;
             this.lblNumOfLists.Text = "0";
             // 
             // lblNumOfFolders
             // 
             this.lblNumOfFolders.AutoSize = true;
-            this.lblNumOfFolders.Location = new System.Drawing.Point(667, 357);
+            this.lblNumOfFolders.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumOfFolders.Location = new System.Drawing.Point(854, 396);
             this.lblNumOfFolders.Name = "lblNumOfFolders";
-            this.lblNumOfFolders.Size = new System.Drawing.Size(13, 13);
+            this.lblNumOfFolders.Size = new System.Drawing.Size(13, 15);
             this.lblNumOfFolders.TabIndex = 26;
             this.lblNumOfFolders.Text = "0";
             // 
             // lblNumLevels
             // 
             this.lblNumLevels.AutoSize = true;
-            this.lblNumLevels.Location = new System.Drawing.Point(667, 421);
+            this.lblNumLevels.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumLevels.Location = new System.Drawing.Point(854, 461);
             this.lblNumLevels.Name = "lblNumLevels";
-            this.lblNumLevels.Size = new System.Drawing.Size(13, 13);
+            this.lblNumLevels.Size = new System.Drawing.Size(13, 15);
             this.lblNumLevels.TabIndex = 27;
             this.lblNumLevels.Text = "0";
             // 
@@ -199,7 +230,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.lblNumLevels);
             this.Controls.Add(this.lblNumOfFolders);
             this.Controls.Add(this.lblNumOfLists);

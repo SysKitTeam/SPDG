@@ -37,7 +37,24 @@ namespace Acceleratio.SPDG.UI
 
         private bool saveForm(object form)
         {
-            return ((frmWizardMaster)form).saveData();
+            try
+            {
+                return ((frmWizardMaster)form).saveData();
+            }
+            catch(Exception ex)
+            {
+                if (ex.Message.IndexOf("Could not load file or assembly 'Microsoft.SharePoint") > -1)
+                {
+                    MessageBox.Show("Missing 'Microsoft.SharePoint.dll'." + Environment.NewLine + "Check if SharePoint is installed on current machine!");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                return false;
+            }
+            
         }
 
         void btnNext_Click(object sender, EventArgs e)
@@ -522,57 +539,81 @@ namespace Acceleratio.SPDG.UI
 
         public override bool saveData()
         {
-            if (radioCustomCredentials.Checked && (txtUserName.Text == string.Empty || txtPassword.Text == string.Empty || txtDomain.Text == string.Empty))
+            try
             {
-                MessageBox.Show("Please, provide custom credentials!");
-                return false;
-            }
-
-            bool isFarmAdmin = true;
-
-            if( radioCustomCredentials.Checked )
-            {
-                isFarmAdmin = false;
-                if (Common.impersonateValidUser(txtUserName.Text, txtDomain.Text, txtPassword.Text))
+                if (SPFarm.Local == null)
                 {
-                    Common.undoImpersonation();
-                }
-                else
-                {
-                    MessageBox.Show("Provided custom credentials are not valid!");
+                    MessageBox.Show("SharePoint is not installed on current machine!");
                     return false;
                 }
 
-                //isFarmAdmin = SPFarm.Local.CurrentUserIsAdministrator();
-                SPSecurity.RunWithElevatedPrivileges(delegate()
+                if (radioCustomCredentials.Checked && (txtUserName.Text == string.Empty || txtPassword.Text == string.Empty || txtDomain.Text == string.Empty))
                 {
-                    SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
-                    foreach (SPUser user in adminGroup.Users)
-                    {
-                        if (user.LoginName.ToLower() == txtDomain.Text.ToLower() + "\\" + txtUserName.Text.ToLower())
-                        {
-                            isFarmAdmin = true;
-                            break;
-                        }
-                    }
-                });
-            }
+                    MessageBox.Show("Please, provide custom credentials!");
+                    return false;
+                }
 
-            if( !isFarmAdmin )
+                bool isFarmAdmin = true;
+
+                if (radioCustomCredentials.Checked)
+                {
+                    isFarmAdmin = false;
+                    if (Common.impersonateValidUser(txtUserName.Text, txtDomain.Text, txtPassword.Text))
+                    {
+                        Common.undoImpersonation();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Provided custom credentials are not valid!");
+                        return false;
+                    }
+
+                    //isFarmAdmin = SPFarm.Local.CurrentUserIsAdministrator();
+                    SPSecurity.RunWithElevatedPrivileges(delegate()
+                    {
+                        SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
+                        foreach (SPUser user in adminGroup.Users)
+                        {
+                            if (user.LoginName.ToLower() == txtDomain.Text.ToLower() + "\\" + txtUserName.Text.ToLower())
+                            {
+                                isFarmAdmin = true;
+                                break;
+                            }
+                        }
+                    });
+                }
+
+                if (!isFarmAdmin)
+                {
+                    MessageBox.Show("Provided user is not Farm Admin on SharePoint!");
+                    return false;
+                }
+
+                Common.WorkingDefinition.SharePointURL = txtSharePointSiteURL.Text;
+                Common.WorkingDefinition.ConnectToSPOnPremise = radioConnectSPOnPremise.Checked;
+                Common.WorkingDefinition.CredentialsOfCurrentUser = radioCurrentCredentials.Checked;
+
+                Common.impersonateUserName = txtUserName.Text;
+                Common.impersonatePassword = txtPassword.Text;
+                Common.impersonateDomain = txtDomain.Text;
+
+                return true;
+            }
+            catch(Exception ex)
             {
-                MessageBox.Show("Provided user is not Farm Admin on SharePoint!");
+                if( ex.Message.IndexOf("Could not load file or assembly 'Microsoft.SharePoint") > -1 )
+                {
+                    MessageBox.Show("Missing 'Microsoft.SharePoint.dll'. Check if SharePoint is installed on current machine!");
+                    Errors.Log(ex);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                    Errors.Log(ex);
+                }
+
                 return false;
             }
-
-            Common.WorkingDefinition.SharePointURL = txtSharePointSiteURL.Text;
-            Common.WorkingDefinition.ConnectToSPOnPremise = radioConnectSPOnPremise.Checked;
-            Common.WorkingDefinition.CredentialsOfCurrentUser = radioCurrentCredentials.Checked;
-
-            Common.impersonateUserName = txtUserName.Text;
-            Common.impersonatePassword = txtPassword.Text;
-            Common.impersonateDomain = txtDomain.Text;
-
-            return true;
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -584,6 +625,11 @@ namespace Acceleratio.SPDG.UI
         {
 
             
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

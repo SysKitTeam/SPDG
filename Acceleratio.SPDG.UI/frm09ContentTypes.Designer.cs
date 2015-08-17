@@ -41,9 +41,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackAddSiteColumns)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            // 
             // ucSteps1
             // 
-            this.ucSteps1.Location = new System.Drawing.Point(0, 103);
+            this.ucSteps1.Location = new System.Drawing.Point(0, 135);
             this.ucSteps1.Name = "ucSteps1";
             this.ucSteps1.Size = new System.Drawing.Size(232, 368);
             this.ucSteps1.TabIndex = 7;
@@ -51,54 +67,60 @@
             // chkCreateSomeConentTypes
             // 
             this.chkCreateSomeConentTypes.AutoSize = true;
-            this.chkCreateSomeConentTypes.Location = new System.Drawing.Point(265, 115);
+            this.chkCreateSomeConentTypes.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateSomeConentTypes.Location = new System.Drawing.Point(265, 155);
             this.chkCreateSomeConentTypes.Name = "chkCreateSomeConentTypes";
-            this.chkCreateSomeConentTypes.Size = new System.Drawing.Size(318, 17);
+            this.chkCreateSomeConentTypes.Size = new System.Drawing.Size(356, 19);
             this.chkCreateSomeConentTypes.TabIndex = 8;
             this.chkCreateSomeConentTypes.Text = "Create some content types and attach them to list and libraries";
             this.chkCreateSomeConentTypes.UseVisualStyleBackColor = true;
             // 
             // trackMaxNumberContentTypes
             // 
-            this.trackMaxNumberContentTypes.Location = new System.Drawing.Point(257, 178);
+            this.trackMaxNumberContentTypes.LargeChange = 1;
+            this.trackMaxNumberContentTypes.Location = new System.Drawing.Point(257, 214);
             this.trackMaxNumberContentTypes.Name = "trackMaxNumberContentTypes";
-            this.trackMaxNumberContentTypes.Size = new System.Drawing.Size(405, 45);
+            this.trackMaxNumberContentTypes.Size = new System.Drawing.Size(546, 45);
             this.trackMaxNumberContentTypes.TabIndex = 31;
             this.trackMaxNumberContentTypes.ValueChanged += new System.EventHandler(this.trackMaxNumberContentTypes_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(262, 159);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.Location = new System.Drawing.Point(262, 195);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(229, 13);
+            this.label5.Size = new System.Drawing.Size(259, 15);
             this.label5.TabIndex = 30;
             this.label5.Text = "Max number of content types per site collection";
             // 
             // chkAddSiteColumns
             // 
             this.chkAddSiteColumns.AutoSize = true;
-            this.chkAddSiteColumns.Location = new System.Drawing.Point(265, 243);
+            this.chkAddSiteColumns.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkAddSiteColumns.Location = new System.Drawing.Point(265, 279);
             this.chkAddSiteColumns.Name = "chkAddSiteColumns";
-            this.chkAddSiteColumns.Size = new System.Drawing.Size(190, 17);
+            this.chkAddSiteColumns.Size = new System.Drawing.Size(212, 19);
             this.chkAddSiteColumns.TabIndex = 32;
             this.chkAddSiteColumns.Text = "Add site columns to Content Types";
             this.chkAddSiteColumns.UseVisualStyleBackColor = true;
             // 
             // trackAddSiteColumns
             // 
-            this.trackAddSiteColumns.Location = new System.Drawing.Point(257, 266);
+            this.trackAddSiteColumns.LargeChange = 1;
+            this.trackAddSiteColumns.Location = new System.Drawing.Point(257, 302);
             this.trackAddSiteColumns.Name = "trackAddSiteColumns";
-            this.trackAddSiteColumns.Size = new System.Drawing.Size(405, 45);
+            this.trackAddSiteColumns.Size = new System.Drawing.Size(545, 45);
             this.trackAddSiteColumns.TabIndex = 33;
             this.trackAddSiteColumns.ValueChanged += new System.EventHandler(this.trackAddSiteColumns_ValueChanged);
             // 
             // chkContentTypesCanInherit
             // 
             this.chkContentTypesCanInherit.AutoSize = true;
-            this.chkContentTypesCanInherit.Location = new System.Drawing.Point(265, 329);
+            this.chkContentTypesCanInherit.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkContentTypesCanInherit.Location = new System.Drawing.Point(265, 365);
             this.chkContentTypesCanInherit.Name = "chkContentTypesCanInherit";
-            this.chkContentTypesCanInherit.Size = new System.Drawing.Size(301, 17);
+            this.chkContentTypesCanInherit.Size = new System.Drawing.Size(340, 19);
             this.chkContentTypesCanInherit.TabIndex = 34;
             this.chkContentTypesCanInherit.Text = "Content Types can inherit from other custom content types";
             this.chkContentTypesCanInherit.UseVisualStyleBackColor = true;
@@ -106,18 +128,20 @@
             // lblMaxContentTypes
             // 
             this.lblMaxContentTypes.AutoSize = true;
-            this.lblMaxContentTypes.Location = new System.Drawing.Point(667, 182);
+            this.lblMaxContentTypes.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblMaxContentTypes.Location = new System.Drawing.Point(814, 217);
             this.lblMaxContentTypes.Name = "lblMaxContentTypes";
-            this.lblMaxContentTypes.Size = new System.Drawing.Size(13, 13);
+            this.lblMaxContentTypes.Size = new System.Drawing.Size(13, 15);
             this.lblMaxContentTypes.TabIndex = 35;
             this.lblMaxContentTypes.Text = "0";
             // 
             // lblSiteCols
             // 
             this.lblSiteCols.AutoSize = true;
-            this.lblSiteCols.Location = new System.Drawing.Point(667, 269);
+            this.lblSiteCols.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblSiteCols.Location = new System.Drawing.Point(814, 304);
             this.lblSiteCols.Name = "lblSiteCols";
-            this.lblSiteCols.Size = new System.Drawing.Size(13, 13);
+            this.lblSiteCols.Size = new System.Drawing.Size(13, 15);
             this.lblSiteCols.TabIndex = 36;
             this.lblSiteCols.Text = "0";
             // 
@@ -125,7 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.lblSiteCols);
             this.Controls.Add(this.lblMaxContentTypes);
             this.Controls.Add(this.chkContentTypesCanInherit);

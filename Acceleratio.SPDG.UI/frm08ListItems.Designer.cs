@@ -49,19 +49,36 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxDocSize)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            // 
             // ucSteps1
             // 
-            this.ucSteps1.Location = new System.Drawing.Point(0, 103);
+            this.ucSteps1.Location = new System.Drawing.Point(0, 135);
             this.ucSteps1.Name = "ucSteps1";
-            this.ucSteps1.Size = new System.Drawing.Size(240, 374);
+            this.ucSteps1.Size = new System.Drawing.Size(240, 469);
             this.ucSteps1.TabIndex = 7;
             // 
             // chkPrefil
             // 
             this.chkPrefil.AutoSize = true;
-            this.chkPrefil.Location = new System.Drawing.Point(265, 115);
+            this.chkPrefil.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkPrefil.Location = new System.Drawing.Point(265, 155);
             this.chkPrefil.Name = "chkPrefil";
-            this.chkPrefil.Size = new System.Drawing.Size(232, 17);
+            this.chkPrefil.Size = new System.Drawing.Size(258, 19);
             this.chkPrefil.TabIndex = 8;
             this.chkPrefil.Text = "Prefil generated List and Libraries with Items";
             this.chkPrefil.UseVisualStyleBackColor = true;
@@ -69,10 +86,10 @@
             // 
             // trackMaxNumberOfItems
             // 
-            this.trackMaxNumberOfItems.Location = new System.Drawing.Point(257, 170);
+            this.trackMaxNumberOfItems.Location = new System.Drawing.Point(257, 208);
             this.trackMaxNumberOfItems.Maximum = 100;
             this.trackMaxNumberOfItems.Name = "trackMaxNumberOfItems";
-            this.trackMaxNumberOfItems.Size = new System.Drawing.Size(397, 45);
+            this.trackMaxNumberOfItems.Size = new System.Drawing.Size(546, 45);
             this.trackMaxNumberOfItems.TabIndex = 20;
             this.trackMaxNumberOfItems.TickFrequency = 5;
             this.trackMaxNumberOfItems.ValueChanged += new System.EventHandler(this.trackMaxNumberOfItems_ValueChanged);
@@ -80,27 +97,30 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(262, 151);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.Location = new System.Drawing.Point(262, 189);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(226, 13);
+            this.label2.Size = new System.Drawing.Size(259, 15);
             this.label2.TabIndex = 19;
             this.label2.Text = "Max number of items to generate per list/library";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(262, 218);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.Location = new System.Drawing.Point(262, 256);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(134, 13);
+            this.label3.Size = new System.Drawing.Size(147, 15);
             this.label3.TabIndex = 21;
             this.label3.Text = "Required Document Types";
             // 
             // chkDOCX
             // 
             this.chkDOCX.AutoSize = true;
-            this.chkDOCX.Location = new System.Drawing.Point(265, 234);
+            this.chkDOCX.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkDOCX.Location = new System.Drawing.Point(265, 272);
             this.chkDOCX.Name = "chkDOCX";
-            this.chkDOCX.Size = new System.Drawing.Size(56, 17);
+            this.chkDOCX.Size = new System.Drawing.Size(58, 19);
             this.chkDOCX.TabIndex = 22;
             this.chkDOCX.Text = "DOCX";
             this.chkDOCX.UseVisualStyleBackColor = true;
@@ -108,9 +128,10 @@
             // chkXLSX
             // 
             this.chkXLSX.AutoSize = true;
-            this.chkXLSX.Location = new System.Drawing.Point(265, 257);
+            this.chkXLSX.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkXLSX.Location = new System.Drawing.Point(265, 295);
             this.chkXLSX.Name = "chkXLSX";
-            this.chkXLSX.Size = new System.Drawing.Size(53, 17);
+            this.chkXLSX.Size = new System.Drawing.Size(52, 19);
             this.chkXLSX.TabIndex = 23;
             this.chkXLSX.Text = "XLSX";
             this.chkXLSX.UseVisualStyleBackColor = true;
@@ -118,9 +139,10 @@
             // chkPDF
             // 
             this.chkPDF.AutoSize = true;
-            this.chkPDF.Location = new System.Drawing.Point(265, 280);
+            this.chkPDF.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkPDF.Location = new System.Drawing.Point(265, 318);
             this.chkPDF.Name = "chkPDF";
-            this.chkPDF.Size = new System.Drawing.Size(47, 17);
+            this.chkPDF.Size = new System.Drawing.Size(47, 19);
             this.chkPDF.TabIndex = 24;
             this.chkPDF.Text = "PDF";
             this.chkPDF.UseVisualStyleBackColor = true;
@@ -128,20 +150,22 @@
             // chkImages
             // 
             this.chkImages.AutoSize = true;
-            this.chkImages.Location = new System.Drawing.Point(265, 303);
+            this.chkImages.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkImages.Location = new System.Drawing.Point(265, 341);
             this.chkImages.Name = "chkImages";
-            this.chkImages.Size = new System.Drawing.Size(60, 17);
+            this.chkImages.Size = new System.Drawing.Size(64, 19);
             this.chkImages.TabIndex = 25;
             this.chkImages.Text = "Images";
             this.chkImages.UseVisualStyleBackColor = true;
             // 
             // trackMinDocSize
             // 
-            this.trackMinDocSize.Location = new System.Drawing.Point(257, 355);
+            this.trackMinDocSize.LargeChange = 1;
+            this.trackMinDocSize.Location = new System.Drawing.Point(257, 393);
             this.trackMinDocSize.Maximum = 1000;
             this.trackMinDocSize.Minimum = 20;
             this.trackMinDocSize.Name = "trackMinDocSize";
-            this.trackMinDocSize.Size = new System.Drawing.Size(397, 45);
+            this.trackMinDocSize.Size = new System.Drawing.Size(546, 45);
             this.trackMinDocSize.TabIndex = 27;
             this.trackMinDocSize.TickFrequency = 100;
             this.trackMinDocSize.Value = 20;
@@ -150,53 +174,59 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(262, 336);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label4.Location = new System.Drawing.Point(262, 374);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(147, 13);
+            this.label4.Size = new System.Drawing.Size(165, 15);
             this.label4.TabIndex = 26;
             this.label4.Text = "Minimal Document Size (PDF)";
             // 
             // trackMaxDocSize
             // 
-            this.trackMaxDocSize.Location = new System.Drawing.Point(257, 422);
+            this.trackMaxDocSize.LargeChange = 1;
+            this.trackMaxDocSize.Location = new System.Drawing.Point(257, 460);
             this.trackMaxDocSize.Name = "trackMaxDocSize";
-            this.trackMaxDocSize.Size = new System.Drawing.Size(397, 45);
+            this.trackMaxDocSize.Size = new System.Drawing.Size(546, 45);
             this.trackMaxDocSize.TabIndex = 29;
             this.trackMaxDocSize.ValueChanged += new System.EventHandler(this.trackMaxDocSize_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(262, 403);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.Location = new System.Drawing.Point(262, 441);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(132, 13);
+            this.label5.Size = new System.Drawing.Size(143, 15);
             this.label5.TabIndex = 28;
             this.label5.Text = "Max Document Size (PDF)";
             // 
             // lblNumItems
             // 
             this.lblNumItems.AutoSize = true;
-            this.lblNumItems.Location = new System.Drawing.Point(658, 174);
+            this.lblNumItems.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumItems.Location = new System.Drawing.Point(811, 212);
             this.lblNumItems.Name = "lblNumItems";
-            this.lblNumItems.Size = new System.Drawing.Size(13, 13);
+            this.lblNumItems.Size = new System.Drawing.Size(13, 15);
             this.lblNumItems.TabIndex = 30;
             this.lblNumItems.Text = "0";
             // 
             // lblMinSize
             // 
             this.lblMinSize.AutoSize = true;
-            this.lblMinSize.Location = new System.Drawing.Point(659, 358);
+            this.lblMinSize.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblMinSize.Location = new System.Drawing.Point(812, 396);
             this.lblMinSize.Name = "lblMinSize";
-            this.lblMinSize.Size = new System.Drawing.Size(29, 13);
+            this.lblMinSize.Size = new System.Drawing.Size(29, 15);
             this.lblMinSize.TabIndex = 31;
             this.lblMinSize.Text = "0 kB";
             // 
             // lblMaxSize
             // 
             this.lblMaxSize.AutoSize = true;
-            this.lblMaxSize.Location = new System.Drawing.Point(659, 425);
+            this.lblMaxSize.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblMaxSize.Location = new System.Drawing.Point(812, 463);
             this.lblMaxSize.Name = "lblMaxSize";
-            this.lblMaxSize.Size = new System.Drawing.Size(32, 13);
+            this.lblMaxSize.Size = new System.Drawing.Size(34, 15);
             this.lblMaxSize.TabIndex = 32;
             this.lblMaxSize.Text = "0 MB";
             // 
@@ -204,7 +234,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.lblMaxSize);
             this.Controls.Add(this.lblMinSize);
             this.Controls.Add(this.lblNumItems);

@@ -66,7 +66,7 @@ namespace Acceleratio.SPDG.UI
             trackNumberOfUsers.Value = Common.WorkingDefinition.NumberOfUsersToCreate;
             trackNumberOfSecGroups.Value = Common.WorkingDefinition.NumberOfSecurityGroupsToCreate;
             cboDomains.Text = Common.WorkingDefinition.ADDomainName;
-            cboOrganizationalUnit.Text = Common.WorkingDefinition.ADOrganizationalUnit ;
+            cboOrganizationalUnit.Text = Common.WorkingDefinition.ADOrganizationalUnit;
 
             this.Show();
             this.Enabled = true;

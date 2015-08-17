@@ -41,53 +41,74 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackNumColumnsPerList)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            // 
             // ucSteps1
             // 
-            this.ucSteps1.Location = new System.Drawing.Point(0, 103);
+            this.ucSteps1.Location = new System.Drawing.Point(0, 135);
             this.ucSteps1.Name = "ucSteps1";
             this.ucSteps1.Size = new System.Drawing.Size(229, 365);
             this.ucSteps1.TabIndex = 7;
             // 
             // trackNumViewsPerList
             // 
-            this.trackNumViewsPerList.Location = new System.Drawing.Point(256, 293);
+            this.trackNumViewsPerList.LargeChange = 1;
+            this.trackNumViewsPerList.Location = new System.Drawing.Point(260, 332);
             this.trackNumViewsPerList.Name = "trackNumViewsPerList";
-            this.trackNumViewsPerList.Size = new System.Drawing.Size(398, 45);
+            this.trackNumViewsPerList.Size = new System.Drawing.Size(543, 45);
             this.trackNumViewsPerList.TabIndex = 16;
             this.trackNumViewsPerList.ValueChanged += new System.EventHandler(this.trackNumViewsPerList_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 277);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.Location = new System.Drawing.Point(265, 316);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(186, 13);
+            this.label3.Size = new System.Drawing.Size(208, 15);
             this.label3.TabIndex = 15;
             this.label3.Text = "Max number of Views per list to create";
             // 
             // trackNumColumnsPerList
             // 
-            this.trackNumColumnsPerList.Location = new System.Drawing.Point(256, 166);
+            this.trackNumColumnsPerList.LargeChange = 1;
+            this.trackNumColumnsPerList.Location = new System.Drawing.Point(260, 205);
             this.trackNumColumnsPerList.Name = "trackNumColumnsPerList";
-            this.trackNumColumnsPerList.Size = new System.Drawing.Size(398, 45);
+            this.trackNumColumnsPerList.Size = new System.Drawing.Size(543, 45);
             this.trackNumColumnsPerList.TabIndex = 18;
             this.trackNumColumnsPerList.ValueChanged += new System.EventHandler(this.trackNumColumnsPerList_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(262, 150);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.Location = new System.Drawing.Point(266, 189);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(197, 13);
+            this.label2.Size = new System.Drawing.Size(224, 15);
             this.label2.TabIndex = 17;
             this.label2.Text = "Max number of columns per list to create";
             // 
             // chkCreateViews
             // 
             this.chkCreateViews.AutoSize = true;
-            this.chkCreateViews.Location = new System.Drawing.Point(265, 242);
+            this.chkCreateViews.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateViews.Location = new System.Drawing.Point(269, 281);
             this.chkCreateViews.Name = "chkCreateViews";
-            this.chkCreateViews.Size = new System.Drawing.Size(88, 17);
+            this.chkCreateViews.Size = new System.Drawing.Size(93, 19);
             this.chkCreateViews.TabIndex = 19;
             this.chkCreateViews.Text = "Create Views";
             this.chkCreateViews.UseVisualStyleBackColor = true;
@@ -96,9 +117,10 @@
             // chkCreateColumns
             // 
             this.chkCreateColumns.AutoSize = true;
-            this.chkCreateColumns.Location = new System.Drawing.Point(265, 115);
+            this.chkCreateColumns.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateColumns.Location = new System.Drawing.Point(269, 154);
             this.chkCreateColumns.Name = "chkCreateColumns";
-            this.chkCreateColumns.Size = new System.Drawing.Size(99, 17);
+            this.chkCreateColumns.Size = new System.Drawing.Size(109, 19);
             this.chkCreateColumns.TabIndex = 20;
             this.chkCreateColumns.Text = "Create columns";
             this.chkCreateColumns.UseVisualStyleBackColor = true;
@@ -107,18 +129,20 @@
             // lblNumColumns
             // 
             this.lblNumColumns.AutoSize = true;
-            this.lblNumColumns.Location = new System.Drawing.Point(659, 169);
+            this.lblNumColumns.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumColumns.Location = new System.Drawing.Point(817, 209);
             this.lblNumColumns.Name = "lblNumColumns";
-            this.lblNumColumns.Size = new System.Drawing.Size(13, 13);
+            this.lblNumColumns.Size = new System.Drawing.Size(13, 15);
             this.lblNumColumns.TabIndex = 21;
             this.lblNumColumns.Text = "0";
             // 
             // lblNumViews
             // 
             this.lblNumViews.AutoSize = true;
-            this.lblNumViews.Location = new System.Drawing.Point(658, 296);
+            this.lblNumViews.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumViews.Location = new System.Drawing.Point(819, 335);
             this.lblNumViews.Name = "lblNumViews";
-            this.lblNumViews.Size = new System.Drawing.Size(13, 13);
+            this.lblNumViews.Size = new System.Drawing.Size(13, 15);
             this.lblNumViews.TabIndex = 22;
             this.lblNumViews.Text = "0";
             // 
@@ -126,7 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.lblNumViews);
             this.Controls.Add(this.lblNumColumns);
             this.Controls.Add(this.chkCreateColumns);

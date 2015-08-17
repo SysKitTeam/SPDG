@@ -45,19 +45,36 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackCreateNewWebApplication)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnBack
+            // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            // 
             // ucSteps1
             // 
-            this.ucSteps1.Location = new System.Drawing.Point(0, 103);
+            this.ucSteps1.Location = new System.Drawing.Point(0, 135);
             this.ucSteps1.Name = "ucSteps1";
-            this.ucSteps1.Size = new System.Drawing.Size(238, 368);
+            this.ucSteps1.Size = new System.Drawing.Size(238, 463);
             this.ucSteps1.TabIndex = 7;
             // 
             // radioCreateNewWebApp
             // 
             this.radioCreateNewWebApp.AutoSize = true;
-            this.radioCreateNewWebApp.Location = new System.Drawing.Point(265, 115);
+            this.radioCreateNewWebApp.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioCreateNewWebApp.Location = new System.Drawing.Point(265, 155);
             this.radioCreateNewWebApp.Name = "radioCreateNewWebApp";
-            this.radioCreateNewWebApp.Size = new System.Drawing.Size(165, 17);
+            this.radioCreateNewWebApp.Size = new System.Drawing.Size(180, 19);
             this.radioCreateNewWebApp.TabIndex = 8;
             this.radioCreateNewWebApp.TabStop = true;
             this.radioCreateNewWebApp.Text = "Create new Web Applications";
@@ -66,18 +83,20 @@
             // 
             // cboUseExistingWebApp
             // 
+            this.cboUseExistingWebApp.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cboUseExistingWebApp.FormattingEnabled = true;
-            this.cboUseExistingWebApp.Location = new System.Drawing.Point(265, 353);
+            this.cboUseExistingWebApp.Location = new System.Drawing.Point(265, 392);
             this.cboUseExistingWebApp.Name = "cboUseExistingWebApp";
-            this.cboUseExistingWebApp.Size = new System.Drawing.Size(401, 21);
+            this.cboUseExistingWebApp.Size = new System.Drawing.Size(538, 23);
             this.cboUseExistingWebApp.TabIndex = 11;
             // 
             // radioUseExistingWebApp
             // 
             this.radioUseExistingWebApp.AutoSize = true;
-            this.radioUseExistingWebApp.Location = new System.Drawing.Point(265, 328);
+            this.radioUseExistingWebApp.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioUseExistingWebApp.Location = new System.Drawing.Point(265, 367);
             this.radioUseExistingWebApp.Name = "radioUseExistingWebApp";
-            this.radioUseExistingWebApp.Size = new System.Drawing.Size(83, 17);
+            this.radioUseExistingWebApp.Size = new System.Drawing.Size(87, 19);
             this.radioUseExistingWebApp.TabIndex = 9;
             this.radioUseExistingWebApp.TabStop = true;
             this.radioUseExistingWebApp.Text = "Use Existing";
@@ -86,83 +105,93 @@
             // 
             // trackCreateNewWebApplication
             // 
-            this.trackCreateNewWebApplication.Location = new System.Drawing.Point(257, 140);
+            this.trackCreateNewWebApplication.LargeChange = 1;
+            this.trackCreateNewWebApplication.Location = new System.Drawing.Point(257, 179);
             this.trackCreateNewWebApplication.Name = "trackCreateNewWebApplication";
-            this.trackCreateNewWebApplication.Size = new System.Drawing.Size(389, 45);
+            this.trackCreateNewWebApplication.Size = new System.Drawing.Size(546, 45);
             this.trackCreateNewWebApplication.TabIndex = 10;
             this.trackCreateNewWebApplication.ValueChanged += new System.EventHandler(this.trackCreateNewWebApplication_ValueChanged);
             // 
             // lblCreateNewApps
             // 
             this.lblCreateNewApps.AutoSize = true;
-            this.lblCreateNewApps.Location = new System.Drawing.Point(652, 144);
+            this.lblCreateNewApps.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblCreateNewApps.Location = new System.Drawing.Point(812, 183);
             this.lblCreateNewApps.Name = "lblCreateNewApps";
-            this.lblCreateNewApps.Size = new System.Drawing.Size(13, 13);
+            this.lblCreateNewApps.Size = new System.Drawing.Size(13, 15);
             this.lblCreateNewApps.TabIndex = 12;
             this.lblCreateNewApps.Text = "0";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(266, 193);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.Location = new System.Drawing.Point(266, 232);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.Size = new System.Drawing.Size(103, 15);
             this.label1.TabIndex = 13;
             this.label1.Text = "Owner UserName:";
             // 
             // txtOwnerUserName
             // 
-            this.txtOwnerUserName.Location = new System.Drawing.Point(401, 190);
+            this.txtOwnerUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtOwnerUserName.Location = new System.Drawing.Point(401, 229);
             this.txtOwnerUserName.Name = "txtOwnerUserName";
-            this.txtOwnerUserName.Size = new System.Drawing.Size(163, 20);
+            this.txtOwnerUserName.Size = new System.Drawing.Size(163, 23);
             this.txtOwnerUserName.TabIndex = 14;
             // 
             // txtOwnerPassword
             // 
-            this.txtOwnerPassword.Location = new System.Drawing.Point(401, 216);
+            this.txtOwnerPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtOwnerPassword.Location = new System.Drawing.Point(401, 255);
             this.txtOwnerPassword.Name = "txtOwnerPassword";
             this.txtOwnerPassword.PasswordChar = '*';
-            this.txtOwnerPassword.Size = new System.Drawing.Size(163, 20);
+            this.txtOwnerPassword.Size = new System.Drawing.Size(163, 23);
             this.txtOwnerPassword.TabIndex = 16;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(266, 219);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.Location = new System.Drawing.Point(266, 258);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 13);
+            this.label2.Size = new System.Drawing.Size(98, 15);
             this.label2.TabIndex = 15;
             this.label2.Text = "Owner Password:";
             // 
             // txtOwnerEmail
             // 
-            this.txtOwnerEmail.Location = new System.Drawing.Point(401, 242);
+            this.txtOwnerEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtOwnerEmail.Location = new System.Drawing.Point(401, 281);
             this.txtOwnerEmail.Name = "txtOwnerEmail";
-            this.txtOwnerEmail.Size = new System.Drawing.Size(163, 20);
+            this.txtOwnerEmail.Size = new System.Drawing.Size(163, 23);
             this.txtOwnerEmail.TabIndex = 18;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(266, 245);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.Location = new System.Drawing.Point(266, 284);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.Size = new System.Drawing.Size(77, 15);
             this.label3.TabIndex = 17;
             this.label3.Text = "Owner Email:";
             // 
             // txtSQLServer
             // 
-            this.txtSQLServer.Location = new System.Drawing.Point(401, 268);
+            this.txtSQLServer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSQLServer.Location = new System.Drawing.Point(401, 307);
             this.txtSQLServer.Name = "txtSQLServer";
-            this.txtSQLServer.Size = new System.Drawing.Size(163, 20);
+            this.txtSQLServer.Size = new System.Drawing.Size(163, 23);
             this.txtSQLServer.TabIndex = 20;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(266, 271);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label4.Location = new System.Drawing.Point(266, 310);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.Size = new System.Drawing.Size(66, 15);
             this.label4.TabIndex = 19;
             this.label4.Text = "SQL Server:";
             // 
@@ -170,7 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 511);
+            this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.txtSQLServer);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtOwnerEmail);

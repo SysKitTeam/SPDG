@@ -52,7 +52,6 @@
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -65,15 +64,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             this.SuspendLayout();
             // 
             // lblStep01
             // 
             this.lblStep01.AutoSize = true;
+            this.lblStep01.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep01.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep01.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep01.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep01.Location = new System.Drawing.Point(47, 20);
             this.lblStep01.Name = "lblStep01";
-            this.lblStep01.Size = new System.Drawing.Size(87, 13);
+            this.lblStep01.Size = new System.Drawing.Size(93, 15);
             this.lblStep01.TabIndex = 0;
             this.lblStep01.TabStop = true;
             this.lblStep01.Text = "Step 1 - Connect";
@@ -82,9 +84,13 @@
             // lblStep02
             // 
             this.lblStep02.AutoSize = true;
-            this.lblStep02.Location = new System.Drawing.Point(47, 45);
+            this.lblStep02.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep02.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep02.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep02.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep02.Location = new System.Drawing.Point(47, 50);
             this.lblStep02.Name = "lblStep02";
-            this.lblStep02.Size = new System.Drawing.Size(120, 13);
+            this.lblStep02.Size = new System.Drawing.Size(130, 15);
             this.lblStep02.TabIndex = 1;
             this.lblStep02.TabStop = true;
             this.lblStep02.Text = "Step 2 - Users && Groups";
@@ -93,9 +99,13 @@
             // lblStep03
             // 
             this.lblStep03.AutoSize = true;
-            this.lblStep03.Location = new System.Drawing.Point(47, 70);
+            this.lblStep03.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep03.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep03.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep03.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep03.Location = new System.Drawing.Point(47, 80);
             this.lblStep03.Name = "lblStep03";
-            this.lblStep03.Size = new System.Drawing.Size(130, 13);
+            this.lblStep03.Size = new System.Drawing.Size(142, 15);
             this.lblStep03.TabIndex = 2;
             this.lblStep03.TabStop = true;
             this.lblStep03.Text = "Step 3 - Web Applications";
@@ -104,9 +114,13 @@
             // lblStep12
             // 
             this.lblStep12.AutoSize = true;
-            this.lblStep12.Location = new System.Drawing.Point(47, 295);
+            this.lblStep12.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep12.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep12.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep12.Location = new System.Drawing.Point(47, 350);
             this.lblStep12.Name = "lblStep12";
-            this.lblStep12.Size = new System.Drawing.Size(88, 13);
+            this.lblStep12.Size = new System.Drawing.Size(96, 15);
             this.lblStep12.TabIndex = 3;
             this.lblStep12.TabStop = true;
             this.lblStep12.Text = "Step 12 - Finalize";
@@ -115,9 +129,13 @@
             // lblStep04
             // 
             this.lblStep04.AutoSize = true;
-            this.lblStep04.Location = new System.Drawing.Point(47, 95);
+            this.lblStep04.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep04.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep04.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep04.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep04.Location = new System.Drawing.Point(47, 110);
             this.lblStep04.Name = "lblStep04";
-            this.lblStep04.Size = new System.Drawing.Size(119, 13);
+            this.lblStep04.Size = new System.Drawing.Size(128, 15);
             this.lblStep04.TabIndex = 3;
             this.lblStep04.TabStop = true;
             this.lblStep04.Text = "Step 4 - Site Collections";
@@ -126,9 +144,13 @@
             // lblStep05
             // 
             this.lblStep05.AutoSize = true;
-            this.lblStep05.Location = new System.Drawing.Point(47, 120);
+            this.lblStep05.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep05.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep05.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep05.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep05.Location = new System.Drawing.Point(47, 140);
             this.lblStep05.Name = "lblStep05";
-            this.lblStep05.Size = new System.Drawing.Size(70, 13);
+            this.lblStep05.Size = new System.Drawing.Size(74, 15);
             this.lblStep05.TabIndex = 3;
             this.lblStep05.TabStop = true;
             this.lblStep05.Text = "Step 5 - Sites";
@@ -137,9 +159,13 @@
             // lblStep06
             // 
             this.lblStep06.AutoSize = true;
-            this.lblStep06.Location = new System.Drawing.Point(47, 145);
+            this.lblStep06.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep06.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep06.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep06.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep06.Location = new System.Drawing.Point(47, 170);
             this.lblStep06.Name = "lblStep06";
-            this.lblStep06.Size = new System.Drawing.Size(114, 13);
+            this.lblStep06.Size = new System.Drawing.Size(128, 15);
             this.lblStep06.TabIndex = 3;
             this.lblStep06.TabStop = true;
             this.lblStep06.Text = "Step 6 - List && Libraries";
@@ -148,9 +174,13 @@
             // lblStep07
             // 
             this.lblStep07.AutoSize = true;
-            this.lblStep07.Location = new System.Drawing.Point(47, 170);
+            this.lblStep07.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep07.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep07.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep07.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep07.Location = new System.Drawing.Point(47, 200);
             this.lblStep07.Name = "lblStep07";
-            this.lblStep07.Size = new System.Drawing.Size(127, 13);
+            this.lblStep07.Size = new System.Drawing.Size(142, 15);
             this.lblStep07.TabIndex = 3;
             this.lblStep07.TabStop = true;
             this.lblStep07.Text = "Step 7 - Views && Columns";
@@ -159,9 +189,13 @@
             // lblStep08
             // 
             this.lblStep08.AutoSize = true;
-            this.lblStep08.Location = new System.Drawing.Point(47, 195);
+            this.lblStep08.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep08.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep08.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep08.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep08.Location = new System.Drawing.Point(47, 230);
             this.lblStep08.Name = "lblStep08";
-            this.lblStep08.Size = new System.Drawing.Size(91, 13);
+            this.lblStep08.Size = new System.Drawing.Size(99, 15);
             this.lblStep08.TabIndex = 3;
             this.lblStep08.TabStop = true;
             this.lblStep08.Text = "Step 8 - List Items";
@@ -170,9 +204,13 @@
             // lblStep09
             // 
             this.lblStep09.AutoSize = true;
-            this.lblStep09.Location = new System.Drawing.Point(47, 220);
+            this.lblStep09.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep09.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep09.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep09.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep09.Location = new System.Drawing.Point(47, 260);
             this.lblStep09.Name = "lblStep09";
-            this.lblStep09.Size = new System.Drawing.Size(116, 13);
+            this.lblStep09.Size = new System.Drawing.Size(125, 15);
             this.lblStep09.TabIndex = 3;
             this.lblStep09.TabStop = true;
             this.lblStep09.Text = "Step 9 - Content Types";
@@ -181,9 +219,13 @@
             // lblStep10
             // 
             this.lblStep10.AutoSize = true;
-            this.lblStep10.Location = new System.Drawing.Point(47, 245);
+            this.lblStep10.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep10.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep10.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep10.Location = new System.Drawing.Point(47, 290);
             this.lblStep10.Name = "lblStep10";
-            this.lblStep10.Size = new System.Drawing.Size(103, 13);
+            this.lblStep10.Size = new System.Drawing.Size(110, 15);
             this.lblStep10.TabIndex = 3;
             this.lblStep10.TabStop = true;
             this.lblStep10.Text = "Step 10 - Workflows";
@@ -192,9 +234,13 @@
             // lblStep11
             // 
             this.lblStep11.AutoSize = true;
-            this.lblStep11.Location = new System.Drawing.Point(47, 270);
+            this.lblStep11.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblStep11.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblStep11.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep11.Location = new System.Drawing.Point(47, 320);
             this.lblStep11.Name = "lblStep11";
-            this.lblStep11.Size = new System.Drawing.Size(108, 13);
+            this.lblStep11.Size = new System.Drawing.Size(117, 15);
             this.lblStep11.TabIndex = 3;
             this.lblStep11.TabStop = true;
             this.lblStep11.Text = "Step 11 - Permissions";
@@ -212,7 +258,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox2.Location = new System.Drawing.Point(16, 44);
+            this.pictureBox2.Location = new System.Drawing.Point(16, 49);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(18, 15);
             this.pictureBox2.TabIndex = 5;
@@ -221,7 +267,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox3.Location = new System.Drawing.Point(16, 69);
+            this.pictureBox3.Location = new System.Drawing.Point(16, 79);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(18, 15);
             this.pictureBox3.TabIndex = 6;
@@ -230,7 +276,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox4.Location = new System.Drawing.Point(16, 94);
+            this.pictureBox4.Location = new System.Drawing.Point(16, 109);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(18, 15);
             this.pictureBox4.TabIndex = 7;
@@ -239,7 +285,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox5.Location = new System.Drawing.Point(16, 119);
+            this.pictureBox5.Location = new System.Drawing.Point(16, 139);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(18, 15);
             this.pictureBox5.TabIndex = 8;
@@ -248,7 +294,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox6.Location = new System.Drawing.Point(16, 144);
+            this.pictureBox6.Location = new System.Drawing.Point(16, 169);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(18, 15);
             this.pictureBox6.TabIndex = 9;
@@ -257,7 +303,7 @@
             // pictureBox7
             // 
             this.pictureBox7.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox7.Location = new System.Drawing.Point(16, 169);
+            this.pictureBox7.Location = new System.Drawing.Point(16, 199);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(18, 15);
             this.pictureBox7.TabIndex = 10;
@@ -266,7 +312,7 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox8.Location = new System.Drawing.Point(16, 194);
+            this.pictureBox8.Location = new System.Drawing.Point(16, 229);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(18, 15);
             this.pictureBox8.TabIndex = 11;
@@ -275,7 +321,7 @@
             // pictureBox9
             // 
             this.pictureBox9.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox9.Location = new System.Drawing.Point(16, 194);
+            this.pictureBox9.Location = new System.Drawing.Point(16, 259);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(18, 15);
             this.pictureBox9.TabIndex = 12;
@@ -284,7 +330,7 @@
             // pictureBox10
             // 
             this.pictureBox10.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox10.Location = new System.Drawing.Point(16, 219);
+            this.pictureBox10.Location = new System.Drawing.Point(16, 289);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(18, 15);
             this.pictureBox10.TabIndex = 13;
@@ -293,7 +339,7 @@
             // pictureBox11
             // 
             this.pictureBox11.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox11.Location = new System.Drawing.Point(16, 244);
+            this.pictureBox11.Location = new System.Drawing.Point(16, 319);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(18, 15);
             this.pictureBox11.TabIndex = 14;
@@ -302,26 +348,16 @@
             // pictureBox12
             // 
             this.pictureBox12.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox12.Location = new System.Drawing.Point(16, 269);
+            this.pictureBox12.Location = new System.Drawing.Point(16, 349);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(18, 15);
             this.pictureBox12.TabIndex = 15;
             this.pictureBox12.TabStop = false;
             // 
-            // pictureBox13
-            // 
-            this.pictureBox13.Image = global::Acceleratio.SPDG.UI.Properties.Resources.temp_icona_11;
-            this.pictureBox13.Location = new System.Drawing.Point(16, 294);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(18, 15);
-            this.pictureBox13.TabIndex = 16;
-            this.pictureBox13.TabStop = false;
-            // 
             // ucSteps
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
@@ -347,7 +383,7 @@
             this.Controls.Add(this.lblStep02);
             this.Controls.Add(this.lblStep01);
             this.Name = "ucSteps";
-            this.Size = new System.Drawing.Size(265, 365);
+            this.Size = new System.Drawing.Size(265, 500);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ucSteps_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -361,7 +397,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,6 +428,5 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.PictureBox pictureBox13;
     }
 }

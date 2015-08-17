@@ -88,7 +88,7 @@ namespace Acceleratio.SPDG.Generator
                             if( countSitesPermissions < numSitesPermissions)
                             {
                                 setSitePermissions(web);
-                                progressDetail("Adding permissions for site '" + web.Url + "'");
+                                progressDetail("Adding permissions to site '" + web.Url + "'");
                             }
 
                             foreach(ListInfo listInfo in siteInfo.Lists)
@@ -96,7 +96,7 @@ namespace Acceleratio.SPDG.Generator
                                 if (countListsPermissions < numListsPermissions)
                                 {
                                     setListPermissions(web, listInfo.Name);
-                                    progressDetail("Adding permissions for list '" + web.Url + "/" + listInfo.Name);
+                                    progressDetail("Adding permissions to list '" + web.Url + "/" + listInfo.Name);
                                 }
 
                                 foreach(FolderInfo folderInfo in listInfo.Folders)
@@ -104,7 +104,7 @@ namespace Acceleratio.SPDG.Generator
                                     if( countFoldersPermissions < numFoldersPermissions)
                                     {
                                         setFolderPermissions(web, folderInfo.URL);
-                                        progressDetail("Adding permissions for folder '" + web.Url + "/" + folderInfo.URL);
+                                        progressDetail("Adding permissions to folder '" + web.Url + "/" + folderInfo.URL);
                                     }
                                 }
 
@@ -112,7 +112,7 @@ namespace Acceleratio.SPDG.Generator
                                 {
                                     setItemPermissions(web, listInfo.Name);
                                     
-                                    Log.Write("Unique permissions added for items in list:" + listInfo.Name + " in site: " + web.Url);
+                                    Log.Write("Unique permissions added to items in list:" + listInfo.Name + " in site: " + web.Url);
                                 }
                             }
 
