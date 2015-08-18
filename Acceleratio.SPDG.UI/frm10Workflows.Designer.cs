@@ -60,6 +60,7 @@
             // 
             this.chkCreateSomeOutOfTheBoxSPworkflows.AutoSize = true;
             this.chkCreateSomeOutOfTheBoxSPworkflows.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateSomeOutOfTheBoxSPworkflows.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkCreateSomeOutOfTheBoxSPworkflows.Location = new System.Drawing.Point(265, 155);
             this.chkCreateSomeOutOfTheBoxSPworkflows.Name = "chkCreateSomeOutOfTheBoxSPworkflows";
             this.chkCreateSomeOutOfTheBoxSPworkflows.Size = new System.Drawing.Size(388, 19);
@@ -72,6 +73,7 @@
             this.chkAttachCustomWF.AutoSize = true;
             this.chkAttachCustomWF.Enabled = false;
             this.chkAttachCustomWF.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkAttachCustomWF.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkAttachCustomWF.Location = new System.Drawing.Point(265, 193);
             this.chkAttachCustomWF.Name = "chkAttachCustomWF";
             this.chkAttachCustomWF.Size = new System.Drawing.Size(193, 19);

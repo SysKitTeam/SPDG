@@ -72,7 +72,7 @@
             this.lblStep01.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep01.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep01.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep01.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep01.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep01.Location = new System.Drawing.Point(47, 20);
             this.lblStep01.Name = "lblStep01";
             this.lblStep01.Size = new System.Drawing.Size(93, 15);
@@ -87,7 +87,7 @@
             this.lblStep02.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep02.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep02.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep02.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep02.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep02.Location = new System.Drawing.Point(47, 50);
             this.lblStep02.Name = "lblStep02";
             this.lblStep02.Size = new System.Drawing.Size(130, 15);
@@ -102,7 +102,7 @@
             this.lblStep03.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep03.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep03.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep03.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep03.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep03.Location = new System.Drawing.Point(47, 80);
             this.lblStep03.Name = "lblStep03";
             this.lblStep03.Size = new System.Drawing.Size(142, 15);
@@ -117,7 +117,7 @@
             this.lblStep12.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep12.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep12.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep12.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep12.Location = new System.Drawing.Point(47, 350);
             this.lblStep12.Name = "lblStep12";
             this.lblStep12.Size = new System.Drawing.Size(96, 15);
@@ -132,7 +132,7 @@
             this.lblStep04.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep04.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep04.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep04.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep04.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep04.Location = new System.Drawing.Point(47, 110);
             this.lblStep04.Name = "lblStep04";
             this.lblStep04.Size = new System.Drawing.Size(128, 15);
@@ -147,7 +147,7 @@
             this.lblStep05.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep05.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep05.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep05.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep05.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep05.Location = new System.Drawing.Point(47, 140);
             this.lblStep05.Name = "lblStep05";
             this.lblStep05.Size = new System.Drawing.Size(74, 15);
@@ -162,7 +162,7 @@
             this.lblStep06.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep06.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep06.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep06.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep06.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep06.Location = new System.Drawing.Point(47, 170);
             this.lblStep06.Name = "lblStep06";
             this.lblStep06.Size = new System.Drawing.Size(128, 15);
@@ -177,7 +177,7 @@
             this.lblStep07.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep07.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep07.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep07.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep07.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep07.Location = new System.Drawing.Point(47, 200);
             this.lblStep07.Name = "lblStep07";
             this.lblStep07.Size = new System.Drawing.Size(142, 15);
@@ -192,7 +192,7 @@
             this.lblStep08.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep08.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep08.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep08.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep08.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep08.Location = new System.Drawing.Point(47, 230);
             this.lblStep08.Name = "lblStep08";
             this.lblStep08.Size = new System.Drawing.Size(99, 15);
@@ -207,7 +207,7 @@
             this.lblStep09.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep09.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep09.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep09.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep09.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep09.Location = new System.Drawing.Point(47, 260);
             this.lblStep09.Name = "lblStep09";
             this.lblStep09.Size = new System.Drawing.Size(125, 15);
@@ -222,7 +222,7 @@
             this.lblStep10.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep10.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep10.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep10.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep10.Location = new System.Drawing.Point(47, 290);
             this.lblStep10.Name = "lblStep10";
             this.lblStep10.Size = new System.Drawing.Size(110, 15);
@@ -237,7 +237,7 @@
             this.lblStep11.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
             this.lblStep11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             this.lblStep11.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.lblStep11.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+            this.lblStep11.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep11.Location = new System.Drawing.Point(47, 320);
             this.lblStep11.Name = "lblStep11";
             this.lblStep11.Size = new System.Drawing.Size(117, 15);

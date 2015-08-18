@@ -20,7 +20,8 @@ namespace Acceleratio.SPDG.UI
             {
                 if (ctrl.Name.StartsWith("lblStep"))
                 {
-                    ctrl.Enabled = false;
+                    ((LinkLabel)ctrl).Links[0].Enabled = false;
+                    ((LinkLabel)ctrl).ActiveLinkColor = System.Drawing.Color.FromArgb(88, 177, 198);
                 }
             }
         }
@@ -35,6 +36,7 @@ namespace Acceleratio.SPDG.UI
                     if (lblNumber <= stepNumber)
                     {
                         ctrl.Enabled = true;
+                        ((LinkLabel)ctrl).Links[0].Enabled = true;
 
                         Control[] ctrls = this.Controls.Find("pictureBox" + lblNumber, false);
                         if (ctrls.Length > 0)

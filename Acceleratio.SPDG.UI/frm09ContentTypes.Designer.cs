@@ -68,6 +68,7 @@
             // 
             this.chkCreateSomeConentTypes.AutoSize = true;
             this.chkCreateSomeConentTypes.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateSomeConentTypes.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkCreateSomeConentTypes.Location = new System.Drawing.Point(265, 155);
             this.chkCreateSomeConentTypes.Name = "chkCreateSomeConentTypes";
             this.chkCreateSomeConentTypes.Size = new System.Drawing.Size(356, 19);
@@ -88,6 +89,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label5.Location = new System.Drawing.Point(262, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(259, 15);
@@ -98,6 +100,7 @@
             // 
             this.chkAddSiteColumns.AutoSize = true;
             this.chkAddSiteColumns.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkAddSiteColumns.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkAddSiteColumns.Location = new System.Drawing.Point(265, 279);
             this.chkAddSiteColumns.Name = "chkAddSiteColumns";
             this.chkAddSiteColumns.Size = new System.Drawing.Size(212, 19);
@@ -118,6 +121,7 @@
             // 
             this.chkContentTypesCanInherit.AutoSize = true;
             this.chkContentTypesCanInherit.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkContentTypesCanInherit.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkContentTypesCanInherit.Location = new System.Drawing.Point(265, 365);
             this.chkContentTypesCanInherit.Name = "chkContentTypesCanInherit";
             this.chkContentTypesCanInherit.Size = new System.Drawing.Size(340, 19);
@@ -129,6 +133,7 @@
             // 
             this.lblMaxContentTypes.AutoSize = true;
             this.lblMaxContentTypes.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblMaxContentTypes.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblMaxContentTypes.Location = new System.Drawing.Point(814, 217);
             this.lblMaxContentTypes.Name = "lblMaxContentTypes";
             this.lblMaxContentTypes.Size = new System.Drawing.Size(13, 15);
@@ -139,6 +144,7 @@
             // 
             this.lblSiteCols.AutoSize = true;
             this.lblSiteCols.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblSiteCols.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblSiteCols.Location = new System.Drawing.Point(814, 304);
             this.lblSiteCols.Name = "lblSiteCols";
             this.lblSiteCols.Size = new System.Drawing.Size(13, 15);

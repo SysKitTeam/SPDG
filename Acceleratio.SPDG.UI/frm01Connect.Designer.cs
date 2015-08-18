@@ -74,6 +74,7 @@
             this.label2.AutoSize = true;
             this.label2.Enabled = false;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label2.Location = new System.Drawing.Point(265, 155);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(183, 15);
@@ -95,6 +96,7 @@
             this.radioConnectSPOnline.AutoSize = true;
             this.radioConnectSPOnline.Enabled = false;
             this.radioConnectSPOnline.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioConnectSPOnline.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioConnectSPOnline.Location = new System.Drawing.Point(268, 223);
             this.radioConnectSPOnline.Name = "radioConnectSPOnline";
             this.radioConnectSPOnline.Size = new System.Drawing.Size(182, 19);
@@ -107,6 +109,7 @@
             this.radioConnectSPOnPremise.AutoSize = true;
             this.radioConnectSPOnPremise.Checked = true;
             this.radioConnectSPOnPremise.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioConnectSPOnPremise.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioConnectSPOnPremise.Location = new System.Drawing.Point(268, 246);
             this.radioConnectSPOnPremise.Name = "radioConnectSPOnPremise";
             this.radioConnectSPOnPremise.Size = new System.Drawing.Size(210, 19);
@@ -128,6 +131,7 @@
             // 
             this.radioCustomCredentials.AutoSize = true;
             this.radioCustomCredentials.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioCustomCredentials.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioCustomCredentials.Location = new System.Drawing.Point(0, 26);
             this.radioCustomCredentials.Name = "radioCustomCredentials";
             this.radioCustomCredentials.Size = new System.Drawing.Size(127, 19);
@@ -141,6 +145,7 @@
             // 
             this.radioCurrentCredentials.AutoSize = true;
             this.radioCurrentCredentials.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioCurrentCredentials.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioCurrentCredentials.Location = new System.Drawing.Point(0, 3);
             this.radioCurrentCredentials.Name = "radioCurrentCredentials";
             this.radioCurrentCredentials.Size = new System.Drawing.Size(184, 19);
@@ -154,6 +159,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label3.Location = new System.Drawing.Point(288, 356);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 15);
@@ -172,6 +178,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label5.Location = new System.Drawing.Point(288, 387);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 15);
@@ -191,6 +198,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label6.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label6.Location = new System.Drawing.Point(288, 413);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 15);
@@ -208,6 +216,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label7.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label7.Location = new System.Drawing.Point(288, 438);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 15);

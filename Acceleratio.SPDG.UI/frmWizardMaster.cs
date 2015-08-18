@@ -19,6 +19,8 @@ namespace Acceleratio.SPDG.UI
             btnNext.BackColor = System.Drawing.ColorTranslator.FromHtml("#898989");
             btnClose.BackColor = System.Drawing.ColorTranslator.FromHtml("#898989");
             btnHelp.BackColor = System.Drawing.ColorTranslator.FromHtml("#898989");
+            pictureBox1.BackColor = System.Drawing.Color.FromArgb(253, 163, 36);
+            pictureBox2.BackColor = System.Drawing.Color.FromArgb(253, 163, 36);
         }
 
         public frm01Connect RootForm { get; set; }

@@ -223,6 +223,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SPDG.ico" />
+    <None Include="Resources\Ilustracija.png" />
     <Content Include="Res\temp_icona-11.png" />
     <Content Include="Res\temp_icona-12.png" />
   </ItemGroup>

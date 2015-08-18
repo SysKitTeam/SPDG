@@ -104,6 +104,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label2.Location = new System.Drawing.Point(265, 375);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(246, 15);
@@ -123,6 +124,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label4.Location = new System.Drawing.Point(265, 439);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(305, 15);
@@ -133,6 +135,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label5.Location = new System.Drawing.Point(265, 221);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(127, 15);
@@ -143,6 +146,7 @@
             // 
             this.chkDocLib.AutoSize = true;
             this.chkDocLib.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkDocLib.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkDocLib.Location = new System.Drawing.Point(269, 269);
             this.chkDocLib.Name = "chkDocLib";
             this.chkDocLib.Size = new System.Drawing.Size(121, 19);
@@ -155,6 +159,7 @@
             // 
             this.chkTasks.AutoSize = true;
             this.chkTasks.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkTasks.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkTasks.Location = new System.Drawing.Point(493, 246);
             this.chkTasks.Name = "chkTasks";
             this.chkTasks.Size = new System.Drawing.Size(55, 19);
@@ -166,6 +171,7 @@
             // 
             this.chkCalendar.AutoSize = true;
             this.chkCalendar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCalendar.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkCalendar.Location = new System.Drawing.Point(493, 269);
             this.chkCalendar.Name = "chkCalendar";
             this.chkCalendar.Size = new System.Drawing.Size(73, 19);
@@ -177,6 +183,7 @@
             // 
             this.chkCreateFolders.AutoSize = true;
             this.chkCreateFolders.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateFolders.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkCreateFolders.Location = new System.Drawing.Point(268, 346);
             this.chkCreateFolders.Name = "chkCreateFolders";
             this.chkCreateFolders.Size = new System.Drawing.Size(250, 19);
@@ -189,6 +196,7 @@
             // 
             this.chkList.AutoSize = true;
             this.chkList.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkList.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkList.Location = new System.Drawing.Point(269, 246);
             this.chkList.Name = "chkList";
             this.chkList.Size = new System.Drawing.Size(44, 19);
@@ -200,6 +208,7 @@
             // 
             this.lblNumOfLists.AutoSize = true;
             this.lblNumOfLists.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumOfLists.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumOfLists.Location = new System.Drawing.Point(855, 176);
             this.lblNumOfLists.Name = "lblNumOfLists";
             this.lblNumOfLists.Size = new System.Drawing.Size(13, 15);
@@ -210,6 +219,7 @@
             // 
             this.lblNumOfFolders.AutoSize = true;
             this.lblNumOfFolders.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumOfFolders.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumOfFolders.Location = new System.Drawing.Point(854, 396);
             this.lblNumOfFolders.Name = "lblNumOfFolders";
             this.lblNumOfFolders.Size = new System.Drawing.Size(13, 15);
@@ -220,6 +230,7 @@
             // 
             this.lblNumLevels.AutoSize = true;
             this.lblNumLevels.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumLevels.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumLevels.Location = new System.Drawing.Point(854, 461);
             this.lblNumLevels.Name = "lblNumLevels";
             this.lblNumLevels.Size = new System.Drawing.Size(13, 15);

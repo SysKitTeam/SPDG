@@ -36,14 +36,12 @@ namespace Acceleratio.SPDG.UI
         {
             preventCloseMessage = true;
             RootForm.MovePrevious(this);
-            this.Close();
         }
 
         void btnNext_Click(object sender, EventArgs e)
         {
             preventCloseMessage = true;
             RootForm.MoveNext(this);
-            this.Close();
         }
 
         public override void loadData()
@@ -134,6 +132,16 @@ namespace Acceleratio.SPDG.UI
 
             this.Enabled = true;
             this.Cursor = Cursors.Default;
+        }
+
+        private void trackNumberOfUsers_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumUsers.Text = trackNumberOfUsers.Value.ToString();
+        }
+
+        private void trackNumberOfSecGroups_ValueChanged(object sender, EventArgs e)
+        {
+            lblGroups.Text = trackNumberOfSecGroups.Value.ToString();
         }
     }
 }

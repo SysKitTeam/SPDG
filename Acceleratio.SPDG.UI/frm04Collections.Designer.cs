@@ -61,6 +61,7 @@
             // 
             this.radioCreateNewSiteColl.AutoSize = true;
             this.radioCreateNewSiteColl.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioCreateNewSiteColl.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioCreateNewSiteColl.Location = new System.Drawing.Point(265, 155);
             this.radioCreateNewSiteColl.Name = "radioCreateNewSiteColl";
             this.radioCreateNewSiteColl.Size = new System.Drawing.Size(168, 19);
@@ -74,6 +75,7 @@
             // 
             this.radioUseExisting.AutoSize = true;
             this.radioUseExisting.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.radioUseExisting.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioUseExisting.Location = new System.Drawing.Point(261, 333);
             this.radioUseExisting.Name = "radioUseExisting";
             this.radioUseExisting.Size = new System.Drawing.Size(166, 19);
@@ -112,6 +114,7 @@
             // 
             this.lblCreateSiteColls.AutoSize = true;
             this.lblCreateSiteColls.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblCreateSiteColls.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblCreateSiteColls.Location = new System.Drawing.Point(819, 183);
             this.lblCreateSiteColls.Name = "lblCreateSiteColls";
             this.lblCreateSiteColls.Size = new System.Drawing.Size(13, 15);
@@ -132,6 +135,7 @@
             this.label3.AutoSize = true;
             this.label3.Enabled = false;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label3.Location = new System.Drawing.Point(261, 258);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 15);
@@ -152,6 +156,7 @@
             this.label1.AutoSize = true;
             this.label1.Enabled = false;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label1.Location = new System.Drawing.Point(261, 232);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 15);

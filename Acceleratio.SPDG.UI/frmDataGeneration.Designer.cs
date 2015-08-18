@@ -61,6 +61,7 @@
             // lblOverview
             // 
             this.lblOverview.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblOverview.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblOverview.Location = new System.Drawing.Point(118, 234);
             this.lblOverview.Name = "lblOverview";
             this.lblOverview.Size = new System.Drawing.Size(528, 17);
@@ -70,6 +71,7 @@
             // lblDetails
             // 
             this.lblDetails.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblDetails.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblDetails.Location = new System.Drawing.Point(118, 324);
             this.lblDetails.Name = "lblDetails";
             this.lblDetails.Size = new System.Drawing.Size(528, 17);
@@ -85,10 +87,12 @@
             // 
             // btnOpenLog
             // 
+            this.btnOpenLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenLog.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnOpenLog.ForeColor = System.Drawing.Color.White;
             this.btnOpenLog.Location = new System.Drawing.Point(665, 423);
             this.btnOpenLog.Name = "btnOpenLog";
-            this.btnOpenLog.Size = new System.Drawing.Size(143, 23);
+            this.btnOpenLog.Size = new System.Drawing.Size(143, 31);
             this.btnOpenLog.TabIndex = 12;
             this.btnOpenLog.Text = "Open Log file";
             this.btnOpenLog.UseVisualStyleBackColor = true;

@@ -77,6 +77,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label3.Location = new System.Drawing.Point(265, 316);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(208, 15);
@@ -96,6 +97,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label2.Location = new System.Drawing.Point(266, 189);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(224, 15);
@@ -106,6 +108,7 @@
             // 
             this.chkCreateViews.AutoSize = true;
             this.chkCreateViews.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateViews.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkCreateViews.Location = new System.Drawing.Point(269, 281);
             this.chkCreateViews.Name = "chkCreateViews";
             this.chkCreateViews.Size = new System.Drawing.Size(93, 19);
@@ -118,6 +121,7 @@
             // 
             this.chkCreateColumns.AutoSize = true;
             this.chkCreateColumns.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkCreateColumns.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkCreateColumns.Location = new System.Drawing.Point(269, 154);
             this.chkCreateColumns.Name = "chkCreateColumns";
             this.chkCreateColumns.Size = new System.Drawing.Size(109, 19);
@@ -130,6 +134,7 @@
             // 
             this.lblNumColumns.AutoSize = true;
             this.lblNumColumns.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumColumns.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumColumns.Location = new System.Drawing.Point(817, 209);
             this.lblNumColumns.Name = "lblNumColumns";
             this.lblNumColumns.Size = new System.Drawing.Size(13, 15);
@@ -140,6 +145,7 @@
             // 
             this.lblNumViews.AutoSize = true;
             this.lblNumViews.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumViews.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumViews.Location = new System.Drawing.Point(819, 335);
             this.lblNumViews.Name = "lblNumViews";
             this.lblNumViews.Size = new System.Drawing.Size(13, 15);

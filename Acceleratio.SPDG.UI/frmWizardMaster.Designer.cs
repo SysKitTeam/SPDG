@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWizardMaster));
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
@@ -44,19 +44,12 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Orange;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(921, 93);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // lblTitle
             // 
@@ -154,6 +147,7 @@
             this.saveDefinitionToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -161,6 +155,7 @@
             // 
             // newDefinitionToolStripMenuItem
             // 
+            this.newDefinitionToolStripMenuItem.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.newDefinitionToolStripMenuItem.Name = "newDefinitionToolStripMenuItem";
             this.newDefinitionToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.newDefinitionToolStripMenuItem.Text = "New Definition";
@@ -168,6 +163,7 @@
             // 
             // loadDefinitionToolStripMenuItem
             // 
+            this.loadDefinitionToolStripMenuItem.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.loadDefinitionToolStripMenuItem.Name = "loadDefinitionToolStripMenuItem";
             this.loadDefinitionToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.loadDefinitionToolStripMenuItem.Text = "Load Definition";
@@ -175,6 +171,7 @@
             // 
             // saveDefinitionToolStripMenuItem
             // 
+            this.saveDefinitionToolStripMenuItem.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.saveDefinitionToolStripMenuItem.Name = "saveDefinitionToolStripMenuItem";
             this.saveDefinitionToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveDefinitionToolStripMenuItem.Text = "Save Definition";
@@ -187,6 +184,7 @@
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitToolStripMenuItem.Text = "Exit";
@@ -199,12 +197,33 @@
             // 
             this.saveFileDialog1.Filter = "(*.xml)|*.xml";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Orange;
+            this.pictureBox2.Image = global::Acceleratio.SPDG.UI.Properties.Resources.Ilustracija;
+            this.pictureBox2.Location = new System.Drawing.Point(595, 31);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(314, 86);
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Orange;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(921, 93);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmWizardMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(921, 644);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnNext);
@@ -213,6 +232,7 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -220,9 +240,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SharePoint Data Generator";
             this.LocationChanged += new System.EventHandler(this.frmWizardMaster_LocationChanged);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,5 +267,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem newDefinitionToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

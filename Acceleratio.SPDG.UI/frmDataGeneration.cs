@@ -26,6 +26,10 @@ namespace Acceleratio.SPDG.UI
 
             base.lblTitle.Text = "Data generation in progress";
             base.lblDescription.Text = "SharePoint data based on prepared definition is being generated ...";
+            btnOpenLog.BackColor = System.Drawing.ColorTranslator.FromHtml("#898989");
+
+            progressOverall.ForeColor = System.Drawing.Color.FromArgb(253, 163, 36);
+            progressDetails.ForeColor = System.Drawing.Color.FromArgb(253, 163, 36);
 
             btnNext.Visible = false;
             btnBack.Visible = false;

@@ -66,6 +66,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label2.Location = new System.Drawing.Point(265, 155);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(143, 15);
@@ -96,6 +97,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label3.Location = new System.Drawing.Point(268, 254);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(170, 15);
@@ -106,6 +108,7 @@
             // 
             this.lblNumSites.AutoSize = true;
             this.lblNumSites.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumSites.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumSites.Location = new System.Drawing.Point(818, 181);
             this.lblNumSites.Name = "lblNumSites";
             this.lblNumSites.Size = new System.Drawing.Size(13, 15);
@@ -116,6 +119,7 @@
             // 
             this.lblNumberLevels.AutoSize = true;
             this.lblNumberLevels.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNumberLevels.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumberLevels.Location = new System.Drawing.Point(819, 277);
             this.lblNumberLevels.Name = "lblNumberLevels";
             this.lblNumberLevels.Size = new System.Drawing.Size(13, 15);

@@ -42,14 +42,12 @@ namespace Acceleratio.SPDG.UI
         {
             preventCloseMessage = true;
             RootForm.MovePrevious(this);
-            this.Close();
         }
 
         void btnNext_Click(object sender, EventArgs e)
         {
             preventCloseMessage = true;
             RootForm.MoveNext(this);
-            this.Close();
         }
 
         public override void loadData()
