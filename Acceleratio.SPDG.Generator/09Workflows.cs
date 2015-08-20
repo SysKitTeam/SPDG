@@ -39,94 +39,101 @@ namespace Acceleratio.SPDG.Generator
             //Site Collection feature for more workflows 0af5989a-3aea-4519-8ab0-85d91abe39ff
             //SPFeatureDefinition featureDef = SPFarm.Local.FeatureDefinitions.First(x => x.DisplayName.Contains("SPDG Worfklow"));
 
-            foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
+            try
             {
-                using (SPSite siteColl = new SPSite(siteCollInfo.URL))
+                foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
                 {
-                    // Activating out-of-the-box workflows
-                    if( siteColl.Features[ new Guid("0af5989a-3aea-4519-8ab0-85d91abe39ff") ] == null )
+                    using (SPSite siteColl = new SPSite(siteCollInfo.URL))
                     {
-                        siteColl.Features.Add(new Guid("0af5989a-3aea-4519-8ab0-85d91abe39ff"));
-                    }
-
-                    foreach (SiteInfo siteInfo in siteCollInfo.Sites)
-                    {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
+                        // Activating out-of-the-box workflows
+                        if( siteColl.Features[ new Guid("0af5989a-3aea-4519-8ab0-85d91abe39ff") ] == null )
                         {
+                            siteColl.Features.Add(new Guid("0af5989a-3aea-4519-8ab0-85d91abe39ff"));
+                        }
 
-                           // web.Features.Add(new Guid("17463962-06a6-4aba-b49f-2c13222f6213"));
-
-                            int workflowCount = web.WorkflowTemplates.Count;
-
-                            foreach (ListInfo listInfo in siteInfo.Lists)
+                        foreach (SiteInfo siteInfo in siteCollInfo.Sites)
+                        {
+                            using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
                             {
-                                try
-                                {
-                                    SPList list = web.Lists[listInfo.Name];
-                                    int randomNumberOfWF = SampleData.GetRandomNumber(0,2);
-                                    List<int> addedTemplates = new List<int>();
 
-                                    for(int i=0; i<randomNumberOfWF; i++)
+                               // web.Features.Add(new Guid("17463962-06a6-4aba-b49f-2c13222f6213"));
+
+                                int workflowCount = web.WorkflowTemplates.Count;
+
+                                foreach (ListInfo listInfo in siteInfo.Lists)
+                                {
+                                    try
                                     {
-                                        progressDetail("Adding Workflow Association to list '" + web.Url + "/" + list.RootFolder.Url + "'");
-                                        int templateIndex = SampleData.GetRandomNumber(0, 5);
+                                        SPList list = web.Lists[listInfo.Name];
+                                        int randomNumberOfWF = SampleData.GetRandomNumber(0,2);
+                                        List<int> addedTemplates = new List<int>();
 
-                                        if(addedTemplates.Any(x => x == templateIndex ))
+                                        for(int i=0; i<randomNumberOfWF; i++)
                                         {
-                                            continue;
-                                        }
+                                            progressDetail("Adding Workflow Association to list '" + web.Url + "/" + list.RootFolder.Url + "'");
+                                            int templateIndex = SampleData.GetRandomNumber(0, 5);
+
+                                            if(addedTemplates.Any(x => x == templateIndex ))
+                                            {
+                                                continue;
+                                            }
                                         
-                                        SPWorkflowTemplate workflowTemplate = web.WorkflowTemplates[templateIndex];
+                                            SPWorkflowTemplate workflowTemplate = web.WorkflowTemplates[templateIndex];
 
-                                        SPList wftasks = web.Lists.TryGetList("Workflow Tasks");
-                                        if(  wftasks == null )
-                                        {
-                                            //Check if Workflow List exists
-                                            Guid listGuid = web.Lists.Add(
-                                                "Workflow Tasks",
-                                                string.Empty,
-                                                SPListTemplateType.Tasks);
-                                                wftasks = web.Lists.GetList(listGuid, false);
-                                        }
+                                            SPList wftasks = web.Lists.TryGetList("Workflow Tasks");
+                                            if(  wftasks == null )
+                                            {
+                                                //Check if Workflow List exists
+                                                Guid listGuid = web.Lists.Add(
+                                                    "Workflow Tasks",
+                                                    string.Empty,
+                                                    SPListTemplateType.Tasks);
+                                                    wftasks = web.Lists.GetList(listGuid, false);
+                                            }
 
-                                        SPList wfhistory = web.Lists.TryGetList("Workflow History");
-                                        if(  wfhistory == null )
-                                        {
-                                            //Check if Workflow List exists
-                                            Guid listGuid = web.Lists.Add(
-                                                "Workflow History",
-                                                string.Empty,
-                                                SPListTemplateType.WorkflowHistory);
-                                                wfhistory = web.Lists.GetList(listGuid, false);
-                                                wfhistory.Hidden = true;
-                                                wfhistory.Update();
-                                        }
+                                            SPList wfhistory = web.Lists.TryGetList("Workflow History");
+                                            if(  wfhistory == null )
+                                            {
+                                                //Check if Workflow List exists
+                                                Guid listGuid = web.Lists.Add(
+                                                    "Workflow History",
+                                                    string.Empty,
+                                                    SPListTemplateType.WorkflowHistory);
+                                                    wfhistory = web.Lists.GetList(listGuid, false);
+                                                    wfhistory.Hidden = true;
+                                                    wfhistory.Update();
+                                            }
                                         
 
-                                        // create the association
-                                        SPWorkflowAssociation assoc =
-                                            SPWorkflowAssociation.CreateListAssociation(
-                                            workflowTemplate, workflowTemplate.Name,
-                                            wftasks, wfhistory
-                                            );
-                                        assoc.AllowManual = true;
+                                            // create the association
+                                            SPWorkflowAssociation assoc =
+                                                SPWorkflowAssociation.CreateListAssociation(
+                                                workflowTemplate, workflowTemplate.Name,
+                                                wftasks, wfhistory
+                                                );
+                                            assoc.AllowManual = true;
 
-                                        //apply the association to the list
-                                        list.WorkflowAssociations.Add(assoc);
+                                            //apply the association to the list
+                                            list.WorkflowAssociations.Add(assoc);
 
-                                        addedTemplates.Add(templateIndex);
+                                            addedTemplates.Add(templateIndex);
+                                        }
+
                                     }
+                                    catch( Exception ex )
+                                    {
+                                        Errors.Log(ex);
+                                    }
+                                }
 
-                                }
-                                catch( Exception ex )
-                                {
-                                    Errors.Log(ex);
-                                }
                             }
-
                         }
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                Errors.Log(ex);
             }
         }
     }

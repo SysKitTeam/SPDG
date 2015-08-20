@@ -91,6 +91,8 @@ namespace Acceleratio.SPDG.UI
             else
             {
                 groupBox1.Enabled = false;
+                Common.WorkingDefinition.NumberOfUsersToCreate = 0;
+                Common.WorkingDefinition.NumberOfSecurityGroupsToCreate = 0;
             }
         }
 

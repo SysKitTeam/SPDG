@@ -40,7 +40,8 @@ namespace Acceleratio.SPDG.Generator
                         addQuickLaunch(web);
 
                         SiteInfo siteInfo = new SiteInfo();
-                        siteInfo.URL = web.GetServerRelativeUrlFromUrl(web.Url);
+                        siteInfo.URL = web.Url;
+                        //siteInfo.URL = web.GetServerRelativeUrlFromUrl(web.Url);
                         Guid siteID = web.ID;
                         siteInfo.ID = siteID;
                         siteCollInfo.Sites.Add(siteInfo);
