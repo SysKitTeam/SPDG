@@ -44,7 +44,7 @@ namespace Acceleratio.SPDG.Generator
                                 {
                                     getNextTemplateType();
                                     string listName = findAvailableListName(web);
-                                    progressDetail("Crating List '" + web.Url +  "/" + listName + "'");
+                                    progressDetail("Crating List '" + listName + "' in site '" + web.Url + "'");
                                     Guid listGuid = web.Lists.Add(listName, string.Empty, lastTemplateType);
 
                                     SPList list = web.Lists.GetList(listGuid, false);

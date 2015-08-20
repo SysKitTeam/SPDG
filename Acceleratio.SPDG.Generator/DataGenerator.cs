@@ -50,7 +50,7 @@ namespace Acceleratio.SPDG.Generator
             try
             {
                 bgWorker = backgroundWorker;
-                SessionID = "Session " + DateTime.Now.ToString("yy-MM-dd") + " " +  DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString() ;
+                
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION STARTS ***");
 
                 //Create AD users and groups

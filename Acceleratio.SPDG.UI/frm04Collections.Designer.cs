@@ -89,6 +89,7 @@
             // 
             this.trackNumSiteColls.LargeChange = 1;
             this.trackNumSiteColls.Location = new System.Drawing.Point(256, 180);
+            this.trackNumSiteColls.Maximum = 20;
             this.trackNumSiteColls.Name = "trackNumSiteColls";
             this.trackNumSiteColls.Size = new System.Drawing.Size(550, 45);
             this.trackNumSiteColls.TabIndex = 11;

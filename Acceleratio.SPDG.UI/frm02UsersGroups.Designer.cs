@@ -31,6 +31,8 @@
             this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
             this.chkGenerateUsers = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblGroups = new System.Windows.Forms.Label();
+            this.lblNumUsers = new System.Windows.Forms.Label();
             this.trackNumberOfSecGroups = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.trackNumberOfUsers = new System.Windows.Forms.TrackBar();
@@ -39,8 +41,6 @@
             this.cboOrganizationalUnit = new System.Windows.Forms.ComboBox();
             this.cboDomains = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblNumUsers = new System.Windows.Forms.Label();
-            this.lblGroups = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).BeginInit();
@@ -101,10 +101,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Users";
             // 
+            // lblGroups
+            // 
+            this.lblGroups.AutoSize = true;
+            this.lblGroups.Location = new System.Drawing.Point(567, 228);
+            this.lblGroups.Name = "lblGroups";
+            this.lblGroups.Size = new System.Drawing.Size(13, 15);
+            this.lblGroups.TabIndex = 7;
+            this.lblGroups.Text = "0";
+            // 
+            // lblNumUsers
+            // 
+            this.lblNumUsers.AutoSize = true;
+            this.lblNumUsers.Location = new System.Drawing.Point(567, 144);
+            this.lblNumUsers.Name = "lblNumUsers";
+            this.lblNumUsers.Size = new System.Drawing.Size(13, 15);
+            this.lblNumUsers.TabIndex = 6;
+            this.lblNumUsers.Text = "0";
+            // 
             // trackNumberOfSecGroups
             // 
             this.trackNumberOfSecGroups.LargeChange = 1;
             this.trackNumberOfSecGroups.Location = new System.Drawing.Point(10, 225);
+            this.trackNumberOfSecGroups.Maximum = 20;
             this.trackNumberOfSecGroups.Name = "trackNumberOfSecGroups";
             this.trackNumberOfSecGroups.Size = new System.Drawing.Size(546, 45);
             this.trackNumberOfSecGroups.TabIndex = 5;
@@ -123,6 +142,7 @@
             // 
             this.trackNumberOfUsers.LargeChange = 1;
             this.trackNumberOfUsers.Location = new System.Drawing.Point(10, 141);
+            this.trackNumberOfUsers.Maximum = 100;
             this.trackNumberOfUsers.Name = "trackNumberOfUsers";
             this.trackNumberOfUsers.Size = new System.Drawing.Size(546, 45);
             this.trackNumberOfUsers.TabIndex = 3;
@@ -153,7 +173,7 @@
             this.cboOrganizationalUnit.FormattingEnabled = true;
             this.cboOrganizationalUnit.Location = new System.Drawing.Point(18, 65);
             this.cboOrganizationalUnit.Name = "cboOrganizationalUnit";
-            this.cboOrganizationalUnit.Size = new System.Drawing.Size(445, 23);
+            this.cboOrganizationalUnit.Size = new System.Drawing.Size(531, 23);
             this.cboOrganizationalUnit.TabIndex = 0;
             // 
             // cboDomains
@@ -162,7 +182,7 @@
             this.cboDomains.FormattingEnabled = true;
             this.cboDomains.Location = new System.Drawing.Point(580, 152);
             this.cboDomains.Name = "cboDomains";
-            this.cboDomains.Size = new System.Drawing.Size(151, 23);
+            this.cboDomains.Size = new System.Drawing.Size(237, 23);
             this.cboDomains.TabIndex = 10;
             this.cboDomains.Leave += new System.EventHandler(this.cboDomains_Leave);
             // 
@@ -176,24 +196,6 @@
             this.label1.Size = new System.Drawing.Size(300, 15);
             this.label1.TabIndex = 11;
             this.label1.Text = "Use this domain to create SharePoint users and groups: ";
-            // 
-            // lblNumUsers
-            // 
-            this.lblNumUsers.AutoSize = true;
-            this.lblNumUsers.Location = new System.Drawing.Point(567, 144);
-            this.lblNumUsers.Name = "lblNumUsers";
-            this.lblNumUsers.Size = new System.Drawing.Size(13, 15);
-            this.lblNumUsers.TabIndex = 6;
-            this.lblNumUsers.Text = "0";
-            // 
-            // lblGroups
-            // 
-            this.lblGroups.AutoSize = true;
-            this.lblGroups.Location = new System.Drawing.Point(567, 228);
-            this.lblGroups.Name = "lblGroups";
-            this.lblGroups.Size = new System.Drawing.Size(13, 15);
-            this.lblGroups.TabIndex = 7;
-            this.lblGroups.Text = "0";
             // 
             // frm02UsersGroups
             // 

@@ -49,6 +49,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.trackPermissionsPerObject = new System.Windows.Forms.TrackBar();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblPermissionsPerObject = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.trackPermissionsPerObject)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBack
@@ -240,7 +244,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label10.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label10.Location = new System.Drawing.Point(283, 413);
+            this.label10.Location = new System.Drawing.Point(283, 410);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(251, 15);
             this.label10.TabIndex = 27;
@@ -290,11 +294,49 @@
             this.label13.TabIndex = 31;
             this.label13.Text = "Create unique permissions for";
             // 
+            // trackPermissionsPerObject
+            // 
+            this.trackPermissionsPerObject.Enabled = false;
+            this.trackPermissionsPerObject.LargeChange = 1;
+            this.trackPermissionsPerObject.Location = new System.Drawing.Point(278, 482);
+            this.trackPermissionsPerObject.Maximum = 30;
+            this.trackPermissionsPerObject.Minimum = 1;
+            this.trackPermissionsPerObject.Name = "trackPermissionsPerObject";
+            this.trackPermissionsPerObject.Size = new System.Drawing.Size(528, 45);
+            this.trackPermissionsPerObject.TabIndex = 34;
+            this.trackPermissionsPerObject.Value = 1;
+            this.trackPermissionsPerObject.ValueChanged += new System.EventHandler(this.trackPermissionsPerObject_ValueChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label14.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label14.Location = new System.Drawing.Point(283, 462);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(362, 15);
+            this.label14.TabIndex = 35;
+            this.label14.Text = "Number of permissions to add to unique permissions list per object";
+            // 
+            // lblPermissionsPerObject
+            // 
+            this.lblPermissionsPerObject.AutoSize = true;
+            this.lblPermissionsPerObject.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblPermissionsPerObject.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblPermissionsPerObject.Location = new System.Drawing.Point(813, 485);
+            this.lblPermissionsPerObject.Name = "lblPermissionsPerObject";
+            this.lblPermissionsPerObject.Size = new System.Drawing.Size(13, 15);
+            this.lblPermissionsPerObject.TabIndex = 36;
+            this.lblPermissionsPerObject.Text = "1";
+            // 
             // frm11Permissions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 644);
+            this.Controls.Add(this.lblPermissionsPerObject);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.trackPermissionsPerObject);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -345,6 +387,10 @@
             this.Controls.SetChildIndex(this.label11, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.label13, 0);
+            this.Controls.SetChildIndex(this.trackPermissionsPerObject, 0);
+            this.Controls.SetChildIndex(this.label14, 0);
+            this.Controls.SetChildIndex(this.lblPermissionsPerObject, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.trackPermissionsPerObject)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,5 +419,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TrackBar trackPermissionsPerObject;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblPermissionsPerObject;
     }
 }

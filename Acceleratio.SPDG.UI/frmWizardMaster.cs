@@ -61,14 +61,14 @@ namespace Acceleratio.SPDG.UI
             {
                 Common.DeserializeDefinition(openFileDialog1.FileName);
 
-                if( this is frm01Connect)
+                if (this is frm01Connect)
                 {
-                    ((frm01Connect)this).loadData();
-                } 
+                    ((frm01Connect)this).MoveAt(12, null);
+                }
                 else
                 {
-                    RootForm.MoveAt(1, this);
-                    RootForm.loadData();
+                    RootForm.MoveAt(12, this);
+                    //RootForm.loadData();
                 }
                 
             }
@@ -115,6 +115,14 @@ namespace Acceleratio.SPDG.UI
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmWizardMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if( !Common.PreventAppClosing)
+            {
+                Application.Exit();
+            }
         }
     }
 }

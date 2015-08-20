@@ -81,7 +81,7 @@
             this.trackMaxNumberContentTypes.LargeChange = 1;
             this.trackMaxNumberContentTypes.Location = new System.Drawing.Point(257, 214);
             this.trackMaxNumberContentTypes.Name = "trackMaxNumberContentTypes";
-            this.trackMaxNumberContentTypes.Size = new System.Drawing.Size(546, 45);
+            this.trackMaxNumberContentTypes.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberContentTypes.TabIndex = 31;
             this.trackMaxNumberContentTypes.ValueChanged += new System.EventHandler(this.trackMaxNumberContentTypes_ValueChanged);
             // 
@@ -113,7 +113,7 @@
             this.trackAddSiteColumns.LargeChange = 1;
             this.trackAddSiteColumns.Location = new System.Drawing.Point(257, 302);
             this.trackAddSiteColumns.Name = "trackAddSiteColumns";
-            this.trackAddSiteColumns.Size = new System.Drawing.Size(545, 45);
+            this.trackAddSiteColumns.Size = new System.Drawing.Size(543, 45);
             this.trackAddSiteColumns.TabIndex = 33;
             this.trackAddSiteColumns.ValueChanged += new System.EventHandler(this.trackAddSiteColumns_ValueChanged);
             // 

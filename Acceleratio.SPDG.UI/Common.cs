@@ -42,6 +42,7 @@ namespace Acceleratio.SPDG.UI
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         public static extern bool CloseHandle(IntPtr handle);
 
+        public static bool PreventAppClosing { get; set; }
         
 
         public static void SerializeDefinition(string path)
@@ -90,6 +91,7 @@ namespace Acceleratio.SPDG.UI
             WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 0;
             WorkingDefinition.MaxNumberOfViewsPerList = 0;
             WorkingDefinition.CreateNewWebApplications = 0;
+            WorkingDefinition.PermissionsPerObject = 1;
             
 
         }

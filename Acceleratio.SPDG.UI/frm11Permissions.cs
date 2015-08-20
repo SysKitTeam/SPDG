@@ -57,11 +57,11 @@ namespace Acceleratio.SPDG.UI
             txtPercentListItems.Text = Common.WorkingDefinition.PermissionsPercentOfListItems.ToString();
             txtPercentDirectlyToUsers.Text = Common.WorkingDefinition.PermissionsPercentForUsers.ToString();
             txtPercentGroupCases.Text = Common.WorkingDefinition.PermissionsPercentForSPGroups.ToString();
+            trackPermissionsPerObject.Value = Common.WorkingDefinition.PermissionsPerObject;
         }
 
         public override bool saveData()
         {
-   
             foreach( Control ctrl in this.Controls)
             {
                 if(ctrl is TextBox)
@@ -87,6 +87,7 @@ namespace Acceleratio.SPDG.UI
             Common.WorkingDefinition.PermissionsPercentOfListItems = Convert.ToInt32(txtPercentListItems.Text);
             Common.WorkingDefinition.PermissionsPercentForUsers = Convert.ToInt32(txtPercentDirectlyToUsers.Text);
             Common.WorkingDefinition.PermissionsPercentForSPGroups = Convert.ToInt32(txtPercentGroupCases.Text);
+            Common.WorkingDefinition.PermissionsPerObject = trackPermissionsPerObject.Value;
             return true;
         }
 
@@ -94,6 +95,7 @@ namespace Acceleratio.SPDG.UI
         {
             if(chkAssignPermissions.Checked)
             {
+                trackPermissionsPerObject.Enabled = true;
                 txtPercentSites.Enabled = true;
 
                 if (Common.WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite > 0)
@@ -116,6 +118,7 @@ namespace Acceleratio.SPDG.UI
             }
             else
             {
+                trackPermissionsPerObject.Enabled = false;
                 txtPercentSites.Enabled = false;
                 txtPercentLists.Enabled = false;
                 txtPercentLibFolders.Enabled = false;
@@ -132,6 +135,11 @@ namespace Acceleratio.SPDG.UI
                     }
                 }
             }
+        }
+
+        private void trackPermissionsPerObject_ValueChanged(object sender, EventArgs e)
+        {
+            lblPermissionsPerObject.Text = trackPermissionsPerObject.Value.ToString();
         }
     }
 }

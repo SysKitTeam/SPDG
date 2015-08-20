@@ -63,11 +63,24 @@ namespace Acceleratio.SPDG.UI
 
         public override bool saveData()
         {
+            if (Common.WorkingDefinition.LibTypeDocument && trackMaxNumberOfItems.Value > 0 &&
+                    (chkDOCX.Checked == false && chkXLSX.Checked == false && chkPDF.Checked == false && chkImages.Checked == false))
+            {
+                MessageBox.Show("Select at least one document type to prefil document library!");
+                return false;
+            }
+
+            if(trackMinDocSize.Value > 20 && trackMaxDocSize.Value == 0)
+            {
+                MessageBox.Show("Minimum document size cannot be greater than maximum document size!");
+                return false;
+            }
+
             Common.WorkingDefinition.PrefilListAndLibrariesWithItems = chkPrefil.Checked;
             Common.WorkingDefinition.MaxNumberofItemsToGenerate = trackMaxNumberOfItems.Value;
             Common.WorkingDefinition.IncludeDocTypeDOCX = chkDOCX.Checked;
-            Common.WorkingDefinition.IncludeDocTypeXLSX= chkXLSX.Checked;
-            Common.WorkingDefinition.IncludeDocTypePDF= chkPDF.Checked;
+            Common.WorkingDefinition.IncludeDocTypeXLSX = chkXLSX.Checked;
+            Common.WorkingDefinition.IncludeDocTypePDF = chkPDF.Checked;
             Common.WorkingDefinition.IncludeDocTypeImages = chkImages.Checked;
             Common.WorkingDefinition.MinDocumentSizeKB = trackMinDocSize.Value;
             Common.WorkingDefinition.MaxDocumentSizeMB  = trackMaxDocSize.Value;

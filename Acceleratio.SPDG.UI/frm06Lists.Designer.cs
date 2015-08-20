@@ -76,8 +76,9 @@
             // 
             this.trackMaxNumberListLibraries.LargeChange = 1;
             this.trackMaxNumberListLibraries.Location = new System.Drawing.Point(260, 173);
+            this.trackMaxNumberListLibraries.Maximum = 100;
             this.trackMaxNumberListLibraries.Name = "trackMaxNumberListLibraries";
-            this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(588, 45);
+            this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberListLibraries.TabIndex = 14;
             this.trackMaxNumberListLibraries.ValueChanged += new System.EventHandler(this.trackMaxNumberListLibraries_ValueChanged);
             // 
@@ -95,8 +96,9 @@
             // 
             this.trackMaxFoldersInLib.LargeChange = 1;
             this.trackMaxFoldersInLib.Location = new System.Drawing.Point(259, 393);
+            this.trackMaxFoldersInLib.Maximum = 20;
             this.trackMaxFoldersInLib.Name = "trackMaxFoldersInLib";
-            this.trackMaxFoldersInLib.Size = new System.Drawing.Size(589, 45);
+            this.trackMaxFoldersInLib.Size = new System.Drawing.Size(543, 45);
             this.trackMaxFoldersInLib.TabIndex = 16;
             this.trackMaxFoldersInLib.ValueChanged += new System.EventHandler(this.trackMaxFoldersInLib_ValueChanged);
             // 
@@ -116,7 +118,7 @@
             this.trackMaxNumberNestedFolders.LargeChange = 1;
             this.trackMaxNumberNestedFolders.Location = new System.Drawing.Point(259, 457);
             this.trackMaxNumberNestedFolders.Name = "trackMaxNumberNestedFolders";
-            this.trackMaxNumberNestedFolders.Size = new System.Drawing.Size(589, 45);
+            this.trackMaxNumberNestedFolders.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberNestedFolders.TabIndex = 18;
             this.trackMaxNumberNestedFolders.ValueChanged += new System.EventHandler(this.trackMaxNumberNestedFolders_ValueChanged);
             // 
@@ -209,7 +211,7 @@
             this.lblNumOfLists.AutoSize = true;
             this.lblNumOfLists.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblNumOfLists.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblNumOfLists.Location = new System.Drawing.Point(855, 176);
+            this.lblNumOfLists.Location = new System.Drawing.Point(810, 176);
             this.lblNumOfLists.Name = "lblNumOfLists";
             this.lblNumOfLists.Size = new System.Drawing.Size(13, 15);
             this.lblNumOfLists.TabIndex = 25;
@@ -220,7 +222,7 @@
             this.lblNumOfFolders.AutoSize = true;
             this.lblNumOfFolders.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblNumOfFolders.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblNumOfFolders.Location = new System.Drawing.Point(854, 396);
+            this.lblNumOfFolders.Location = new System.Drawing.Point(810, 396);
             this.lblNumOfFolders.Name = "lblNumOfFolders";
             this.lblNumOfFolders.Size = new System.Drawing.Size(13, 15);
             this.lblNumOfFolders.TabIndex = 26;
@@ -231,7 +233,7 @@
             this.lblNumLevels.AutoSize = true;
             this.lblNumLevels.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblNumLevels.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblNumLevels.Location = new System.Drawing.Point(854, 461);
+            this.lblNumLevels.Location = new System.Drawing.Point(810, 461);
             this.lblNumLevels.Name = "lblNumLevels";
             this.lblNumLevels.Size = new System.Drawing.Size(13, 15);
             this.lblNumLevels.TabIndex = 27;

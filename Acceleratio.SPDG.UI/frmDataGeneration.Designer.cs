@@ -92,7 +92,7 @@
             this.btnOpenLog.ForeColor = System.Drawing.Color.White;
             this.btnOpenLog.Location = new System.Drawing.Point(665, 423);
             this.btnOpenLog.Name = "btnOpenLog";
-            this.btnOpenLog.Size = new System.Drawing.Size(143, 31);
+            this.btnOpenLog.Size = new System.Drawing.Size(143, 26);
             this.btnOpenLog.TabIndex = 12;
             this.btnOpenLog.Text = "Open Log file";
             this.btnOpenLog.UseVisualStyleBackColor = true;

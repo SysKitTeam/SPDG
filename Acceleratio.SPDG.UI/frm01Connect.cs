@@ -25,7 +25,7 @@ namespace Acceleratio.SPDG.UI
             btnNext.Click += btnNext_Click;
             ucSteps1.showStep(1);
             this.Text = Common.APP_TITLE;
-            
+            DataGenerator.SessionID = "Session " + DateTime.Now.ToString("yy-MM-dd") + " " + DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString();
 
             if(appStart)
             {
@@ -204,7 +204,10 @@ namespace Acceleratio.SPDG.UI
             }
             else
             {
+                Common.PreventAppClosing = true;
                 ((Form)fromForm).Close();
+                Common.PreventAppClosing = false;
+
             }
             
         }
@@ -335,7 +338,9 @@ namespace Acceleratio.SPDG.UI
                 frm.Show();
             }
 
+            Common.PreventAppClosing = true;
             ((Form)fromForm).Close();
+            Common.PreventAppClosing = false;
         }
 
         internal void MoveAt(int stepNumber, Form currentForm)
@@ -541,11 +546,11 @@ namespace Acceleratio.SPDG.UI
         {
             try
             {
-                if (SPFarm.Local == null)
-                {
-                    MessageBox.Show("SharePoint is not installed on current machine!");
-                    return false;
-                }
+                //if (SPFarm.Local == null)
+                //{
+                //    MessageBox.Show("SharePoint is not installed on current machine!");
+                //    return false;
+                //}
 
                 if (radioCustomCredentials.Checked && (txtUserName.Text == string.Empty || txtPassword.Text == string.Empty || txtDomain.Text == string.Empty))
                 {

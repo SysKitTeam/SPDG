@@ -66,5 +66,6 @@ namespace Acceleratio.SPDG.Generator
         public int PermissionsPercentOfListItems { get; set; }
         public int PermissionsPercentForUsers { get; set; }
         public int PermissionsPercentForSPGroups { get; set; }
+        public int PermissionsPerObject { get; set; }
     }
 }

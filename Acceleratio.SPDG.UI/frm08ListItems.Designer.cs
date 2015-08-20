@@ -90,7 +90,7 @@
             this.trackMaxNumberOfItems.Location = new System.Drawing.Point(257, 208);
             this.trackMaxNumberOfItems.Maximum = 100;
             this.trackMaxNumberOfItems.Name = "trackMaxNumberOfItems";
-            this.trackMaxNumberOfItems.Size = new System.Drawing.Size(546, 45);
+            this.trackMaxNumberOfItems.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberOfItems.TabIndex = 20;
             this.trackMaxNumberOfItems.TickFrequency = 5;
             this.trackMaxNumberOfItems.ValueChanged += new System.EventHandler(this.trackMaxNumberOfItems_ValueChanged);
@@ -172,7 +172,7 @@
             this.trackMinDocSize.Maximum = 1000;
             this.trackMinDocSize.Minimum = 20;
             this.trackMinDocSize.Name = "trackMinDocSize";
-            this.trackMinDocSize.Size = new System.Drawing.Size(546, 45);
+            this.trackMinDocSize.Size = new System.Drawing.Size(543, 45);
             this.trackMinDocSize.TabIndex = 27;
             this.trackMinDocSize.TickFrequency = 100;
             this.trackMinDocSize.Value = 20;
@@ -194,7 +194,7 @@
             this.trackMaxDocSize.LargeChange = 1;
             this.trackMaxDocSize.Location = new System.Drawing.Point(257, 484);
             this.trackMaxDocSize.Name = "trackMaxDocSize";
-            this.trackMaxDocSize.Size = new System.Drawing.Size(546, 45);
+            this.trackMaxDocSize.Size = new System.Drawing.Size(543, 45);
             this.trackMaxDocSize.TabIndex = 29;
             this.trackMaxDocSize.ValueChanged += new System.EventHandler(this.trackMaxDocSize_ValueChanged);
             // 
@@ -214,7 +214,7 @@
             this.lblNumItems.AutoSize = true;
             this.lblNumItems.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblNumItems.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblNumItems.Location = new System.Drawing.Point(811, 212);
+            this.lblNumItems.Location = new System.Drawing.Point(808, 212);
             this.lblNumItems.Name = "lblNumItems";
             this.lblNumItems.Size = new System.Drawing.Size(13, 15);
             this.lblNumItems.TabIndex = 30;
@@ -225,7 +225,7 @@
             this.lblMinSize.AutoSize = true;
             this.lblMinSize.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblMinSize.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblMinSize.Location = new System.Drawing.Point(812, 420);
+            this.lblMinSize.Location = new System.Drawing.Point(809, 420);
             this.lblMinSize.Name = "lblMinSize";
             this.lblMinSize.Size = new System.Drawing.Size(29, 15);
             this.lblMinSize.TabIndex = 31;
@@ -236,7 +236,7 @@
             this.lblMaxSize.AutoSize = true;
             this.lblMaxSize.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblMaxSize.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblMaxSize.Location = new System.Drawing.Point(812, 487);
+            this.lblMaxSize.Location = new System.Drawing.Point(809, 487);
             this.lblMaxSize.Name = "lblMaxSize";
             this.lblMaxSize.Size = new System.Drawing.Size(34, 15);
             this.lblMaxSize.TabIndex = 32;

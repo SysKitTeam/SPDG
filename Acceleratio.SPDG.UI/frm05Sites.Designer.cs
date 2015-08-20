@@ -77,6 +77,7 @@
             // 
             this.trackNumSitesToCreate.LargeChange = 1;
             this.trackNumSitesToCreate.Location = new System.Drawing.Point(260, 177);
+            this.trackNumSitesToCreate.Maximum = 100;
             this.trackNumSitesToCreate.Minimum = 1;
             this.trackNumSitesToCreate.Name = "trackNumSitesToCreate";
             this.trackNumSitesToCreate.Size = new System.Drawing.Size(543, 45);
@@ -87,9 +88,9 @@
             // trackMaxNumberLevels
             // 
             this.trackMaxNumberLevels.LargeChange = 1;
-            this.trackMaxNumberLevels.Location = new System.Drawing.Point(264, 274);
+            this.trackMaxNumberLevels.Location = new System.Drawing.Point(260, 274);
             this.trackMaxNumberLevels.Name = "trackMaxNumberLevels";
-            this.trackMaxNumberLevels.Size = new System.Drawing.Size(539, 45);
+            this.trackMaxNumberLevels.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberLevels.TabIndex = 14;
             this.trackMaxNumberLevels.ValueChanged += new System.EventHandler(this.trackMaxNumberLevels_ValueChanged);
             // 
@@ -98,7 +99,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label3.Location = new System.Drawing.Point(268, 254);
+            this.label3.Location = new System.Drawing.Point(265, 256);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(170, 15);
             this.label3.TabIndex = 13;
