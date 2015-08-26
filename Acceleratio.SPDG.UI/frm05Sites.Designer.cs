@@ -35,6 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblNumSites = new System.Windows.Forms.Label();
             this.lblNumberLevels = new System.Windows.Forms.Label();
+            this.cboSiteTemplates = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumSitesToCreate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberLevels)).BeginInit();
             this.SuspendLayout();
@@ -127,11 +129,32 @@
             this.lblNumberLevels.TabIndex = 16;
             this.lblNumberLevels.Text = "0";
             // 
+            // cboSiteTemplates
+            // 
+            this.cboSiteTemplates.FormattingEnabled = true;
+            this.cboSiteTemplates.Location = new System.Drawing.Point(268, 371);
+            this.cboSiteTemplates.Name = "cboSiteTemplates";
+            this.cboSiteTemplates.Size = new System.Drawing.Size(526, 21);
+            this.cboSiteTemplates.TabIndex = 17;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label1.Location = new System.Drawing.Point(265, 347);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 15);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Use Site Template";
+            // 
             // frm05Sites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 644);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboSiteTemplates);
             this.Controls.Add(this.lblNumberLevels);
             this.Controls.Add(this.lblNumSites);
             this.Controls.Add(this.trackMaxNumberLevels);
@@ -154,6 +177,8 @@
             this.Controls.SetChildIndex(this.trackMaxNumberLevels, 0);
             this.Controls.SetChildIndex(this.lblNumSites, 0);
             this.Controls.SetChildIndex(this.lblNumberLevels, 0);
+            this.Controls.SetChildIndex(this.cboSiteTemplates, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackNumSitesToCreate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberLevels)).EndInit();
             this.ResumeLayout(false);
@@ -170,5 +195,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblNumSites;
         private System.Windows.Forms.Label lblNumberLevels;
+        private System.Windows.Forms.ComboBox cboSiteTemplates;
+        private System.Windows.Forms.Label label1;
     }
 }

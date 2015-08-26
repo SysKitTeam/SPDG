@@ -71,14 +71,13 @@
             // chkAttachCustomWF
             // 
             this.chkAttachCustomWF.AutoSize = true;
-            this.chkAttachCustomWF.Enabled = false;
             this.chkAttachCustomWF.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkAttachCustomWF.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkAttachCustomWF.Location = new System.Drawing.Point(265, 193);
             this.chkAttachCustomWF.Name = "chkAttachCustomWF";
-            this.chkAttachCustomWF.Size = new System.Drawing.Size(193, 19);
+            this.chkAttachCustomWF.Size = new System.Drawing.Size(210, 19);
             this.chkAttachCustomWF.TabIndex = 9;
-            this.chkAttachCustomWF.Text = "Attach custom worklfow to lists";
+            this.chkAttachCustomWF.Text = "Attach declarative worklfow to lists";
             this.chkAttachCustomWF.UseVisualStyleBackColor = true;
             // 
             // frm10Workflows

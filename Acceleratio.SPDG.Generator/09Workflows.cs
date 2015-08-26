@@ -11,21 +11,125 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
     {
-        //public static void AddWorklfowTemplate()
-        //{
-        //    try
-        //    {
-        //        SPSolution solution = SPFarm.Local.Solutions.Add("SampleData\\SPDG Workflow.wsp");
-        //        //Collection selectedWebApps = new Collection();
-        //        //SPWebApplication webApp = SPWebApplication.Lookup(new Uri("http://localhost"));
-        //        //selectedWebApps.Add(webApp);
+        public static void AddWorklfowTemplate()
+        {
+            try
+            {
+                bool exists = false;
+                SPSolutionCollection solutionCollection = SPFarm.Local.Solutions;
+                foreach( SPSolution sol in solutionCollection )
+                {
+                    if( sol.Name.ToLower() == "spdg workflow2.wsp")
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
 
-        //        solution.DeployLocal(true, true);
-                
-        //    }
-        //    catch { }
-        //}
+                if( !exists )
+                {
+                    SPSolution solution = SPFarm.Local.Solutions.Add("SampleData\\SPDG Workflow2.wsp");
+                    solution.DeployLocal(true, true);
+                }
+            }
+            catch(Exception ex)
+            {
+                Errors.Log(ex);
+            }
+        }
 
+
+        public void AssociateCustomWorkflows()
+        {
+            if( !workingDefinition.AttachCustomWorkflowToList)
+            {
+                return;
+            }
+
+            progressOverall("Adding Declarative Workflow Associations", 20);
+
+            AddWorklfowTemplate();
+
+            try
+            {
+                foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
+                {
+                    using (SPSite siteColl = new SPSite(siteCollInfo.URL))
+                    {
+
+                        foreach (SiteInfo siteInfo in siteCollInfo.Sites)
+                        {
+                            using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
+                            {
+                                if (web.Features[new Guid("17463962-06a6-4aba-b49f-2c13222f6213")] == null)
+                                {
+                                    web.Features.Add(new Guid("17463962-06a6-4aba-b49f-2c13222f6213"));
+                                }
+
+                                int workflowCount = web.WorkflowTemplates.Count;
+                                int templateIndex = 5;
+
+                                foreach (ListInfo listInfo in siteInfo.Lists)
+                                {
+                                    try
+                                    {
+                                        SPList list = web.Lists[listInfo.Name];
+                                        SPWorkflowTemplate workflowTemplate = web.WorkflowTemplates[templateIndex];
+
+                                        SPList wftasks = web.Lists.TryGetList("Workflow Tasks");
+                                        if (wftasks == null)
+                                        {
+                                            //Check if Workflow List exists
+                                            Guid listGuid = web.Lists.Add(
+                                                "Workflow Tasks",
+                                                string.Empty,
+                                                SPListTemplateType.Tasks);
+                                            wftasks = web.Lists.GetList(listGuid, false);
+                                        }
+
+                                        SPList wfhistory = web.Lists.TryGetList("Workflow History");
+                                        if (wfhistory == null)
+                                        {
+                                            //Check if Workflow List exists
+                                            Guid listGuid = web.Lists.Add(
+                                                "Workflow History",
+                                                string.Empty,
+                                                SPListTemplateType.WorkflowHistory);
+                                            wfhistory = web.Lists.GetList(listGuid, false);
+                                            wfhistory.Hidden = true;
+                                            wfhistory.Update();
+                                        }
+
+
+                                        // create the association
+                                        SPWorkflowAssociation assoc =
+                                            SPWorkflowAssociation.CreateListAssociation(
+                                            workflowTemplate, workflowTemplate.Name,
+                                            wftasks, wfhistory
+                                            );
+                                        assoc.AllowManual = true;
+
+                                        //apply the association to the list
+                                        list.WorkflowAssociations.Add(assoc);
+
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Errors.Log(ex);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Errors.Log(ex);
+            }
+        }
 
         public void AssociateWorkflows()
         {

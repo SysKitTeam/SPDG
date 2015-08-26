@@ -49,6 +49,37 @@ namespace Acceleratio.SPDG.Generator
             return domainList;
         }
 
+        public static List<string> GetDomainList2()
+        {
+
+            List<string> domainList = new List<string>();
+            string sRootDomain;
+            System.DirectoryServices.DirectoryEntry deRootDSE;
+            System.DirectoryServices.DirectoryEntry deSearchRoot;
+            System.DirectoryServices.DirectorySearcher dsFindDomains;
+            System.DirectoryServices.SearchResultCollection srcResults;
+
+            deRootDSE = new System.DirectoryServices.DirectoryEntry("GC://RootDSE");
+            sRootDomain = "GC://" + deRootDSE.Properties["rootDomainNamingContext"].Value.ToString();
+
+            deSearchRoot = new System.DirectoryServices.DirectoryEntry(sRootDomain);
+            dsFindDomains = new System.DirectoryServices.DirectorySearcher(deSearchRoot);
+            dsFindDomains.Filter = "(objectCategory=domainDNS)";
+            dsFindDomains.SearchScope = System.DirectoryServices.SearchScope.Subtree;
+
+            srcResults = dsFindDomains.FindAll();
+            foreach (System.DirectoryServices.SearchResult srDomain in srcResults)
+            {
+                //System.Console.WriteLine(srDomain.Properties["name"][0].ToString()
+                //    + " - "
+                //    + srDomain.Properties["distinguishedName"][0].ToString());
+
+                domainList.Add(srDomain.Properties["name"][0].ToString());
+            }
+
+            return domainList;
+        }
+
         public static string GetUsersFromAD()
         {
             string output = string.Empty;

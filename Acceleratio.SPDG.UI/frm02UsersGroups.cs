@@ -52,7 +52,18 @@ namespace Acceleratio.SPDG.UI
 
             List<string> domains = AD.GetDomainList();
 
-            foreach(string domain in domains)
+            foreach (string domain in domains)
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = domain;
+                item.Value = domain;
+                cboDomains.Items.Add(item);
+            }
+            cboDomains.Text = domains[0];
+
+            List<string> subdomains = AD.GetDomainList2();
+
+            foreach (string domain in subdomains)
             {
                 ComboboxItem item = new ComboboxItem();
                 item.Text = domain;
@@ -63,7 +74,11 @@ namespace Acceleratio.SPDG.UI
             chkGenerateUsers.Checked = Common.WorkingDefinition.GenerateUsersAndSecurityGroupsActiveInDirectory;
             trackNumberOfUsers.Value = Common.WorkingDefinition.NumberOfUsersToCreate;
             trackNumberOfSecGroups.Value = Common.WorkingDefinition.NumberOfSecurityGroupsToCreate;
-            cboDomains.Text = Common.WorkingDefinition.ADDomainName;
+            if (!string.IsNullOrEmpty(Common.WorkingDefinition.ADDomainName))
+            {
+                cboDomains.Text = Common.WorkingDefinition.ADDomainName;
+            }
+            
             cboOrganizationalUnit.Text = Common.WorkingDefinition.ADOrganizationalUnit;
 
             this.Show();

@@ -9,6 +9,10 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
     {
+        SPWebTemplate choosenTemplate = null;
+        bool templateInitiated = false;
+        uint lang;
+
         internal void CreateSites()
         {
             int totalProgress = workingDefinition.NumberOfSitesToCreate;
@@ -34,7 +38,36 @@ namespace Acceleratio.SPDG.Generator
 
                         progressDetail("Creating Site '" + siteCollInfo.URL + "/" + siteName + "'");
 
-                        SPWeb web = siteColl.AllWebs.Add(siteName);
+                        if(!templateInitiated)
+                        {
+                            //initweb = siteColl.AllWebs.Add(siteName);
+                            lang = siteColl.RootWeb.Language;
+                            InitWebTemplate(siteColl.RootWeb);
+                        }
+
+                        SPWeb web = null;
+                        if(choosenTemplate == null )
+                        {
+                            web = siteColl.AllWebs.Add(siteName);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                web = siteColl.AllWebs.Add(Common.GenerateSlug(siteName, 40), siteName, null, lang, choosenTemplate, false, false);
+                            }
+                            catch(Exception ex)
+                            {
+                                Log.Write("ERROR while trying to add site template '" + workingDefinition.SiteTemplate + "'");
+                                Errors.Log(ex);
+                                Log.Write("Reverting to 'Team Site' template");
+                                choosenTemplate = null;
+                                web = siteColl.AllWebs.Add(siteName);
+                            }
+                            
+                        }
+
+
                         web.Title = siteName;
                         web.Update();
                         addQuickLaunch(web);
@@ -76,6 +109,27 @@ namespace Acceleratio.SPDG.Generator
                     }
                 }
             }
+        }
+
+        private void InitWebTemplate(SPWeb web)
+        {
+            if (!string.IsNullOrEmpty(workingDefinition.SiteTemplate) && !templateInitiated)
+            {
+                if (choosenTemplate == null)
+                {
+                    SPWebTemplateCollection templateCollection = web.GetAvailableWebTemplates(web.Language);
+                    foreach( SPWebTemplate template in templateCollection)
+                    {
+                        if( template.Title == workingDefinition.SiteTemplate)
+                        {
+                            choosenTemplate = template;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            templateInitiated = true;
         }
 
         private void addQuickLaunch(SPWeb childWeb)

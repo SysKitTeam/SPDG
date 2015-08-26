@@ -90,9 +90,11 @@
             this.trackNumSiteColls.LargeChange = 1;
             this.trackNumSiteColls.Location = new System.Drawing.Point(256, 180);
             this.trackNumSiteColls.Maximum = 20;
+            this.trackNumSiteColls.Minimum = 1;
             this.trackNumSiteColls.Name = "trackNumSiteColls";
             this.trackNumSiteColls.Size = new System.Drawing.Size(550, 45);
             this.trackNumSiteColls.TabIndex = 11;
+            this.trackNumSiteColls.Value = 1;
             this.trackNumSiteColls.ValueChanged += new System.EventHandler(this.trackNumSiteColls_ValueChanged);
             // 
             // cboSiteCollection
@@ -120,7 +122,7 @@
             this.lblCreateSiteColls.Name = "lblCreateSiteColls";
             this.lblCreateSiteColls.Size = new System.Drawing.Size(13, 15);
             this.lblCreateSiteColls.TabIndex = 17;
-            this.lblCreateSiteColls.Text = "1";
+            this.lblCreateSiteColls.Text = "0";
             // 
             // txtOwnerEmail
             // 

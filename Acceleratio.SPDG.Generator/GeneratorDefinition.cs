@@ -20,6 +20,7 @@ namespace Acceleratio.SPDG.Generator
         public string DatabaseServer { get; set; }
         public string SiteCollOwnerLogin { get; set; }
         public string SiteCollOwnerEmail { get; set; }
+        public string SiteTemplate { get; set; }
         public bool GenerateUsersAndSecurityGroupsActiveInDirectory { get; set; }
         public string ADDomainName { get; set; }
         public string ADOrganizationalUnit { get; set; }

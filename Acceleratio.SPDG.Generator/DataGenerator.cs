@@ -79,6 +79,7 @@ namespace Acceleratio.SPDG.Generator
 
                 //AssociateWorkflows
                 AssociateWorkflows();
+                AssociateCustomWorkflows();
 
                 //Create permissions
                 CreatePermissions();
