@@ -61,13 +61,29 @@ namespace Acceleratio.SPDG.Generator
                         {
                             using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
                             {
-                                if (web.Features[new Guid("17463962-06a6-4aba-b49f-2c13222f6213")] == null)
+                                if (web.Features[new Guid("2e57115a-aa11-49ff-9113-b8e57afb8162")] == null)
                                 {
-                                    web.Features.Add(new Guid("17463962-06a6-4aba-b49f-2c13222f6213"));
+                                    web.Features.Add(new Guid("2e57115a-aa11-49ff-9113-b8e57afb8162"));
                                 }
 
-                                int workflowCount = web.WorkflowTemplates.Count;
-                                int templateIndex = 5;
+                                SPWorkflowTemplateCollection wfTemplates = web.WorkflowTemplates;
+                                int templateIndex = -1;
+
+                                for (int i = 0; i < wfTemplates.Count; i++ )
+                                {
+                                    SPWorkflowTemplate wfTemplate = wfTemplates[i];
+                                    if (wfTemplate.Name == "SPDG Workflow2")
+                                    {
+                                        templateIndex = i;
+                                    }
+                                }
+
+                                if( templateIndex == -1)
+                                {
+                                    Log.Write("Declarative Workflow 'SPDG Workflow2' not found.");
+                                    return;
+                                }
+                                
 
                                 foreach (ListInfo listInfo in siteInfo.Lists)
                                 {
@@ -169,7 +185,7 @@ namespace Acceleratio.SPDG.Generator
                                     try
                                     {
                                         SPList list = web.Lists[listInfo.Name];
-                                        int randomNumberOfWF = SampleData.GetRandomNumber(0,2);
+                                        int randomNumberOfWF = SampleData.GetRandomNumber(1,2);
                                         List<int> addedTemplates = new List<int>();
 
                                         for(int i=0; i<randomNumberOfWF; i++)
