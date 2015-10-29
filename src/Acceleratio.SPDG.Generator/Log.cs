@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator 
 {
     public class Log
     {
