@@ -122,7 +122,7 @@
             this.lblCreateSiteColls.Name = "lblCreateSiteColls";
             this.lblCreateSiteColls.Size = new System.Drawing.Size(13, 15);
             this.lblCreateSiteColls.TabIndex = 17;
-            this.lblCreateSiteColls.Text = "0";
+            this.lblCreateSiteColls.Text = "1";
             // 
             // txtOwnerEmail
             // 

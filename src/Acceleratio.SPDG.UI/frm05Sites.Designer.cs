@@ -77,14 +77,14 @@
             // 
             // trackNumSitesToCreate
             // 
-            this.trackNumSitesToCreate.LargeChange = 1;
+            this.trackNumSitesToCreate.LargeChange = 50;
             this.trackNumSitesToCreate.Location = new System.Drawing.Point(260, 177);
-            this.trackNumSitesToCreate.Maximum = 100;
+            this.trackNumSitesToCreate.Maximum = 500;
             this.trackNumSitesToCreate.Minimum = 1;
             this.trackNumSitesToCreate.Name = "trackNumSitesToCreate";
             this.trackNumSitesToCreate.Size = new System.Drawing.Size(543, 45);
             this.trackNumSitesToCreate.TabIndex = 12;
-            this.trackNumSitesToCreate.Value = 1;
+            this.trackNumSitesToCreate.Value = 50;
             this.trackNumSitesToCreate.ValueChanged += new System.EventHandler(this.trackNumSitesToCreate_ValueChanged);
             // 
             // trackMaxNumberLevels
@@ -94,6 +94,7 @@
             this.trackMaxNumberLevels.Name = "trackMaxNumberLevels";
             this.trackMaxNumberLevels.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberLevels.TabIndex = 14;
+            this.trackMaxNumberLevels.Value = 3;
             this.trackMaxNumberLevels.ValueChanged += new System.EventHandler(this.trackMaxNumberLevels_ValueChanged);
             // 
             // label3
@@ -114,9 +115,9 @@
             this.lblNumSites.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumSites.Location = new System.Drawing.Point(818, 181);
             this.lblNumSites.Name = "lblNumSites";
-            this.lblNumSites.Size = new System.Drawing.Size(13, 15);
+            this.lblNumSites.Size = new System.Drawing.Size(19, 15);
             this.lblNumSites.TabIndex = 15;
-            this.lblNumSites.Text = "1";
+            this.lblNumSites.Text = "50";
             // 
             // lblNumberLevels
             // 
@@ -127,7 +128,7 @@
             this.lblNumberLevels.Name = "lblNumberLevels";
             this.lblNumberLevels.Size = new System.Drawing.Size(13, 15);
             this.lblNumberLevels.TabIndex = 16;
-            this.lblNumberLevels.Text = "0";
+            this.lblNumberLevels.Text = "3";
             // 
             // cboSiteTemplates
             // 

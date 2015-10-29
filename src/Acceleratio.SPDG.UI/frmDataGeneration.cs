@@ -121,7 +121,7 @@ namespace Acceleratio.SPDG.UI
             bool success = generator.startDataGeneration(bgWorker);
            
             isRunning = false;
-            btnClose.Text = "Close";
+            //btnClose.Text = "Close";
 
             if (success)
             {

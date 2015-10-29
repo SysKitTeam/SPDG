@@ -38,7 +38,11 @@ namespace Acceleratio.SPDG.Generator
                         using( SPWeb web = siteColl.OpenWeb(siteInfo.ID)) 
                         {
                             Log.Write("Creating lists in site '" + web.Url + "'");
-                            for( int s = 0; s < workingDefinition.MaxNumberOfListsAndLibrariesPerSite; s++ )
+                            Random rnd = new Random();
+
+                            int listsToCreate = Math.Max(rnd.Next(workingDefinition.MaxNumberOfListsAndLibrariesPerSite) + 1, workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
+
+                            for( int s = 0; s < listsToCreate; s++ )
                             {
                                 try
                                 {

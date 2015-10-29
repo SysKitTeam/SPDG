@@ -12,12 +12,20 @@ using PdfSharp.Drawing.Layout;
 
 namespace Acceleratio.SPDG.Generator
 {
+    public class DepartmentData
+    {
+        public string Department { get; set; }
+        public string Subdepartment { get; set; }
+    }
+
     public class SampleData
     {
         internal static List<string> Accounts;
         internal static List<string> Years;
         internal static List<string> BusinessDocsTypes;
         internal static List<string> Countries;
+        internal static List<string> Offices;
+        internal static List<string> Dates;
         internal static List<string> FirstNames;
         internal static List<string> LastNames;
         internal static List<string> Addresses;
@@ -26,6 +34,8 @@ namespace Acceleratio.SPDG.Generator
         internal static List<string> PhoneNumbers;
         internal static List<string> EmailAddreses;
         internal static List<string> WebSites;
+        internal static List<DepartmentData> Departments;
+        internal static List<string> Customers;
         private static Random randomGen = new Random();
 
         public static void PrepareSampleCollections()
@@ -42,6 +52,63 @@ namespace Acceleratio.SPDG.Generator
             PhoneNumbers = CreateSampleCollection("PhoneNumbers.csv");
             EmailAddreses = CreateSampleCollection("emails.csv");
             WebSites = CreateSampleCollection("WebSites.csv");
+            Offices = CreateSampleCollection("Offices.csv");
+            Dates = CreateSampleCollection("Dates.csv");
+            Departments = ImportDepartments("departments.csv");
+            Customers = CreateSampleCollection("Customers.csv");
+        }
+
+        internal static string GetRandomName(List<string> primaryCollection, List<string> secondaryCollection, List<string> tertiaryCollection, ref int attempt, out string baseName)
+        {
+            string retVal = "";
+            attempt++;
+            baseName = "";
+
+            if ((secondaryCollection == null && tertiaryCollection == null) || attempt < 5)
+            {
+                baseName = GetSampleValueRandom(primaryCollection);
+                retVal = baseName;
+            }
+            else if (tertiaryCollection == null)
+            {
+                baseName = GetSampleValueRandom(primaryCollection);
+                retVal = string.Format("{0} {1}", baseName, GetSampleValueRandom(secondaryCollection));
+            }
+            else
+            {
+                if (attempt < 10)
+                {
+                    baseName = GetSampleValueRandom(primaryCollection);
+                    retVal = string.Format("{0} {1}", baseName, GetSampleValueRandom(secondaryCollection));
+                }
+                else if (attempt < 20)
+                {
+                    baseName = GetSampleValueRandom(primaryCollection);
+                    retVal = string.Format("{0} {1}", baseName, GetSampleValueRandom(tertiaryCollection));
+                }
+                else
+                {
+                    baseName = GetSampleValueRandom(primaryCollection);
+                    retVal = string.Format("{0} {1} {2}", baseName, GetSampleValueRandom(secondaryCollection), GetSampleValueRandom(tertiaryCollection));
+                }
+            }
+
+
+            
+            if (attempt > 40)
+            {
+                retVal += string.Format("{0} {1}", retVal, randomGen.Next(10000).ToString());
+            }
+
+            return retVal;
+        }
+
+        internal static List<DepartmentData> ImportDepartments(string csvFileName)
+        {
+            return File.ReadLines(@"SampleData\" + csvFileName)
+               .Select(line => line.Split(','))
+               .Select(tokens => new DepartmentData() { Department = tokens[0], Subdepartment = tokens[1] })
+               .ToList();
         }
 
         internal static List<string> CreateSampleCollection(string csvFileName)
@@ -65,24 +132,33 @@ namespace Acceleratio.SPDG.Generator
 
         internal static string GetSampleValueRandom(List<string> sampleCollection)
         {
-            int randomNumber = randomGen.Next(0, sampleCollection.Count()-1);
+            try
+            {
+                int randomNumber = randomGen.Next(0, sampleCollection.Count() - 1);
 
-            return sampleCollection[randomNumber];
+                return sampleCollection[randomNumber];
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            
         }
 
-        internal static string Clean(string val)
-        {
-            val = val.Replace(" ", "");
-            val = val.Replace(",", "");
-            val = val.Replace(".", "");
-            val = val.Replace("/", "");
-            val = val.Replace("\\", "");
-            val = val.Replace("(", "");
-            val = val.Replace(")", "");
-            val = val.Replace("&", "");
+        //internal static string Clean(string val)
+        //{
+        //    val = val.Replace(" ", "");
+        //    val = val.Replace(",", "");
+        //    val = val.Replace(".", "");
+        //    val = val.Replace("/", "");
+        //    val = val.Replace("\\", "");
+        //    val = val.Replace("(", "");
+        //    val = val.Replace(")", "");
+        //    val = val.Replace("&", "");
 
-            return val;
-        }
+        //    return val;
+        //}
 
         internal static int GetRandomNumber(int min, int max)
         {

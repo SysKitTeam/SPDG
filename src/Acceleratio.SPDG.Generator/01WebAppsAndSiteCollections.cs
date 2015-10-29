@@ -5,8 +5,10 @@ using System.Text;
 using System.Text;
 using System.Security;
 using System.IO;
+using Acceleratio.SPDG.Generator.Utilities;
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Administration.SiteHealth;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -51,17 +53,7 @@ namespace Acceleratio.SPDG.Generator
 
                 for (int s = 0; s < workingDefinition.CreateNewSiteCollections; s++)
                 {
-                    string sitCollName = findAvailableSiteCollectionName(webApp);
-                    progressDetail("Creating site collection '" + sitCollName + "'");
-                    int siteCollNumber = s + 1 + webApp.Sites.Count;
-                    
-                    SPSiteCollection siteCollections = webApp.Sites;
-                    SPSite site = siteCollections.Add("/sites/" + sitCollName, workingDefinition.SiteCollOwnerLogin, workingDefinition.SiteCollOwnerEmail);
-
-                    SiteCollInfo siteCollInfo = new SiteCollInfo();
-                    siteCollInfo.URL = site.Url;
-                    
-                    workingSiteCollections.Add(siteCollInfo);
+                    CreateSiteCollection(webApp);
                 }
             }
             catch (Exception ex)
@@ -70,16 +62,44 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
-        private string findAvailableSiteCollectionName(SPWebApplication webApp)
+        private void CreateSiteCollection(SPWebApplication webApp)
         {
-            string siteCollCandidate = SampleData.Clean( SampleData.GetSampleValueRandom(SampleData.Countries) );
+            string sitCollName = "";
+            string url = "";
+            string baseName = "";
 
-            while( webApp.Sites.Any(s => s.Url.Contains(siteCollCandidate)) )
+            findAvailableSiteCollectionName(webApp, out sitCollName, out url, out baseName);
+
+            progressDetail("Creating site collection '" + url + "'");
+
+            SPSiteCollection siteCollections = webApp.Sites;
+            SPSite site = siteCollections.Add("/sites/" + url, workingDefinition.SiteCollOwnerLogin,
+                workingDefinition.SiteCollOwnerEmail);
+
+            SPWeb web = site.RootWeb;
+            web.Title = sitCollName;
+            web.Update();
+
+            SiteCollInfo siteCollInfo = new SiteCollInfo();
+            siteCollInfo.URL = site.Url;
+
+            workingSiteCollections.Add(siteCollInfo);
+        }
+
+        private void findAvailableSiteCollectionName(SPWebApplication webApp, out string siteName, out string url, out string baseName)
+        {
+            baseName = "";
+            siteName = SampleData.GetSampleValueRandom(SampleData.Companies);
+            string siteUrl = Utilities.Path.GenerateSlug(siteName, 25);
+
+            int i = 0;
+            while (webApp.Sites.Any(s => s.Url.Contains(siteUrl)))
             {
-                siteCollCandidate = SampleData.Clean(SampleData.GetSampleValueRandom(SampleData.Countries));
+                siteName = SampleData.GetRandomName(SampleData.Companies, SampleData.Offices, null, ref i, out baseName);
+                siteUrl = Utilities.Path.GenerateSlug(siteName, 25);
             }
-            
-            return siteCollCandidate;
+
+            url = siteUrl;
         }
 
         private void createNewWebApplications()
@@ -125,15 +145,7 @@ namespace Acceleratio.SPDG.Generator
 
                     for( int s=0; s<workingDefinition.CreateNewSiteCollections; s++)
                     {
-                        int siteCollNumber = s + 1;
-                        string sitCollName = findAvailableSiteCollectionName(newApplication);
-                        progressDetail("Creating site collection '" + sitCollName + "'");
-                        SPSiteCollection siteCollections = newApplication.Sites;
-                        SPSite site = siteCollections.Add("/sites/" + sitCollName, workingDefinition.WebAppOwnerLogin, workingDefinition.WebAppOwnerEmail);
-
-                        SiteCollInfo siteCollInfo = new SiteCollInfo();
-                        siteCollInfo.URL = site.Url;
-                        workingSiteCollections.Add(siteCollInfo);
+                        CreateSiteCollection(newApplication);
                     }
 
                 }
