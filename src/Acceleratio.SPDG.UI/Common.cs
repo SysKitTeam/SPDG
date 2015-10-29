@@ -79,20 +79,44 @@ namespace Acceleratio.SPDG.UI
 
             WorkingDefinition.NumberOfSecurityGroupsToCreate = 0;
             WorkingDefinition.NumberOfUsersToCreate = 0;
-            WorkingDefinition.NumberOfSitesToCreate = 1;
-            WorkingDefinition.MinDocumentSizeKB = 0;
-            WorkingDefinition.MaxDocumentSizeMB = 0;
+            WorkingDefinition.NumberOfSitesToCreate = 50;
             WorkingDefinition.MaxNumberOfColumnsPerList = 0;
             WorkingDefinition.MaxNumberOfContentTypesPerSiteCollection = 0;
             WorkingDefinition.MaxNumberOfFoldersToGenerate = 0;
             WorkingDefinition.MaxNumberofItemsToGenerate = 0;
-            WorkingDefinition.MaxNumberOfLevelsForSites = 0;
-            WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite = 0;
-            WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 0;
+            WorkingDefinition.MaxNumberOfLevelsForSites = 3;
+            WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite = 3;
             WorkingDefinition.MaxNumberOfViewsPerList = 0;
             WorkingDefinition.CreateNewWebApplications = 0;
-            WorkingDefinition.PermissionsPerObject = 1;
-            
+            WorkingDefinition.CreateNewSiteCollections = 1;
+            WorkingDefinition.SiteTemplate = "Team Site";
+            WorkingDefinition.LibTypeList = true;
+            WorkingDefinition.LibTypeDocument = true;
+            WorkingDefinition.LibTypeCalendar = true;
+            WorkingDefinition.LibTypeTasks = true;
+            WorkingDefinition.CreateSomeFoldersInDocumentLibraries = true;
+            WorkingDefinition.MaxNumberOfFoldersToGenerate = 10;
+            WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 3;
+            WorkingDefinition.CreateColumns = true;
+            WorkingDefinition.MaxNumberOfColumnsPerList = 3;
+            WorkingDefinition.PrefilListAndLibrariesWithItems = true;
+            WorkingDefinition.MaxNumberofItemsToGenerate = 30;
+            WorkingDefinition.IncludeDocTypeDOCX = true;
+            WorkingDefinition.IncludeDocTypePDF = true;
+            WorkingDefinition.IncludeDocTypeImages = true;
+            WorkingDefinition.IncludeDocTypeXLSX = true;
+            WorkingDefinition.MinDocumentSizeKB = 100;
+            WorkingDefinition.MaxDocumentSizeMB = 1;
+            WorkingDefinition.ContentTypesCanInheritFromOtherContentType = true;
+            WorkingDefinition.CreateContentTypes = true;
+            WorkingDefinition.MaxNumberOfContentTypesPerSiteCollection = 10;
+            WorkingDefinition.PermissionsPercentOfSites = 30;
+            WorkingDefinition.PermissionsPercentOfLists = 30;
+            WorkingDefinition.PermissionsPerObject = 10;
+            WorkingDefinition.PermissionsPercentForUsers = 20;
+            WorkingDefinition.PermissionsPercentForSPGroups = 40;
+            WorkingDefinition.PermissionsPercentOfListItems = 5;
+
 
         }
 
