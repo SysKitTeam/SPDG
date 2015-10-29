@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acceleratio.SPDG.UI", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9203E962-DC3E-42E8-9F36-EADE58D49F37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Releases", "releases\Releases.csproj", "{01C79725-604D-4734-A3A2-28B539EFC906}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +23,6 @@ Global
 		{1A548AB3-5D2E-44E0-8DAE-4178C4D303C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A548AB3-5D2E-44E0-8DAE-4178C4D303C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A548AB3-5D2E-44E0-8DAE-4178C4D303C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01C79725-604D-4734-A3A2-28B539EFC906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01C79725-604D-4734-A3A2-28B539EFC906}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
