@@ -58,10 +58,11 @@ namespace Acceleratio.SPDG.Generator
                 totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
             }
 
-            if (workingDefinition.CreateNewWebApplications > 0)
-            {
-                totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
-            }
+            //TODO:rf vratiti ovo nekako
+            //if (workingDefinition.CreateNewWebApplications > 0)
+            //{
+            //    totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
+            //}
 
             progressOverall("Creating Permissions", totalProgress);
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Acceleratio.SPDG.Generator
 {
-    internal class SiteCollInfo
+    public class SiteCollInfo
     {
         
         internal SiteCollInfo()
@@ -19,7 +19,7 @@ namespace Acceleratio.SPDG.Generator
         
     }
 
-    internal class SiteInfo
+    public class SiteInfo
     {
         
         internal SiteInfo()
@@ -32,7 +32,7 @@ namespace Acceleratio.SPDG.Generator
         internal Guid ID { get; set; }
     }
 
-    internal class ListInfo
+    public class ListInfo
     {
         
         internal ListInfo()
@@ -46,7 +46,7 @@ namespace Acceleratio.SPDG.Generator
         internal SPListTemplateType TemplateType { get; set; }
     }
 
-    internal class FolderInfo
+    public class FolderInfo
     {
         
         internal FolderInfo()

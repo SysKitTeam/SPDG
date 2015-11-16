@@ -17,7 +17,7 @@ namespace Acceleratio.SPDG.UI
         public const int LOGON32_LOGON_INTERACTIVE = 2;
         public const int LOGON32_PROVIDER_DEFAULT = 0;
 
-        public static GeneratorDefinition WorkingDefinition { get; set; }
+        public static GeneratorDefinitionBase WorkingDefinition { get; set; }
         public static string impersonateUserName { get; set; }
         public static string impersonateDomain { get; set; }
         public static string impersonatePassword { get; set; }
@@ -54,7 +54,7 @@ namespace Acceleratio.SPDG.UI
             //definition.Password = "XXXX";
             //definition.Domain = "acceleratio";
 
-            XmlSerializer serializer = new XmlSerializer(typeof(GeneratorDefinition));
+            XmlSerializer serializer = new XmlSerializer(typeof(ServerGeneratorDefinition), new Type[] { typeof(ClientGeneratorDefinition), typeof(ServerGeneratorDefinition)});
             using (TextWriter writer = new StreamWriter(path))
             {
                 serializer.Serialize(writer, WorkingDefinition);
@@ -63,59 +63,79 @@ namespace Acceleratio.SPDG.UI
 
         public static void DeserializeDefinition(string path)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(GeneratorDefinition));
+            XmlSerializer deserializer = new XmlSerializer(typeof(ServerGeneratorDefinition));
             TextReader reader = new StreamReader(path);
             object obj = deserializer.Deserialize(reader);
-            WorkingDefinition = (GeneratorDefinition)obj;
+            WorkingDefinition = (ServerGeneratorDefinition)obj;
             reader.Close();
         }
 
-        public static void InitEmptyDefinition()
+
+        public static void InitClientDefinition()
         {
-            WorkingDefinition = new GeneratorDefinition();
+            var clientDefinition = new ClientGeneratorDefinition();
+            SetCommonDefaults(clientDefinition);
+            WorkingDefinition = clientDefinition;
+        }
 
-            WorkingDefinition.ConnectToSPOnPremise = true;
-            WorkingDefinition.CredentialsOfCurrentUser = true;
+        public static void InitServerDefinition()
+        {
+            var serverDefinition = new ServerGeneratorDefinition();
+            SetCommonDefaults(serverDefinition);
+                        
+            serverDefinition.CredentialsOfCurrentUser = true;
+            serverDefinition.CreateNewWebApplications = 0;
 
-            WorkingDefinition.NumberOfSecurityGroupsToCreate = 0;
-            WorkingDefinition.NumberOfUsersToCreate = 0;
-            WorkingDefinition.NumberOfSitesToCreate = 50;
-            WorkingDefinition.MaxNumberOfColumnsPerList = 0;
-            WorkingDefinition.MaxNumberOfContentTypesPerSiteCollection = 0;
-            WorkingDefinition.MaxNumberOfFoldersToGenerate = 0;
-            WorkingDefinition.MaxNumberofItemsToGenerate = 0;
-            WorkingDefinition.MaxNumberOfLevelsForSites = 3;
-            WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite = 3;
-            WorkingDefinition.MaxNumberOfViewsPerList = 0;
-            WorkingDefinition.CreateNewWebApplications = 0;
-            WorkingDefinition.CreateNewSiteCollections = 1;
-            WorkingDefinition.SiteTemplate = "Team Site";
-            WorkingDefinition.LibTypeList = true;
-            WorkingDefinition.LibTypeDocument = true;
-            WorkingDefinition.LibTypeCalendar = true;
-            WorkingDefinition.LibTypeTasks = true;
-            WorkingDefinition.CreateSomeFoldersInDocumentLibraries = true;
-            WorkingDefinition.MaxNumberOfFoldersToGenerate = 10;
-            WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = 3;
-            WorkingDefinition.CreateColumns = true;
-            WorkingDefinition.MaxNumberOfColumnsPerList = 3;
-            WorkingDefinition.PrefilListAndLibrariesWithItems = true;
-            WorkingDefinition.MaxNumberofItemsToGenerate = 30;
-            WorkingDefinition.IncludeDocTypeDOCX = true;
-            WorkingDefinition.IncludeDocTypePDF = true;
-            WorkingDefinition.IncludeDocTypeImages = true;
-            WorkingDefinition.IncludeDocTypeXLSX = true;
-            WorkingDefinition.MinDocumentSizeKB = 100;
-            WorkingDefinition.MaxDocumentSizeMB = 1;
-            WorkingDefinition.ContentTypesCanInheritFromOtherContentType = true;
-            WorkingDefinition.CreateContentTypes = true;
-            WorkingDefinition.MaxNumberOfContentTypesPerSiteCollection = 10;
-            WorkingDefinition.PermissionsPercentOfSites = 30;
-            WorkingDefinition.PermissionsPercentOfLists = 30;
-            WorkingDefinition.PermissionsPerObject = 10;
-            WorkingDefinition.PermissionsPercentForUsers = 20;
-            WorkingDefinition.PermissionsPercentForSPGroups = 40;
-            WorkingDefinition.PermissionsPercentOfListItems = 5;
+            WorkingDefinition = serverDefinition;
+        }
+
+
+        private static void SetCommonDefaults(GeneratorDefinitionBase definition)
+        {
+           // WorkingDefinition = new ServerGeneratorDefinition();
+
+            //WorkingDefinition.ConnectToSPOnPremise = true;
+          //  WorkingDefinition.CredentialsOfCurrentUser = true;
+
+            definition.NumberOfSecurityGroupsToCreate = 0;
+            definition.NumberOfUsersToCreate = 0;
+            definition.NumberOfSitesToCreate = 50;
+            definition.MaxNumberOfColumnsPerList = 0;
+            definition.MaxNumberOfContentTypesPerSiteCollection = 0;
+            definition.MaxNumberOfFoldersToGenerate = 0;
+            definition.MaxNumberofItemsToGenerate = 0;
+            definition.MaxNumberOfLevelsForSites = 3;
+            definition.MaxNumberOfListsAndLibrariesPerSite = 3;
+            definition.MaxNumberOfViewsPerList = 0;
+           // WorkingDefinition.CreateNewWebApplications = 0;
+            definition.CreateNewSiteCollections = 1;
+            definition.SiteTemplate = "Team Site";
+            definition.LibTypeList = true;
+            definition.LibTypeDocument = true;
+            definition.LibTypeCalendar = true;
+            definition.LibTypeTasks = true;
+            definition.CreateSomeFoldersInDocumentLibraries = true;
+            definition.MaxNumberOfFoldersToGenerate = 10;
+            definition.MaxNumberOfNestedFolderLevelPerLibrary = 3;
+            definition.CreateColumns = true;
+            definition.MaxNumberOfColumnsPerList = 3;
+            definition.PrefilListAndLibrariesWithItems = true;
+            definition.MaxNumberofItemsToGenerate = 30;
+            definition.IncludeDocTypeDOCX = true;
+            definition.IncludeDocTypePDF = true;
+            definition.IncludeDocTypeImages = true;
+            definition.IncludeDocTypeXLSX = true;
+            definition.MinDocumentSizeKB = 100;
+            definition.MaxDocumentSizeMB = 1;
+            definition.ContentTypesCanInheritFromOtherContentType = true;
+            definition.CreateContentTypes = true;
+            definition.MaxNumberOfContentTypesPerSiteCollection = 10;
+            definition.PermissionsPercentOfSites = 30;
+            definition.PermissionsPercentOfLists = 30;
+            definition.PermissionsPerObject = 10;
+            definition.PermissionsPercentForUsers = 20;
+            definition.PermissionsPercentForSPGroups = 40;
+            definition.PermissionsPercentOfListItems = 5;
 
 
         }

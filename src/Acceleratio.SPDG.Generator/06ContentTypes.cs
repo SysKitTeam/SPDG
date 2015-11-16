@@ -17,18 +17,7 @@ namespace Acceleratio.SPDG.Generator
                 return;
             }
 
-            int totalProgress = workingDefinition.MaxNumberOfContentTypesPerSiteCollection *
-                        workingDefinition.NumberOfSitesToCreate;
-
-            if (workingDefinition.CreateNewSiteCollections > 0)
-            {
-                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
-            }
-
-            if (workingDefinition.CreateNewWebApplications > 0)
-            {
-                totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
-            }
+            int totalProgress = CalculateTotalContentTypesForProgressReporting();
 
             progressOverall("Creating Content Types", totalProgress);
 

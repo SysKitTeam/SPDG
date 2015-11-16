@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Acceleratio.SPDG.Generator.Objects;
 using Acceleratio.SPDG.Generator.Utilities;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Navigation;
@@ -27,7 +28,7 @@ namespace Acceleratio.SPDG.Generator
             return sessionUrl;
         }
 
-        internal void CreateSubsites(ref List<SiteInfo> sites, SPWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
+        internal void CreateSubsites(ref List<SiteInfo> sites, SPDGWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
         {
             progressOverall("Creating Sites", siteCounter);
             Random rnd = new Random();
@@ -39,7 +40,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 if (siteCounter < maxSitesToCreate)
                 {
-                    SPWeb childSubsite = CreateSubsite(parentWeb, parentBaseName, currentLevel, out baseName);
+                    var childSubsite = CreateSubsite(parentWeb, parentBaseName, currentLevel, out baseName);
 
                     SiteInfo siteInfo = new SiteInfo();
                     siteInfo.URL = childSubsite.Url;
@@ -57,13 +58,17 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
+
+        
+
         internal void CreateSites()
         {
             foreach(SiteCollInfo siteCollInfo in workingSiteCollections)
             {
-                using (SPSite siteColl = new SPSite(siteCollInfo.URL))
+                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
-                    InitWebTemplate(siteColl.RootWeb);
+                    
+                    //InitWebTemplate(siteColl.RootWeb);
 
                     //SPWeb web = CreateSubsite(siteColl.RootWeb);
                     int sitecounter = 0;
@@ -75,18 +80,19 @@ namespace Acceleratio.SPDG.Generator
                 }
             }
         }
-
-        private SPWeb CreateSubsite(SPWeb parentWeb, string parentBaseName, int level, out string baseName)
+      
+        private SPDGWeb CreateSubsite(SPDGWeb parentWeb, string parentBaseName, int level, out string baseName)
         {
             string siteName, url;
             findAvailableSiteName(parentWeb, out siteName, out url, parentBaseName, level, out baseName);
 
             progressDetail("Creating Site '" + parentWeb.Url + "/" + url + "'");
 
-            SPWeb childWeb = null;
+            SPDGWeb childWeb = null;
             try
-            {
-                childWeb = parentWeb.Webs.Add(url, siteName, null, lang, _templateName, false, false);
+            {              
+                
+                childWeb = parentWeb.AddWeb(url, siteName, null, lang, _templateName, false, false);
                 addQuickLaunch(childWeb);
 
                 Log.Write("Site created '" + childWeb.Url + "'");
@@ -100,30 +106,30 @@ namespace Acceleratio.SPDG.Generator
             return childWeb;
         }
 
-        private void InitWebTemplate(SPWeb web)
+
+        //TODO:rf nepotrebno, mozemo u sucelju prikazati displayname, a pamtiti name
+        //private void InitWebTemplate(SPWeb web)
+        //{
+        //    if (!string.IsNullOrEmpty(workingDefinition.SiteTemplate))
+        //    {
+        //        SPWebTemplateCollection templateCollection = web.GetAvailableWebTemplates(web.Language);
+        //        foreach( SPWebTemplate template in templateCollection)
+        //        {
+        //            if(template.Title == workingDefinition.SiteTemplate)
+        //            {
+        //                _templateName = template.Name;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
+
+        private void addQuickLaunch(SPDGWeb childWeb)
         {
-            if (!string.IsNullOrEmpty(workingDefinition.SiteTemplate))
-            {
-                SPWebTemplateCollection templateCollection = web.GetAvailableWebTemplates(web.Language);
-                foreach( SPWebTemplate template in templateCollection)
-                {
-                    if(template.Title == workingDefinition.SiteTemplate)
-                    {
-                        _templateName = template.Name;
-                        break;
-                    }
-                }
-            }
+            childWeb.ParentWeb.AddNavigationNode(childWeb.Title, childWeb.ServerRelativeUrl);            
         }
 
-        private void addQuickLaunch(SPWeb childWeb)
-        {
-            SPNavigationNodeCollection topnav = childWeb.ParentWeb.Navigation.TopNavigationBar;
-            SPNavigationNode node = new SPNavigationNode(childWeb.Title, childWeb.ServerRelativeUrl);
-            node = topnav.AddAsLast(node);
-        }
-
-        private void findAvailableSiteName(SPWeb web, out string siteName, out string siteUrl, string parentBaseName, int level, out string baseName)
+        private void findAvailableSiteName(SPDGWeb web, out string siteName, out string siteUrl, string parentBaseName, int level, out string baseName)
         {
             baseName = "";
             List<string> primaryCollection;
@@ -149,7 +155,7 @@ namespace Acceleratio.SPDG.Generator
             string candidate = SampleData.GetSampleValueRandom(primaryCollection);
             string url = Utilities.Path.GenerateSlug(candidate, 7);
             baseName = candidate;
-
+            
             int i = 0;
             while (candidate==parentBaseName || web.Webs.Any(s => s.Name.Equals(url)))
             {

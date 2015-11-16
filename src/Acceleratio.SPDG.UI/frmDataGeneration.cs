@@ -39,20 +39,21 @@ namespace Acceleratio.SPDG.UI
 
             btnOpenLog.Click += btnOpenLog_Click;
 
-            if (!string.IsNullOrEmpty(Common.impersonateUserName))
-            {
-                if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
-                {
-                    //Insert your code that runs under the security context of a specific user here.
-                    startDataGeneration();
-                    Common.undoImpersonation();
-                }
-                else
-                {
-                    MessageBox.Show("Impersonation Failed!");
-                }
-            }
-            else
+            //TODO:rf vratiti validaciju
+            //if (!string.IsNullOrEmpty(Common.impersonateUserName))
+            //{
+            //    if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
+            //    {
+            //        //Insert your code that runs under the security context of a specific user here.
+            //        startDataGeneration();
+            //        Common.undoImpersonation();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Impersonation Failed!");
+            //    }
+            //}
+            //else
             {
                 startDataGeneration();
             }
@@ -65,7 +66,7 @@ namespace Acceleratio.SPDG.UI
 
         private void startDataGeneration()
         {
-            generator = new DataGenerator(Common.WorkingDefinition);
+            generator = DataGenerator.Create(Common.WorkingDefinition);
 
             progressOverall.Maximum = generator.OverallProgressMaxSteps;
 

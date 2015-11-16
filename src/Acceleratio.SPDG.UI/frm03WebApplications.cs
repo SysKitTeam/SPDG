@@ -35,6 +35,11 @@ namespace Acceleratio.SPDG.UI
             
         }
 
+        public new ServerGeneratorDefinition WorkingDefinition
+        {
+            get { return (ServerGeneratorDefinition) base.WorkingDefinition; }
+        }
+
         void btnBack_Click(object sender, EventArgs e)
         {
             preventCloseMessage = true;
@@ -72,13 +77,13 @@ namespace Acceleratio.SPDG.UI
 
         public override void loadData()
         {
-            trackCreateNewWebApplication.Value = Common.WorkingDefinition.CreateNewWebApplications;
-            if ( !string.IsNullOrEmpty( Common.WorkingDefinition.UseExistingWebApplication) )
+            trackCreateNewWebApplication.Value = WorkingDefinition.CreateNewWebApplications;
+            if ( !string.IsNullOrEmpty( WorkingDefinition.UseExistingWebApplication) )
             {
-                cboUseExistingWebApp.Text = Common.WorkingDefinition.UseExistingWebApplicationName;
+                cboUseExistingWebApp.Text = WorkingDefinition.UseExistingWebApplicationName;
             }
 
-            if( Common.WorkingDefinition.CreateNewWebApplications > 0 )
+            if( WorkingDefinition.CreateNewWebApplications > 0 )
             {
                 radioCreateNewWebApp.Checked = true;
                 trackCreateNewWebApplication.Enabled = true;
@@ -94,10 +99,10 @@ namespace Acceleratio.SPDG.UI
                 txtOwnerEmail.Enabled = true;
                 txtSQLServer.Enabled = true;
 
-                txtOwnerUserName.Text = Common.WorkingDefinition.WebAppOwnerLogin;
-                txtOwnerPassword.Text = Common.WorkingDefinition.WebAppOwnerPassword;
-                txtOwnerEmail.Text =  Common.WorkingDefinition.WebAppOwnerEmail;
-                txtSQLServer.Text = Common.WorkingDefinition.DatabaseServer;
+                txtOwnerUserName.Text = WorkingDefinition.WebAppOwnerLogin;
+                txtOwnerPassword.Text = WorkingDefinition.WebAppOwnerPassword;
+                txtOwnerEmail.Text =  WorkingDefinition.WebAppOwnerEmail;
+                txtSQLServer.Text = WorkingDefinition.DatabaseServer;
             }
             else
             {
@@ -177,22 +182,22 @@ namespace Acceleratio.SPDG.UI
             }
 
 
-            Common.WorkingDefinition.CreateNewWebApplications = trackCreateNewWebApplication.Value;
-            if (cboUseExistingWebApp.SelectedItem != null && Common.WorkingDefinition.CreateNewWebApplications == 0)
+            WorkingDefinition.CreateNewWebApplications = trackCreateNewWebApplication.Value;
+            if (cboUseExistingWebApp.SelectedItem != null && WorkingDefinition.CreateNewWebApplications == 0)
             {
-                Common.WorkingDefinition.CreateNewWebApplications = 0;
-                Common.WorkingDefinition.UseExistingWebApplication = ((ComboboxItem)cboUseExistingWebApp.SelectedItem).Value.ToString();
-                Common.WorkingDefinition.UseExistingWebApplicationName = ((ComboboxItem)cboUseExistingWebApp.SelectedItem).Text.ToString();
+                WorkingDefinition.CreateNewWebApplications = 0;
+                WorkingDefinition.UseExistingWebApplication = ((ComboboxItem)cboUseExistingWebApp.SelectedItem).Value.ToString();
+                WorkingDefinition.UseExistingWebApplicationName = ((ComboboxItem)cboUseExistingWebApp.SelectedItem).Text.ToString();
             }
             else
             {
-                Common.WorkingDefinition.UseExistingWebApplication = string.Empty;
-                Common.WorkingDefinition.UseExistingWebApplicationName = string.Empty;
-                Common.WorkingDefinition.SiteCollection = string.Empty;
-                Common.WorkingDefinition.WebAppOwnerLogin = txtOwnerUserName.Text;
-                Common.WorkingDefinition.WebAppOwnerPassword = txtOwnerPassword.Text;
-                Common.WorkingDefinition.WebAppOwnerEmail = txtOwnerEmail.Text;
-                Common.WorkingDefinition.DatabaseServer = txtSQLServer.Text;
+                WorkingDefinition.UseExistingWebApplication = string.Empty;
+                WorkingDefinition.UseExistingWebApplicationName = string.Empty;
+                WorkingDefinition.SiteCollection = string.Empty;
+                WorkingDefinition.WebAppOwnerLogin = txtOwnerUserName.Text;
+                WorkingDefinition.WebAppOwnerPassword = txtOwnerPassword.Text;
+                WorkingDefinition.WebAppOwnerEmail = txtOwnerEmail.Text;
+                WorkingDefinition.DatabaseServer = txtSQLServer.Text;
             }
 
             return true;

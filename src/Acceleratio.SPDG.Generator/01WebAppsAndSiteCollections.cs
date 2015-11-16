@@ -12,33 +12,33 @@ using Microsoft.SharePoint.Administration.SiteHealth;
 
 namespace Acceleratio.SPDG.Generator
 {
-    public partial class DataGenerator
+    public partial class ServerDataGenerator
     {
-        internal void ResolveWebAppsAndSiteCollections()
+        protected override void ResolveWebAppsAndSiteCollections()
         {
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            if (WorkingDefinition.CreateNewSiteCollections > 0)
             {
-                int totalProgress = workingDefinition.CreateNewSiteCollections;
-                if (workingDefinition.CreateNewWebApplications > 0 )
+                int totalProgress = WorkingDefinition.CreateNewSiteCollections;
+                if (WorkingDefinition.CreateNewWebApplications > 0 )
                 {
-                    totalProgress = (workingDefinition.CreateNewSiteCollections * workingDefinition.CreateNewWebApplications) + workingDefinition.CreateNewWebApplications;
+                    totalProgress = (WorkingDefinition.CreateNewSiteCollections * WorkingDefinition.CreateNewWebApplications) + WorkingDefinition.CreateNewWebApplications;
                 }
                 progressOverall("Creating Web Applications / Site Collections", totalProgress);
             }
 
 
-            if( workingDefinition.CreateNewWebApplications > 0 )
+            if( WorkingDefinition.CreateNewWebApplications > 0 )
             {
                 createNewWebApplications();
             }
-            else if (workingDefinition.CreateNewSiteCollections > 0)
+            else if (WorkingDefinition.CreateNewSiteCollections > 0)
             {
                 createNewSiteCollections();
             }
             else
             {
                 SiteCollInfo siteCollInfo = new SiteCollInfo();
-                siteCollInfo.URL = workingDefinition.SiteCollection;
+                siteCollInfo.URL = WorkingDefinition.SiteCollection;
                 workingSiteCollections.Add(siteCollInfo);
             }
 
@@ -49,9 +49,9 @@ namespace Acceleratio.SPDG.Generator
             try
             {
                 SPWebService spWebService = SPWebService.ContentService;
-                SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == new Guid(workingDefinition.UseExistingWebApplication));
+                SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == new Guid(WorkingDefinition.UseExistingWebApplication));
 
-                for (int s = 0; s < workingDefinition.CreateNewSiteCollections; s++)
+                for (int s = 0; s < WorkingDefinition.CreateNewSiteCollections; s++)
                 {
                     CreateSiteCollection(webApp);
                 }
@@ -73,8 +73,8 @@ namespace Acceleratio.SPDG.Generator
             progressDetail("Creating site collection '" + url + "'");
 
             SPSiteCollection siteCollections = webApp.Sites;
-            SPSite site = siteCollections.Add("/sites/" + url, workingDefinition.SiteCollOwnerLogin,
-                workingDefinition.SiteCollOwnerEmail);
+            SPSite site = siteCollections.Add("/sites/" + url, WorkingDefinition.SiteCollOwnerLogin,
+                WorkingDefinition.SiteCollOwnerEmail);
 
             SPWeb web = site.RootWeb;
             web.Title = sitCollName;
@@ -107,7 +107,7 @@ namespace Acceleratio.SPDG.Generator
             try
             {
                 int currentPort = 80;
-                for( int a=0; a < workingDefinition.CreateNewWebApplications; a++ )
+                for( int a=0; a < WorkingDefinition.CreateNewWebApplications; a++ )
                 {
                     
 
@@ -121,13 +121,13 @@ namespace Acceleratio.SPDG.Generator
                     webAppBuilder.RootDirectory = new DirectoryInfo("C:\\inetpub\\wwwroot\\wss\\" + currentPort.ToString());
                     webAppBuilder.ApplicationPoolId = "SPDG Pool " + currentPort.ToString();
                     webAppBuilder.IdentityType = IdentityType.SpecificUser;
-                    webAppBuilder.ApplicationPoolUsername = workingDefinition.WebAppOwnerLogin;
-                    webAppBuilder.ApplicationPoolPassword = Common.StringToSecureString(workingDefinition.WebAppOwnerPassword);
+                    webAppBuilder.ApplicationPoolUsername = WorkingDefinition.WebAppOwnerLogin;
+                    webAppBuilder.ApplicationPoolPassword = Common.StringToSecureString(WorkingDefinition.WebAppOwnerPassword);
                    
 
                     webAppBuilder.ServerComment = "SPDG Site " + currentPort.ToString("00");
                     webAppBuilder.CreateNewDatabase = true;
-                    webAppBuilder.DatabaseServer = workingDefinition.DatabaseServer; // DB server name
+                    webAppBuilder.DatabaseServer = WorkingDefinition.DatabaseServer; // DB server name
                     webAppBuilder.DatabaseName = "WSS_Content_SPDG_" + currentPort.ToString("00");// DB Name
                     //webAppBuilder.HostHeader = "SPDG" + appNumer.ToString("00") + ".com"; //if any 
 
@@ -143,7 +143,7 @@ namespace Acceleratio.SPDG.Generator
                     newApplication.Provision();
 
 
-                    for( int s=0; s<workingDefinition.CreateNewSiteCollections; s++)
+                    for( int s=0; s<WorkingDefinition.CreateNewSiteCollections; s++)
                     {
                         CreateSiteCollection(newApplication);
                     }

@@ -94,7 +94,6 @@
             // radioConnectSPOnline
             // 
             this.radioConnectSPOnline.AutoSize = true;
-            this.radioConnectSPOnline.Enabled = false;
             this.radioConnectSPOnline.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.radioConnectSPOnline.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioConnectSPOnline.Location = new System.Drawing.Point(268, 223);

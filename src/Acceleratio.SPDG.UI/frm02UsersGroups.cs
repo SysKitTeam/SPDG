@@ -29,8 +29,11 @@ namespace Acceleratio.SPDG.UI
             chkGenerateUsers_CheckedChanged(null, EventArgs.Empty);
             cboDomains.SelectedIndexChanged += cboDomains_SelectedIndexChanged;
         }
+        public new ServerGeneratorDefinition WorkingDefinition
+        {
+            get { return (ServerGeneratorDefinition) base.WorkingDefinition; }
+        }
 
-        
 
         void btnBack_Click(object sender, EventArgs e)
         {
@@ -71,15 +74,15 @@ namespace Acceleratio.SPDG.UI
                 cboDomains.Items.Add(item);
             }
 
-            chkGenerateUsers.Checked = Common.WorkingDefinition.GenerateUsersAndSecurityGroupsActiveInDirectory;
-            trackNumberOfUsers.Value = Common.WorkingDefinition.NumberOfUsersToCreate;
-            trackNumberOfSecGroups.Value = Common.WorkingDefinition.NumberOfSecurityGroupsToCreate;
-            if (!string.IsNullOrEmpty(Common.WorkingDefinition.ADDomainName))
+            chkGenerateUsers.Checked = WorkingDefinition.GenerateUsersAndSecurityGroupsActiveInDirectory;
+            trackNumberOfUsers.Value = WorkingDefinition.NumberOfUsersToCreate;
+            trackNumberOfSecGroups.Value = WorkingDefinition.NumberOfSecurityGroupsToCreate;
+            if (!string.IsNullOrEmpty(WorkingDefinition.ADDomainName))
             {
-                cboDomains.Text = Common.WorkingDefinition.ADDomainName;
+                cboDomains.Text = WorkingDefinition.ADDomainName;
             }
             
-            cboOrganizationalUnit.Text = Common.WorkingDefinition.ADOrganizationalUnit;
+            cboOrganizationalUnit.Text = WorkingDefinition.ADOrganizationalUnit;
 
             this.Show();
             this.Enabled = true;
@@ -88,11 +91,11 @@ namespace Acceleratio.SPDG.UI
 
         public override bool saveData()
         {
-            Common.WorkingDefinition.GenerateUsersAndSecurityGroupsActiveInDirectory = chkGenerateUsers.Checked;
-            Common.WorkingDefinition.NumberOfUsersToCreate = trackNumberOfUsers.Value;
-            Common.WorkingDefinition.NumberOfSecurityGroupsToCreate = trackNumberOfSecGroups.Value;
-            Common.WorkingDefinition.ADDomainName = cboDomains.Text;
-            Common.WorkingDefinition.ADOrganizationalUnit = cboOrganizationalUnit.Text;
+            WorkingDefinition.GenerateUsersAndSecurityGroupsActiveInDirectory = chkGenerateUsers.Checked;
+            WorkingDefinition.NumberOfUsersToCreate = trackNumberOfUsers.Value;
+            WorkingDefinition.NumberOfSecurityGroupsToCreate = trackNumberOfSecGroups.Value;
+            WorkingDefinition.ADDomainName = cboDomains.Text;
+            WorkingDefinition.ADOrganizationalUnit = cboOrganizationalUnit.Text;
 
             return true;
         }
@@ -106,8 +109,8 @@ namespace Acceleratio.SPDG.UI
             else
             {
                 groupBox1.Enabled = false;
-                Common.WorkingDefinition.NumberOfUsersToCreate = 0;
-                Common.WorkingDefinition.NumberOfSecurityGroupsToCreate = 0;
+                WorkingDefinition.NumberOfUsersToCreate = 0;
+                WorkingDefinition.NumberOfSecurityGroupsToCreate = 0;
             }
         }
 

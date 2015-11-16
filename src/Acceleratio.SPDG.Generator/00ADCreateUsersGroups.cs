@@ -5,16 +5,16 @@ using System.Text;
 
 namespace Acceleratio.SPDG.Generator
 {
-    public partial class DataGenerator
+    public partial class ServerDataGenerator
     {
-        public void CreateADUsersAndGroups()
+        protected override void CreateUsersAndGroups()
         {
-            if( workingDefinition.NumberOfUsersToCreate > 0  )
+            if(WorkingDefinition.NumberOfUsersToCreate > 0  )
             {
                 try
                 {
                     Log.Write("Creating Active Directory users.");
-                    AD.createUsers(workingDefinition.ADDomainName, workingDefinition.ADOrganizationalUnit, workingDefinition.NumberOfUsersToCreate);
+                    AD.createUsers(WorkingDefinition.ADDomainName, WorkingDefinition.ADOrganizationalUnit, WorkingDefinition.NumberOfUsersToCreate);
                 }
                 catch(Exception ex)
                 {
@@ -22,12 +22,12 @@ namespace Acceleratio.SPDG.Generator
                 }
             }
 
-            if ( workingDefinition.NumberOfSecurityGroupsToCreate > 0)
+            if (WorkingDefinition.NumberOfSecurityGroupsToCreate > 0)
             {
                 try
                 {
                     Log.Write("Creating Active Directory groups.");
-                    AD.createGroups(workingDefinition.ADDomainName, workingDefinition.ADOrganizationalUnit, workingDefinition.NumberOfSecurityGroupsToCreate);
+                    AD.createGroups(WorkingDefinition.ADDomainName, WorkingDefinition.ADOrganizationalUnit, WorkingDefinition.NumberOfSecurityGroupsToCreate);
                 }
                 catch (Exception ex)
                 {

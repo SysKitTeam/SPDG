@@ -9,7 +9,7 @@ using Microsoft.SharePoint.Administration;
 
 namespace Acceleratio.SPDG.Generator
 {
-    public partial class DataGenerator
+    public partial class ServerDataGenerator
     {
         public static void AddWorklfowTemplate()
         {
@@ -41,7 +41,7 @@ namespace Acceleratio.SPDG.Generator
 
         public void AssociateCustomWorkflows()
         {
-            if( !workingDefinition.AttachCustomWorkflowToList)
+            if( !WorkingDefinition.AttachCustomWorkflowToList)
             {
                 return;
             }
@@ -149,7 +149,7 @@ namespace Acceleratio.SPDG.Generator
 
         public void AssociateWorkflows()
         {
-            if( !workingDefinition.CreateOutOfTheBoxWorkflowsToList)
+            if( !WorkingDefinition.CreateOutOfTheBoxWorkflowsToList)
             {
                 return;
             }

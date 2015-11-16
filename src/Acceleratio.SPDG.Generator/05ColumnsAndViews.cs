@@ -16,22 +16,7 @@ namespace Acceleratio.SPDG.Generator
                 return;
             }
 
-            int totalProgress = workingDefinition.MaxNumberOfColumnsPerList * 
-                        workingDefinition.NumberOfSitesToCreate *
-                        workingDefinition.MaxNumberOfListsAndLibrariesPerSite +
-                        (workingDefinition.MaxNumberOfViewsPerList * 
-                        workingDefinition.NumberOfSitesToCreate *
-                        workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
-
-            if( workingDefinition.CreateNewSiteCollections > 0 )
-            {
-                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
-            }
-
-            if (workingDefinition.CreateNewWebApplications > 0)
-            {
-                totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
-            }
+            int totalProgress = CalculateTotalColumnsAndViewsForProgressReporting();
 
             progressOverall("Creating Columns and Views", totalProgress);
 

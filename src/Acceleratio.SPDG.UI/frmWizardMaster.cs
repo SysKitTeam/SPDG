@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Acceleratio.SPDG.Generator;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -21,6 +22,11 @@ namespace Acceleratio.SPDG.UI
             btnHelp.BackColor = System.Drawing.ColorTranslator.FromHtml("#898989");
             pictureBox1.BackColor = System.Drawing.Color.FromArgb(253, 163, 36);
             pictureBox2.BackColor = System.Drawing.Color.FromArgb(253, 163, 36);
+        }
+
+        public GeneratorDefinitionBase WorkingDefinition
+        {
+            get { return Common.WorkingDefinition; }
         }
 
         public frm01Connect RootForm { get; set; }
@@ -55,9 +61,8 @@ namespace Acceleratio.SPDG.UI
         }
 
         private void loadDefinitionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName != "openFileDialog1")
+        {            
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Common.DeserializeDefinition(openFileDialog1.FileName);
 
@@ -76,8 +81,8 @@ namespace Acceleratio.SPDG.UI
 
         private void saveDefinitionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
-            if (saveFileDialog1.FileName != "saveFileDialog1" )
+           
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Common.SerializeDefinition(saveFileDialog1.FileName);
                 MessageBox.Show("Definition saved successfully.");
@@ -90,14 +95,14 @@ namespace Acceleratio.SPDG.UI
 
             if (this is frm01Connect)
             {
-                Common.InitEmptyDefinition();
+                Common.InitServerDefinition();
                 ((frm01Connect)this).loadData();
             }
             else
             {
                 RootForm.MoveAt(1, this);
                 System.Threading.Thread.Sleep(200);
-                Common.InitEmptyDefinition();
+                Common.InitServerDefinition();
                 System.Threading.Thread.Sleep(200);
                 RootForm.loadData();
             }

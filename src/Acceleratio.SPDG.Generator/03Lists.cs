@@ -16,17 +16,12 @@ namespace Acceleratio.SPDG.Generator
         {
             if (workingDefinition.MaxNumberOfListsAndLibrariesPerSite > 0 )
             {
-                int progressTotal = workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate;
-                if (workingDefinition.CreateNewSiteCollections > 0)
-                {
-                    progressTotal = progressTotal * workingDefinition.CreateNewSiteCollections;
-                }
-                if (workingDefinition.CreateNewWebApplications > 0)
-                {
-                    progressTotal = progressTotal * workingDefinition.CreateNewWebApplications;
-                }
-
+                int progressTotal = CalculateTotalListsForProgressReporting();
                 progressOverall("Creating Lists and Libraries", progressTotal);
+            }
+            else
+            {
+                return;
             }
 
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)

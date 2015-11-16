@@ -29,7 +29,10 @@ namespace Acceleratio.SPDG.UI
 
             if(appStart)
             {
-                Common.InitEmptyDefinition();
+                Common.InitServerDefinition();
+                //Common.InitClientDefinition();
+                //WorkingDefinition.Username = "admin@cloudkit24.onmicrosoft.com";
+                //WorkingDefinition.Password = "pass@word1";
             }
 
             loadData();
@@ -71,7 +74,16 @@ namespace Acceleratio.SPDG.UI
                     return;
                 }
 
-                frm02UsersGroups frm = new frm02UsersGroups();
+                frmWizardMaster frm = null;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    frm = new frm05Sites();
+                   
+                }
+                else
+                {
+                    frm = new frm02UsersGroups();                 
+                }
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -115,7 +127,15 @@ namespace Acceleratio.SPDG.UI
                     return;
                 }
 
-                frm06Lists frm = new frm06Lists();
+                frmWizardMaster frm = null;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    frm = new frm12Finalize();
+                }
+                else
+                {
+                    frm = new frm06Lists();
+                }
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -520,9 +540,9 @@ namespace Acceleratio.SPDG.UI
             SampleData.PrepareSampleCollections();
             //AD.createUser();
 
-            txtSharePointSiteURL.Text = Common.WorkingDefinition.SharePointURL;
-            radioConnectSPOnPremise.Checked = Common.WorkingDefinition.ConnectToSPOnPremise;
-            radioConnectSPOnline.Checked = !Common.WorkingDefinition.ConnectToSPOnPremise;
+           // txtSharePointSiteURL.Text = Common.WorkingDefinition.SharePointURL;
+            //radioConnectSPOnPremise.Checked = Common.WorkingDefinition.ConnectToSPOnPremise;
+            //radioConnectSPOnline.Checked = !Common.WorkingDefinition.ConnectToSPOnPremise;
             if (Common.WorkingDefinition.CredentialsOfCurrentUser)
             {
                 radioCurrentCredentials.Checked = true;
@@ -552,50 +572,53 @@ namespace Acceleratio.SPDG.UI
                 //    return false;
                 //}
 
-                if (radioCustomCredentials.Checked && (txtUserName.Text == string.Empty || txtPassword.Text == string.Empty || txtDomain.Text == string.Empty))
-                {
-                    MessageBox.Show("Please, provide custom credentials!");
-                    return false;
-                }
-
+                //TODO:rf vratiti validaciju
+                //if (radioCustomCredentials.Checked && (txtUserName.Text == string.Empty || txtPassword.Text == string.Empty || txtDomain.Text == string.Empty))
+                //{
+                //    MessageBox.Show("Please, provide custom credentials!");
+                //    return false;
+                //}
+                //TODO:rf vratiti validaciju
                 bool isFarmAdmin = true;
 
-                if (radioCustomCredentials.Checked)
-                {
-                    isFarmAdmin = false;
-                    if (Common.impersonateValidUser(txtUserName.Text, txtDomain.Text, txtPassword.Text))
-                    {
-                        Common.undoImpersonation();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Provided custom credentials are not valid!");
-                        return false;
-                    }
+                //if (radioCustomCredentials.Checked)
+                //{
+                //    isFarmAdmin = false;
 
-                    //isFarmAdmin = SPFarm.Local.CurrentUserIsAdministrator();
-                    SPSecurity.RunWithElevatedPrivileges(delegate()
-                    {
-                        SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
-                        foreach (SPUser user in adminGroup.Users)
-                        {
-                            if (user.LoginName.ToLower() == txtDomain.Text.ToLower() + "\\" + txtUserName.Text.ToLower())
-                            {
-                                isFarmAdmin = true;
-                                break;
-                            }
-                        }
-                    });
-                }
+                //    //TODO:rf vratiti validaciju
+                //    //if (Common.impersonateValidUser(txtUserName.Text, txtDomain.Text, txtPassword.Text))
+                //    //{
+                //    //    Common.undoImpersonation();
+                //    //}
+                //    //else
+                //    //{
+                //    //    MessageBox.Show("Provided custom credentials are not valid!");
+                //    //    return false;
+                //    //}
 
-                if (!isFarmAdmin)
-                {
-                    MessageBox.Show("Provided user is not Farm Admin on SharePoint!");
-                    return false;
-                }
+                //    //isFarmAdmin = SPFarm.Local.CurrentUserIsAdministrator();
+                //    SPSecurity.RunWithElevatedPrivileges(delegate()
+                //    {
+                //        SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
+                //        foreach (SPUser user in adminGroup.Users)
+                //        {
+                //            if (user.LoginName.ToLower() == txtDomain.Text.ToLower() + "\\" + txtUserName.Text.ToLower())
+                //            {
+                //                isFarmAdmin = true;
+                //                break;
+                //            }
+                //        }
+                //    });
+                //}
 
-                Common.WorkingDefinition.SharePointURL = txtSharePointSiteURL.Text;
-                Common.WorkingDefinition.ConnectToSPOnPremise = radioConnectSPOnPremise.Checked;
+                //if (!isFarmAdmin)
+                //{
+                //    MessageBox.Show("Provided user is not Farm Admin on SharePoint!");
+                //    return false;
+                //}
+
+               // Common.WorkingDefinition.SharePointURL = txtSharePointSiteURL.Text;
+                //Common.WorkingDefinition.ConnectToSPOnPremise = radioConnectSPOnPremise.Checked;
                 Common.WorkingDefinition.CredentialsOfCurrentUser = radioCurrentCredentials.Checked;
 
                 Common.impersonateUserName = txtUserName.Text;

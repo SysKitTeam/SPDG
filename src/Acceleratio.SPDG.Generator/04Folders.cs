@@ -12,18 +12,7 @@ namespace Acceleratio.SPDG.Generator
         {
             if( workingDefinition.MaxNumberOfFoldersToGenerate > 0 )
             {
-                int totalProgress = workingDefinition.NumberOfSitesToCreate *
-                        workingDefinition.MaxNumberOfFoldersToGenerate ;
-
-                if (workingDefinition.CreateNewSiteCollections > 0)
-                {
-                    totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
-                }
-
-                if (workingDefinition.CreateNewWebApplications > 0)
-                {
-                    totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
-                }
+                int totalProgress = CalculateTotalFoldersForProgressReporting();
 
                 progressOverall("Creating Folders", totalProgress);
             }

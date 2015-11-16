@@ -21,14 +21,14 @@ namespace Acceleratio.SPDG.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GeneratorDefinition definition = new GeneratorDefinition();
+            ServerGeneratorDefinition definition = new ServerGeneratorDefinition();
             definition.SharePointURL = "http://sp-kreso";
             definition.CredentialsOfCurrentUser = false;
             definition.Username = "kresimir.korovljevic";
             definition.Password = "XXXX";
             definition.Domain = "acceleratio";
 
-            XmlSerializer serializer = new XmlSerializer(typeof(GeneratorDefinition));
+            XmlSerializer serializer = new XmlSerializer(typeof(ServerGeneratorDefinition));
             using (TextWriter writer = new StreamWriter("SPDG_Definition.xml"))
             {
                 serializer.Serialize(writer, definition);
@@ -37,10 +37,10 @@ namespace Acceleratio.SPDG.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(GeneratorDefinition));
+            XmlSerializer deserializer = new XmlSerializer(typeof(ServerGeneratorDefinition));
             TextReader reader = new StreamReader("SPDG_Definition.xml");
             object obj = deserializer.Deserialize(reader);
-            GeneratorDefinition XmlData = (GeneratorDefinition)obj;
+            ServerGeneratorDefinition XmlData = (ServerGeneratorDefinition)obj;
             reader.Close();
         }
     }

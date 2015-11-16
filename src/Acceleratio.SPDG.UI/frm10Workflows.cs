@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Acceleratio.SPDG.Generator;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -26,6 +27,11 @@ namespace Acceleratio.SPDG.UI
             loadData();
         }
 
+        public new ServerGeneratorDefinition WorkingDefinition
+        {
+            get { return (ServerGeneratorDefinition)base.WorkingDefinition; }
+        }
+
         void btnBack_Click(object sender, EventArgs e)
         {
             preventCloseMessage = true;
@@ -40,14 +46,14 @@ namespace Acceleratio.SPDG.UI
 
         public override void loadData()
         {
-            chkCreateSomeOutOfTheBoxSPworkflows.Checked = Common.WorkingDefinition.CreateOutOfTheBoxWorkflowsToList;
-            chkAttachCustomWF.Checked = Common.WorkingDefinition.AttachCustomWorkflowToList;
+            chkCreateSomeOutOfTheBoxSPworkflows.Checked = WorkingDefinition.CreateOutOfTheBoxWorkflowsToList;
+            chkAttachCustomWF.Checked = WorkingDefinition.AttachCustomWorkflowToList;
         }
 
         public override bool saveData()
         {
-            Common.WorkingDefinition.CreateOutOfTheBoxWorkflowsToList = chkCreateSomeOutOfTheBoxSPworkflows.Checked;
-            Common.WorkingDefinition.AttachCustomWorkflowToList = chkAttachCustomWF.Checked;
+            WorkingDefinition.CreateOutOfTheBoxWorkflowsToList = chkCreateSomeOutOfTheBoxSPworkflows.Checked;
+            WorkingDefinition.AttachCustomWorkflowToList = chkAttachCustomWF.Checked;
 
             return true;
         }

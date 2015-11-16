@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Security.Principal;
 using System.Runtime.InteropServices;
+using Acceleratio.SPDG.Generator;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -28,6 +29,8 @@ namespace Acceleratio.SPDG.UI
             this.Text = Common.APP_TITLE;
             ucSteps1.showStep(4);
         }
+
+       
 
 
         void btnBack_Click(object sender, EventArgs e)
@@ -76,12 +79,23 @@ namespace Acceleratio.SPDG.UI
             changeRadio();
         }
 
-        private void loadSiteCollections()
+
+        private void loadSiteCollectionsClient()
         {
-            if (Common.WorkingDefinition.UseExistingWebApplication != string.Empty)
+            
+        }
+
+        private void loadSiteCollectionsServer()
+        {
+            ServerGeneratorDefinition serverDefinition= WorkingDefinition as ServerGeneratorDefinition;
+            if (serverDefinition == null)
+            {
+                return;
+            }
+            if (serverDefinition.UseExistingWebApplication != string.Empty)
             {
                 SPWebService spWebService = SPWebService.ContentService;
-                SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == new Guid( Common.WorkingDefinition.UseExistingWebApplication));
+                SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == new Guid(serverDefinition.UseExistingWebApplication));
 
                 foreach (SPSite siteColl in webApp.Sites)
                 {
@@ -93,10 +107,26 @@ namespace Acceleratio.SPDG.UI
             }
         }
 
+        private void loadSiteCollections()
+        {
+            if (WorkingDefinition is ServerGeneratorDefinition)
+            {
+                loadSiteCollectionsServer();
+            }
+            else
+            {
+                loadSiteCollectionsClient();
+            }
+        }
+
         public override void loadData()
         {
-            if (Common.WorkingDefinition.CreateNewWebApplications > 0 )
+            ServerGeneratorDefinition serverDefinition = WorkingDefinition as ServerGeneratorDefinition;
+
+            if (serverDefinition.CreateNewWebApplications > 0 )
             {
+                //TODO:rf zamijeniti sve Common.WorkingDefinition s WorkingDefinition property
+                //dodatno, ovo se moze unutar getera za propertye rijesiti za ovaj if
                 Common.WorkingDefinition.UseExistingSiteCollection = false;
                 trackNumSiteColls.Minimum = 1;
                 Common.WorkingDefinition.CreateNewSiteCollections = 1;

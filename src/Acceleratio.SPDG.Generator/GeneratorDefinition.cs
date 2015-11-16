@@ -5,30 +5,19 @@ using System.Text;
 
 namespace Acceleratio.SPDG.Generator
 {
-    public class GeneratorDefinition
+
+    public abstract class GeneratorDefinitionBase
     {
-        public string SharePointURL { get; set; }
+        public abstract bool IsClientObjectModel { get; }
         public bool CredentialsOfCurrentUser { get; set; }
-        public bool ConnectToSPOnPremise { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Domain { get; set; }
-
-        public string WebAppOwnerLogin { get; set; }
-        public string WebAppOwnerPassword { get; set; }
-        public string WebAppOwnerEmail { get; set; }
-        public string DatabaseServer { get; set; }
         public string SiteCollOwnerLogin { get; set; }
         public string SiteCollOwnerEmail { get; set; }
         public string SiteTemplate { get; set; }
-        public bool GenerateUsersAndSecurityGroupsActiveInDirectory { get; set; }
-        public string ADDomainName { get; set; }
-        public string ADOrganizationalUnit { get; set; }
         public int NumberOfUsersToCreate { get; set; }
         public int NumberOfSecurityGroupsToCreate { get; set; }
-        public int CreateNewWebApplications { get; set; }
-        public string UseExistingWebApplication { get; set; }
-        public string UseExistingWebApplicationName { get; set; }
         public int CreateNewSiteCollections { get; set; }
         public bool UseExistingSiteCollection { get; set; }
         public string SiteCollection { get; set; }
@@ -59,8 +48,6 @@ namespace Acceleratio.SPDG.Generator
         public bool AddSiteColumnsToContentTypes { get; set; }
         public int NumberSiteColumnsPerContentType { get; set; }
         public bool ContentTypesCanInheritFromOtherContentType { get; set; }
-        public bool CreateOutOfTheBoxWorkflowsToList { get; set; }
-        public bool AttachCustomWorkflowToList { get; set; }
         public int PermissionsPercentOfSites { get; set; }
         public int PermissionsPercentOfLists { get; set; }
         public int PermissionsPercentOfFolders { get; set; }
@@ -68,5 +55,31 @@ namespace Acceleratio.SPDG.Generator
         public int PermissionsPercentForUsers { get; set; }
         public int PermissionsPercentForSPGroups { get; set; }
         public int PermissionsPerObject { get; set; }
+    }
+
+    public class ClientGeneratorDefinition : GeneratorDefinitionBase
+    {
+        public override bool IsClientObjectModel { get { return true; } }
+    }
+
+    public class ServerGeneratorDefinition : GeneratorDefinitionBase
+    {
+        public override bool IsClientObjectModel { get { return false; } }
+        public string SharePointURL { get; set; }
+       
+      //  public bool ConnectToSPOnPremise { get; set; }
+
+        public string WebAppOwnerLogin { get; set; }
+        public string WebAppOwnerPassword { get; set; }
+        public string WebAppOwnerEmail { get; set; }
+        public string DatabaseServer { get; set; }
+        public bool GenerateUsersAndSecurityGroupsActiveInDirectory { get; set; }
+        public string ADDomainName { get; set; }
+        public string ADOrganizationalUnit { get; set; }
+        public int CreateNewWebApplications { get; set; }
+        public string UseExistingWebApplication { get; set; }
+        public string UseExistingWebApplicationName { get; set; }
+        public bool CreateOutOfTheBoxWorkflowsToList { get; set; }
+        public bool AttachCustomWorkflowToList { get; set; }
     }
 }

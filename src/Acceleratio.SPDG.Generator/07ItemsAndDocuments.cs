@@ -16,20 +16,8 @@ namespace Acceleratio.SPDG.Generator
         {
             int totalProgress = 0;
             if( workingDefinition.MaxNumberofItemsToGenerate > 0 )
-            { 
-                totalProgress = workingDefinition.NumberOfSitesToCreate *
-                                workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
-                            workingDefinition.MaxNumberofItemsToGenerate;
-
-                if (workingDefinition.CreateNewSiteCollections > 0)
-                {
-                    totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
-                }
-
-                if (workingDefinition.CreateNewWebApplications > 0)
-                {
-                    totalProgress = totalProgress * workingDefinition.CreateNewWebApplications;
-                }
+            {
+                totalProgress = CalculateTotalItemsForProgressReporting();
             }
             else
             {
