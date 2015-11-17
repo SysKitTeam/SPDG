@@ -269,7 +269,7 @@ namespace Acceleratio.SPDG.Generator
                 CreateLists();
 
                 //Create folders with nested folder levels
-               // CreateFolders();
+                CreateFolders();
 
                 //Create folders with nested folder levels
                // CreateColumnsAndViews();

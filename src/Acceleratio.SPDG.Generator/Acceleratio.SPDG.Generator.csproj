@@ -118,13 +118,16 @@
     <Compile Include="09Workflows.cs" />
     <Compile Include="10Permissions.cs" />
     <Compile Include="AD.cs" />
+    <Compile Include="Objects\Client\SPDGClientFolder.cs" />
     <Compile Include="Objects\Client\SPDGClientList.cs" />
     <Compile Include="Objects\Client\SPDGClientSite.cs" />
     <Compile Include="Objects\Client\SPDGClientWeb.cs" />
+    <Compile Include="Objects\Server\SPDGServerFolder.cs" />
     <Compile Include="Objects\Server\SPDGServerList.cs" />
     <Compile Include="Objects\Server\SPDGServerWeb.cs" />
     <Compile Include="Objects\Server\SPDGServerSite.cs" />
     <Compile Include="Objects\SPDGClientObjectsFactory.cs" />
+    <Compile Include="Objects\SPDGFolder.cs" />
     <Compile Include="Objects\SPDGList.cs" />
     <Compile Include="Objects\SPDGListItem.cs" />
     <Compile Include="Objects\SPDGObjectsFactory.cs" />

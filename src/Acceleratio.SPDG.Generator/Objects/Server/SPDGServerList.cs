@@ -20,9 +20,19 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
             get { return _spList.DefaultViewUrl; }
         }
 
+        public override SPDGFolder RootFolder
+        {
+            get
+            {
+                return  new SPDGServerFolder(_spList.RootFolder);
+            }
+        }
+
         public SPDGServerList(SPList spList)
         {
             _spList = spList;
         }
+
+        
     }
 }

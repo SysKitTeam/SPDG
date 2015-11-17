@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Acceleratio.SPDG.Generator.Objects;
 using Microsoft.SharePoint;
 
 namespace Acceleratio.SPDG.Generator
@@ -19,11 +20,11 @@ namespace Acceleratio.SPDG.Generator
 
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
-                using (SPSite siteColl = new SPSite(siteCollInfo.URL))
+                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
+                        using (var web = siteColl.OpenWeb(siteInfo.ID))
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
@@ -35,9 +36,9 @@ namespace Acceleratio.SPDG.Generator
                                         {
                                             Log.Write("Creating folders in '" + web.Url + "/" + listInfo.Name);
 
-                                            SPList list = web.Lists[listInfo.Name];
-                                            string folderName = findAvailableListName(list);
-                                            SPFolder folder = list.RootFolder.SubFolders.Add(folderName);
+                                            var list = web.GetList(listInfo.Name);
+                                            string folderName = findAvailableFolderName(list);
+                                            var folder = list.RootFolder.AddFolder(folderName);
                                             folder.Update();
 
                                             FolderInfo folderInfo = new FolderInfo();
@@ -55,8 +56,8 @@ namespace Acceleratio.SPDG.Generator
                                                     break;
                                                 }
 
-                                                folderName = findAvailableListName(list);
-                                                folder = folder.SubFolders.Add(folderName);
+                                                folderName = findAvailableFolderName(list);
+                                                folder = folder.AddFolder(folderName);
                                                 //folder.Name = "Folder" + folderNumber;
                                                 folder.Update();
 
@@ -85,7 +86,7 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
-        private string findAvailableListName(SPList list)
+        private string findAvailableFolderName(SPDGList list)
         {
             string candidate = SampleData.GetSampleValueRandom(SampleData.Countries);
 

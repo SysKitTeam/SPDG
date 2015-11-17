@@ -21,6 +21,7 @@ namespace Acceleratio.SPDG.Generator.Objects
         public abstract IEnumerable<SPDGList> Lists { get; }
         public abstract Guid AddList(string title, string description, int templateId);
         public abstract SPDGList GetList(Guid id);
+        public abstract SPDGList GetList(string title);
         public abstract SPDGList TryGetList(string title);
 
     }

@@ -119,6 +119,10 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
         {
             return new SPDGServerList(_spWeb.Lists[id]);
         }
+        public override SPDGList GetList(string listName)
+        {
+            return new SPDGServerList(_spWeb.Lists[listName]);
+        }
 
         public override SPDGList TryGetList(string title)
         {

@@ -23,6 +23,14 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             get { return _list.DefaultViewUrl; }
         }
 
+        public override SPDGFolder RootFolder
+        {
+            get
+            {
+                return new SPDGClientFolder(_list.RootFolder, _context);
+            }
+        }
+
         public SPDGClientList(SPDGWeb web, List list, ClientContext context)
         {
             _web = web;
@@ -37,7 +45,8 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                 List<Expression<Func<List, object>>> includeExpression = new List<Expression<Func<List, object>>>();
                 includeExpression.Add(web => web.Id);
                 includeExpression.Add(web => web.Title);
-                includeExpression.Add(web => web.DefaultViewUrl);                
+                includeExpression.Add(web => web.DefaultViewUrl);
+                includeExpression.Add(web => web.RootFolder);
                 return includeExpression.ToArray();
             }
         }

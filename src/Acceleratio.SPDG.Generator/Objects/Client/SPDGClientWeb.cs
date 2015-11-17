@@ -91,6 +91,17 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             return new SPDGClientList(this,list, _context);
         }
 
+        public override SPDGList GetList(string title)
+        {
+            var list = TryGetList(title);
+            if (list == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return list;
+        }
+
         public override SPDGList TryGetList(string title)
         {
             var query = _web.Lists.Where(x => x.Title == title).Include(SPDGClientList.IncludeExpression);

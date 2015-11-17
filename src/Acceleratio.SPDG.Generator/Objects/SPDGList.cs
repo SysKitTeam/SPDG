@@ -9,5 +9,7 @@ namespace Acceleratio.SPDG.Generator.Objects
     {
         public abstract  string Title { get; }
         public abstract  string DefaultViewUrl { get; }
+        public abstract SPDGFolder RootFolder { get; }
+        
     }
 }
