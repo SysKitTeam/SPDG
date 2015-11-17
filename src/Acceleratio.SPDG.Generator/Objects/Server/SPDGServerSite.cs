@@ -1,3 +1,4 @@
+using System;
 using Microsoft.SharePoint;
 
 namespace Acceleratio.SPDG.Generator.Objects.Server
@@ -10,6 +11,11 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
         {
             this._spSite = sPSite;
             _rootWeb = new SPDGServerWeb(sPSite.RootWeb);
+        }
+
+        public override SPDGWeb OpenWeb(Guid id)
+        {
+            return new SPDGServerWeb(_spSite.OpenWeb(id));
         }
 
         public override SPDGWeb RootWeb

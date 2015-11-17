@@ -1,4 +1,5 @@
-﻿using Microsoft.SharePoint.Client;
+﻿using System;
+using Microsoft.SharePoint.Client;
 
 namespace Acceleratio.SPDG.Generator.Objects.Client
 {
@@ -11,6 +12,14 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
         {
             _context = context;
             _clientSite = clientSite;
+        }
+
+        public override SPDGWeb OpenWeb(Guid id)
+        {
+            var web=_clientSite.OpenWebById(id);
+            _context.Load(web, SPDGClientWeb.IncludeExpression);
+            _context.ExecuteQuery();
+            return new SPDGClientWeb(web, null, _context, this);
         }
 
         public override SPDGWeb RootWeb

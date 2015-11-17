@@ -67,17 +67,62 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
             }
         }
 
-        public override void AddNavigationNode(string title, string url)
+        public override void AddNavigationNode(string title, string url, NavigationNodeLocation location)
         {
-            SPNavigationNodeCollection topnav = _spWeb.Navigation.TopNavigationBar;
+            SPNavigationNodeCollection topnav = null;
             SPNavigationNode node = new SPNavigationNode(title, url);
-            node = topnav.AddAsLast(node);
+            if (_spWeb.Navigation.GetNodeByUrl(node.Url) != null)
+            {
+                return;
+            }
+            switch (location)
+            {
+                case NavigationNodeLocation.TopNavigationBar:
+                    topnav = _spWeb.Navigation.TopNavigationBar;
+                    topnav.AddAsLast(node);
+                    break;                              
+                case NavigationNodeLocation.QuickLaunchLists:                                        
+                    _spWeb.Navigation.AddToQuickLaunch(node, SPQuickLaunchHeading.Lists);                    
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(location), location, null);
+            }   
         }
 
-        public override string Name { get { return _spWeb.Name; } }
+        public override string Name
+        {
+            get { return _spWeb.Name; }
+        }
+
         public override Guid ID
         {
             get { return _spWeb.ID; }
+        }
+
+        public override IEnumerable<SPDGList> Lists
+        {
+            get
+            {
+                foreach (SPList spList in _spWeb.Lists)
+                {
+                    yield return new SPDGServerList(spList);
+                }
+            }
+        }
+
+        public override Guid AddList(string title, string description, int templateId)
+        {
+            return _spWeb.Lists.Add(title, description, (SPListTemplateType) templateId);
+        }
+
+        public override SPDGList GetList(Guid id)
+        {
+            return new SPDGServerList(_spWeb.Lists[id]);
+        }
+
+        public override SPDGList TryGetList(string title)
+        {
+           return new SPDGServerList(_spWeb.Lists.TryGetList(title));
         }
     }
 }

@@ -29,10 +29,10 @@ namespace Acceleratio.SPDG.UI
 
             if(appStart)
             {
-                Common.InitServerDefinition();
-                //Common.InitClientDefinition();
-                //WorkingDefinition.Username = "admin@cloudkit24.onmicrosoft.com";
-                //WorkingDefinition.Password = "pass@word1";
+                //Common.InitServerDefinition();
+                Common.InitClientDefinition();
+                WorkingDefinition.Username = "admin@cloudkit24.onmicrosoft.com";
+                WorkingDefinition.Password = "pass@word1";
             }
 
             loadData();
@@ -126,16 +126,8 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-
-                frmWizardMaster frm = null;
-                if (WorkingDefinition.IsClientObjectModel)
-                {
-                    frm = new frm12Finalize();
-                }
-                else
-                {
-                    frm = new frm06Lists();
-                }
+                             
+                var frm = new frm06Lists();                
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -145,8 +137,15 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-
-                frm07ViewsColumns frm = new frm07ViewsColumns();
+                frmWizardMaster frm = null;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    frm = new frm12Finalize();
+                }
+                else
+                {
+                    frm = new frm07ViewsColumns();
+                }                
                 frm.RootForm = this;
                 frm.Show();
             }

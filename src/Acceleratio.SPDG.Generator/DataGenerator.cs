@@ -29,7 +29,7 @@ namespace Acceleratio.SPDG.Generator
         protected override void ResolveWebAppsAndSiteCollections()
         {
             //TODO:rf
-            base.workingSiteCollections.Add(new SiteCollInfo() {URL = "https://cloudkit24.sharepoint.com"});
+            base.workingSiteCollections.Add(new SiteCollInfo() {URL = "https://cloudkit24.sharepoint.com/sites/Dev" });
         }
     }
 
@@ -266,7 +266,7 @@ namespace Acceleratio.SPDG.Generator
                 CreateSites();
 
                 //Create lists and libraries
-                //CreateLists();
+                CreateLists();
 
                 //Create folders with nested folder levels
                // CreateFolders();

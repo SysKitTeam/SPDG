@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Acceleratio.SPDG.Generator.Objects
 {
-    class SPDGList
+    public abstract class SPDGList
     {
+        public abstract  string Title { get; }
+        public abstract  string DefaultViewUrl { get; }
     }
 }

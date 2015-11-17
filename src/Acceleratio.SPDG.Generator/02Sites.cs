@@ -41,19 +41,23 @@ namespace Acceleratio.SPDG.Generator
                 if (siteCounter < maxSitesToCreate)
                 {
                     var childSubsite = CreateSubsite(parentWeb, parentBaseName, currentLevel, out baseName);
-
-                    SiteInfo siteInfo = new SiteInfo();
-                    siteInfo.URL = childSubsite.Url;
-                    Guid siteID = childSubsite.ID;
-                    siteInfo.ID = siteID;
-                    sites.Add(siteInfo);
-
                     siteCounter++;
-
-                    if (currentLevel < maxLevels)
+                    if (childSubsite != null)
                     {
-                        CreateSubsites(ref sites, childSubsite, currentLevel + 1, maxLevels, ref siteCounter, maxSitesToCreate, baseName);
+                        SiteInfo siteInfo = new SiteInfo();
+                        siteInfo.URL = childSubsite.Url;
+                        Guid siteID = childSubsite.ID;
+                        siteInfo.ID = siteID;
+                        sites.Add(siteInfo);
+                        if (currentLevel < maxLevels)
+                        {
+                            CreateSubsites(ref sites, childSubsite, currentLevel + 1, maxLevels, ref siteCounter, maxSitesToCreate, baseName);
+                        }
                     }
+
+                    
+
+                    
                 }
             }
         }
@@ -93,7 +97,7 @@ namespace Acceleratio.SPDG.Generator
             {              
                 
                 childWeb = parentWeb.AddWeb(url, siteName, null, lang, _templateName, false, false);
-                addQuickLaunch(childWeb);
+                AddToNavigationBar(childWeb);
 
                 Log.Write("Site created '" + childWeb.Url + "'");
             }
@@ -124,9 +128,9 @@ namespace Acceleratio.SPDG.Generator
         //    }
         //}
 
-        private void addQuickLaunch(SPDGWeb childWeb)
+        private void AddToNavigationBar(SPDGWeb childWeb)
         {
-            childWeb.ParentWeb.AddNavigationNode(childWeb.Title, childWeb.ServerRelativeUrl);            
+            childWeb.ParentWeb.AddNavigationNode(childWeb.Title, childWeb.ServerRelativeUrl, NavigationNodeLocation.TopNavigationBar);            
         }
 
         private void findAvailableSiteName(SPDGWeb web, out string siteName, out string siteUrl, string parentBaseName, int level, out string baseName)
@@ -153,18 +157,18 @@ namespace Acceleratio.SPDG.Generator
 
             
             string candidate = SampleData.GetSampleValueRandom(primaryCollection);
-            string url = Utilities.Path.GenerateSlug(candidate, 7);
+            string leafName = Utilities.Path.GenerateSlug(candidate, 7);
             baseName = candidate;
             
             int i = 0;
-            while (candidate==parentBaseName || web.Webs.Any(s => s.Name.Equals(url)))
+            while (candidate==parentBaseName || web.Webs.Any(s => s.Url.Equals(web.Url + "/" + leafName)))
             {
                 candidate = SampleData.GetRandomName(primaryCollection, secondaryCollection, null, ref i, out baseName);
-                url = Utilities.Path.GenerateSlug(candidate, 7);
+                leafName = Utilities.Path.GenerateSlug(candidate, 7);
             }
 
             siteName = candidate;
-            siteUrl = url;
+            siteUrl = leafName;
         }
     }
 }

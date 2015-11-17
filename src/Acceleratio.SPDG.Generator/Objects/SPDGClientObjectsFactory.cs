@@ -18,7 +18,7 @@ namespace Acceleratio.SPDG.Generator.Objects
             ClientContext context = new ClientContext(url);
             context.Credentials = _credentials;
             context.Load(context.Site, x=>x.Id, x=>x.Url, x=>x.ServerRelativeUrl);
-            context.Load(context.Site.RootWeb, x=>x.Id, x=>x.Title, x=>x.Url, x=>x.ServerRelativeUrl);
+            context.Load(context.Site.RootWeb, SPDGClientWeb.IncludeExpression);
 
             context.ExecuteQuery();
             return new SPDGClientSite(context, context.Site);

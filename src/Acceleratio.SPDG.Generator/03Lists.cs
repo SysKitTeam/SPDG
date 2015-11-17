@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Acceleratio.SPDG.Generator.Objects;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Navigation;
 
@@ -26,11 +27,11 @@ namespace Acceleratio.SPDG.Generator
 
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
-                using (SPSite siteColl = new SPSite(siteCollInfo.URL))
+                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using( SPWeb web = siteColl.OpenWeb(siteInfo.ID)) 
+                        using(var web = siteColl.OpenWeb(siteInfo.ID)) 
                         {
                             Log.Write("Creating lists in site '" + web.Url + "'");
                             Random rnd = new Random();
@@ -44,22 +45,11 @@ namespace Acceleratio.SPDG.Generator
                                     getNextTemplateType();
                                     string listName = findAvailableListName(web);
                                     progressDetail("Creating List '" + listName + "' in site '" + web.Url + "'");
-                                    Guid listGuid = web.Lists.Add(listName, string.Empty, lastTemplateType);
+                                    
+                                    Guid listGuid = web.AddList(listName, string.Empty, (int)lastTemplateType);
 
-                                    SPList list = web.Lists.GetList(listGuid, false);
-                                    // Check for an existing link to the list.
-                                    SPNavigationNode listNode = web.Navigation.GetNodeByUrl(list.DefaultViewUrl);
-
-                                    // No link, so create one.
-                                    if (listNode == null)
-                                    {
-                                        // Create the node.
-                                        listNode = new SPNavigationNode(list.Title, list.DefaultViewUrl);
-
-                                        // Add it to Quick Launch.
-                                        listNode = web.Navigation.AddToQuickLaunch(listNode, SPQuickLaunchHeading.Lists);
-                                    }
-
+                                    var list = web.GetList(listGuid);                                    
+                                    web.AddNavigationNode(list.Title, list.DefaultViewUrl, NavigationNodeLocation.QuickLaunchLists);
                                     ListInfo listInfo = new ListInfo();
                                     listInfo.Name = listName;
                                     listInfo.TemplateType = lastTemplateType;
@@ -204,7 +194,7 @@ namespace Acceleratio.SPDG.Generator
             return lastTemplateType;
         }
 
-        private string findAvailableListName(SPWeb web)
+        private string findAvailableListName(SPDGWeb web)
         {
             string candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
 
@@ -217,7 +207,7 @@ namespace Acceleratio.SPDG.Generator
                 candidate += " Calendar";
             }
 
-            while (web.Lists.TryGetList(candidate) != null)
+            while (web.TryGetList(candidate) != null)
             {
                 candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
             }
