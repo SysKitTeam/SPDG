@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.SharePoint;
 using System.IO;
+using Acceleratio.SPDG.Generator.Objects;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -28,17 +29,17 @@ namespace Acceleratio.SPDG.Generator
 
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
-                using (SPSite siteColl = new SPSite(siteCollInfo.URL))
+                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
-                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
+                        using (var web = siteColl.OpenWeb(siteInfo.ID))
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
                                 if (!listInfo.isLib)
                                 {
-                                    SPList list = web.Lists[listInfo.Name];
+                                    var list = web.GetList(listInfo.Name);
 
                                     if( listInfo.TemplateType == SPListTemplateType.Tasks )
                                     {
@@ -53,35 +54,37 @@ namespace Acceleratio.SPDG.Generator
                                         Log.Write("Start adding items to list: " + listInfo.Name + " in site: " + web.Url);
                                     }
                                     
-
+                                    List<SPDGListItemInfo> listItemsToCreate=new List<SPDGListItemInfo>();
                                     for (int i = 0; i < workingDefinition.MaxNumberofItemsToGenerate; i++ )
                                     {
+                                        var itemInfo=new SPDGListItemInfo();
                                         if (listInfo.TemplateType == SPListTemplateType.Tasks)
                                         {
-                                            addTaskToList(list, null, false);
+                                            populateTask(itemInfo);
                                         }
                                         else if (listInfo.TemplateType == SPListTemplateType.Events)
                                         {
-                                            addEventToList(list, null, false);
+                                            populateEvent(itemInfo);
                                         }
                                         else
                                         {
-                                            addItemToList(list, null, false);
+                                            populateItemInfo(list, itemInfo, false);
                                         }
+                                        listItemsToCreate.Add(itemInfo);
                                     }
-
-                                    
+                                    list.AddItems(listItemsToCreate);
                                 }
                                 else
                                 {
                                     docsAdded = 0;
-                                    SPList list = web.Lists[listInfo.Name];
+                                    var list = web.GetList(listInfo.Name);
                                     Log.Write("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url);
 
-                                    while (docsAdded < workingDefinition.MaxNumberofItemsToGenerate)
-                                    {
-                                        addDocumentToFolder(list.RootFolder);
-                                    }
+                                    //TODO:rf bring back documents support
+                                    //while (docsAdded < workingDefinition.MaxNumberofItemsToGenerate)
+                                    //{
+                                    //    addDocumentToFolder(list.RootFolder);
+                                    //}
 
                                 }
                             }
@@ -93,33 +96,34 @@ namespace Acceleratio.SPDG.Generator
 
         private void addDocumentToFolder(SPFolder folder)
         {
-            if( docsAdded >= workingDefinition.MaxNumberofItemsToGenerate)
-            {
-                return;
-            }
+            //TODO:rf bring back document support
+            //if( docsAdded >= workingDefinition.MaxNumberofItemsToGenerate)
+            //{
+            //    return;
+            //}
 
-            fileTypeRotator();
-            byte[] fileContent = getFileContent();
-            SPFile spFile = folder.Files.Add(SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames)  + " " + SampleData.GetRandomNumber(1, 30000) + "." + currentFileType , fileContent, true);
-            if (spFile.Item != null)
-            { 
-                addItemToList( (SPList) folder.DocumentLibrary, spFile.Item, true);
-            }
-            docsAdded++;
+            //fileTypeRotator();
+            //byte[] fileContent = getFileContent();
+            //SPFile spFile = folder.Files.Add(SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames)  + " " + SampleData.GetRandomNumber(1, 30000) + "." + currentFileType , fileContent, true);
+            //if (spFile.Item != null)
+            //{ 
+            //    populateItemInfo( (SPList) folder.DocumentLibrary, spFile.Item, true);
+            //}
+            //docsAdded++;
             
 
-            foreach(SPFolder childFolder in folder.SubFolders)
-            {
-                if( docsAdded >= workingDefinition.MaxNumberofItemsToGenerate)
-                {
-                    break;
-                }
+            //foreach(SPFolder childFolder in folder.SubFolders)
+            //{
+            //    if( docsAdded >= workingDefinition.MaxNumberofItemsToGenerate)
+            //    {
+            //        break;
+            //    }
 
-                if( childFolder.Url.IndexOf("/Forms") == -1  )
-                {
-                    addDocumentToFolder(childFolder);
-                }
-            }
+            //    if( childFolder.Url.IndexOf("/Forms") == -1  )
+            //    {
+            //        addDocumentToFolder(childFolder);
+            //    }
+            //}
         }
 
         private byte[] getFileContent()
@@ -152,20 +156,15 @@ namespace Acceleratio.SPDG.Generator
             return content;
         }
 
-        private void addItemToList( SPList list, SPListItem item, bool isDocLib )
+        private void populateItemInfo(SPDGList list, ISPDGListItemInfo item, bool isDocLib )
         {
             List<string> userFields = new List<string>();
-            foreach(SPField field in list.Fields)
+            foreach(var field in list.Fields)
             {
-                if( !field.SourceId.StartsWith("http://"))
+                if( _availableFieldInfos.Any(x=>x.DisplayName==field.Title))
                 {
                     userFields.Add(field.Title);
                 }
-            }
-
-            if( item == null )
-            {
-                item = list.AddItem();
             }
 
             string title = getFieldValue("First Name") + " "  + getFieldValue("Last Name");
@@ -179,8 +178,7 @@ namespace Acceleratio.SPDG.Generator
                     item[fieldName] = value;
                 }
             }
-
-            item.Update();
+            
             if (isDocLib)
             {
                 progressDetail("Document added: " + title);
@@ -191,40 +189,24 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
-        private void addTaskToList(SPList list, SPListItem item, bool isDocLib)
+        private void populateTask(ISPDGListItemInfo item)
         {
-            if (item == null)
-            {
-                item = list.AddItem();
-            }
-
             string title = SampleData.GetSampleValueRandom(SampleData.Accounts) + " Task";
             item["Title"] = title;
             item["Status"] = "In Progress";
             item["Due Date"] = SampleData.GetRandomDate(2013, 2015);
             item["Priority"] = "(2) Normal";
-            item["% Complete"] = SampleData.GetRandomNumber(1, 100) / 100;
-            item.Update();
-
-            progressDetail("task added: " + title);
+            item["% Complete"] = SampleData.GetRandomNumber(1, 100) / 100;                        
         }
 
-        private void addEventToList(SPList list, SPListItem item, bool isDocLib)
-        {
-            if (item == null)
-            {
-                item = list.AddItem();
-            }
-
+        private void populateEvent(ISPDGListItemInfo item)
+        {            
             string title = SampleData.GetSampleValueRandom(SampleData.Accounts) + " Event";
             item["Title"] = title;
             DateTime time = SampleData.GetRandomDateCurrentMonth();
             item["Start Time"] = time;
             item["End Time"] = time;
-            item["Location"] = SampleData.GetSampleValueRandom(SampleData.Cities);
-            item.Update();
-
-            progressDetail("event added: " + title);
+            item["Location"] = SampleData.GetSampleValueRandom(SampleData.Cities);                 
         }
 
         private object getFieldValue( string fieldName)

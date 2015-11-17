@@ -137,15 +137,8 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-                frmWizardMaster frm = null;
-                if (WorkingDefinition.IsClientObjectModel)
-                {
-                    frm = new frm12Finalize();
-                }
-                else
-                {
-                    frm = new frm07ViewsColumns();
-                }                
+                var frm = new frm07ViewsColumns();                
+                frm = new frm07ViewsColumns();               
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -155,8 +148,7 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-
-                frm08ListItems frm = new frm08ListItems();
+                var frm = new frm08ListItems();               
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -167,7 +159,15 @@ namespace Acceleratio.SPDG.UI
                     return;
                 }
 
-                frm09ContentTypes frm = new frm09ContentTypes();
+                frmWizardMaster frm = null;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    frm = new frm12Finalize();
+                }
+                else
+                {
+                    frm = new frm09ContentTypes();
+                }                
                 frm.RootForm = this;
                 frm.Show();
             }

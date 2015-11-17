@@ -272,13 +272,13 @@ namespace Acceleratio.SPDG.Generator
                 CreateFolders();
 
                 //Create folders with nested folder levels
-               // CreateColumnsAndViews();
+                CreateColumnsAndViews();
 
                 //Create content types
                // CreateContentTypes();
 
                 //Create items and documents
-                //CreateItemsAndDocuments();
+                CreateItemsAndDocuments();
 
                 //AssociateWorkflows
                 //TODO:rf vratiti za server
