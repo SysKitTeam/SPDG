@@ -72,7 +72,10 @@ namespace Acceleratio.SPDG.Generator
                                         }
                                         listItemsToCreate.Add(itemInfo);
                                     }
+                                    //TODO:rf better messages
+                                    Log.Write(string.Format("Created {0} items for list {1}: ", workingDefinition.MaxNumberofItemsToGenerate, list.RootFolder.Url));
                                     list.AddItems(listItemsToCreate);
+                                    Log.Write(string.Format("Added {0} items to list {1}: ", workingDefinition.MaxNumberofItemsToGenerate, list.RootFolder.Url));
                                 }
                                 else
                                 {
@@ -163,7 +166,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 if( _availableFieldInfos.Any(x=>x.DisplayName==field.Title))
                 {
-                    userFields.Add(field.Title);
+                    userFields.Add(field.InternalName);
                 }
             }
 
@@ -177,16 +180,7 @@ namespace Acceleratio.SPDG.Generator
                 {
                     item[fieldName] = value;
                 }
-            }
-            
-            if (isDocLib)
-            {
-                progressDetail("Document added: " + title);
-            }
-            else
-            {
-                progressDetail("Item added: " + title);
-            }
+            }         
         }
 
         private void populateTask(ISPDGListItemInfo item)
@@ -194,9 +188,9 @@ namespace Acceleratio.SPDG.Generator
             string title = SampleData.GetSampleValueRandom(SampleData.Accounts) + " Task";
             item["Title"] = title;
             item["Status"] = "In Progress";
-            item["Due Date"] = SampleData.GetRandomDate(2013, 2015);
+            item["DueDate"] = SampleData.GetRandomDate(2013, 2015);
             item["Priority"] = "(2) Normal";
-            item["% Complete"] = SampleData.GetRandomNumber(1, 100) / 100;                        
+            item["PercentComplete"] = SampleData.GetRandomNumber(1, 100) / 100;                        
         }
 
         private void populateEvent(ISPDGListItemInfo item)
@@ -204,8 +198,8 @@ namespace Acceleratio.SPDG.Generator
             string title = SampleData.GetSampleValueRandom(SampleData.Accounts) + " Event";
             item["Title"] = title;
             DateTime time = SampleData.GetRandomDateCurrentMonth();
-            item["Start Time"] = time;
-            item["End Time"] = time;
+            item["EventDate"] = time;
+            item["EndDate"] = time;
             item["Location"] = SampleData.GetSampleValueRandom(SampleData.Cities);                 
         }
 

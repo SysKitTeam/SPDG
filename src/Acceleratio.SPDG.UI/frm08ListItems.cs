@@ -77,7 +77,7 @@ namespace Acceleratio.SPDG.UI
             }
 
             Common.WorkingDefinition.PrefilListAndLibrariesWithItems = chkPrefil.Checked;
-            Common.WorkingDefinition.MaxNumberofItemsToGenerate = trackMaxNumberOfItems.Value;
+            Common.WorkingDefinition.MaxNumberofItemsToGenerate = NumberOfItemsToGenerate;
             Common.WorkingDefinition.IncludeDocTypeDOCX = chkDOCX.Checked;
             Common.WorkingDefinition.IncludeDocTypeXLSX = chkXLSX.Checked;
             Common.WorkingDefinition.IncludeDocTypePDF = chkPDF.Checked;
@@ -111,9 +111,19 @@ namespace Acceleratio.SPDG.UI
             }
         }
 
+
+
+        int NumberOfItemsToGenerate
+        {
+            get
+            {
+                return trackMaxNumberOfItems.Value;
+            }
+        }
+
         private void trackMaxNumberOfItems_ValueChanged(object sender, EventArgs e)
         {
-            lblNumItems.Text = trackMaxNumberOfItems.Value.ToString();
+            lblNumItems.Text = NumberOfItemsToGenerate.ToString();
         }
 
         private void trackMinDocSize_ValueChanged(object sender, EventArgs e)
