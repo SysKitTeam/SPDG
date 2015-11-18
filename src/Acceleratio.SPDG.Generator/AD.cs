@@ -228,7 +228,7 @@ namespace Acceleratio.SPDG.Generator
                         groupPrincipal.Name = SampleData.GetSampleValueRandom(SampleData.Accounts);
                         groupPrincipal.DisplayName = groupPrincipal.Name;
 
-                        groupPrincipal.Save();
+                        groupPrincipal.Save();                        
                     }
                     catch (Exception ex)
                     {

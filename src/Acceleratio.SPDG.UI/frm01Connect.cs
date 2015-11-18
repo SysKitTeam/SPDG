@@ -33,6 +33,7 @@ namespace Acceleratio.SPDG.UI
                 Common.InitClientDefinition();
                 WorkingDefinition.Username = "admin@cloudkit24.onmicrosoft.com";
                 WorkingDefinition.Password = "pass@word1";
+                (WorkingDefinition as ClientGeneratorDefinition).TenantName = "cloudkit24";
             }
 
             loadData();
@@ -77,7 +78,7 @@ namespace Acceleratio.SPDG.UI
                 frmWizardMaster frm = null;
                 if (WorkingDefinition.IsClientObjectModel)
                 {
-                    frm = new frm05Sites();
+                    frm = new frm02UsersGroups();
                    
                 }
                 else
@@ -94,7 +95,17 @@ namespace Acceleratio.SPDG.UI
                     return;
                 }
 
-                frm03WebApplications frm = new frm03WebApplications();
+                frmWizardMaster frm = null;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    frm = new frm12Finalize();
+
+                }
+                else
+                {
+                    frm = new frm03WebApplications();
+                }
+               // frm03WebApplications frm = new frm03WebApplications();
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -556,15 +567,35 @@ namespace Acceleratio.SPDG.UI
                 radioCustomCredentials.Checked = true;
                 txtUserName.Text = Common.WorkingDefinition.Username;
                 txtPassword.Text = Common.WorkingDefinition.Password;
-                txtDomain.Text = Common.WorkingDefinition.Domain;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    txtDomain.Text = ((ClientGeneratorDefinition) WorkingDefinition).TenantName;
+                }
+                else
+                {
+                    txtDomain.Text = Common.WorkingDefinition.Domain;
+                }
             }
 
+        }
+
+        private void validateClient()
+        {
+            
         }
 
         public override bool saveData()
         {
             try
             {
+                WorkingDefinition.Username = txtUserName.Text;
+                WorkingDefinition.Password = txtPassword.Text;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    ((ClientGeneratorDefinition) WorkingDefinition).TenantName = txtDomain.Text;                    
+                }
+                WorkingDefinition.ValidateCredentials();
+
                 //if (SPFarm.Local == null)
                 //{
                 //    MessageBox.Show("SharePoint is not installed on current machine!");
@@ -623,7 +654,7 @@ namespace Acceleratio.SPDG.UI
                 Common.impersonateUserName = txtUserName.Text;
                 Common.impersonatePassword = txtPassword.Text;
                 Common.impersonateDomain = txtDomain.Text;
-
+                
                 return true;
             }
             catch(Exception ex)

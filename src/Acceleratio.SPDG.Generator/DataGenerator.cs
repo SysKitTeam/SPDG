@@ -5,34 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Acceleratio.SPDG.Generator.Objects;
-using Microsoft.SharePoint.Client;
 
 namespace Acceleratio.SPDG.Generator
 {
-
-    public partial class ClientDataGenerator : DataGenerator
-    {
-        public ClientDataGenerator(ClientGeneratorDefinition definition) : base(definition)
-        {
-        }
-
-        protected override SPDGObjectsFactory CreateObjectsFactory()
-        {
-            return new SPDGClientObjectsFactory(new SharePointOnlineCredentials(WorkingDefinition.Username, Utilities.Common.StringToSecureString(WorkingDefinition.Password)));
-        }
-
-        protected override void CreateUsersAndGroups()
-        {
-            
-        }
-
-        protected override void ResolveWebAppsAndSiteCollections()
-        {
-            //TODO:rf
-            base.workingSiteCollections.Add(new SiteCollInfo() {URL = "https://cloudkit24.sharepoint.com/sites/Dev" });
-        }
-    }
-
     public partial class ServerDataGenerator : DataGenerator
     {
         public ServerDataGenerator(ServerGeneratorDefinition definition) : base(definition)
@@ -259,6 +234,7 @@ namespace Acceleratio.SPDG.Generator
                 //Create AD users and groups
                 CreateUsersAndGroups();
 
+              //  return true;
                 //Creates or sets Web applications and Site Collections
                 ResolveWebAppsAndSiteCollections();
 

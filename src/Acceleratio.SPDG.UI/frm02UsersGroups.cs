@@ -28,13 +28,7 @@ namespace Acceleratio.SPDG.UI
             loadData();
             chkGenerateUsers_CheckedChanged(null, EventArgs.Empty);
             cboDomains.SelectedIndexChanged += cboDomains_SelectedIndexChanged;
-        }
-        public new ServerGeneratorDefinition WorkingDefinition
-        {
-            get { return (ServerGeneratorDefinition) base.WorkingDefinition; }
-        }
-
-
+        }      
         void btnBack_Click(object sender, EventArgs e)
         {
             preventCloseMessage = true;
@@ -64,25 +58,40 @@ namespace Acceleratio.SPDG.UI
             }
             cboDomains.Text = domains[0];
 
-            List<string> subdomains = AD.GetDomainList2();
-
-            foreach (string domain in subdomains)
+            if (!WorkingDefinition.IsClientObjectModel)
             {
-                ComboboxItem item = new ComboboxItem();
-                item.Text = domain;
-                item.Value = domain;
-                cboDomains.Items.Add(item);
+                List<string> subdomains = AD.GetDomainList2();
+
+                foreach (string domain in subdomains)
+                {
+                    ComboboxItem item = new ComboboxItem();
+                    item.Text = domain;
+                    item.Value = domain;
+                    cboDomains.Items.Add(item);
+                }
+            }
+            else
+            {
+                cboDomains.Enabled = false;
             }
 
-            chkGenerateUsers.Checked = WorkingDefinition.GenerateUsersAndSecurityGroupsActiveInDirectory;
+            chkGenerateUsers.Checked = WorkingDefinition.GenerateUsersAndSecurityGroupsInDirectory;
             trackNumberOfUsers.Value = WorkingDefinition.NumberOfUsersToCreate;
             trackNumberOfSecGroups.Value = WorkingDefinition.NumberOfSecurityGroupsToCreate;
-            if (!string.IsNullOrEmpty(WorkingDefinition.ADDomainName))
+
+            var serverDefinition = WorkingDefinition as ServerGeneratorDefinition;
+            if (serverDefinition != null)
             {
-                cboDomains.Text = WorkingDefinition.ADDomainName;
+                if (!string.IsNullOrEmpty(serverDefinition.ADDomainName))
+                {
+                    cboDomains.Text = serverDefinition.ADDomainName;
+                }
+                cboOrganizationalUnit.Text = serverDefinition.ADOrganizationalUnit;
             }
-            
-            cboOrganizationalUnit.Text = WorkingDefinition.ADOrganizationalUnit;
+            else
+            {
+                cboOrganizationalUnit.Enabled = false;
+            }
 
             this.Show();
             this.Enabled = true;
@@ -91,11 +100,15 @@ namespace Acceleratio.SPDG.UI
 
         public override bool saveData()
         {
-            WorkingDefinition.GenerateUsersAndSecurityGroupsActiveInDirectory = chkGenerateUsers.Checked;
+            WorkingDefinition.GenerateUsersAndSecurityGroupsInDirectory = chkGenerateUsers.Checked;
             WorkingDefinition.NumberOfUsersToCreate = trackNumberOfUsers.Value;
             WorkingDefinition.NumberOfSecurityGroupsToCreate = trackNumberOfSecGroups.Value;
-            WorkingDefinition.ADDomainName = cboDomains.Text;
-            WorkingDefinition.ADOrganizationalUnit = cboOrganizationalUnit.Text;
+            var serverDefinition = WorkingDefinition as ServerGeneratorDefinition;
+            if (serverDefinition != null)
+            {
+                serverDefinition.ADDomainName = cboDomains.Text;
+                serverDefinition.ADOrganizationalUnit = cboOrganizationalUnit.Text;
+            }
 
             return true;
         }

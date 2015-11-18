@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Azure.ActiveDirectory.GraphClient;
+using Microsoft.Online.SharePoint.TenantAdministration;
+using Microsoft.SharePoint.Client;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -55,15 +58,40 @@ namespace Acceleratio.SPDG.Generator
         public int PermissionsPercentForUsers { get; set; }
         public int PermissionsPercentForSPGroups { get; set; }
         public int PermissionsPerObject { get; set; }
+        public bool GenerateUsersAndSecurityGroupsInDirectory { get; set; }
+
+        public abstract void ValidateCredentials();
+
     }
 
     public class ClientGeneratorDefinition : GeneratorDefinitionBase
     {
+        public string TenantName { get; set; }
         public override bool IsClientObjectModel { get { return true; } }
+
+        public string AzureAdAccessToken { get; private set; }
+        public override void ValidateCredentials()
+        {
+            AzureAdAccessToken = TokenHelper.GetUserAccessToken(Username, Password);
+            
+            //var onlineCredentials = new SharePointOnlineCredentials(Username, Utilities.Common.StringToSecureString(Password));
+            //using (ClientContext context = new ClientContext(string.Format("https://{0}-admin.sharepoint.com", TenantName)))
+            //{
+            //    context.Credentials = onlineCredentials;
+            //    var tenant = new Tenant(context);
+            //    context.Load(tenant);
+            //    context.ExecuteQuery();
+            //}
+        }
     }
 
     public class ServerGeneratorDefinition : GeneratorDefinitionBase
     {
+        public override void ValidateCredentials()
+        {
+            
+        }
+
         public override bool IsClientObjectModel { get { return false; } }
         public string SharePointURL { get; set; }
        
@@ -73,7 +101,6 @@ namespace Acceleratio.SPDG.Generator
         public string WebAppOwnerPassword { get; set; }
         public string WebAppOwnerEmail { get; set; }
         public string DatabaseServer { get; set; }
-        public bool GenerateUsersAndSecurityGroupsActiveInDirectory { get; set; }
         public string ADDomainName { get; set; }
         public string ADOrganizationalUnit { get; set; }
         public int CreateNewWebApplications { get; set; }
