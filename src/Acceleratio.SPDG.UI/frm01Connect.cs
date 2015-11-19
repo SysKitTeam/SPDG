@@ -32,7 +32,7 @@ namespace Acceleratio.SPDG.UI
                 //Common.InitServerDefinition();
                 Common.InitClientDefinition();
                 WorkingDefinition.Username = "admin@cloudkit24.onmicrosoft.com";
-                WorkingDefinition.Password = "pass@word1";
+                WorkingDefinition.Password = "**********";
                 (WorkingDefinition as ClientGeneratorDefinition).TenantName = "cloudkit24";
             }
 
