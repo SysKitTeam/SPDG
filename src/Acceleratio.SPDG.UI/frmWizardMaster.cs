@@ -27,6 +27,7 @@ namespace Acceleratio.SPDG.UI
         public GeneratorDefinitionBase WorkingDefinition
         {
             get { return Common.WorkingDefinition; }
+            set { Common.WorkingDefinition = value; }
         }
 
         public frm01Connect RootForm { get; set; }

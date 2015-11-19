@@ -254,8 +254,7 @@ namespace Acceleratio.SPDG.Generator
 
                 //Create AD users and groups
                 CreateUsersAndGroups();
-
-              //  return true;
+              
                 //Creates or sets Web applications and Site Collections
                 ResolveWebAppsAndSiteCollections();
 
@@ -268,7 +267,7 @@ namespace Acceleratio.SPDG.Generator
                 //Create folders with nested folder levels
                 CreateFolders();
 
-                //Create folders with nested folder levels
+                //Create columns and views
                 CreateColumnsAndViews();
 
                 //Create content types

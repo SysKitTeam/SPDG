@@ -212,8 +212,50 @@ namespace Acceleratio.SPDG.Generator
 
         protected override void ResolveWebAppsAndSiteCollections()
         {
-            //TODO:rf
-            base.workingSiteCollections.Add(new SiteCollInfo() {URL = "https://cloudkit24.sharepoint.com/sites/Dev" });
+
+            if (WorkingDefinition.CreateNewSiteCollections == 0)
+            {
+                base.workingSiteCollections.Add(new SiteCollInfo() {URL = WorkingDefinition.SiteCollection});
+            }
+            else
+            {
+                
+                int totalProgress = WorkingDefinition.CreateNewSiteCollections;                  
+                progressOverall("Creating Web Applications / Site Collections", totalProgress);
+                
+                ClientHelper helper=new ClientHelper(WorkingDefinition);
+                HashSet<string> existingSites=new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var siteCollectionUrl in helper.GetAllSiteCollections())
+                {
+                    existingSites.Add(siteCollectionUrl);
+                }
+                for (int s = 0; s < WorkingDefinition.CreateNewSiteCollections; s++)
+                {
+                    string siteName = "";
+                    string siteUrl = "";
+                    string leafName = "";
+                    int i = 0;
+                    string baseName = "";
+                    do
+                    {
+                        siteName = SampleData.GetRandomName(SampleData.Companies, SampleData.Offices, null, ref i, out baseName);
+                        leafName = Utilities.Path.GenerateSlug(siteName, 25);
+                        siteUrl = string.Format("https://{0}.sharepoint.com/sites/{1}", WorkingDefinition.TenantName, leafName);
+                    } while (existingSites.Contains(siteUrl));
+
+                    progressDetail("Creating site collection '" + siteUrl + "'");
+                    var owner = WorkingDefinition.SiteCollOwnerLogin;
+                    if (string.IsNullOrEmpty(owner))
+                    {
+                        owner = WorkingDefinition.Username;
+                    }
+                    helper.CreateNewSiteCollection(siteName, leafName, owner);
+                    SiteCollInfo siteCollInfo = new SiteCollInfo();
+                    siteCollInfo.URL = siteUrl;
+                    workingSiteCollections.Add(siteCollInfo);
+                }               
+            }            
+            
         }
     }
 }

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtSharePointSiteURL = new System.Windows.Forms.TextBox();
             this.radioConnectSPOnline = new System.Windows.Forms.RadioButton();
             this.radioConnectSPOnPremise = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,39 +67,18 @@
             this.ucSteps1.Size = new System.Drawing.Size(225, 461);
             this.ucSteps1.TabIndex = 7;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Enabled = false;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label2.Location = new System.Drawing.Point(265, 155);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(183, 15);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Enter URL to your SharePoint site:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // txtSharePointSiteURL
-            // 
-            this.txtSharePointSiteURL.Enabled = false;
-            this.txtSharePointSiteURL.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSharePointSiteURL.Location = new System.Drawing.Point(268, 173);
-            this.txtSharePointSiteURL.Name = "txtSharePointSiteURL";
-            this.txtSharePointSiteURL.Size = new System.Drawing.Size(368, 23);
-            this.txtSharePointSiteURL.TabIndex = 9;
-            // 
             // radioConnectSPOnline
             // 
             this.radioConnectSPOnline.AutoSize = true;
             this.radioConnectSPOnline.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.radioConnectSPOnline.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.radioConnectSPOnline.Location = new System.Drawing.Point(268, 223);
+            this.radioConnectSPOnline.Location = new System.Drawing.Point(268, 166);
             this.radioConnectSPOnline.Name = "radioConnectSPOnline";
             this.radioConnectSPOnline.Size = new System.Drawing.Size(182, 19);
             this.radioConnectSPOnline.TabIndex = 12;
             this.radioConnectSPOnline.Text = "Connect to SharePoint Online";
             this.radioConnectSPOnline.UseVisualStyleBackColor = true;
+            this.radioConnectSPOnline.CheckedChanged += new System.EventHandler(this.uiEventHandler);
             // 
             // radioConnectSPOnPremise
             // 
@@ -109,19 +86,20 @@
             this.radioConnectSPOnPremise.Checked = true;
             this.radioConnectSPOnPremise.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.radioConnectSPOnPremise.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.radioConnectSPOnPremise.Location = new System.Drawing.Point(268, 246);
+            this.radioConnectSPOnPremise.Location = new System.Drawing.Point(268, 189);
             this.radioConnectSPOnPremise.Name = "radioConnectSPOnPremise";
             this.radioConnectSPOnPremise.Size = new System.Drawing.Size(210, 19);
             this.radioConnectSPOnPremise.TabIndex = 13;
             this.radioConnectSPOnPremise.TabStop = true;
             this.radioConnectSPOnPremise.Text = "Connect to SharePoint On-Premise";
             this.radioConnectSPOnPremise.UseVisualStyleBackColor = true;
+            this.radioConnectSPOnPremise.CheckedChanged += new System.EventHandler(this.uiEventHandler);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.radioCustomCredentials);
             this.panel1.Controls.Add(this.radioCurrentCredentials);
-            this.panel1.Location = new System.Drawing.Point(268, 291);
+            this.panel1.Location = new System.Drawing.Point(268, 240);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(368, 49);
             this.panel1.TabIndex = 14;
@@ -138,7 +116,7 @@
             this.radioCustomCredentials.TabStop = true;
             this.radioCustomCredentials.Text = "Custom credentials";
             this.radioCustomCredentials.UseVisualStyleBackColor = true;
-            this.radioCustomCredentials.CheckedChanged += new System.EventHandler(this.radioCustomCredentials_CheckedChanged);
+            this.radioCustomCredentials.CheckedChanged += new System.EventHandler(this.uiEventHandler);
             // 
             // radioCurrentCredentials
             // 
@@ -152,14 +130,14 @@
             this.radioCurrentCredentials.TabStop = true;
             this.radioCurrentCredentials.Text = "Credentials of the current user";
             this.radioCurrentCredentials.UseVisualStyleBackColor = true;
-            this.radioCurrentCredentials.CheckedChanged += new System.EventHandler(this.radioCurrentCredentials_CheckedChanged);
+            this.radioCurrentCredentials.CheckedChanged += new System.EventHandler(this.uiEventHandler);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label3.Location = new System.Drawing.Point(288, 356);
+            this.label3.Location = new System.Drawing.Point(290, 301);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 15);
             this.label3.TabIndex = 15;
@@ -168,7 +146,7 @@
             // txtUserName
             // 
             this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtUserName.Location = new System.Drawing.Point(423, 384);
+            this.txtUserName.Location = new System.Drawing.Point(425, 329);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(213, 23);
             this.txtUserName.TabIndex = 17;
@@ -178,7 +156,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label5.Location = new System.Drawing.Point(288, 387);
+            this.label5.Location = new System.Drawing.Point(290, 332);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 15);
             this.label5.TabIndex = 16;
@@ -187,7 +165,7 @@
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtPassword.Location = new System.Drawing.Point(423, 410);
+            this.txtPassword.Location = new System.Drawing.Point(425, 355);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(213, 23);
@@ -198,7 +176,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label6.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label6.Location = new System.Drawing.Point(288, 413);
+            this.label6.Location = new System.Drawing.Point(290, 358);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 15);
             this.label6.TabIndex = 18;
@@ -206,7 +184,7 @@
             // 
             // txtDomain
             // 
-            this.txtDomain.Location = new System.Drawing.Point(423, 436);
+            this.txtDomain.Location = new System.Drawing.Point(425, 381);
             this.txtDomain.Name = "txtDomain";
             this.txtDomain.Size = new System.Drawing.Size(213, 20);
             this.txtDomain.TabIndex = 21;
@@ -216,7 +194,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label7.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label7.Location = new System.Drawing.Point(288, 438);
+            this.label7.Location = new System.Drawing.Point(290, 383);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 15);
             this.label7.TabIndex = 20;
@@ -237,8 +215,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radioConnectSPOnPremise);
             this.Controls.Add(this.radioConnectSPOnline);
-            this.Controls.Add(this.txtSharePointSiteURL);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.ucSteps1);
             this.Name = "frm01Connect";
             this.Text = "frm01Connect";
@@ -250,8 +226,6 @@
             this.Controls.SetChildIndex(this.btnHelp, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.ucSteps1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.txtSharePointSiteURL, 0);
             this.Controls.SetChildIndex(this.radioConnectSPOnline, 0);
             this.Controls.SetChildIndex(this.radioConnectSPOnPremise, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
@@ -272,8 +246,6 @@
         #endregion
 
         private ucSteps ucSteps1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtSharePointSiteURL;
         private System.Windows.Forms.RadioButton radioConnectSPOnline;
         private System.Windows.Forms.RadioButton radioConnectSPOnPremise;
         private System.Windows.Forms.Panel panel1;

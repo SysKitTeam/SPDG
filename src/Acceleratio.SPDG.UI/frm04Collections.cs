@@ -82,7 +82,14 @@ namespace Acceleratio.SPDG.UI
 
         private void loadSiteCollectionsClient()
         {
-            
+            var helper=new ClientHelper((ClientGeneratorDefinition) WorkingDefinition);
+            foreach (var url in helper.GetAllSiteCollections())
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = url;
+                item.Value = url;
+                cboSiteCollection.Items.Add(item);
+            }            
         }
 
         private void loadSiteCollectionsServer()
@@ -123,23 +130,26 @@ namespace Acceleratio.SPDG.UI
         {
             ServerGeneratorDefinition serverDefinition = WorkingDefinition as ServerGeneratorDefinition;
 
-            if (serverDefinition.CreateNewWebApplications > 0 )
+            if (serverDefinition != null)
             {
-                //TODO:rf zamijeniti sve Common.WorkingDefinition s WorkingDefinition property
-                //dodatno, ovo se moze unutar getera za propertye rijesiti za ovaj if
-                Common.WorkingDefinition.UseExistingSiteCollection = false;
-                trackNumSiteColls.Minimum = 1;
-                Common.WorkingDefinition.CreateNewSiteCollections = 1;
-                radioCreateNewSiteColl.Checked = true;
-                radioUseExisting.Enabled = false;
+                if (serverDefinition.CreateNewWebApplications > 0)
+                {
+                    //TODO:rf zamijeniti sve Common.WorkingDefinition s WorkingDefinition property
+                    //dodatno, ovo se moze unutar getera za propertye rijesiti za ovaj if
+                    Common.WorkingDefinition.UseExistingSiteCollection = false;
+                    trackNumSiteColls.Minimum = 1;
+                    Common.WorkingDefinition.CreateNewSiteCollections = 1;
+                    radioCreateNewSiteColl.Checked = true;
+                    radioUseExisting.Enabled = false;
 
-                txtOwnerUserName.Text = Common.WorkingDefinition.SiteCollOwnerLogin;
-                txtOwnerEmail.Text = Common.WorkingDefinition.SiteCollOwnerEmail;
-            }
-            else
-            {
-                trackNumSiteColls.Minimum = 0;
-                radioUseExisting.Enabled = true;
+                    txtOwnerUserName.Text = Common.WorkingDefinition.SiteCollOwnerLogin;
+                    txtOwnerEmail.Text = Common.WorkingDefinition.SiteCollOwnerEmail;
+                }
+                else
+                {
+                    trackNumSiteColls.Minimum = 0;
+                    radioUseExisting.Enabled = true;
+                }
             }
 
             trackNumSiteColls.Value = Common.WorkingDefinition.CreateNewSiteCollections;
@@ -200,20 +210,21 @@ namespace Acceleratio.SPDG.UI
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
 
-            if (!string.IsNullOrEmpty(Common.impersonateUserName))
-            {
-                if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
-                {
-                    //Insert your code that runs under the security context of a specific user here.
-                    loadSiteCollections();
-                    Common.undoImpersonation();
-                }
-                else
-                {
-                    MessageBox.Show("Impersonation Failed!");
-                }
-            }
-            else
+            //TODO:rf return impersonation validation
+            //if (!string.IsNullOrEmpty(Common.impersonateUserName))
+            //{
+            //    if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
+            //    {
+            //        //Insert your code that runs under the security context of a specific user here.
+            //        loadSiteCollections();
+            //        Common.undoImpersonation();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Impersonation Failed!");
+            //    }
+            //}
+            //else
             {
                 loadSiteCollections();
             }

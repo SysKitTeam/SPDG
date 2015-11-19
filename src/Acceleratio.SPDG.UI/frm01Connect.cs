@@ -31,12 +31,14 @@ namespace Acceleratio.SPDG.UI
             {
                 //Common.InitServerDefinition();
                 Common.InitClientDefinition();
+                radioConnectSPOnline.Checked = true;                
                 WorkingDefinition.Username = "admin@cloudkit24.onmicrosoft.com";
                 WorkingDefinition.Password = "pass@word1";
                 (WorkingDefinition as ClientGeneratorDefinition).TenantName = "cloudkit24";
             }
 
             loadData();
+            setUIState();
         }
 
         private bool saveForm(object form)
@@ -90,7 +92,7 @@ namespace Acceleratio.SPDG.UI
                 frmWizardMaster frm = null;
                 if (WorkingDefinition.IsClientObjectModel)
                 {
-                    frm = new frm05Sites();
+                    frm = new frm04Collections();
 
                 }
                 else
@@ -507,32 +509,6 @@ namespace Acceleratio.SPDG.UI
             
         }
 
-        private void radioCustomCredentials_CheckedChanged(object sender, EventArgs e)
-        {
-            changeCredentialsState();
-        }
-
-        private void changeCredentialsState()
-        {
-            if (radioCurrentCredentials.Checked)
-            {
-                txtUserName.Enabled = false;
-                txtPassword.Enabled = false;
-                txtDomain.Enabled = false;
-            }
-            else
-            {
-                txtUserName.Enabled = true;
-                txtPassword.Enabled = true;
-                txtDomain.Enabled = true;
-            }
-        }
-
-        private void radioCurrentCredentials_CheckedChanged(object sender, EventArgs e)
-        {
-            changeCredentialsState();
-        }
-
         private void frm01Connect_VisibleChanged(object sender, EventArgs e)
         {
         }
@@ -666,21 +642,42 @@ namespace Acceleratio.SPDG.UI
             }
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
+   
 
+        private void uiEventHandler(object sender, EventArgs e)
+        {
+            if (sender.Equals(radioConnectSPOnline))
+            {
+                if (!radioConnectSPOnline.Checked && WorkingDefinition.IsClientObjectModel)
+                {
+                    Common.InitServerDefinition();                    
+                }
+                else if (radioConnectSPOnline.Checked && !WorkingDefinition.IsClientObjectModel)
+                {
+                    Common.InitClientDefinition();
+                }
+            }
+            setUIState();
         }
 
-        private void loadDefinitionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
+
+        private void setUIState()
+        {
             
+            bool isSPOnline = radioConnectSPOnline.Checked;
+            
+            
+            if (isSPOnline)
+            {
+                radioCustomCredentials.Checked = true;
+            }
+            radioCurrentCredentials.Enabled = !isSPOnline;
+            var customCredentials = radioCustomCredentials.Checked;
+
+            txtDomain.Enabled = customCredentials;
+            txtPassword.Enabled = customCredentials;
+            txtUserName.Enabled = customCredentials;
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

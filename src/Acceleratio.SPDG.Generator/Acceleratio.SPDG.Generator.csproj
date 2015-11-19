@@ -149,6 +149,7 @@
     <Compile Include="10Permissions.cs" />
     <Compile Include="AD.cs" />
     <Compile Include="ClientDataGenerator.cs" />
+    <Compile Include="ClientHelper.cs" />
     <Compile Include="Objects\Client\ClientRoleAssignmentHelper.cs" />
     <Compile Include="Objects\Client\SPDGClientFolder.cs" />
     <Compile Include="Objects\Client\SPDGClientGroup.cs" />
