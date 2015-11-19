@@ -21,6 +21,12 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
             get { return _spWeb.Url; }
         }
 
+        public override bool HasUniqueRoleAssignments
+        {
+            get { return _spWeb.HasUniqueRoleAssignments; }
+        }
+
+       
         public override void Dispose()
         {
             _spWeb.Dispose();
@@ -123,10 +129,88 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
         {
             return new SPDGServerList(_spWeb.Lists[listName]);
         }
-
         public override SPDGList TryGetList(string title)
         {
            return new SPDGServerList(_spWeb.Lists.TryGetList(title));
+        }
+
+        public override SPDGRoleAssignment GetRoleAssignmentByPrincipal(SPDGPrincipal principal)
+        {
+            return ServerRoleAssignmentHelper.GetRoleAssignmentByPrincipal(_spWeb, principal);
+
+        }
+
+        public override void AddRoleAssignment(SPDGPrincipal principal, IEnumerable<SPDGRoleDefinition> roledefinitions)
+        {
+           ServerRoleAssignmentHelper.AddRoleAssignment(_spWeb, principal, roledefinitions);
+        }
+
+        public override void BreakRoleInheritance(bool copyRoleAssignments)
+        {            
+            _spWeb.BreakRoleInheritance(copyRoleAssignments);
+        }
+
+        public override SPDGUser EnsureUser(string loginName)
+        {
+            var spUser = _spWeb.EnsureUser(loginName);
+            
+            return new SPDGServerUser(spUser);
+        }
+
+        public override void AddSiteGroup(string name, SPDGUser owner, SPDGUser defaultUser, string description)
+        {
+            var spOwner =((SPDGServerUser)owner).SPUser;
+            var spDefaultUser = ((SPDGServerUser)defaultUser).SPUser;
+            
+            _spWeb.SiteGroups.Add(name, spOwner, spDefaultUser, description);
+        }
+
+
+        public override SPDGUser CurrentUser
+        {
+            get
+            {
+                return new SPDGServerUser(_spWeb.CurrentUser);
+            }
+        }
+
+        public override IEnumerable<SPDGGroup> SiteGroups
+        {
+            get
+            {
+                
+                foreach (SPGroup spGroup in _spWeb.SiteGroups)
+                {
+                    yield return  new SPDGServerGroup(spGroup);
+                }
+            }
+        }
+
+        public override IEnumerable<SPDGUser> SiteUsers
+        {
+            get
+            {
+                foreach (SPUser siteUser in _spWeb.SiteUsers)
+                {
+                    yield return new SPDGServerUser(siteUser);
+                }
+            }
+        }
+
+        public override IEnumerable<SPDGRoleDefinition> RoleDefinitions
+        {
+            get
+            {
+                foreach (SPRoleDefinition roleDefinition in _spWeb.RoleDefinitions)
+                {
+                    yield return new SPDGServerRoleDefinition(roleDefinition);
+                }
+            }
+        }
+
+        public override SPDGFolder GetFolder(string folderUrl)
+        {
+            return new SPDGServerFolder(_spWeb.GetFolder(folderUrl));
         }
     }
 }

@@ -19,6 +19,9 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                 includeExpression.Add(web => web.Url);
                 includeExpression.Add(web => web.ServerRelativeUrl);
                 includeExpression.Add(web => web.RootFolder);
+                includeExpression.Add(web => web.CurrentUser);
+                includeExpression.Add(web => web.HasUniqueRoleAssignments);
+
 
                 return includeExpression.ToArray();
             }
@@ -119,6 +122,41 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             }
         }
 
+        public override bool HasUniqueRoleAssignments
+        {
+            get { return _web.HasUniqueRoleAssignments; }
+        }
+
+        public override SPDGRoleAssignment GetRoleAssignmentByPrincipal(SPDGPrincipal principal)
+        {
+            return ClientRoleAssignmentHelper.GetRoleAssignmentByPrincipal(_web, _context, principal);
+        }
+
+        public override void AddRoleAssignment(SPDGPrincipal principal, IEnumerable<SPDGRoleDefinition> roledefinitions)
+        {
+            ClientRoleAssignmentHelper.AddRoleAssignment(_web, _context, principal, roledefinitions);
+        }
+
+        public override void BreakRoleInheritance(bool copyRoleAssignments)
+        {
+            if (_web.Id == _site.RootWeb.ID)
+            {
+                return;
+            }
+            _web.BreakRoleInheritance(copyRoleAssignments,false);
+            _context.Load(_web,x=>x.HasUniqueRoleAssignments);
+            _context.ExecuteQuery();
+        }
+
+        public override SPDGUser EnsureUser(string loginName)
+        {
+            invalidateSiteUsers();
+            var user=_web.EnsureUser(loginName);
+            _context.Load(user);
+            _context.ExecuteQuery();
+            return new SPDGClientUser(user);
+        }
+
         public override string Url
         {
             get { return _web.Url; }
@@ -196,6 +234,119 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
         public override Guid ID
         {
             get { return _web.Id; }
+        }
+
+        public override SPDGUser CurrentUser
+        {
+            get
+            {
+                return new SPDGClientUser(_web.CurrentUser);
+            }
+        }
+
+        private void invalidateSiteGroups()
+        {
+            _siteGroups = null;
+        }
+
+        public override void AddSiteGroup(string name, SPDGUser owner, SPDGUser defaultUser, string description)
+        {
+            if (_site.RootWeb.ID != this.ID)
+            {
+                _site.RootWeb.AddSiteGroup(name, owner, defaultUser, description);
+            }
+            invalidateSiteGroups();
+            GroupCreationInformation groupCreateInformation=new GroupCreationInformation();
+            groupCreateInformation.Title = name;
+            groupCreateInformation.Description = description;
+
+            var group= _web.SiteGroups.Add(groupCreateInformation);
+            group.Owner = ((SPDGClientUser) owner).User;
+            group.Update();
+            _context.ExecuteQuery();
+        }
+
+        private List<SPDGGroup> _siteGroups;
+        public override IEnumerable<SPDGGroup> SiteGroups
+        {
+            get
+            {
+                if (_site.RootWeb.ID != this.ID)
+                {
+                    return _site.RootWeb.SiteGroups;
+                }
+                if (_siteGroups == null)
+                {
+                    _siteGroups=new List<SPDGGroup>();
+                    _context.Load(_web.SiteGroups);
+                    _context.ExecuteQuery();
+                    foreach (var @group in _web.SiteGroups)
+                    {
+                        _siteGroups.Add(new SPDGClientGroup(@group));
+                    }
+                }
+                return _siteGroups;
+            }
+        }
+
+        private void invalidateSiteUsers()
+        {
+            _siteUsers = null;
+        }
+        private List<SPDGUser> _siteUsers;
+
+        public override IEnumerable<SPDGUser> SiteUsers
+        {
+            get
+            {
+                if (_site.RootWeb.ID != this.ID)
+                {
+                    return _site.RootWeb.SiteUsers;
+                }
+                if (_siteUsers == null)
+                {
+                    _siteUsers = new List<SPDGUser>();
+                    _context.Load(_web.SiteUsers);
+                    _context.ExecuteQuery();
+                    foreach (var user in _web.SiteUsers)
+                    {
+                        _siteUsers.Add(new SPDGClientUser(user));
+                    }
+                }
+                return _siteUsers;
+            }
+        }
+
+        private List<SPDGClientRoleDefinition> _roleDefinitions;
+
+        public override IEnumerable<SPDGRoleDefinition> RoleDefinitions
+        {
+            get
+            {
+                if (_site.RootWeb.ID != this.ID)
+                {
+                    return _site.RootWeb.RoleDefinitions;
+                }
+                if (_roleDefinitions == null)
+                {
+                    _roleDefinitions=new List<SPDGClientRoleDefinition>();
+                    _context.Load(_web.RoleDefinitions);
+                    _context.ExecuteQuery();
+                    foreach (var roleDefinition in _web.RoleDefinitions)
+                    {
+                        _roleDefinitions.Add(new SPDGClientRoleDefinition(roleDefinition));
+                    }
+                }
+                return _roleDefinitions;
+            }
+        }
+
+        public override SPDGFolder GetFolder(string folderUrl)
+        {
+            var folder = _web.GetFolderByServerRelativeUrl(folderUrl);
+            _context.Load(folder);
+            _context.Load(folder.ListItemAllFields);
+            return new SPDGClientFolder(folder, _context);
         }
     }
 }

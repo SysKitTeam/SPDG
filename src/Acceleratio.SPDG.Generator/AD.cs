@@ -80,10 +80,9 @@ namespace Acceleratio.SPDG.Generator
             return domainList;
         }
 
-        public static string GetUsersFromAD()
+        public static List<string> GetUsersFromAD()
         {
-            string output = string.Empty;
-
+            List<string> retVal=new List<string>();
             try
             {
                 //domainName = Server.UrlDecode(domainName);
@@ -106,10 +105,8 @@ namespace Acceleratio.SPDG.Generator
 
                     foreach (UserPrincipal userPrincipal in results)
                     {
-                        sb.Append(domainName + "\\" + userPrincipal.SamAccountName + ";");
-                    }
-
-                    output = sb.ToString();
+                        retVal.Add(domainName + "\\" + userPrincipal.SamAccountName);                        
+                    }                    
                 }
             }
             catch (Exception ex)
@@ -117,14 +114,13 @@ namespace Acceleratio.SPDG.Generator
                 Errors.Log(ex);
             }
 
-            return output;
+            return retVal;
         }
 
 
-        public static string GetGroupsFromAD()
+        public static List<string> GetGroupsFromAD()
         {
-            string output = string.Empty;
-
+            List<string> retVal =new List<string>();
             try
             {
                 ContextType contextType = ContextType.Domain;
@@ -146,10 +142,9 @@ namespace Acceleratio.SPDG.Generator
 
                     foreach (GroupPrincipal groupPrincipal in results)
                     {
-                        sb.Append(domainName + "\\" + groupPrincipal.Name + ";");
+                        retVal.Add(domainName + "\\" + groupPrincipal.Name + ";");
                     }
-
-                    output = sb.ToString();
+                   
                 }
             }
             catch (Exception ex)
@@ -157,7 +152,7 @@ namespace Acceleratio.SPDG.Generator
                 Errors.Log(ex);
             }
 
-            return output;
+            return retVal;
         }
 
         public static List<string> ListOU(string name)

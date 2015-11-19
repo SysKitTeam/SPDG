@@ -14,6 +14,26 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class ServerDataGenerator
     {
+        List<string>  _allUsers;
+        List<string> _allGroups;
+        protected override List<string> GetAvailableUsersInDirectory()
+        {
+            if (_allUsers == null)
+            {
+                _allUsers = AD.GetUsersFromAD();
+            }
+            return _allUsers;
+        }
+
+        protected override List<string> GetAvailableGroupsInDirectory()
+        {
+            if (_allGroups == null)
+            {
+                _allGroups = AD.GetGroupsFromAD();
+            }
+            return _allGroups;
+        }
+
         protected override void ResolveWebAppsAndSiteCollections()
         {
             if (WorkingDefinition.CreateNewSiteCollections > 0)

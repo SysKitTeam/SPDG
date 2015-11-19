@@ -12,6 +12,7 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
         {
             _context = context;
             _clientSite = clientSite;
+            _rootWeb= new SPDGClientWeb(_clientSite.RootWeb, null, _context, this);
         }
 
         public override SPDGWeb OpenWeb(Guid id)
@@ -22,11 +23,12 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             return new SPDGClientWeb(web, null, _context, this);
         }
 
+        private SPDGWeb _rootWeb = null;
         public override SPDGWeb RootWeb
         {
             get
             {
-                return new SPDGClientWeb(_clientSite.RootWeb, null, _context, this);
+                return _rootWeb;                
             }
         }
         public override void Dispose()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Acceleratio.SPDG.Generator.Objects;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
+using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 using Microsoft.SharePoint.Client;
 using Group = Microsoft.Azure.ActiveDirectory.GraphClient.Group;
 using User = Microsoft.Azure.ActiveDirectory.GraphClient.User;
@@ -12,6 +13,47 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class ClientDataGenerator : DataGenerator
     {
+        List<string> _allUsers = null;
+        List<string> _allGroups = null;
+        protected override List<string> GetAvailableUsersInDirectory()
+        {
+            if (_allUsers == null)
+            {
+                var adClient = GetADClient();
+                _allUsers = new List<string>();
+
+                IPagedCollection<IUser> result = null;
+                do
+                {
+                    result = adClient.Users.ExecuteAsync().Result;
+                    foreach (var user in result.CurrentPage)
+                    {
+                        _allUsers.Add(user.UserPrincipalName);
+                    }
+                } while (result.MorePagesAvailable);
+            }
+            return _allUsers;
+        }
+
+        protected override List<string> GetAvailableGroupsInDirectory()
+        {
+            if (_allGroups == null)
+            {
+                var adClient = GetADClient();
+                _allGroups = new List<string>();
+
+                IPagedCollection<IGroup> result = null;
+                do
+                {
+                    result = adClient.Groups.ExecuteAsync().Result;
+                    foreach (var group in result.CurrentPage)
+                    {
+                        _allGroups.Add(group.DisplayName);
+                    }
+                } while (result.MorePagesAvailable);
+            }
+            return _allGroups;
+        }
 
         protected new ClientGeneratorDefinition WorkingDefinition
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Acceleratio.SPDG.Generator.Objects
 {
-    public abstract class SPDGWeb : IDisposable
+    public abstract class SPDGWeb : SPDGSecurableObject, IDisposable
     {
         public abstract  string Title { get; }
         public abstract  string ServerRelativeUrl { get; }
@@ -22,8 +22,14 @@ namespace Acceleratio.SPDG.Generator.Objects
         public abstract Guid AddList(string title, string description, int templateId);
         public abstract SPDGList GetList(Guid id);
         public abstract SPDGList GetList(string title);
-        public abstract SPDGList TryGetList(string title);
-
+        public abstract SPDGList TryGetList(string title);        
+        public abstract SPDGUser EnsureUser(string loginName);
+        public abstract void AddSiteGroup(string name, SPDGUser owner, SPDGUser defaultUser, string description);
+        public abstract SPDGUser CurrentUser { get; }
+        public abstract IEnumerable<SPDGGroup> SiteGroups { get; }
+        public abstract IEnumerable<SPDGUser> SiteUsers { get; } 
+        public abstract IEnumerable<SPDGRoleDefinition> RoleDefinitions { get; }
+        public abstract SPDGFolder GetFolder(string folderUrl);
     }
 
     public enum NavigationNodeLocation

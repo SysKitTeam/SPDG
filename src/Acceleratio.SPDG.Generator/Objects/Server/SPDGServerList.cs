@@ -71,5 +71,34 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
                 item.Update();
             }
         }
+
+        public override SPDGRoleAssignment GetRoleAssignmentByPrincipal(SPDGPrincipal principal)
+        {
+            return ServerRoleAssignmentHelper.GetRoleAssignmentByPrincipal(_spList, principal);
+
+        }
+
+        public override void AddRoleAssignment(SPDGPrincipal principal, IEnumerable<SPDGRoleDefinition> roledefinitions)
+        {
+            ServerRoleAssignmentHelper.AddRoleAssignment(_spList, principal, roledefinitions);
+        }
+
+        public override void BreakRoleInheritance(bool copyRoleAssignments)
+        {
+            _spList.BreakRoleInheritance(copyRoleAssignments);
+        }
+
+        public override bool HasUniqueRoleAssignments { get; }
+
+        public override IEnumerable<SPDGListItem> Items
+        {
+            get
+            {                
+                foreach (SPListItem item in _spList.Items)
+                {
+                    yield return new SPDGServerListItem(item);
+                }
+            }
+        }
     }
 }

@@ -39,6 +39,15 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                 }
             }
         }
+
+        public override SPDGListItem Item
+        {
+            get
+            {
+                return new SPDGClientListItem(_folder.ListItemAllFields, _context);
+            }
+        }
+
         public override SPDGFolder AddFolder(string name)
         {
            var subFolder =  _folder.Folders.Add(name);

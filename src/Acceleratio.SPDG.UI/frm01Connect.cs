@@ -75,16 +75,8 @@ namespace Acceleratio.SPDG.UI
                     return;
                 }
 
-                frmWizardMaster frm = null;
-                if (WorkingDefinition.IsClientObjectModel)
-                {
-                    frm = new frm02UsersGroups();
-                   
-                }
-                else
-                {
-                    frm = new frm02UsersGroups();                 
-                }
+                frmWizardMaster frm = null;                
+                frm = new frm02UsersGroups();                                 
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -98,7 +90,7 @@ namespace Acceleratio.SPDG.UI
                 frmWizardMaster frm = null;
                 if (WorkingDefinition.IsClientObjectModel)
                 {
-                    frm = new frm12Finalize();
+                    frm = new frm05Sites();
 
                 }
                 else
@@ -173,7 +165,7 @@ namespace Acceleratio.SPDG.UI
                 frmWizardMaster frm = null;
                 if (WorkingDefinition.IsClientObjectModel)
                 {
-                    frm = new frm12Finalize();
+                    frm = new frm11Permissions();
                 }
                 else
                 {

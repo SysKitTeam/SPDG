@@ -76,6 +76,16 @@ namespace Acceleratio.SPDG.Generator
             }
             return total;
         }
+
+        protected override int CalculateOverallPermissionsForProgressReporting(int totalInSiteCollection)
+        {
+            var total= base.CalculateOverallPermissionsForProgressReporting(totalInSiteCollection);
+            if (WorkingDefinition.CreateNewWebApplications > 0)
+            {
+                total = total * WorkingDefinition.CreateNewWebApplications;
+            }
+            return total;
+        }
     }
 
     public abstract partial class DataGenerator
@@ -219,6 +229,17 @@ namespace Acceleratio.SPDG.Generator
             return totalProgress;
         }
 
+        protected virtual int CalculateOverallPermissionsForProgressReporting(int totalInSiteCollection)
+        {
+            var total = totalInSiteCollection;
+            if (workingDefinition.CreateNewSiteCollections > 0)
+            {
+                total = totalInSiteCollection * workingDefinition.CreateNewSiteCollections;
+            }
+
+            return total;
+        }
+
 
         protected abstract void ResolveWebAppsAndSiteCollections();
 
@@ -262,7 +283,7 @@ namespace Acceleratio.SPDG.Generator
                 //AssociateCustomWorkflows();
 
                 //Create permissions
-               // CreatePermissions();
+                CreatePermissions();
 
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION COMPLETED ***");
                 bgWorker.ReportProgress(3);

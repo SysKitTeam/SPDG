@@ -10,7 +10,9 @@ namespace Acceleratio.SPDG.Generator.Objects
         public abstract string Name { get; }
         public abstract string Url { get; }
         public abstract IEnumerable<SPDGFolder> SubFolders { get; }
+        public abstract SPDGListItem Item { get; }
         public abstract SPDGFolder AddFolder(string name);
         public abstract void Update();
+
     }
 }

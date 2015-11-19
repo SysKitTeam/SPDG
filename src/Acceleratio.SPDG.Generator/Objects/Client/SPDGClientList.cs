@@ -70,6 +70,7 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                 includeExpression.Add(web => web.Title);
                 includeExpression.Add(web => web.DefaultViewUrl);
                 includeExpression.Add(web => web.RootFolder);
+                includeExpression.Add(web => web.HasUniqueRoleAssignments);
                 return includeExpression.ToArray();
             }
         }
@@ -113,6 +114,66 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                 }
             }
             _context.ExecuteQuery();
+        }
+
+        public override SPDGRoleAssignment GetRoleAssignmentByPrincipal(SPDGPrincipal principal)
+        {
+            return ClientRoleAssignmentHelper.GetRoleAssignmentByPrincipal(_list, _context, principal);
+        }
+
+        public override void AddRoleAssignment(SPDGPrincipal principal, IEnumerable<SPDGRoleDefinition> roledefinitions)
+        {
+            ClientRoleAssignmentHelper.AddRoleAssignment(_list, _context, principal, roledefinitions);
+        }
+
+        public override void BreakRoleInheritance(bool copyRoleDefinitions)
+        {
+            _list.BreakRoleInheritance(copyRoleDefinitions,false);   
+            _context.ExecuteQuery();
+
+        }
+
+        public override bool HasUniqueRoleAssignments
+        {
+            get { return _list.HasUniqueRoleAssignments; }
+        }
+
+        private List<SPDGListItem> _items;
+        public override IEnumerable<SPDGListItem> Items
+        {
+            get
+            {
+                if (_items == null)
+                {
+                    _items = loadListItems();
+                }
+                return _items;
+            }
+        }
+
+
+
+        private List<SPDGListItem> loadListItems()
+        {
+            List<SPDGListItem> retVal=new List<SPDGListItem>();
+            ListItemCollectionPosition itemPosition = null;           
+            do
+            {
+                CamlQuery query = CamlQuery.CreateAllItemsQuery(5000);
+                query.ListItemCollectionPosition = itemPosition;
+                var itemBatch = _list.GetItems(query);                 
+                _context.Load(itemBatch, collection=>collection.Include(SPDGClientListItem.IncludeExpression), collection => collection.ListItemCollectionPosition);
+                _context.ExecuteQuery();
+                itemPosition = itemBatch.ListItemCollectionPosition;
+
+                foreach (var item in itemBatch)
+                {
+                    retVal.Add(new SPDGClientListItem(item, _context));
+                }
+
+            } while (itemPosition != null);
+           
+           return retVal;
         }
     }
 }
