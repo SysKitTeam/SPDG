@@ -140,10 +140,9 @@ namespace Acceleratio.SPDG.UI
                     trackNumSiteColls.Minimum = 1;
                     Common.WorkingDefinition.CreateNewSiteCollections = 1;
                     radioCreateNewSiteColl.Checked = true;
-                    radioUseExisting.Enabled = false;
-
-                    txtOwnerUserName.Text = Common.WorkingDefinition.SiteCollOwnerLogin;
-                    txtOwnerEmail.Text = Common.WorkingDefinition.SiteCollOwnerEmail;
+                    radioUseExisting.Enabled = false;                                     
+                   
+                    
                 }
                 else
                 {
@@ -152,6 +151,17 @@ namespace Acceleratio.SPDG.UI
                 }
             }
 
+            label3.Visible= !Common.WorkingDefinition.IsClientObjectModel;
+            txtOwnerEmail.Visible = !Common.WorkingDefinition.IsClientObjectModel;
+            txtOwnerUserName.Text = Common.WorkingDefinition.SiteCollOwnerLogin;
+            if (string.IsNullOrEmpty(Common.WorkingDefinition.SiteCollOwnerLogin) && !string.IsNullOrEmpty(Common.WorkingDefinition.Username))
+            {
+                txtOwnerUserName.Text = Common.WorkingDefinition.Username;
+            }
+            if (!Common.WorkingDefinition.IsClientObjectModel)
+            {
+                txtOwnerEmail.Text = Common.WorkingDefinition.SiteCollOwnerEmail;
+            }
             trackNumSiteColls.Value = Common.WorkingDefinition.CreateNewSiteCollections;
             radioUseExisting.Checked = Common.WorkingDefinition.UseExistingSiteCollection;
             radioCreateNewSiteColl.Checked = !Common.WorkingDefinition.UseExistingSiteCollection;
@@ -172,7 +182,7 @@ namespace Acceleratio.SPDG.UI
 
             if( radioCreateNewSiteColl.Checked )
             {
-                if (txtOwnerUserName.Text == string.Empty || txtOwnerEmail.Text == string.Empty )
+                if (txtOwnerUserName.Text == string.Empty || !WorkingDefinition.IsClientObjectModel && txtOwnerEmail.Text == string.Empty )
                 {
                     MessageBox.Show("Missing user details for site collection creation!");
                     return false;
@@ -209,7 +219,7 @@ namespace Acceleratio.SPDG.UI
             this.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-
+            loadData();
             //TODO:rf return impersonation validation
             //if (!string.IsNullOrEmpty(Common.impersonateUserName))
             //{
@@ -229,7 +239,7 @@ namespace Acceleratio.SPDG.UI
                 loadSiteCollections();
             }
             
-            loadData();
+         
             this.Enabled = true;
             this.Cursor = Cursors.Default;
         }

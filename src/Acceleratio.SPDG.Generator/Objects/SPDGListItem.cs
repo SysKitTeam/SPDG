@@ -13,6 +13,7 @@ namespace Acceleratio.SPDG.Generator.Objects
 
         public abstract int Id { get; }
         public abstract  string DisplayName { get; }
+        public abstract void Update();
 
     }
 }

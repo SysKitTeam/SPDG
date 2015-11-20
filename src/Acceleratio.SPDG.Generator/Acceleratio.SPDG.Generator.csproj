@@ -151,6 +151,7 @@
     <Compile Include="ClientDataGenerator.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Objects\Client\ClientRoleAssignmentHelper.cs" />
+    <Compile Include="Objects\Client\SPDGClientFile.cs" />
     <Compile Include="Objects\Client\SPDGClientFolder.cs" />
     <Compile Include="Objects\Client\SPDGClientGroup.cs" />
     <Compile Include="Objects\Client\SPDGClientList.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Objects\Client\SPDGClientWeb.cs" />
     <Compile Include="Objects\ISPDGListItemInfo.cs" />
     <Compile Include="Objects\Server\ServerRoleAssignmentHelper.cs" />
+    <Compile Include="Objects\Server\SPDGServerFile.cs" />
     <Compile Include="Objects\Server\SPDGServerFolder.cs" />
     <Compile Include="Objects\Server\SPDGServerGroup.cs" />
     <Compile Include="Objects\Server\SPDGServerList.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="Objects\SPDGClientObjectsFactory.cs" />
     <Compile Include="Objects\SPDGField.cs" />
     <Compile Include="Objects\SPDGFieldInfo.cs" />
+    <Compile Include="Objects\SPDGFile.cs" />
     <Compile Include="Objects\SPDGFolder.cs" />
     <Compile Include="Objects\SPDGList.cs" />
     <Compile Include="Objects\SPDGListItem.cs" />

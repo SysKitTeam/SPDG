@@ -49,6 +49,12 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
             return new SPDGServerFolder(spFolder);
         }
 
+        public override SPDGFile AddFile(string url, byte[] content, bool overWrite)
+        {
+            var file=_folder.Files.Add(url, content, overWrite);
+            return new SPDGServerFile(file);
+        }
+
         public override void Update()
         {
             _folder.Update();

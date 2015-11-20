@@ -19,17 +19,26 @@ namespace Acceleratio.SPDG.Generator
 
         public List<string> GetAllSiteCollections()
         {
-            var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
-            using (ClientContext context=new ClientContext(url))
+            try
             {
-                context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utilities.Common.StringToSecureString(_generatorDefinition.Password));
-                var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
-                var siteProperties = officeTenant.GetSiteProperties(0, true);
-                context.Load(siteProperties);                
-                context.ExecuteQuery();
-                
-                return siteProperties.Select(x => x.Url).ToList();
+                var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
+                using (ClientContext context = new ClientContext(url))
+                {
+                    context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utilities.Common.StringToSecureString(_generatorDefinition.Password));
+                    var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
+                    var siteProperties = officeTenant.GetSiteProperties(0, true);
+                    context.Load(siteProperties);
+                    context.ExecuteQuery();
+
+                    return siteProperties.Select(x => x.Url).ToList();
+                }
             }
+            catch (Exception ex)
+            {                
+                Errors.Log(ex);
+            }
+            
+            return new List<string>();
         }
 
         public void CreateNewSiteCollection(string title, string name, string owner)
@@ -49,11 +58,9 @@ namespace Acceleratio.SPDG.Generator
                 var spo= officeTenant.CreateSite(newSiteProperties);
                 context.Load(spo, i => i.IsComplete);
                 context.ExecuteQuery();
-
-                //Check if provisioning of the SiteCollection is complete.
+                                
                 while (!spo.IsComplete)
-                {
-                    //Wait for 30 seconds and then try again
+                {                    
                     System.Threading.Thread.Sleep(10000);
                     spo.RefreshLoad();
                     context.ExecuteQuery();

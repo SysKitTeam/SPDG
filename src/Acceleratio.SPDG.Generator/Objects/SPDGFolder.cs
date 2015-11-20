@@ -13,6 +13,7 @@ namespace Acceleratio.SPDG.Generator.Objects
         public abstract SPDGListItem Item { get; }
         public abstract SPDGFolder AddFolder(string name);
         public abstract void Update();
+        public abstract SPDGFile AddFile(string url, byte[] content, bool overWrite);
 
     }
 }

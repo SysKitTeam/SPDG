@@ -56,6 +56,19 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             return new SPDGClientFolder(subFolder, _context);
         }
 
+        public override SPDGFile AddFile(string url, byte[] content, bool overWrite)
+        {
+            FileCreationInformation fci=new FileCreationInformation();
+            fci.Content = content;
+            fci.Url = url;
+            fci.Overwrite = overWrite;
+            var file=_folder.Files.Add(fci);
+            _context.Load(file);
+            _context.Load(file.ListItemAllFields, SPDGClientListItem.IncludeExpression);
+            _context.ExecuteQuery();
+            return new SPDGClientFile(file, _context);
+        }
+
         public override void Update()
         {
            //no update

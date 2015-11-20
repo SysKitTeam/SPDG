@@ -16,7 +16,7 @@ namespace Acceleratio.SPDG.Generator
         public void CreateItemsAndDocuments()
         {
             int totalProgress = 0;
-            if( workingDefinition.MaxNumberofItemsToGenerate > 0 )
+            if( workingDefinition.MaxNumberofItemsToGenerate > 0 || workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate > 0)
             {
                 totalProgress = CalculateTotalItemsForProgressReporting();
             }
@@ -83,11 +83,12 @@ namespace Acceleratio.SPDG.Generator
                                     var list = web.GetList(listInfo.Name);
                                     Log.Write("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url);
 
+                                    
                                     //TODO:rf bring back documents support
-                                    //while (docsAdded < workingDefinition.MaxNumberofItemsToGenerate)
-                                    //{
-                                    //    addDocumentToFolder(list.RootFolder);
-                                    //}
+                                    while (docsAdded < workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
+                                    {
+                                        addDocumentToFolder(list,list.RootFolder);
+                                    }
 
                                 }
                             }
@@ -97,36 +98,33 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
-        private void addDocumentToFolder(SPFolder folder)
-        {
-            //TODO:rf bring back document support
-            //if( docsAdded >= workingDefinition.MaxNumberofItemsToGenerate)
-            //{
-            //    return;
-            //}
-
-            //fileTypeRotator();
-            //byte[] fileContent = getFileContent();
-            //SPFile spFile = folder.Files.Add(SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames)  + " " + SampleData.GetRandomNumber(1, 30000) + "." + currentFileType , fileContent, true);
-            //if (spFile.Item != null)
-            //{ 
-            //    populateItemInfo( (SPList) folder.DocumentLibrary, spFile.Item, true);
-            //}
-            //docsAdded++;
+        private void addDocumentToFolder(SPDGList docLib, SPDGFolder folder)
+        {                        
+            fileTypeRotator();
+            byte[] fileContent = getFileContent();
+            var url = SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames) + " " + SampleData.GetRandomNumber(1, 30000) + "." + currentFileType;
+            var spFile = folder.AddFile(url, fileContent, true);
+            var fileItem = spFile.Item;
+            if (fileItem != null)
+            { 
+                populateItemInfo(docLib, fileItem, true);
+                fileItem.Update();                
+            }
+            docsAdded++;
             
 
-            //foreach(SPFolder childFolder in folder.SubFolders)
-            //{
-            //    if( docsAdded >= workingDefinition.MaxNumberofItemsToGenerate)
-            //    {
-            //        break;
-            //    }
+            foreach(var childFolder in folder.SubFolders)
+            {
+                if( docsAdded >= workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
+                {
+                    break;
+                }
 
-            //    if( childFolder.Url.IndexOf("/Forms") == -1  )
-            //    {
-            //        addDocumentToFolder(childFolder);
-            //    }
-            //}
+                if( childFolder.Url.IndexOf("/Forms") == -1  )
+                {
+                    addDocumentToFolder(docLib, childFolder);
+                }
+            }
         }
 
         private byte[] getFileContent()

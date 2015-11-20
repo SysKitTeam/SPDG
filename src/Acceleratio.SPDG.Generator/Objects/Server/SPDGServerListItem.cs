@@ -56,5 +56,10 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
         {
             get { return _item.DisplayName; }
         }
+
+        public override void Update()
+        {
+            _item.Update();
+        }
     }
 }

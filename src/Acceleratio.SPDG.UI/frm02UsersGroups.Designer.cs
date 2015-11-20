@@ -41,9 +41,11 @@
             this.cboOrganizationalUnit = new System.Windows.Forms.ComboBox();
             this.cboDomains = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBack
@@ -84,14 +86,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblGroups);
-            this.groupBox1.Controls.Add(this.lblNumUsers);
-            this.groupBox1.Controls.Add(this.trackNumberOfSecGroups);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.trackNumberOfUsers);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.cboOrganizationalUnit);
+            this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.groupBox1.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.groupBox1.Location = new System.Drawing.Point(268, 226);
@@ -104,35 +99,37 @@
             // lblGroups
             // 
             this.lblGroups.AutoSize = true;
-            this.lblGroups.Location = new System.Drawing.Point(567, 228);
+            this.lblGroups.Location = new System.Drawing.Point(526, 125);
             this.lblGroups.Name = "lblGroups";
-            this.lblGroups.Size = new System.Drawing.Size(13, 15);
+            this.lblGroups.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblGroups.Size = new System.Drawing.Size(13, 20);
             this.lblGroups.TabIndex = 7;
             this.lblGroups.Text = "0";
             // 
             // lblNumUsers
             // 
             this.lblNumUsers.AutoSize = true;
-            this.lblNumUsers.Location = new System.Drawing.Point(567, 144);
+            this.lblNumUsers.Location = new System.Drawing.Point(526, 59);
             this.lblNumUsers.Name = "lblNumUsers";
-            this.lblNumUsers.Size = new System.Drawing.Size(13, 15);
+            this.lblNumUsers.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblNumUsers.Size = new System.Drawing.Size(13, 20);
             this.lblNumUsers.TabIndex = 6;
             this.lblNumUsers.Text = "0";
             // 
             // trackNumberOfSecGroups
             // 
             this.trackNumberOfSecGroups.LargeChange = 1;
-            this.trackNumberOfSecGroups.Location = new System.Drawing.Point(10, 225);
+            this.trackNumberOfSecGroups.Location = new System.Drawing.Point(3, 128);
             this.trackNumberOfSecGroups.Maximum = 20;
             this.trackNumberOfSecGroups.Name = "trackNumberOfSecGroups";
-            this.trackNumberOfSecGroups.Size = new System.Drawing.Size(546, 45);
+            this.trackNumberOfSecGroups.Size = new System.Drawing.Size(517, 45);
             this.trackNumberOfSecGroups.TabIndex = 5;
             this.trackNumberOfSecGroups.ValueChanged += new System.EventHandler(this.trackNumberOfSecGroups_ValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 209);
+            this.label4.Location = new System.Drawing.Point(3, 110);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(203, 15);
             this.label4.TabIndex = 4;
@@ -141,10 +138,10 @@
             // trackNumberOfUsers
             // 
             this.trackNumberOfUsers.LargeChange = 1;
-            this.trackNumberOfUsers.Location = new System.Drawing.Point(10, 141);
+            this.trackNumberOfUsers.Location = new System.Drawing.Point(3, 62);
             this.trackNumberOfUsers.Maximum = 100;
             this.trackNumberOfUsers.Name = "trackNumberOfUsers";
-            this.trackNumberOfUsers.Size = new System.Drawing.Size(546, 45);
+            this.trackNumberOfUsers.Size = new System.Drawing.Size(517, 45);
             this.trackNumberOfUsers.TabIndex = 3;
             this.trackNumberOfUsers.ValueChanged += new System.EventHandler(this.trackNumberOfUsers_ValueChanged);
             // 
@@ -152,7 +149,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label3.Location = new System.Drawing.Point(15, 125);
+            this.label3.Location = new System.Drawing.Point(3, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 15);
             this.label3.TabIndex = 2;
@@ -162,7 +159,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label2.Location = new System.Drawing.Point(15, 46);
+            this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 15);
             this.label2.TabIndex = 1;
@@ -171,7 +168,7 @@
             // cboOrganizationalUnit
             // 
             this.cboOrganizationalUnit.FormattingEnabled = true;
-            this.cboOrganizationalUnit.Location = new System.Drawing.Point(18, 65);
+            this.cboOrganizationalUnit.Location = new System.Drawing.Point(3, 18);
             this.cboOrganizationalUnit.Name = "cboOrganizationalUnit";
             this.cboOrganizationalUnit.Size = new System.Drawing.Size(531, 23);
             this.cboOrganizationalUnit.TabIndex = 0;
@@ -197,6 +194,22 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Use this domain to create SharePoint users and groups: ";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.label2);
+            this.flowLayoutPanel1.Controls.Add(this.cboOrganizationalUnit);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
+            this.flowLayoutPanel1.Controls.Add(this.trackNumberOfUsers);
+            this.flowLayoutPanel1.Controls.Add(this.lblNumUsers);
+            this.flowLayoutPanel1.Controls.Add(this.label4);
+            this.flowLayoutPanel1.Controls.Add(this.trackNumberOfSecGroups);
+            this.flowLayoutPanel1.Controls.Add(this.lblGroups);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 19);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(610, 292);
+            this.flowLayoutPanel1.TabIndex = 8;
+            // 
             // frm02UsersGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,9 +234,10 @@
             this.Controls.SetChildIndex(this.cboDomains, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,5 +258,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblGroups;
         private System.Windows.Forms.Label lblNumUsers;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

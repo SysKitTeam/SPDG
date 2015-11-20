@@ -47,19 +47,19 @@ namespace Acceleratio.SPDG.UI
             this.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
 
-            List<string> domains = AD.GetDomainList();
-
-            foreach (string domain in domains)
-            {
-                ComboboxItem item = new ComboboxItem();
-                item.Text = domain;
-                item.Value = domain;
-                cboDomains.Items.Add(item);
-            }
-            cboDomains.Text = domains[0];
-
             if (!WorkingDefinition.IsClientObjectModel)
             {
+                List<string> domains = AD.GetDomainList();
+
+                foreach (string domain in domains)
+                {
+                    ComboboxItem item = new ComboboxItem();
+                    item.Text = domain;
+                    item.Value = domain;
+                    cboDomains.Items.Add(item);
+                }
+                cboDomains.Text = domains[0];
+          
                 List<string> subdomains = AD.GetDomainList2();
 
                 foreach (string domain in subdomains)
@@ -72,7 +72,11 @@ namespace Acceleratio.SPDG.UI
             }
             else
             {
+                label2.Visible = false;
+                cboOrganizationalUnit.Visible = false;
+                label1.Visible = false;
                 cboDomains.Enabled = false;
+                cboDomains.Visible = false;
             }
 
             chkGenerateUsers.Checked = WorkingDefinition.GenerateUsersAndSecurityGroupsInDirectory;

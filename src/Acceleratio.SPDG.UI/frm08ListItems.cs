@@ -51,8 +51,10 @@ namespace Acceleratio.SPDG.UI
 
         public override void loadData()
         {
+            grpDocumentLibrarySettings.Enabled = Common.WorkingDefinition.LibTypeDocument;
             chkPrefil.Checked = Common.WorkingDefinition.PrefilListAndLibrariesWithItems;
-            trackMaxNumberOfItems.Value = Common.WorkingDefinition.MaxNumberofItemsToGenerate;
+            NumberOfItemsToGenerate = Common.WorkingDefinition.MaxNumberofItemsToGenerate;
+            DocLibItemsToGenerate = Common.WorkingDefinition.MaxNumberofDocumentLibraryItemsToGenerate;
             chkDOCX.Checked = Common.WorkingDefinition.IncludeDocTypeDOCX;
             chkXLSX.Checked = Common.WorkingDefinition.IncludeDocTypeXLSX;
             chkPDF.Checked = Common.WorkingDefinition.IncludeDocTypePDF;
@@ -78,6 +80,8 @@ namespace Acceleratio.SPDG.UI
 
             Common.WorkingDefinition.PrefilListAndLibrariesWithItems = chkPrefil.Checked;
             Common.WorkingDefinition.MaxNumberofItemsToGenerate = NumberOfItemsToGenerate;
+            Common.WorkingDefinition.MaxNumberofDocumentLibraryItemsToGenerate = DocLibItemsToGenerate;
+            
             Common.WorkingDefinition.IncludeDocTypeDOCX = chkDOCX.Checked;
             Common.WorkingDefinition.IncludeDocTypeXLSX = chkXLSX.Checked;
             Common.WorkingDefinition.IncludeDocTypePDF = chkPDF.Checked;
@@ -112,6 +116,11 @@ namespace Acceleratio.SPDG.UI
         }
 
 
+        int DocLibItemsToGenerate
+        {
+            get { return trackMaxNumberOrDocLibItems.Value; }
+            set { trackMaxNumberOrDocLibItems.Value = value; }
+        }
 
         int NumberOfItemsToGenerate
         {
@@ -119,6 +128,7 @@ namespace Acceleratio.SPDG.UI
             {
                 return trackMaxNumberOfItems.Value;
             }
+            set { trackMaxNumberOrDocLibItems.Value = value; }
         }
 
         private void trackMaxNumberOfItems_ValueChanged(object sender, EventArgs e)
@@ -134,6 +144,11 @@ namespace Acceleratio.SPDG.UI
         private void trackMaxDocSize_ValueChanged(object sender, EventArgs e)
         {
             lblMaxSize.Text = trackMaxDocSize.Value.ToString() + " MB";
+        }
+
+        private void trackMaxNumberOrDocLibItems_ValueChanged(object sender, EventArgs e)
+        {
+            lblNumDocLibItems.Text = DocLibItemsToGenerate.ToString();
         }
     }
 }

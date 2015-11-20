@@ -26,6 +26,8 @@ namespace Acceleratio.SPDG.UI
             }
         }
 
+        private List<int> _serverSteps = new List<int>() {3, 10};
+
         public void showStep(int stepNumber)
         {
             foreach (Control ctrl in this.Controls)
@@ -34,19 +36,19 @@ namespace Acceleratio.SPDG.UI
                 {
                     int lblNumber = Convert.ToInt32(ctrl.Name.Replace("lblStep", "").TrimStart('0'));
                     if (lblNumber <= stepNumber)
-                    {
-                        ctrl.Enabled = true;
-                        ((LinkLabel)ctrl).Links[0].Enabled = true;
-
-                        Control[] ctrls = this.Controls.Find("pictureBox" + lblNumber, false);
-                        if (ctrls.Length > 0)
+                    {                     
+                        bool canBeEnabled = !_serverSteps.Contains(lblNumber) || !Common.WorkingDefinition.IsClientObjectModel;
+                        if (canBeEnabled)
                         {
-                            ((PictureBox)ctrls[0]).Image = Properties.Resources.temp_icona_12;
+                            ctrl.Enabled = true;
+                            ((LinkLabel) ctrl).Links[0].Enabled = true;
+                            Control[] ctrls = this.Controls.Find("pictureBox" + lblNumber, false);
+                            if (ctrls.Length > 0)
+                            {
+                                ((PictureBox) ctrls[0]).Image = Properties.Resources.temp_icona_12;
+                            }
                         }
                     }
-
-                    
-                    
                 }
             }
 

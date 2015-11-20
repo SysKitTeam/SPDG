@@ -168,7 +168,7 @@ namespace Acceleratio.SPDG.Generator
         {
            var totalProgress = workingDefinition.NumberOfSitesToCreate *
                               workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
-                          workingDefinition.MaxNumberofItemsToGenerate;
+                          (workingDefinition.MaxNumberofItemsToGenerate + workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate);
 
             if (workingDefinition.CreateNewSiteCollections > 0)
             {

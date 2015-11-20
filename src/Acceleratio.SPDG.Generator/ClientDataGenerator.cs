@@ -212,6 +212,7 @@ namespace Acceleratio.SPDG.Generator
 
         protected override void ResolveWebAppsAndSiteCollections()
         {
+          //  base.workingSiteCollections.Add(new SiteCollInfo() { URL = "https://cloudkit24.sharepoint.com/sites/dev});
 
             if (WorkingDefinition.CreateNewSiteCollections == 0)
             {

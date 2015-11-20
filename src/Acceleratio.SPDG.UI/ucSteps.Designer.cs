@@ -75,7 +75,8 @@
             this.lblStep01.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.lblStep01.Location = new System.Drawing.Point(47, 20);
             this.lblStep01.Name = "lblStep01";
-            this.lblStep01.Size = new System.Drawing.Size(93, 15);
+            this.lblStep01.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.lblStep01.Size = new System.Drawing.Size(93, 19);
             this.lblStep01.TabIndex = 0;
             this.lblStep01.TabStop = true;
             this.lblStep01.Text = "Step 1 - Connect";
