@@ -154,12 +154,18 @@ namespace Acceleratio.SPDG.Generator
             Log.Write("***" + overallCurrentStepDescription.ToUpper() + "***"); 
         }
 
-        internal void progressDetail(string detailStepDescription)
+        
+
+        internal void progressDetail(string detailStepDescription, int incrementInProgress=1)
         {
-            DetailCurrentStep++;
-            DetailCurrentStepDescription = detailStepDescription;
+            DetailCurrentStep+= incrementInProgress;
+            if (!string.IsNullOrEmpty(detailStepDescription))
+            {
+                DetailCurrentStepDescription = detailStepDescription;
+                Log.Write(detailStepDescription);
+            }
             bgWorker.ReportProgress(2);
-            Log.Write(detailStepDescription);
+            
         }
 
         protected abstract void CreateUsersAndGroups();

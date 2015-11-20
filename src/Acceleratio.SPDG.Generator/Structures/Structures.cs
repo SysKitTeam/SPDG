@@ -45,6 +45,7 @@ namespace Acceleratio.SPDG.Generator
         internal bool isLib { get; set; }
         internal  bool isBigList { get; set; }
         internal SPListTemplateType TemplateType { get; set; }
+        public int ItemCount { get; set; }
     }
 
     public class FolderInfo

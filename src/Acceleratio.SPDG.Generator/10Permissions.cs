@@ -9,53 +9,41 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
     {
-
-        int numSitesPermissions = 0;
-        int numListsPermissions = 0;
-        int numFoldersPermissions = 0;
-        int numItemsPermissions = 0;
-        int totalPermissions = 0;
-        int countSitesPermissions = 0;
-        int countListsPermissions = 0;
-        int countFoldersPermissions = 0;
-        int countItemsPermissions = 0;
-
-        int numUserPermissions = 0;
-        int numGroupPermissions = 0;
-        int numADPermissions = 0;
-        int countUserPermissions = 0;
-        int countGroupPermissions = 0;
-        int countADPermissions = 0;
+        
 
         int permissionsPerObject = 1;
-
-        string roleAssignemnetType = "user";
+        
         List<SPDGUser> _siteSpUsers = null ;
         List<SPDGGroup> _siteSpGroups = null;
         List<SPDGUser> _siteAdGroupSpUsers = null;
 
         public void CreatePermissions()
         {
+
+            
             
             //Per site collection
-            permissionsPerObject = workingDefinition.PermissionsPerObject;
-            numSitesPermissions = (int) Math.Floor(Convert.ToDecimal( workingDefinition.NumberOfSitesToCreate * workingDefinition.PermissionsPercentOfSites / 100 ));
-            numListsPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfLists / 100));
+            //permissionsPerObject = workingDefinition.PermissionsPerObject;
+            //numSitesPermissions = (int) Math.Floor(Convert.ToDecimal( workingDefinition.NumberOfSitesToCreate * workingDefinition.PermissionsPercentOfSites / 100 ));
+            //numListsPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfLists / 100));
             
-            numFoldersPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfFoldersToGenerate * workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfFolders / 100));
-            numItemsPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberofItemsToGenerate * workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfListItems / 100));
-            totalPermissions = (numSitesPermissions + numListsPermissions + numFoldersPermissions + numItemsPermissions + totalPermissions) * permissionsPerObject;
+            //numFoldersPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfFoldersToGenerate * workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfFolders / 100));
+            //numItemsPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberofItemsToGenerate * workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfListItems / 100));
+            //totalPermissions = (numSitesPermissions + numListsPermissions + numFoldersPermissions + numItemsPermissions + totalPermissions) * permissionsPerObject;
+            
+            //numGroupPermissions = (int)Math.Floor(Convert.ToDecimal(totalPermissions * workingDefinition.PermissionsPercentForSPGroups / 100));            
 
-            numUserPermissions = (int)Math.Floor(Convert.ToDecimal(totalPermissions * workingDefinition.PermissionsPercentForUsers / 100));
-            numGroupPermissions = (int)Math.Floor(Convert.ToDecimal(totalPermissions * workingDefinition.PermissionsPercentForSPGroups / 100));
-            numADPermissions = (int)Math.Floor(Convert.ToDecimal(totalPermissions * (100 - workingDefinition.PermissionsPercentForSPGroups - workingDefinition.PermissionsPercentForUsers) / 100));
-
-            if (totalPermissions == 0)
+            bool stuffTodo = workingDefinition.PermissionsPercentOfSites > 0
+                             || workingDefinition.PermissionsPercentOfLists > 0
+                             || workingDefinition.PermissionsPercentOfListItems > 0
+                             || workingDefinition.PermissionsPercentOfFolders > 0;
+            if (!stuffTodo)
             {
                 return;
             }
+            
 
-            int totalProgress = CalculateOverallPermissionsForProgressReporting(totalPermissions);
+            int totalProgress = 
             
             progressOverall("Creating Permissions", totalProgress);
 
@@ -99,23 +87,12 @@ namespace Acceleratio.SPDG.Generator
                     _siteSpGroups = siteColl.RootWeb.SiteGroups.ToList();
                     _siteSpUsers = siteColl.RootWeb.SiteUsers.Where(x => !x.IsDomainGroup).ToList();
                     _siteAdGroupSpUsers = siteColl.RootWeb.SiteUsers.Where(x => x.IsDomainGroup).ToList();
-
-                    countSitesPermissions = 0;
-                    countListsPermissions = 0;
-                    countFoldersPermissions = 0;
-                    countItemsPermissions = 0;
-                    countUserPermissions = 0;
-                    countGroupPermissions = 0;
-                    countADPermissions = 0;
+                   
                   
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
                         using (var web = siteColl.OpenWeb(siteInfo.ID))
-                        {
-                            if (countSitesPermissions < numSitesPermissions || countListsPermissions < numListsPermissions || countFoldersPermissions < numFoldersPermissions || countItemsPermissions < numItemsPermissions)
-                            {
-                               
-                            }
+                        {                          
 
                             if(allSitesWithUniquePermissions.Contains(siteInfo))
                             {
@@ -128,6 +105,10 @@ namespace Acceleratio.SPDG.Generator
                                 
                             }
 
+                            if (workingDefinition.PermissionsPercentOfLists == 0)
+                            {
+                                continue;                                
+                            }
                            
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
@@ -211,7 +192,7 @@ namespace Acceleratio.SPDG.Generator
             }          
 
             /// CREATE SHAREPOINT GROUPS
-            if (numGroupPermissions > 0)
+            if (WorkingDefinition.PermissionsPercentForSPGroups > 0)
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -247,9 +228,7 @@ namespace Acceleratio.SPDG.Generator
                 }
                
             }
-
-            Log.Write("Unique permissions added to site: " + web.Url);
-            countSitesPermissions++;
+            Log.Write("Unique permissions added to site: " + web.Url);            
         }
 
         private void setListPermissions(SPDGWeb web, string listName)
@@ -266,8 +245,6 @@ namespace Acceleratio.SPDG.Generator
             }
 
             Log.Write("Unique permissions added to list: " + listName + ", site: " + web.Url);
-
-            countListsPermissions++;
         }
 
         private void setFolderPermissions(SPDGWeb web, string folderURL)
@@ -283,16 +260,14 @@ namespace Acceleratio.SPDG.Generator
                setupNextRoleAssignment(web, folder.Item);
             }
 
-            Log.Write("Unique permissions added to folder: " + folderURL + " in site: " + web.Url);
-            countFoldersPermissions++;
+            Log.Write("Unique permissions added to folder: " + folderURL + " in site: " + web.Url);            
         }
 
         private void setItemPermissions(SPDGWeb web, string listName)
         {
             var list = web.GetList(listName);
             foreach (var item in list.Items)
-            {
-                countItemsPermissions++;
+            {                
                 if (workingDefinition.PermissionsPercentOfListItems <= SampleData.GetRandomNumber(0,100))
                 {
                     continue;
@@ -316,50 +291,19 @@ namespace Acceleratio.SPDG.Generator
         private void setupNextRoleAssignment(SPDGWeb web, SPDGSecurableObject securableObject)
         {
             SPRoleAssignment roleAssignement = null;
-            SPDGPrincipal principal = null;
-            if( roleAssignemnetType == "user")
+            SPDGPrincipal principal = null;            
+            var rnd = SampleData.GetRandomNumber(0, 100);
+            if (rnd< WorkingDefinition.PermissionsPercentForUsers)
             {
-                principal = _siteSpUsers[ SampleData.GetRandomNumber(0, _siteSpUsers.Count-1) ];                
-                countUserPermissions++;
-
-                if( countGroupPermissions < numGroupPermissions )
-                {
-                    roleAssignemnetType = "group";
-                }
-                else if( countADPermissions < numADPermissions)
-                {
-                    roleAssignemnetType = "ad";
-                }
+                principal = _siteSpUsers[SampleData.GetRandomNumber(0, _siteSpUsers.Count - 1)];
             }
-            else if( roleAssignemnetType == "group")
+            else if (rnd < WorkingDefinition.PermissionsPercentForUsers + WorkingDefinition.PermissionsPercentForSPGroups)
             {
                 principal = _siteSpGroups[SampleData.GetRandomNumber(0, _siteSpGroups.Count - 1)];
-                
-                countGroupPermissions++;
-
-                if( countADPermissions < numADPermissions)
-                {
-                    roleAssignemnetType = "ad";
-                }
-                else if( countUserPermissions < numUserPermissions)
-                {
-                    roleAssignemnetType = "user";
-                }
             }
-            else if (roleAssignemnetType == "ad")
+            else
             {
                 principal = _siteAdGroupSpUsers[SampleData.GetRandomNumber(0, _siteAdGroupSpUsers.Count - 1)];
-             
-                countADPermissions++;
-
-                if( countUserPermissions < numUserPermissions)
-                {
-                    roleAssignemnetType = "user";
-                }
-                else if( countGroupPermissions < numGroupPermissions )
-                {
-                    roleAssignemnetType = "group";
-                }
             }
 
             if (securableObject.GetRoleAssignmentByPrincipal(principal) == null)

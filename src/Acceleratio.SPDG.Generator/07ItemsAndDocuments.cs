@@ -85,10 +85,11 @@ namespace Acceleratio.SPDG.Generator
                                         if (batch.Count > 400)
                                         {
                                             list.AddItems(batch);
-                                            progressDetail(string.Format("Created {0}/{1} items for list {2}: ", i + 1, itemCount, list.RootFolder.Url));                                            
+                                            progressDetail(string.Format("Created {0}/{1} items for list {2}: ", i + 1, itemCount, list.RootFolder.Url), batch.Count);                                            
                                             batch.Clear();
                                         }
-                                    }                                                                        
+                                    }
+                                    listInfo.ItemCount = itemCount;
                                 }
                                 else
                                 {
