@@ -53,6 +53,7 @@ namespace Acceleratio.SPDG.UI
         public override void loadData()
         {
             trackMaxNumberListLibraries.Value = Common.WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite;
+            trackBigListsCount.Value = Common.WorkingDefinition.NumberOfBigListsPerSite;
             chkDocLib.Checked = Common.WorkingDefinition.LibTypeDocument;
             chkTasks.Checked = Common.WorkingDefinition.LibTypeTasks;
             chkCalendar.Checked = Common.WorkingDefinition.LibTypeCalendar;
@@ -78,6 +79,7 @@ namespace Acceleratio.SPDG.UI
             Common.WorkingDefinition.CreateSomeFoldersInDocumentLibraries = chkCreateFolders.Checked;
             Common.WorkingDefinition.MaxNumberOfFoldersToGenerate = trackMaxFoldersInLib.Value;
             Common.WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary = trackMaxNumberNestedFolders.Value;
+            Common.WorkingDefinition.NumberOfBigListsPerSite = trackBigListsCount.Value;
             return true;
         }
 
@@ -140,6 +142,11 @@ namespace Acceleratio.SPDG.UI
                 trackMaxFoldersInLib.Value = 0;
                 trackMaxNumberNestedFolders.Value = 0;
             }
+        }
+
+        private void trackBigListsCount_ValueChanged(object sender, EventArgs e)
+        {
+            lblBigLists.Text = trackBigListsCount.Value.ToString();
         }
     }
 }

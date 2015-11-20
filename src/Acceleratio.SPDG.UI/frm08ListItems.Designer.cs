@@ -48,11 +48,15 @@
             this.lblNumDocLibItems = new System.Windows.Forms.Label();
             this.trackMaxNumberOrDocLibItems = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
+            this.trackBarBigListItemsCount = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblBigListCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOfItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMinDocSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxDocSize)).BeginInit();
             this.grpDocumentLibrarySettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOrDocLibItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBigListItemsCount)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBack
@@ -94,7 +98,7 @@
             // trackMaxNumberOfItems
             // 
             this.trackMaxNumberOfItems.Location = new System.Drawing.Point(257, 209);
-            this.trackMaxNumberOfItems.Maximum = 100;
+            this.trackMaxNumberOfItems.Maximum = 200;
             this.trackMaxNumberOfItems.Name = "trackMaxNumberOfItems";
             this.trackMaxNumberOfItems.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberOfItems.TabIndex = 20;
@@ -117,7 +121,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label3.Location = new System.Drawing.Point(6, 94);
+            this.label3.Location = new System.Drawing.Point(6, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 15);
             this.label3.TabIndex = 21;
@@ -128,7 +132,7 @@
             this.chkDOCX.AutoSize = true;
             this.chkDOCX.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkDOCX.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.chkDOCX.Location = new System.Drawing.Point(9, 113);
+            this.chkDOCX.Location = new System.Drawing.Point(9, 106);
             this.chkDOCX.Name = "chkDOCX";
             this.chkDOCX.Size = new System.Drawing.Size(58, 19);
             this.chkDOCX.TabIndex = 22;
@@ -140,7 +144,7 @@
             this.chkXLSX.AutoSize = true;
             this.chkXLSX.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkXLSX.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.chkXLSX.Location = new System.Drawing.Point(9, 136);
+            this.chkXLSX.Location = new System.Drawing.Point(73, 106);
             this.chkXLSX.Name = "chkXLSX";
             this.chkXLSX.Size = new System.Drawing.Size(52, 19);
             this.chkXLSX.TabIndex = 23;
@@ -152,7 +156,7 @@
             this.chkPDF.AutoSize = true;
             this.chkPDF.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkPDF.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.chkPDF.Location = new System.Drawing.Point(9, 159);
+            this.chkPDF.Location = new System.Drawing.Point(131, 105);
             this.chkPDF.Name = "chkPDF";
             this.chkPDF.Size = new System.Drawing.Size(47, 19);
             this.chkPDF.TabIndex = 24;
@@ -164,7 +168,7 @@
             this.chkImages.AutoSize = true;
             this.chkImages.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkImages.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.chkImages.Location = new System.Drawing.Point(9, 182);
+            this.chkImages.Location = new System.Drawing.Point(184, 106);
             this.chkImages.Name = "chkImages";
             this.chkImages.Size = new System.Drawing.Size(64, 19);
             this.chkImages.TabIndex = 25;
@@ -174,7 +178,7 @@
             // trackMinDocSize
             // 
             this.trackMinDocSize.LargeChange = 1;
-            this.trackMinDocSize.Location = new System.Drawing.Point(1, 225);
+            this.trackMinDocSize.Location = new System.Drawing.Point(2, 145);
             this.trackMinDocSize.Maximum = 1000;
             this.trackMinDocSize.Minimum = 20;
             this.trackMinDocSize.Name = "trackMinDocSize";
@@ -189,7 +193,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label4.Location = new System.Drawing.Point(6, 206);
+            this.label4.Location = new System.Drawing.Point(7, 126);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(165, 15);
             this.label4.TabIndex = 26;
@@ -198,7 +202,7 @@
             // trackMaxDocSize
             // 
             this.trackMaxDocSize.LargeChange = 1;
-            this.trackMaxDocSize.Location = new System.Drawing.Point(1, 292);
+            this.trackMaxDocSize.Location = new System.Drawing.Point(2, 212);
             this.trackMaxDocSize.Name = "trackMaxDocSize";
             this.trackMaxDocSize.Size = new System.Drawing.Size(543, 45);
             this.trackMaxDocSize.TabIndex = 29;
@@ -209,7 +213,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label5.Location = new System.Drawing.Point(6, 273);
+            this.label5.Location = new System.Drawing.Point(7, 193);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(143, 15);
             this.label5.TabIndex = 28;
@@ -231,7 +235,7 @@
             this.lblMinSize.AutoSize = true;
             this.lblMinSize.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblMinSize.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblMinSize.Location = new System.Drawing.Point(553, 228);
+            this.lblMinSize.Location = new System.Drawing.Point(554, 148);
             this.lblMinSize.Name = "lblMinSize";
             this.lblMinSize.Size = new System.Drawing.Size(29, 15);
             this.lblMinSize.TabIndex = 31;
@@ -242,7 +246,7 @@
             this.lblMaxSize.AutoSize = true;
             this.lblMaxSize.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblMaxSize.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblMaxSize.Location = new System.Drawing.Point(553, 295);
+            this.lblMaxSize.Location = new System.Drawing.Point(554, 215);
             this.lblMaxSize.Name = "lblMaxSize";
             this.lblMaxSize.Size = new System.Drawing.Size(34, 15);
             this.lblMaxSize.TabIndex = 32;
@@ -264,9 +268,9 @@
             this.grpDocumentLibrarySettings.Controls.Add(this.label5);
             this.grpDocumentLibrarySettings.Controls.Add(this.label4);
             this.grpDocumentLibrarySettings.Controls.Add(this.trackMinDocSize);
-            this.grpDocumentLibrarySettings.Location = new System.Drawing.Point(257, 250);
+            this.grpDocumentLibrarySettings.Location = new System.Drawing.Point(237, 303);
             this.grpDocumentLibrarySettings.Name = "grpDocumentLibrarySettings";
-            this.grpDocumentLibrarySettings.Size = new System.Drawing.Size(627, 336);
+            this.grpDocumentLibrarySettings.Size = new System.Drawing.Size(614, 287);
             this.grpDocumentLibrarySettings.TabIndex = 33;
             this.grpDocumentLibrarySettings.TabStop = false;
             this.grpDocumentLibrarySettings.Text = "Document Libraries";
@@ -284,7 +288,7 @@
             // 
             // trackMaxNumberOrDocLibItems
             // 
-            this.trackMaxNumberOrDocLibItems.Location = new System.Drawing.Point(1, 47);
+            this.trackMaxNumberOrDocLibItems.Location = new System.Drawing.Point(3, 40);
             this.trackMaxNumberOrDocLibItems.Maximum = 100;
             this.trackMaxNumberOrDocLibItems.Name = "trackMaxNumberOrDocLibItems";
             this.trackMaxNumberOrDocLibItems.Size = new System.Drawing.Size(543, 45);
@@ -297,17 +301,52 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label6.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label6.Location = new System.Drawing.Point(6, 23);
+            this.label6.Location = new System.Drawing.Point(6, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(221, 15);
+            this.label6.Size = new System.Drawing.Size(297, 15);
             this.label6.TabIndex = 33;
-            this.label6.Text = "Max number of items to generate per list";
+            this.label6.Text = "Max number of items to generate per document library";
+            // 
+            // trackBarBigListItemsCount
+            // 
+            this.trackBarBigListItemsCount.Location = new System.Drawing.Point(258, 259);
+            this.trackBarBigListItemsCount.Maximum = 200;
+            this.trackBarBigListItemsCount.Name = "trackBarBigListItemsCount";
+            this.trackBarBigListItemsCount.Size = new System.Drawing.Size(543, 45);
+            this.trackBarBigListItemsCount.TabIndex = 39;
+            this.trackBarBigListItemsCount.TickFrequency = 5;
+            this.trackBarBigListItemsCount.ValueChanged += new System.EventHandler(this.trackBarBigListItemsCount_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label1.Location = new System.Drawing.Point(260, 239);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(244, 15);
+            this.label1.TabIndex = 38;
+            this.label1.Text = "Max number of items to generate per Big List";
+            // 
+            // lblBigListCount
+            // 
+            this.lblBigListCount.AutoSize = true;
+            this.lblBigListCount.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblBigListCount.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblBigListCount.Location = new System.Drawing.Point(809, 261);
+            this.lblBigListCount.Name = "lblBigListCount";
+            this.lblBigListCount.Size = new System.Drawing.Size(13, 15);
+            this.lblBigListCount.TabIndex = 40;
+            this.lblBigListCount.Text = "0";
             // 
             // frm08ListItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 644);
+            this.Controls.Add(this.lblBigListCount);
+            this.Controls.Add(this.trackBarBigListItemsCount);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.grpDocumentLibrarySettings);
             this.Controls.Add(this.lblNumItems);
             this.Controls.Add(this.trackMaxNumberOfItems);
@@ -328,12 +367,16 @@
             this.Controls.SetChildIndex(this.trackMaxNumberOfItems, 0);
             this.Controls.SetChildIndex(this.lblNumItems, 0);
             this.Controls.SetChildIndex(this.grpDocumentLibrarySettings, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.trackBarBigListItemsCount, 0);
+            this.Controls.SetChildIndex(this.lblBigListCount, 0);
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOfItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMinDocSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxDocSize)).EndInit();
             this.grpDocumentLibrarySettings.ResumeLayout(false);
             this.grpDocumentLibrarySettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackMaxNumberOrDocLibItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBigListItemsCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -361,5 +404,8 @@
         private System.Windows.Forms.Label lblNumDocLibItems;
         private System.Windows.Forms.TrackBar trackMaxNumberOrDocLibItems;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TrackBar trackBarBigListItemsCount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblBigListCount;
     }
 }

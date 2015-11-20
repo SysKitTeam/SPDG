@@ -96,6 +96,7 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
 
         public override void AddItems(IEnumerable<ISPDGListItemInfo> items)
         {
+            
             int counter = 0;
             foreach (var itemInfo in items)
             {

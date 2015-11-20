@@ -36,12 +36,12 @@ namespace Acceleratio.SPDG.Generator
 
         public void CreatePermissions()
         {
-            int totalSitesToProcess = workingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists)).Count();
+            
             //Per site collection
             permissionsPerObject = workingDefinition.PermissionsPerObject;
             numSitesPermissions = (int) Math.Floor(Convert.ToDecimal( workingDefinition.NumberOfSitesToCreate * workingDefinition.PermissionsPercentOfSites / 100 ));
             numListsPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfLists / 100));
-            var numListsPermissionsPerSite = numListsPermissions/totalSitesToProcess;
+            
             numFoldersPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberOfFoldersToGenerate * workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfFolders / 100));
             numItemsPermissions = (int) Math.Floor(Convert.ToDecimal((workingDefinition.MaxNumberofItemsToGenerate * workingDefinition.MaxNumberOfListsAndLibrariesPerSite * workingDefinition.NumberOfSitesToCreate) * workingDefinition.PermissionsPercentOfListItems / 100));
             totalPermissions = (numSitesPermissions + numListsPermissions + numFoldersPermissions + numItemsPermissions + totalPermissions) * permissionsPerObject;

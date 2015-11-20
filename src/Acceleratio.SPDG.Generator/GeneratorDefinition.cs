@@ -27,6 +27,7 @@ namespace Acceleratio.SPDG.Generator
         public int NumberOfSitesToCreate { get; set; }
         public int MaxNumberOfLevelsForSites { get; set; }
         public int MaxNumberOfListsAndLibrariesPerSite { get; set; }
+        public int NumberOfBigListsPerSite { get; set; }
         public bool LibTypeList { get; set; }
         public bool LibTypeDocument { get; set; }
         public bool LibTypeTasks { get; set; }
@@ -40,8 +41,8 @@ namespace Acceleratio.SPDG.Generator
         public int MaxNumberOfColumnsPerList { get; set; }
         public bool PrefilListAndLibrariesWithItems { get; set; }
         public int MaxNumberofItemsToGenerate { get; set; }
-
         public int MaxNumberofDocumentLibraryItemsToGenerate { get; set; }
+        public int MaxNumberofItemsBigListToGenerate { get; set; }
         public bool IncludeDocTypeDOCX { get; set; }
         public bool IncludeDocTypeXLSX { get; set; }
         public bool IncludeDocTypePDF { get; set; }

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.SharePoint;
 using System.IO;
 using Acceleratio.SPDG.Generator.Objects;
+using Acceleratio.SPDG.Generator.Utilities;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -16,7 +17,9 @@ namespace Acceleratio.SPDG.Generator
         public void CreateItemsAndDocuments()
         {
             int totalProgress = 0;
-            if( workingDefinition.MaxNumberofItemsToGenerate > 0 || workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate > 0)
+            if( workingDefinition.MaxNumberofItemsToGenerate > 0 
+                || workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate > 0
+                || workingDefinition.MaxNumberofItemsBigListToGenerate >0)
             {
                 totalProgress = CalculateTotalItemsForProgressReporting();
             }
@@ -35,8 +38,12 @@ namespace Acceleratio.SPDG.Generator
                     {
                         using (var web = siteColl.OpenWeb(siteInfo.ID))
                         {
-                            foreach (ListInfo listInfo in siteInfo.Lists)
+                            var available = siteInfo.Lists;
+                            //shuffle because of big lists
+                            available.Shuffle();
+                            foreach (ListInfo listInfo in available)
                             {
+                                titleUsage.Clear();
                                 if (!listInfo.isLib)
                                 {
                                     var list = web.GetList(listInfo.Name);
@@ -54,8 +61,10 @@ namespace Acceleratio.SPDG.Generator
                                         Log.Write("Start adding items to list: " + listInfo.Name + " in site: " + web.Url);
                                     }
                                     
-                                    List<SPDGListItemInfo> listItemsToCreate=new List<SPDGListItemInfo>();
-                                    for (int i = 0; i < workingDefinition.MaxNumberofItemsToGenerate; i++ )
+                                    List<SPDGListItemInfo> batch=new List<SPDGListItemInfo>();
+                                    int itemCount = listInfo.isBigList ? workingDefinition.MaxNumberofItemsBigListToGenerate : workingDefinition.MaxNumberofItemsToGenerate;
+                                    itemCount = SampleData.GetRandomNumber(itemCount*3/4, itemCount);
+                                    for (int i = 0; i < itemCount; i++ )
                                     {
                                         var itemInfo=new SPDGListItemInfo();
                                         if (listInfo.TemplateType == SPListTemplateType.Tasks)
@@ -68,23 +77,25 @@ namespace Acceleratio.SPDG.Generator
                                         }
                                         else
                                         {
+                                            
                                             populateItemInfo(list, itemInfo, false);
                                         }
-                                        listItemsToCreate.Add(itemInfo);
-                                    }
-                                    //TODO:rf better messages
-                                    Log.Write(string.Format("Created {0} items for list {1}: ", workingDefinition.MaxNumberofItemsToGenerate, list.RootFolder.Url));
-                                    list.AddItems(listItemsToCreate);
-                                    Log.Write(string.Format("Added {0} items to list {1}: ", workingDefinition.MaxNumberofItemsToGenerate, list.RootFolder.Url));
+                                        batch.Add(itemInfo);
+
+                                        if (batch.Count > 400)
+                                        {
+                                            list.AddItems(batch);
+                                            progressDetail(string.Format("Created {0}/{1} items for list {2}: ", i + 1, itemCount, list.RootFolder.Url));                                            
+                                            batch.Clear();
+                                        }
+                                    }                                                                        
                                 }
                                 else
                                 {
                                     docsAdded = 0;
                                     var list = web.GetList(listInfo.Name);
                                     Log.Write("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url);
-
-                                    
-                                    //TODO:rf bring back documents support
+                                                                       
                                     while (docsAdded < workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
                                     {
                                         addDocumentToFolder(list,list.RootFolder);
@@ -157,6 +168,8 @@ namespace Acceleratio.SPDG.Generator
             return content;
         }
 
+
+        private static Dictionary<string,int> titleUsage=new Dictionary<string, int>();
         private void populateItemInfo(SPDGList list, ISPDGListItemInfo item, bool isDocLib )
         {
             List<string> userFields = new List<string>();
@@ -169,6 +182,15 @@ namespace Acceleratio.SPDG.Generator
             }
 
             string title = getFieldValue("First Name") + " "  + getFieldValue("Last Name");
+            if (!titleUsage.ContainsKey(title))
+            {
+                titleUsage[title] = 0;
+            }
+            titleUsage[title]++;
+            if (titleUsage[title] != 1)
+            {
+                title += " No. " + titleUsage[title];
+            }
             item["Title"] = title;
 
             foreach( string fieldName in userFields )

@@ -26,7 +26,7 @@ namespace Acceleratio.SPDG.UI
             }
         }
 
-        private List<int> _serverSteps = new List<int>() {3, 10};
+        private List<int> _serverSteps = new List<int>() {3, 9, 10};
 
         public void showStep(int stepNumber)
         {

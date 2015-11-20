@@ -15,7 +15,7 @@ namespace Acceleratio.SPDG.Generator
 
         public void CreateLists()
         {
-            if (workingDefinition.MaxNumberOfListsAndLibrariesPerSite > 0 )
+            if (workingDefinition.MaxNumberOfListsAndLibrariesPerSite > 0 || workingDefinition.NumberOfBigListsPerSite>0)
             {
                 int progressTotal = CalculateTotalListsForProgressReporting();
                 progressOverall("Creating Lists and Libraries", progressTotal);
@@ -33,28 +33,45 @@ namespace Acceleratio.SPDG.Generator
                     {
                         using(var web = siteColl.OpenWeb(siteInfo.ID)) 
                         {
-                            Log.Write("Creating lists in site '" + web.Url + "'");
                             Random rnd = new Random();
-
-                            int listsToCreate = Math.Max(rnd.Next(workingDefinition.MaxNumberOfListsAndLibrariesPerSite) + 1, workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
-
+                            int listsToCreate = rnd.Next(workingDefinition.MaxNumberOfListsAndLibrariesPerSite+1);                            
+                            int bigListsToCreate = workingDefinition.NumberOfBigListsPerSite;
+                            Log.Write("Creating lists in site '" + web.Url + "'");
+                            listsToCreate += bigListsToCreate;
+                            int bigListsCreated = 0;
                             for( int s = 0; s < listsToCreate; s++ )
                             {
                                 try
                                 {
-                                    getNextTemplateType();
+                                    SPListTemplateType listTemplate;
+                                    if (bigListsCreated >= bigListsToCreate)
+                                    {
+                                        getNextTemplateType();
+                                        
+                                        listTemplate = lastTemplateType;
+                                    }
+                                    else
+                                    {
+                                        lastListPrefix = "List";
+                                        listTemplate = SPListTemplateType.GenericList;                                        
+                                    }
+                                    
                                     string listName = findAvailableListName(web);
                                     progressDetail("Creating List '" + listName + "' in site '" + web.Url + "'");
                                     
-                                    Guid listGuid = web.AddList(listName, string.Empty, (int)lastTemplateType);
+                                    Guid listGuid = web.AddList(listName, string.Empty, (int)listTemplate);
 
                                     var list = web.GetList(listGuid);                                    
                                     web.AddNavigationNode(list.Title, list.DefaultViewUrl, NavigationNodeLocation.QuickLaunchLists);
                                     ListInfo listInfo = new ListInfo();
                                     listInfo.Name = listName;
-                                    listInfo.TemplateType = lastTemplateType;
-                                    listInfo.isLib = (lastTemplateType == SPListTemplateType.DocumentLibrary ? true : false);
-
+                                    listInfo.TemplateType = listTemplate;
+                                    listInfo.isLib = (listTemplate == SPListTemplateType.DocumentLibrary ? true : false);
+                                    if (!listInfo.isLib && bigListsCreated < bigListsToCreate)
+                                    {
+                                        listInfo.isBigList = true;
+                                        bigListsCreated++;
+                                    }
                                     siteInfo.Lists.Add(listInfo);
 
                                     

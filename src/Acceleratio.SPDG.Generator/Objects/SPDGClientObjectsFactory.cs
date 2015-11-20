@@ -16,6 +16,7 @@ namespace Acceleratio.SPDG.Generator.Objects
         public override SPDGSite GetSite(string url)
         {
             ClientContext context = new ClientContext(url);
+            context.RequestTimeout = 10 * 60 * 1000;
             context.Credentials = _credentials;
             context.Load(context.Site, x=>x.Id, x=>x.Url, x=>x.ServerRelativeUrl);
             context.Load(context.Site.RootWeb, SPDGClientWeb.IncludeExpression);

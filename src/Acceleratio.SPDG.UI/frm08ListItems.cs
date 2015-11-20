@@ -51,6 +51,7 @@ namespace Acceleratio.SPDG.UI
 
         public override void loadData()
         {
+            trackBarBigListItemsCount.Enabled = Common.WorkingDefinition.NumberOfBigListsPerSite!=0;
             grpDocumentLibrarySettings.Enabled = Common.WorkingDefinition.LibTypeDocument;
             chkPrefil.Checked = Common.WorkingDefinition.PrefilListAndLibrariesWithItems;
             NumberOfItemsToGenerate = Common.WorkingDefinition.MaxNumberofItemsToGenerate;
@@ -61,6 +62,7 @@ namespace Acceleratio.SPDG.UI
             chkImages.Checked = Common.WorkingDefinition.IncludeDocTypeImages;
             trackMinDocSize.Value = Common.WorkingDefinition.MinDocumentSizeKB > 20 ? Common.WorkingDefinition.MinDocumentSizeKB : 20;
             trackMaxDocSize.Value = Common.WorkingDefinition.MaxDocumentSizeMB;
+            BigListItemsToGenerate = Common.WorkingDefinition.MaxNumberofItemsBigListToGenerate;
         }
 
         public override bool saveData()
@@ -81,7 +83,8 @@ namespace Acceleratio.SPDG.UI
             Common.WorkingDefinition.PrefilListAndLibrariesWithItems = chkPrefil.Checked;
             Common.WorkingDefinition.MaxNumberofItemsToGenerate = NumberOfItemsToGenerate;
             Common.WorkingDefinition.MaxNumberofDocumentLibraryItemsToGenerate = DocLibItemsToGenerate;
-            
+            Common.WorkingDefinition.MaxNumberofItemsBigListToGenerate = BigListItemsToGenerate;
+
             Common.WorkingDefinition.IncludeDocTypeDOCX = chkDOCX.Checked;
             Common.WorkingDefinition.IncludeDocTypeXLSX = chkXLSX.Checked;
             Common.WorkingDefinition.IncludeDocTypePDF = chkPDF.Checked;
@@ -121,14 +124,20 @@ namespace Acceleratio.SPDG.UI
             get { return trackMaxNumberOrDocLibItems.Value; }
             set { trackMaxNumberOrDocLibItems.Value = value; }
         }
-
         int NumberOfItemsToGenerate
+        {
+            get { return trackMaxNumberOfItems.Value; }
+            set { trackMaxNumberOfItems.Value = value; }
+        }
+
+        int BigListItemsToGenerate
         {
             get
             {
-                return trackMaxNumberOfItems.Value;
+                var val = trackBarBigListItemsCount.Value;
+                return val*val;
             }
-            set { trackMaxNumberOrDocLibItems.Value = value; }
+            set { trackBarBigListItemsCount.Value = (int)Math.Sqrt(value); }
         }
 
         private void trackMaxNumberOfItems_ValueChanged(object sender, EventArgs e)
@@ -149,6 +158,11 @@ namespace Acceleratio.SPDG.UI
         private void trackMaxNumberOrDocLibItems_ValueChanged(object sender, EventArgs e)
         {
             lblNumDocLibItems.Text = DocLibItemsToGenerate.ToString();
+        }
+
+        private void trackBarBigListItemsCount_ValueChanged(object sender, EventArgs e)
+        {
+            lblBigListCount.Text = BigListItemsToGenerate.ToString();
         }
     }
 }
