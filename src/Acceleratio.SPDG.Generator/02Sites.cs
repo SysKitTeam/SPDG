@@ -29,8 +29,7 @@ namespace Acceleratio.SPDG.Generator
         }
 
         internal void CreateSubsites(ref List<SiteInfo> sites, SPDGWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
-        {
-            progressOverall("Creating Sites", siteCounter);
+        {            
             Random rnd = new Random();
             string baseName = "";
 
@@ -67,7 +66,10 @@ namespace Acceleratio.SPDG.Generator
 
         internal void CreateSites()
         {
-            foreach(SiteCollInfo siteCollInfo in workingSiteCollections)
+
+            var totalSites = CalculateTotalSitesForProgressReporting();
+            progressOverall("Creating Sites", totalSites);
+            foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
@@ -79,7 +81,7 @@ namespace Acceleratio.SPDG.Generator
 
                     List<SiteInfo> sites = new List<SiteInfo>(); 
                     CreateSubsites(ref sites, siteColl.RootWeb, 0, workingDefinition.MaxNumberOfLevelsForSites, ref sitecounter, workingDefinition.NumberOfSitesToCreate, "");
-
+                   
                     siteCollInfo.Sites = sites;
                 }
             }
@@ -90,7 +92,7 @@ namespace Acceleratio.SPDG.Generator
             string siteName, url;
             findAvailableSiteName(parentWeb, out siteName, out url, parentBaseName, level, out baseName);
 
-            progressDetail("Creating Site '" + parentWeb.Url + "/" + url + "'");
+            progressDetail("Creating Site '" + parentWeb.Url + "/" + url + "'",0);
 
             SPDGWeb childWeb = null;
             try
@@ -99,11 +101,12 @@ namespace Acceleratio.SPDG.Generator
                 childWeb = parentWeb.AddWeb(url, siteName, null, lang, _templateName, false, false);
                 AddToNavigationBar(childWeb);
 
-                Log.Write("Site created '" + childWeb.Url + "'");
+                progressDetail("Site created '" + childWeb.Url + "'");
             }
             catch (Exception ex)
             {
                 Log.Write("Could not create site '" + url + "'");
+                progressDetail("");
                 Errors.Log(ex);
             }
            

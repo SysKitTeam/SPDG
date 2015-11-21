@@ -50,15 +50,15 @@ namespace Acceleratio.SPDG.Generator
 
                                     if( listInfo.TemplateType == SPListTemplateType.Tasks )
                                     {
-                                        Log.Write("Start adding items to tasks list: " + listInfo.Name + " in site: " + web.Url);
+                                        progressDetail("Start adding items to tasks list: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     else if (listInfo.TemplateType == SPListTemplateType.Events)
                                     {
-                                        Log.Write("Start adding events to calendar: " + listInfo.Name + " in site: " + web.Url);
+                                        progressDetail("Start adding events to calendar: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     else
                                     {
-                                        Log.Write("Start adding items to list: " + listInfo.Name + " in site: " + web.Url);
+                                        progressDetail("Start adding items to list: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     
                                     List<SPDGListItemInfo> batch=new List<SPDGListItemInfo>();
@@ -89,13 +89,19 @@ namespace Acceleratio.SPDG.Generator
                                             batch.Clear();
                                         }
                                     }
+                                    if (batch.Count > 0)
+                                    {
+                                        list.AddItems(batch);
+                                        progressDetail(string.Format("Created {0} items for list {1}: ", itemCount, list.RootFolder.Url), batch.Count);
+                                        batch.Clear();
+                                    }
                                     listInfo.ItemCount = itemCount;
                                 }
                                 else
                                 {
                                     docsAdded = 0;
                                     var list = web.GetList(listInfo.Name);
-                                    Log.Write("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url);
+                                    progressDetail("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url,0);
                                                                        
                                     while (docsAdded < workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
                                     {
@@ -137,6 +143,7 @@ namespace Acceleratio.SPDG.Generator
                     addDocumentToFolder(docLib, childFolder);
                 }
             }
+            progressDetail("Adding document to folder: " + folder.Url);
         }
 
         private byte[] getFileContent()

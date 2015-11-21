@@ -57,10 +57,8 @@ namespace Acceleratio.SPDG.Generator
                                     }
                                     
                                     string listName = findAvailableListName(web);
-                                    progressDetail("Creating List '" + listName + "' in site '" + web.Url + "'");
-                                    
                                     Guid listGuid = web.AddList(listName, string.Empty, (int)listTemplate);
-
+                                    progressDetail("Created List '" + listName + "' in site '" + web.Url + "'");
                                     var list = web.GetList(listGuid);                                    
                                     web.AddNavigationNode(list.Title, list.DefaultViewUrl, NavigationNodeLocation.QuickLaunchLists);
                                     ListInfo listInfo = new ListInfo();

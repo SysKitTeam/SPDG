@@ -86,6 +86,16 @@ namespace Acceleratio.SPDG.Generator
             }
             return total;
         }
+
+        protected override int CalculateTotalSitesForProgressReporting()
+        {
+            var total= base.CalculateTotalSitesForProgressReporting();
+            if (WorkingDefinition.CreateNewWebApplications > 0)
+            {
+                total = total * WorkingDefinition.CreateNewWebApplications;
+            }
+            return total;
+        }
     }
 
     public abstract partial class DataGenerator
@@ -150,6 +160,7 @@ namespace Acceleratio.SPDG.Generator
             OverallCurrentStep++;
             OverallCurrentStepDescription = overallCurrentStepDescription;
             DetailProgressMaxSteps = detailsMaxSteps;
+            DetailCurrentStep = 0;
             bgWorker.ReportProgress(1);
             Log.Write("***" + overallCurrentStepDescription.ToUpper() + "***"); 
         }
@@ -173,8 +184,9 @@ namespace Acceleratio.SPDG.Generator
         protected virtual int CalculateTotalItemsForProgressReporting()
         {
            var totalProgress = workingDefinition.NumberOfSitesToCreate *
-                              workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
-                          (workingDefinition.MaxNumberofItemsToGenerate + workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate);
+                              (workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
+                          (workingDefinition.MaxNumberofItemsToGenerate + workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate) 
+                          + workingDefinition.NumberOfBigListsPerSite* workingDefinition.MaxNumberofItemsBigListToGenerate);
 
             if (workingDefinition.CreateNewSiteCollections > 0)
             {
@@ -215,6 +227,16 @@ namespace Acceleratio.SPDG.Generator
                       workingDefinition.NumberOfSitesToCreate *
                       workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
 
+            if (workingDefinition.CreateNewSiteCollections > 0)
+            {
+                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+            }
+            return totalProgress;
+        }
+
+        protected virtual int CalculateTotalSitesForProgressReporting()
+        {
+            int totalProgress = workingDefinition.NumberOfSitesToCreate;
             if (workingDefinition.CreateNewSiteCollections > 0)
             {
                 totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
