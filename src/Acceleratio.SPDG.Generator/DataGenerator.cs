@@ -304,10 +304,9 @@ namespace Acceleratio.SPDG.Generator
                 //Create items and documents
                 CreateItemsAndDocuments();
 
-                //AssociateWorkflows
-                //TODO:rf vratiti za server
-                //AssociateWorkflows();
-                //AssociateCustomWorkflows();
+                //AssociateWorkflows                
+                AssociateWorkflows();
+                AssociateCustomWorkflows();
 
                 //Create permissions
                 CreatePermissions();
@@ -328,7 +327,8 @@ namespace Acceleratio.SPDG.Generator
             
         }
 
+        protected abstract void AssociateWorkflows();
+        protected abstract void AssociateCustomWorkflows();
 
-      
     }
 }

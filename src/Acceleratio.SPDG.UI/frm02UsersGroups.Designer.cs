@@ -31,21 +31,21 @@
             this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
             this.chkGenerateUsers = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblGroups = new System.Windows.Forms.Label();
-            this.lblNumUsers = new System.Windows.Forms.Label();
-            this.trackNumberOfSecGroups = new System.Windows.Forms.TrackBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.trackNumberOfUsers = new System.Windows.Forms.TrackBar();
-            this.label3 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.cboOrganizationalUnit = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.trackNumberOfUsers = new System.Windows.Forms.TrackBar();
+            this.lblNumUsers = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.trackNumberOfSecGroups = new System.Windows.Forms.TrackBar();
+            this.lblGroups = new System.Windows.Forms.Label();
             this.cboDomains = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBack
@@ -78,9 +78,9 @@
             this.chkGenerateUsers.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkGenerateUsers.Location = new System.Drawing.Point(268, 193);
             this.chkGenerateUsers.Name = "chkGenerateUsers";
-            this.chkGenerateUsers.Size = new System.Drawing.Size(313, 19);
+            this.chkGenerateUsers.Size = new System.Drawing.Size(277, 19);
             this.chkGenerateUsers.TabIndex = 8;
-            this.chkGenerateUsers.Text = "Generate Users and Security Groups in Active Directory";
+            this.chkGenerateUsers.Text = "Generate Users and Security Groups in Directory";
             this.chkGenerateUsers.UseVisualStyleBackColor = true;
             this.chkGenerateUsers.CheckedChanged += new System.EventHandler(this.chkGenerateUsers_CheckedChanged);
             // 
@@ -96,64 +96,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Users";
             // 
-            // lblGroups
+            // flowLayoutPanel1
             // 
-            this.lblGroups.AutoSize = true;
-            this.lblGroups.Location = new System.Drawing.Point(526, 125);
-            this.lblGroups.Name = "lblGroups";
-            this.lblGroups.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblGroups.Size = new System.Drawing.Size(13, 20);
-            this.lblGroups.TabIndex = 7;
-            this.lblGroups.Text = "0";
-            // 
-            // lblNumUsers
-            // 
-            this.lblNumUsers.AutoSize = true;
-            this.lblNumUsers.Location = new System.Drawing.Point(526, 59);
-            this.lblNumUsers.Name = "lblNumUsers";
-            this.lblNumUsers.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblNumUsers.Size = new System.Drawing.Size(13, 20);
-            this.lblNumUsers.TabIndex = 6;
-            this.lblNumUsers.Text = "0";
-            // 
-            // trackNumberOfSecGroups
-            // 
-            this.trackNumberOfSecGroups.LargeChange = 1;
-            this.trackNumberOfSecGroups.Location = new System.Drawing.Point(3, 128);
-            this.trackNumberOfSecGroups.Maximum = 20;
-            this.trackNumberOfSecGroups.Name = "trackNumberOfSecGroups";
-            this.trackNumberOfSecGroups.Size = new System.Drawing.Size(517, 45);
-            this.trackNumberOfSecGroups.TabIndex = 5;
-            this.trackNumberOfSecGroups.ValueChanged += new System.EventHandler(this.trackNumberOfSecGroups_ValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 110);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(203, 15);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Number of Security Groups to create:";
-            // 
-            // trackNumberOfUsers
-            // 
-            this.trackNumberOfUsers.LargeChange = 1;
-            this.trackNumberOfUsers.Location = new System.Drawing.Point(3, 62);
-            this.trackNumberOfUsers.Maximum = 100;
-            this.trackNumberOfUsers.Name = "trackNumberOfUsers";
-            this.trackNumberOfUsers.Size = new System.Drawing.Size(517, 45);
-            this.trackNumberOfUsers.TabIndex = 3;
-            this.trackNumberOfUsers.ValueChanged += new System.EventHandler(this.trackNumberOfUsers_ValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label3.Location = new System.Drawing.Point(3, 44);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Number of users to create:";
+            this.flowLayoutPanel1.Controls.Add(this.label2);
+            this.flowLayoutPanel1.Controls.Add(this.cboOrganizationalUnit);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
+            this.flowLayoutPanel1.Controls.Add(this.trackNumberOfUsers);
+            this.flowLayoutPanel1.Controls.Add(this.lblNumUsers);
+            this.flowLayoutPanel1.Controls.Add(this.label4);
+            this.flowLayoutPanel1.Controls.Add(this.trackNumberOfSecGroups);
+            this.flowLayoutPanel1.Controls.Add(this.lblGroups);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 19);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(610, 292);
+            this.flowLayoutPanel1.TabIndex = 8;
             // 
             // label2
             // 
@@ -172,6 +129,67 @@
             this.cboOrganizationalUnit.Name = "cboOrganizationalUnit";
             this.cboOrganizationalUnit.Size = new System.Drawing.Size(531, 23);
             this.cboOrganizationalUnit.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label3.Location = new System.Drawing.Point(3, 44);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(147, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Number of users to create:";
+            // 
+            // trackNumberOfUsers
+            // 
+            this.trackNumberOfUsers.LargeChange = 1;
+            this.trackNumberOfUsers.Location = new System.Drawing.Point(3, 62);
+            this.trackNumberOfUsers.Maximum = 1000;
+            this.trackNumberOfUsers.Name = "trackNumberOfUsers";
+            this.trackNumberOfUsers.Size = new System.Drawing.Size(517, 45);
+            this.trackNumberOfUsers.SmallChange = 10;
+            this.trackNumberOfUsers.TabIndex = 3;
+            this.trackNumberOfUsers.TickFrequency = 10;
+            this.trackNumberOfUsers.ValueChanged += new System.EventHandler(this.trackNumberOfUsers_ValueChanged);
+            // 
+            // lblNumUsers
+            // 
+            this.lblNumUsers.AutoSize = true;
+            this.lblNumUsers.Location = new System.Drawing.Point(526, 59);
+            this.lblNumUsers.Name = "lblNumUsers";
+            this.lblNumUsers.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblNumUsers.Size = new System.Drawing.Size(13, 20);
+            this.lblNumUsers.TabIndex = 6;
+            this.lblNumUsers.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(203, 15);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Number of Security Groups to create:";
+            // 
+            // trackNumberOfSecGroups
+            // 
+            this.trackNumberOfSecGroups.LargeChange = 1;
+            this.trackNumberOfSecGroups.Location = new System.Drawing.Point(3, 128);
+            this.trackNumberOfSecGroups.Maximum = 100;
+            this.trackNumberOfSecGroups.Name = "trackNumberOfSecGroups";
+            this.trackNumberOfSecGroups.Size = new System.Drawing.Size(517, 45);
+            this.trackNumberOfSecGroups.TabIndex = 5;
+            this.trackNumberOfSecGroups.ValueChanged += new System.EventHandler(this.trackNumberOfSecGroups_ValueChanged);
+            // 
+            // lblGroups
+            // 
+            this.lblGroups.AutoSize = true;
+            this.lblGroups.Location = new System.Drawing.Point(526, 125);
+            this.lblGroups.Name = "lblGroups";
+            this.lblGroups.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblGroups.Size = new System.Drawing.Size(13, 20);
+            this.lblGroups.TabIndex = 7;
+            this.lblGroups.Text = "0";
             // 
             // cboDomains
             // 
@@ -193,22 +211,6 @@
             this.label1.Size = new System.Drawing.Size(300, 15);
             this.label1.TabIndex = 11;
             this.label1.Text = "Use this domain to create SharePoint users and groups: ";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.label2);
-            this.flowLayoutPanel1.Controls.Add(this.cboOrganizationalUnit);
-            this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.trackNumberOfUsers);
-            this.flowLayoutPanel1.Controls.Add(this.lblNumUsers);
-            this.flowLayoutPanel1.Controls.Add(this.label4);
-            this.flowLayoutPanel1.Controls.Add(this.trackNumberOfSecGroups);
-            this.flowLayoutPanel1.Controls.Add(this.lblGroups);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 19);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(610, 292);
-            this.flowLayoutPanel1.TabIndex = 8;
             // 
             // frm02UsersGroups
             // 
@@ -234,10 +236,10 @@
             this.Controls.SetChildIndex(this.cboDomains, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfSecGroups)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -86,6 +86,11 @@ namespace Acceleratio.SPDG.Generator
 
         protected override void CreateUsersAndGroups()
         {
+            if (WorkingDefinition.NumberOfUsersToCreate == 0 && WorkingDefinition.NumberOfSecurityGroupsToCreate == 0)
+            {
+                return;
+            }
+            progressOverall("Creating Directory Users And Groups", WorkingDefinition.NumberOfUsersToCreate+ WorkingDefinition.NumberOfSecurityGroupsToCreate);
             var client = GetADClient();
             
             List<ITenantDetail> tenantsList = client.TenantDetails
@@ -98,7 +103,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 try
                 {
-                    Log.Write("Creating Active Directory users.");
+                    progressDetail("Creating Active Directory users.",0);
 
                     int batchcounter = 0;
                     HashSet<Tuple<string,string>> usedNames=new HashSet<Tuple<string, string>>();
@@ -137,8 +142,10 @@ namespace Acceleratio.SPDG.Generator
                             batchcounter++;
                             if (batchcounter >= 50)
                             {
-                                batchcounter = 0;
+                               
                                 client.Context.SaveChangesAsync().Wait();
+                                progressDetail(string.Format("Created {0}/{1} users", i+1, WorkingDefinition.NumberOfUsersToCreate), batchcounter);
+                                batchcounter = 0;
                             }
 
                         }
@@ -150,6 +157,7 @@ namespace Acceleratio.SPDG.Generator
                     if (batchcounter > 0)
                     {
                        client.Context.SaveChangesAsync().Wait();
+                       progressDetail(string.Format("Created {0} users", WorkingDefinition.NumberOfUsersToCreate), batchcounter);
                     }                   
                 }
                 catch (Exception ex)
@@ -162,7 +170,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 try
                 {
-                    Log.Write("Creating Active Directory groups.");
+                    progressDetail("Creating Active Directory groups.",0);
                     HashSet<string> usedGroupNames=new HashSet<string>();
                     int batchCounter = 0;
                     for (int i = 0; i < WorkingDefinition.NumberOfSecurityGroupsToCreate; i++)
@@ -187,8 +195,10 @@ namespace Acceleratio.SPDG.Generator
                             client.Groups.AddGroupAsync(group,true).Wait();
                             if (batchCounter >= 50)
                             {
-                                batchCounter = 0;
+                                
                                 client.Context.SaveChangesAsync().Wait();
+                                progressDetail(string.Format("Created {0}/{1} security groups", i+1, WorkingDefinition.NumberOfSecurityGroupsToCreate), batchCounter);
+                                batchCounter = 0;
                             }
                         }
                         catch (Exception ex)
@@ -200,6 +210,7 @@ namespace Acceleratio.SPDG.Generator
                     if (batchCounter > 0)
                     {
                         client.Context.SaveChangesAsync().Wait();
+                        progressDetail(string.Format("Created {0} security groups", WorkingDefinition.NumberOfSecurityGroupsToCreate), batchCounter);
                     }
                 }
                 catch (Exception ex)
@@ -257,6 +268,16 @@ namespace Acceleratio.SPDG.Generator
                 }               
             }            
             
+        }
+
+        protected override void AssociateWorkflows()
+        {
+            //nothing
+        }
+
+        protected override void AssociateCustomWorkflows()
+        {
+            //nothing
         }
     }
 }

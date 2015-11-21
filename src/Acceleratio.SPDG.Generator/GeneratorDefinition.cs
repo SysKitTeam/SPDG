@@ -11,6 +11,15 @@ namespace Acceleratio.SPDG.Generator
 
     public abstract class GeneratorDefinitionBase
     {
+        private int _maxNumberOfViewsPerList;
+        private int _maxNumberOfColumnsPerList;
+        private int _maxNumberofItemsToGenerate;
+        private int _maxNumberofDocumentLibraryItemsToGenerate;
+        private int _maxNumberofItemsBigListToGenerate;
+        private int _maxNumberOfContentTypesPerSiteCollection;
+        private int _numberSiteColumnsPerContentType;
+        private int _numberOfUsersToCreate;
+        private int _numberOfSecurityGroupsToCreate;
         public abstract bool IsClientObjectModel { get; }
         public bool CredentialsOfCurrentUser { get; set; }
         public string Username { get; set; }
@@ -19,8 +28,7 @@ namespace Acceleratio.SPDG.Generator
         public string SiteCollOwnerLogin { get; set; }
         public string SiteCollOwnerEmail { get; set; }
         public string SiteTemplate { get; set; }
-        public int NumberOfUsersToCreate { get; set; }
-        public int NumberOfSecurityGroupsToCreate { get; set; }
+        
         public int CreateNewSiteCollections { get; set; }
         public bool UseExistingSiteCollection { get; set; }
         public string SiteCollection { get; set; }
@@ -36,13 +44,91 @@ namespace Acceleratio.SPDG.Generator
         public int MaxNumberOfFoldersToGenerate { get; set; }
         public int MaxNumberOfNestedFolderLevelPerLibrary { get; set; }
         public bool CreateViews { get; set; }
-        public int MaxNumberOfViewsPerList { get; set; }
+
+        public int MaxNumberOfViewsPerList
+        {
+            get
+            {
+                if (CreateViews)
+                {
+                    return _maxNumberOfViewsPerList;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _maxNumberOfViewsPerList = value; }
+        }
+
         public bool CreateColumns { get; set; }
-        public int MaxNumberOfColumnsPerList { get; set; }
+
+        public int MaxNumberOfColumnsPerList
+        {
+            get
+            {
+                if (CreateColumns)
+                {
+                    return _maxNumberOfColumnsPerList;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _maxNumberOfColumnsPerList = value; }
+        }
+
         public bool PrefilListAndLibrariesWithItems { get; set; }
-        public int MaxNumberofItemsToGenerate { get; set; }
-        public int MaxNumberofDocumentLibraryItemsToGenerate { get; set; }
-        public int MaxNumberofItemsBigListToGenerate { get; set; }
+
+        public int MaxNumberofItemsToGenerate
+        {
+            get
+            {
+                if (PrefilListAndLibrariesWithItems)
+                {
+                    return _maxNumberofItemsToGenerate;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _maxNumberofItemsToGenerate = value; }
+        }
+
+        public int MaxNumberofDocumentLibraryItemsToGenerate
+        {
+            get
+            {
+                if (PrefilListAndLibrariesWithItems)
+                {
+                    return _maxNumberofDocumentLibraryItemsToGenerate;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _maxNumberofDocumentLibraryItemsToGenerate = value; }
+        }
+
+        public int MaxNumberofItemsBigListToGenerate
+        {
+            get
+            {
+                if (PrefilListAndLibrariesWithItems)
+                {
+                    return _maxNumberofItemsBigListToGenerate;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _maxNumberofItemsBigListToGenerate = value; }
+        }
+
         public bool IncludeDocTypeDOCX { get; set; }
         public bool IncludeDocTypeXLSX { get; set; }
         public bool IncludeDocTypePDF { get; set; }
@@ -50,9 +136,41 @@ namespace Acceleratio.SPDG.Generator
         public int MinDocumentSizeKB { get; set; }
         public int MaxDocumentSizeMB { get; set; }
         public bool CreateContentTypes { get; set; }
-        public int MaxNumberOfContentTypesPerSiteCollection { get; set; }
+
+        public int MaxNumberOfContentTypesPerSiteCollection
+        {
+            get
+            {
+                if (CreateContentTypes)
+                {
+                    return _maxNumberOfContentTypesPerSiteCollection;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _maxNumberOfContentTypesPerSiteCollection = value; }
+        }
+
         public bool AddSiteColumnsToContentTypes { get; set; }
-        public int NumberSiteColumnsPerContentType { get; set; }
+
+        public int NumberSiteColumnsPerContentType
+        {
+            get
+            {
+                if (AddSiteColumnsToContentTypes)
+                {
+                    return _numberSiteColumnsPerContentType;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _numberSiteColumnsPerContentType = value; }
+        }
+
         public bool ContentTypesCanInheritFromOtherContentType { get; set; }
         public int PermissionsPercentOfSites { get; set; }
         public int PermissionsPercentOfLists { get; set; }
@@ -62,6 +180,41 @@ namespace Acceleratio.SPDG.Generator
         public int PermissionsPercentForSPGroups { get; set; }
         public int PermissionsPerObject { get; set; }
         public bool GenerateUsersAndSecurityGroupsInDirectory { get; set; }
+
+        public int NumberOfUsersToCreate
+        {
+            get
+            {
+                if (GenerateUsersAndSecurityGroupsInDirectory)
+                {
+                    return _numberOfUsersToCreate;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                _numberOfUsersToCreate = value;
+            }
+        }
+
+        public int NumberOfSecurityGroupsToCreate
+        {
+            get
+            {
+                if (GenerateUsersAndSecurityGroupsInDirectory)
+                {
+                    return _numberOfSecurityGroupsToCreate;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _numberOfSecurityGroupsToCreate = value; }
+        }
 
         public abstract void ValidateCredentials();
 

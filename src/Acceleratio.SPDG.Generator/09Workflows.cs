@@ -39,7 +39,7 @@ namespace Acceleratio.SPDG.Generator
         }
 
 
-        public void AssociateCustomWorkflows()
+        protected override void AssociateCustomWorkflows()
         {
             if( !WorkingDefinition.AttachCustomWorkflowToList)
             {
@@ -147,7 +147,7 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
-        public void AssociateWorkflows()
+        protected override void AssociateWorkflows()
         {
             if( !WorkingDefinition.CreateOutOfTheBoxWorkflowsToList)
             {
