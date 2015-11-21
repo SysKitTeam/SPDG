@@ -14,7 +14,8 @@ namespace Acceleratio.SPDG.Generator.Objects
         public abstract  IEnumerable<SPDGField> Fields { get; } 
         public abstract void AddFields(IEnumerable<SPDGFieldInfo> fields, bool addToDefaultView);
         public abstract void AddItems(IEnumerable<ISPDGListItemInfo> items);
-        public abstract  IEnumerable<SPDGListItem> Items { get; } 
+        public abstract  IEnumerable<SPDGListItem> Items { get; }
+        public abstract void AddView(string viewName, IEnumerable<string> viewFields, string strQuery, uint rowLimit, bool paged, bool makeDefault);
 
     }
 }

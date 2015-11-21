@@ -44,80 +44,37 @@ namespace Acceleratio.SPDG.Generator
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
-                                progressDetail("Creating columns in List '" + listInfo.Name + "'");
                                 var list = web.GetList(listInfo.Name);
 
-                                var fieldsToCreate = _availableFieldInfos.Take(workingDefinition.MaxNumberOfColumnsPerList);
-                                list.AddFields(fieldsToCreate, true);
-                             
-                                Log.Write("Columns created in List '" + list.RootFolder.Url + "'");
+                                progressDetail("Creating columns in List '" + list.RootFolder.Url + "'", 0);
+                               
+                                var newFields = _availableFieldInfos.Take(workingDefinition.MaxNumberOfColumnsPerList).ToList();
+                                list.AddFields(newFields, true);
 
-                                progressDetail("Creating view in list '" + listInfo.Name + "'");
+                                progressDetail("Columns created in List '" + list.RootFolder.Url + "'", newFields.Count);
 
-                                //TODO:rf return view generation
-                                //for (int c = 0; c < workingDefinition.MaxNumberOfViewsPerList; c++)
-                                //{
-
-                                //    List<string> addedFields = new List<string>();
-                                //    System.Collections.Specialized.StringCollection viewFields = new System.Collections.Specialized.StringCollection();
-
-                                //    for(int f = 0; f < c + 1; f++ )
-                                //    {
-                                //        if( f == 0)
-                                //        {
-                                //            viewFields.Add(list.Fields["First Name"].InternalName);
-                                //        }
-
-                                //        if (f == 1)
-                                //        {
-                                //            viewFields.Add(list.Fields["Last Name"].InternalName);
-                                //        }
-
-                                //        if (f == 2)
-                                //        {
-                                //            viewFields.Add(list.Fields["Address"].InternalName);
-                                //        }
-
-                                //        if (f == 3)
-                                //        {
-                                //            viewFields.Add(list.Fields["Birthday"].InternalName);
-                                //        }
-
-                                //        if (f == 4)
-                                //        {
-                                //            viewFields.Add(list.Fields["Salary"].InternalName);
-                                //        }
-
-                                //        if (f == 5)
-                                //        {
-                                //            viewFields.Add(list.Fields["Company"].InternalName);
-                                //        }
-
-                                //        if (f == 6)
-                                //        {
-                                //            viewFields.Add(list.Fields["Email"].InternalName);
-                                //        }
-
-                                //        if (f == 7)
-                                //        {
-                                //            viewFields.Add(list.Fields["City"].InternalName);
-                                //        }
-
-                                //        if (f == 8)
-                                //        {
-                                //            viewFields.Add(list.Fields["Phone"].InternalName);
-                                //        }
-
-                                //        if (f == 9)
-                                //        {
-                                //            viewFields.Add(list.Fields["Web"].InternalName);
-                                //        }
-                                //    }
-
-                                //    list.Views.Add("View " + (c+1).ToString(), viewFields, null, 100, true, false );
-                                //}
+                                progressDetail("Creating views in list  '" + list.RootFolder.Url + "'", 0);
                                 
-                                //list.Update();
+                               
+                                var listFields = list.Fields.ToList();
+                                for (int c = 0; c < workingDefinition.MaxNumberOfViewsPerList; c++)
+                                {                                
+                                    var viewFields = new List<string>();
+                                    newFields.Shuffle();
+                                    for (int i = 0; i <= c + 1 && i<=5;i++)
+                                    {
+                                        if (i < newFields.Count)
+                                        {
+                                            viewFields.Add(listFields.First(x=>x.Title == newFields[i].DisplayName).InternalName);
+                                        }
+                                        else
+                                        {
+                                            viewFields.Add(listFields[SampleData.GetRandomNumber(0,listFields.Count-1)].InternalName);
+                                        }
+                                    }
+                                    list.AddView("View " + (c+1).ToString(), viewFields, null, 100, true, false );
+                                }
+                                progressDetail("Created views in list '" + list.RootFolder.Url + "'", workingDefinition.MaxNumberOfViewsPerList);
                             }
                         }
                     }

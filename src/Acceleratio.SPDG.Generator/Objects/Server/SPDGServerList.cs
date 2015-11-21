@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using Microsoft.SharePoint;
@@ -99,6 +100,13 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
                     yield return new SPDGServerListItem(item);
                 }
             }
+        }
+
+        public override void AddView(string viewName, IEnumerable<string> viewFields, string strQuery, uint rowLimit, bool paged, bool makeDefault)
+        {
+            var strColl = new StringCollection();
+            strColl.AddRange(viewFields.ToArray());
+            SPView view=_spList.Views.Add(viewName, strColl, strQuery, rowLimit, paged, makeDefault);
         }
     }
 }

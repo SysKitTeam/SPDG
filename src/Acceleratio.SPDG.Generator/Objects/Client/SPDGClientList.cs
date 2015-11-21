@@ -176,5 +176,19 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
            
            return retVal;
         }
+
+
+        public override void AddView(string viewName, IEnumerable<string> viewFields, string strQuery, uint rowLimit, bool paged, bool makeDefault)
+        {
+            var viewCreationInfo=new ViewCreationInformation();
+            viewCreationInfo.Title = viewName;
+            viewCreationInfo.ViewFields = viewFields.ToArray();
+            viewCreationInfo.Paged = paged;
+            viewCreationInfo.RowLimit = rowLimit;
+            viewCreationInfo.Query = strQuery;
+            viewCreationInfo.SetAsDefaultView = makeDefault;
+            _list.Views.Add(viewCreationInfo);
+            _context.ExecuteQuery();            
+        }
     }
 }
