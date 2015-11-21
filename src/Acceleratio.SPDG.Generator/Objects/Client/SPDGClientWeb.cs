@@ -198,10 +198,10 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             switch (location)
             {
                 case NavigationNodeLocation.TopNavigationBar:
-                    navNodeColl = _context.Web.Navigation.TopNavigationBar;
+                    navNodeColl = _web.Navigation.TopNavigationBar;
                     break;                
                 case NavigationNodeLocation.QuickLaunchLists:
-                    navNodeColl = _context.Web.Navigation.QuickLaunch;
+                    navNodeColl = _web.Navigation.QuickLaunch;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(location), location, null);

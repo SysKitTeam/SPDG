@@ -32,9 +32,9 @@ namespace Acceleratio.SPDG.UI
                 //Common.InitServerDefinition();
                 Common.InitClientDefinition();
                 radioConnectSPOnline.Checked = true;                
-                WorkingDefinition.Username = "admin@cloudkit24.onmicrosoft.com";
+                WorkingDefinition.Username = "admin@cloudkit23.onmicrosoft.com";
                 WorkingDefinition.Password = "**********";
-                (WorkingDefinition as ClientGeneratorDefinition).TenantName = "cloudkit24";
+                (WorkingDefinition as ClientGeneratorDefinition).TenantName = "cloudkit23";
             }
 
             loadData();
@@ -269,7 +269,15 @@ namespace Acceleratio.SPDG.UI
                     return;
                 }
 
-                frm03WebApplications frm = new frm03WebApplications();
+                frmWizardMaster frm = null;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    frm = new frm02UsersGroups();
+                }
+                else
+                {
+                    frm = new frm03WebApplications();
+                }
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -345,8 +353,15 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-
-                frm10Workflows frm = new frm10Workflows();
+                frmWizardMaster frm;
+                if (WorkingDefinition.IsClientObjectModel)
+                {
+                    frm = new frm08ListItems();
+                }
+                else
+                {
+                    frm = new frm10Workflows();
+                }                
                 frm.RootForm = this;
                 frm.Show();
             }
