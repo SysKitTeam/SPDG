@@ -31,9 +31,7 @@ namespace Acceleratio.SPDG.UI
             {
                 //Common.InitServerDefinition();
                 Common.InitClientDefinition();
-                radioConnectSPOnline.Checked = true;                
-                WorkingDefinition.Username = "admin@cloudkit23.onmicrosoft.com";
-                WorkingDefinition.Password = "**********";
+                radioConnectSPOnline.Checked = true;                               
                 (WorkingDefinition as ClientGeneratorDefinition).TenantName = "cloudkit23";
             }
 
