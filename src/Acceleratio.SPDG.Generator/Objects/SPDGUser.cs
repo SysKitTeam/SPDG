@@ -34,5 +34,8 @@ namespace Acceleratio.SPDG.Generator.Objects
         public SPDGGroup(int id, string loginName, string name) : base(id, loginName, name)
         {
         }
+
+        public abstract void AddUsers(IEnumerable<SPDGUser> users);
+
     }
 }

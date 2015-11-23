@@ -282,7 +282,7 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                     _context.ExecuteQuery();
                     foreach (var @group in _web.SiteGroups)
                     {
-                        _siteGroups.Add(new SPDGClientGroup(@group));
+                        _siteGroups.Add(new SPDGClientGroup(@group, _context));
                     }
                 }
                 return _siteGroups;

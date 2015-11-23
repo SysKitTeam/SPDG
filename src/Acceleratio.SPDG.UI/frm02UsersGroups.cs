@@ -82,7 +82,7 @@ namespace Acceleratio.SPDG.UI
             chkGenerateUsers.Checked = WorkingDefinition.GenerateUsersAndSecurityGroupsInDirectory;
             trackNumberOfUsers.Value = WorkingDefinition.NumberOfUsersToCreate;
             trackNumberOfSecGroups.Value = WorkingDefinition.NumberOfSecurityGroupsToCreate;
-
+            trackMaxNumberOfUsersInSecurityGroups.Value = WorkingDefinition.MaxNumberOfUsersInCreatedSecurityGroups;
             var serverDefinition = WorkingDefinition as ServerGeneratorDefinition;
             if (serverDefinition != null)
             {
@@ -107,6 +107,7 @@ namespace Acceleratio.SPDG.UI
             WorkingDefinition.GenerateUsersAndSecurityGroupsInDirectory = chkGenerateUsers.Checked;
             WorkingDefinition.NumberOfUsersToCreate = trackNumberOfUsers.Value;
             WorkingDefinition.NumberOfSecurityGroupsToCreate = trackNumberOfSecGroups.Value;
+            WorkingDefinition.MaxNumberOfUsersInCreatedSecurityGroups = trackMaxNumberOfUsersInSecurityGroups.Value;
             var serverDefinition = WorkingDefinition as ServerGeneratorDefinition;
             if (serverDefinition != null)
             {
@@ -179,6 +180,11 @@ namespace Acceleratio.SPDG.UI
         private void trackNumberOfSecGroups_ValueChanged(object sender, EventArgs e)
         {
             lblGroups.Text = trackNumberOfSecGroups.Value.ToString();
+        }
+
+        private void trackMaxNumberOfUsersInSecurityGroups_ValueChanged(object sender, EventArgs e)
+        {
+            lblMaxNumberOfUsersInSecurityGroups.Text = trackMaxNumberOfUsersInSecurityGroups.Value.ToString();
         }
     }
 }

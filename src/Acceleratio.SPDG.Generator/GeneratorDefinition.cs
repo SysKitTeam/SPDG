@@ -20,6 +20,7 @@ namespace Acceleratio.SPDG.Generator
         private int _numberSiteColumnsPerContentType;
         private int _numberOfUsersToCreate;
         private int _numberOfSecurityGroupsToCreate;
+        private int _maxNumberOfUsersInCreatedSecurityGroups;
         public abstract bool IsClientObjectModel { get; }
         public bool CredentialsOfCurrentUser { get; set; }
         public string Username { get; set; }
@@ -214,6 +215,22 @@ namespace Acceleratio.SPDG.Generator
                 }
             }
             set { _numberOfSecurityGroupsToCreate = value; }
+        }
+
+        public int MaxNumberOfUsersInCreatedSecurityGroups
+        {
+            get
+            {
+                if (GenerateUsersAndSecurityGroupsInDirectory && NumberOfSecurityGroupsToCreate > 0)
+                {
+                    return _maxNumberOfUsersInCreatedSecurityGroups;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { _maxNumberOfUsersInCreatedSecurityGroups = value; }
         }
 
         public abstract void ValidateCredentials();

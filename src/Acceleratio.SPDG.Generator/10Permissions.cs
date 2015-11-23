@@ -101,10 +101,7 @@ namespace Acceleratio.SPDG.Generator
                     progressDetail("Ensuring users and groups on '" + siteCollInfo.URL + "'");
                     EnsureUsersAndGroups(siteColl.RootWeb);
 
-                    _siteSpGroups = siteColl.RootWeb.SiteGroups.ToList();
-                    _siteSpUsers = siteColl.RootWeb.SiteUsers.Where(x => !x.IsDomainGroup).ToList();
-                    _siteAdGroupSpUsers = siteColl.RootWeb.SiteUsers.Where(x => x.IsDomainGroup).ToList();
-                   
+                 
                   
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
@@ -204,7 +201,8 @@ namespace Acceleratio.SPDG.Generator
                 }
             }          
 
-            /// CREATE SHAREPOINT GROUPS
+            HashSet<string> createdGroups=new HashSet<string>();
+            /// CREATE SHAREPOINT GROUPS            
             if (WorkingDefinition.PermissionsPercentForSPGroups > 0)
             {
                 for (int i = 0; i < 10; i++)
@@ -216,14 +214,32 @@ namespace Acceleratio.SPDG.Generator
                         web.CurrentUser,
                         web.CurrentUser,
                         "SPDG generated group");
+                        createdGroups.Add(nameCandidate);
+                        Log.Write("Created group:" + nameCandidate);
                     }
                     catch (Exception ex)
                     {
                         Errors.Log(ex);
                     }
-
-
                 }                
+            }
+            _siteSpGroups = web.SiteGroups.ToList();
+            _siteSpUsers = web.SiteUsers.Where(x => !x.IsDomainGroup).ToList();
+            _siteAdGroupSpUsers = web.SiteUsers.Where(x => x.IsDomainGroup).ToList();
+
+            if (createdGroups.Count > 0)
+            {
+                var candidates = _siteSpUsers.Union(_siteAdGroupSpUsers).ToList();
+                var groups = web.SiteGroups.ToList();
+                foreach (var @group in createdGroups)
+                {
+                    candidates.Shuffle();
+                    var elementsToTake = Math.Min(candidates.Count, 10);
+                    var users = candidates.Take(elementsToTake).ToList();
+                    var grp = groups.First(x => x.Name == @group);
+                    grp.AddUsers(users);
+                    Log.Write(string.Format("added {0} users to group {1}:",users.Count, @group));
+                }
             }
         }
 

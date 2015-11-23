@@ -13,46 +13,71 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class ClientDataGenerator : DataGenerator
     {
-        List<string> _allUsers = null;
-        List<string> _allGroups = null;
-        protected override List<string> GetAvailableUsersInDirectory()
+        List<User> _allUsers = null;
+        List<Group> _allGroups = null;
+        protected  List<User> GetAvailableUserObjectsInDirectory()
         {
             if (_allUsers == null)
             {
                 var adClient = GetADClient();
-                _allUsers = new List<string>();
+                _allUsers = new List<User>();
 
                 IPagedCollection<IUser> result = null;
+                
                 do
                 {
-                    result = adClient.Users.ExecuteAsync().Result;
-                    foreach (var user in result.CurrentPage)
+                    if (result == null)
                     {
-                        _allUsers.Add(user.UserPrincipalName);
+                        result = adClient.Users.ExecuteAsync().Result;
+                    }
+                    else
+                    {
+                        result = result.GetNextPageAsync().Result;
+                    }
+                    foreach (User user in result.CurrentPage)
+                    {
+                        _allUsers.Add(user);
                     }
                 } while (result.MorePagesAvailable);
             }
             return _allUsers;
         }
 
-        protected override List<string> GetAvailableGroupsInDirectory()
+        protected override List<string> GetAvailableUsersInDirectory()
+        {
+            return GetAvailableUserObjectsInDirectory().Select(x => x.UserPrincipalName).ToList();
+        }
+
+        protected List<Group> GetAvailableGroupObjectsInDirectory()
         {
             if (_allGroups == null)
             {
                 var adClient = GetADClient();
-                _allGroups = new List<string>();
+                _allGroups = new List<Group>();
 
                 IPagedCollection<IGroup> result = null;
                 do
                 {
-                    result = adClient.Groups.ExecuteAsync().Result;
-                    foreach (var group in result.CurrentPage)
+                    if (result == null)
                     {
-                        _allGroups.Add(group.DisplayName);
+                        result = adClient.Groups.ExecuteAsync().Result;
+                    }
+                    else
+                    {
+                        result = result.GetNextPageAsync().Result;
+                    }
+                    foreach (Group group in result.CurrentPage)
+                    {
+                        _allGroups.Add(group);
                     }
                 } while (result.MorePagesAvailable);
             }
             return _allGroups;
+        }
+
+        protected override List<string> GetAvailableGroupsInDirectory()
+        {
+            return GetAvailableGroupObjectsInDirectory().Select(x => x.DisplayName).ToList();
         }
 
         protected new ClientGeneratorDefinition WorkingDefinition
@@ -73,15 +98,20 @@ namespace Acceleratio.SPDG.Generator
         {
             return WorkingDefinition.AzureAdAccessToken;
         }
+
+        private ActiveDirectoryClient _adClient = null;
         private ActiveDirectoryClient GetADClient()
         {
-            Uri servicePointUri = new Uri("https://graph.windows.net");
-            
-            var serviceRoot = new Uri(servicePointUri, string.Format("{0}.onmicrosoft.com", WorkingDefinition.TenantName));            
-            
-            ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
-                async () => GetToken());
-            return activeDirectoryClient;
+            if (_adClient == null)
+            {
+                Uri servicePointUri = new Uri("https://graph.windows.net");
+
+                var serviceRoot = new Uri(servicePointUri, string.Format("{0}.onmicrosoft.com", WorkingDefinition.TenantName));
+
+                _adClient = new ActiveDirectoryClient(serviceRoot,
+                    async () => GetToken());
+            }
+            return _adClient;           
         }
 
         protected override void CreateUsersAndGroups()
@@ -90,7 +120,14 @@ namespace Acceleratio.SPDG.Generator
             {
                 return;
             }
-            progressOverall("Creating Directory Users And Groups", WorkingDefinition.NumberOfUsersToCreate+ WorkingDefinition.NumberOfSecurityGroupsToCreate);
+
+            var progressTotal = WorkingDefinition.NumberOfUsersToCreate + WorkingDefinition.NumberOfSecurityGroupsToCreate;
+            if(WorkingDefinition.MaxNumberOfUsersInCreatedSecurityGroups > 0)
+            {
+                progressTotal += WorkingDefinition.NumberOfSecurityGroupsToCreate;
+            }
+            progressOverall("Creating Directory Users And Groups",
+                progressTotal);
             var client = GetADClient();
             
             List<ITenantDetail> tenantsList = client.TenantDetails
@@ -164,8 +201,8 @@ namespace Acceleratio.SPDG.Generator
                 {
                     Errors.Log(ex);
                 }
-            }
-
+            }            
+           
             if (WorkingDefinition.NumberOfSecurityGroupsToCreate > 0)
             {
                 try
@@ -190,9 +227,8 @@ namespace Acceleratio.SPDG.Generator
                             group.MailEnabled = false;
                             group.SecurityEnabled = true;
                             group.MailNickname = mailNickname;
-                            batchCounter++;
-                            
-                            client.Groups.AddGroupAsync(group,true).Wait();
+                            batchCounter++;                            
+                            client.Groups.AddGroupAsync(group, true).Wait();                           
                             if (batchCounter >= 50)
                             {
                                 
@@ -211,6 +247,37 @@ namespace Acceleratio.SPDG.Generator
                     {
                         client.Context.SaveChangesAsync().Wait();
                         progressDetail(string.Format("Created {0} security groups", WorkingDefinition.NumberOfSecurityGroupsToCreate), batchCounter);
+                    }
+                    if (WorkingDefinition.NumberOfSecurityGroupsToCreate > 0 && WorkingDefinition.MaxNumberOfUsersInCreatedSecurityGroups > 0)
+                    {
+                        progressDetail("Retriving groups and users.", 0);
+                        var allGroups = GetAvailableGroupObjectsInDirectory();
+
+                        var allUsers = GetAvailableUserObjectsInDirectory();
+                        progressDetail("Adding users to groups.", 0);
+                        foreach (var @group in allGroups)
+                        {
+                            if (usedGroupNames.Contains(@group.DisplayName))
+                            {
+                                var userGroupMaxCount = Math.Min(WorkingDefinition.MaxNumberOfUsersInCreatedSecurityGroups, allUsers.Count);
+                                var userGroupCount = SampleData.GetRandomNumber(0, userGroupMaxCount);
+                                if (userGroupCount > 0)
+                                {
+                                    allUsers.Shuffle();
+                                    foreach (var user in allUsers.Take(userGroupCount))
+                                    {
+                                        group.Members.Add(user);
+                                       
+                                     //   progressDetail(string.Format("Added {0} user to {1} security group", user.DisplayName, @group.DisplayName));
+                                    }
+                                    group.UpdateAsync().Wait();
+
+                                    progressDetail(string.Format("Added {0} users to {1} security group", userGroupCount, @group.DisplayName));
+                                }
+                            }
+                        }
+
+                      
                     }
                 }
                 catch (Exception ex)
