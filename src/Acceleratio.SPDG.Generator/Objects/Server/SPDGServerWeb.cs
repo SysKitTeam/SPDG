@@ -212,5 +212,13 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
         {
             return new SPDGServerFolder(_spWeb.GetFolder(folderUrl));
         }
+
+        public override IEnumerable<SPDGWebTemplate> GetWebTemplates(uint lcid)
+        {
+            foreach (SPWebTemplate template in _spWeb.GetAvailableWebTemplates(lcid))
+            {
+                yield return new SPDGWebTemplate(template.Name, template.Title);
+            }
+        }
     }
 }

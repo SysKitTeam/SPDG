@@ -74,9 +74,9 @@ namespace Acceleratio.SPDG.Generator
                 using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     
-                    //InitWebTemplate(siteColl.RootWeb);
+                    InitWebTemplate(siteColl.RootWeb);
 
-                    //SPWeb web = CreateSubsite(siteColl.RootWeb);
+                    
                     int sitecounter = 0;
 
                     List<SiteInfo> sites = new List<SiteInfo>(); 
@@ -112,24 +112,21 @@ namespace Acceleratio.SPDG.Generator
            
             return childWeb;
         }
-
-
-        //TODO:rf nepotrebno, mozemo u sucelju prikazati displayname, a pamtiti name
-        //private void InitWebTemplate(SPWeb web)
-        //{
-        //    if (!string.IsNullOrEmpty(workingDefinition.SiteTemplate))
-        //    {
-        //        SPWebTemplateCollection templateCollection = web.GetAvailableWebTemplates(web.Language);
-        //        foreach( SPWebTemplate template in templateCollection)
-        //        {
-        //            if(template.Title == workingDefinition.SiteTemplate)
-        //            {
-        //                _templateName = template.Name;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
+        
+        private void InitWebTemplate(SPDGWeb web)
+        {
+            if (!string.IsNullOrEmpty(workingDefinition.SiteTemplate))
+            {                 
+                foreach (var template in web.GetWebTemplates(1033))
+                {
+                    if (template.Title == workingDefinition.SiteTemplate)
+                    {
+                        _templateName = template.Name;
+                        break;
+                    }
+                }
+            }
+        }
 
         private void AddToNavigationBar(SPDGWeb childWeb)
         {

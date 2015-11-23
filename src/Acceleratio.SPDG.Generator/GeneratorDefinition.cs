@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
 using Microsoft.Online.SharePoint.TenantAdministration;
 using Microsoft.SharePoint.Client;
@@ -21,6 +22,7 @@ namespace Acceleratio.SPDG.Generator
         private int _numberOfUsersToCreate;
         private int _numberOfSecurityGroupsToCreate;
         private int _maxNumberOfUsersInCreatedSecurityGroups;
+        [XmlIgnore]
         public abstract bool IsClientObjectModel { get; }
         public bool CredentialsOfCurrentUser { get; set; }
         public string Username { get; set; }
@@ -240,8 +242,10 @@ namespace Acceleratio.SPDG.Generator
     public class ClientGeneratorDefinition : GeneratorDefinitionBase
     {
         public string TenantName { get; set; }
+        
         public override bool IsClientObjectModel { get { return true; } }
 
+        [XmlIgnore]
         public string AzureAdAccessToken { get; private set; }
         public override void ValidateCredentials()
         {

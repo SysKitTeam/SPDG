@@ -188,6 +188,7 @@
     <Compile Include="Objects\SPDGSite.cs" />
     <Compile Include="Objects\SPDGUser.cs" />
     <Compile Include="Objects\SPDGWeb.cs" />
+    <Compile Include="Objects\SPDGWebTemplate.cs" />
     <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\Path.cs" />
     <Compile Include="Utilities\Site.cs" />

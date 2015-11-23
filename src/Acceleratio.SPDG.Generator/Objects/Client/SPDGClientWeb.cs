@@ -285,13 +285,14 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                         _siteGroups.Add(new SPDGClientGroup(@group, _context));
                     }
                 }
+                
                 return _siteGroups;
             }
         }
 
         private void invalidateSiteUsers()
         {
-            _siteUsers = null;
+            _siteUsers = null;                     
         }
         private List<SPDGUser> _siteUsers;
 
@@ -347,6 +348,24 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             _context.Load(folder);
             _context.Load(folder.ListItemAllFields);
             return new SPDGClientFolder(folder, _context);
+        }
+
+        private List<SPDGWebTemplate> _webTemplates;
+        public override IEnumerable<SPDGWebTemplate> GetWebTemplates(uint lcid)
+        {
+            if (_webTemplates == null)
+            {
+                _webTemplates=new List<SPDGWebTemplate>();
+                var templates = _web.GetAvailableWebTemplates(lcid, true);
+                _context.Load(templates);
+                _context.ExecuteQuery();
+                foreach (var template in templates)
+                {
+                    _webTemplates.Add(new SPDGWebTemplate(template.Name, template.Title));
+                }
+            }
+            return _webTemplates;
+
         }
     }
 }

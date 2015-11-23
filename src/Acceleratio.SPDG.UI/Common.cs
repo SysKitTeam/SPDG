@@ -43,8 +43,11 @@ namespace Acceleratio.SPDG.UI
         public static extern bool CloseHandle(IntPtr handle);
 
         public static bool PreventAppClosing { get; set; }
-        
 
+        public class SerializeWrapper
+        {
+            public GeneratorDefinitionBase Definition { get; set; }
+        }
         public static void SerializeDefinition(string path)
         {
             //GeneratorDefinition definition = new GeneratorDefinition();
@@ -53,20 +56,20 @@ namespace Acceleratio.SPDG.UI
             //definition.Username = "kresimir.korovljevic";
             //definition.Password = "XXXX";
             //definition.Domain = "acceleratio";
-
-            XmlSerializer serializer = new XmlSerializer(typeof(ServerGeneratorDefinition), new Type[] { typeof(ClientGeneratorDefinition), typeof(ServerGeneratorDefinition)});
+            
+            XmlSerializer serializer = new XmlSerializer(typeof(SerializeWrapper), new Type[] { typeof(ClientGeneratorDefinition), typeof(ServerGeneratorDefinition)});
             using (TextWriter writer = new StreamWriter(path))
             {
-                serializer.Serialize(writer, WorkingDefinition);
+                serializer.Serialize(writer, new SerializeWrapper() {Definition = WorkingDefinition});
             } 
         }
 
         public static void DeserializeDefinition(string path)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(ServerGeneratorDefinition));
+            XmlSerializer deserializer = new XmlSerializer(typeof(SerializeWrapper), new Type[] { typeof(ClientGeneratorDefinition), typeof(ServerGeneratorDefinition) });
             TextReader reader = new StreamReader(path);
             object obj = deserializer.Deserialize(reader);
-            WorkingDefinition = (ServerGeneratorDefinition)obj;
+            WorkingDefinition = ((SerializeWrapper)obj).Definition;
             reader.Close();
         }
 

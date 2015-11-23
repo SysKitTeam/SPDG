@@ -31,8 +31,7 @@ namespace Acceleratio.SPDG.UI
             {
                 //Common.InitServerDefinition();
                 Common.InitClientDefinition();
-                radioConnectSPOnline.Checked = true;                               
-                (WorkingDefinition as ClientGeneratorDefinition).TenantName = "cloudkit23";
+                radioConnectSPOnline.Checked = true;                                               
             }
 
             loadData();

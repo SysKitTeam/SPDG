@@ -162,7 +162,10 @@ namespace Acceleratio.SPDG.UI
             {
                 txtOwnerEmail.Text = Common.WorkingDefinition.SiteCollOwnerEmail;
             }
-            trackNumSiteColls.Value = Common.WorkingDefinition.CreateNewSiteCollections;
+            if (!Common.WorkingDefinition.UseExistingSiteCollection)
+            {
+                trackNumSiteColls.Value = Common.WorkingDefinition.CreateNewSiteCollections;
+            }
             radioUseExisting.Checked = Common.WorkingDefinition.UseExistingSiteCollection;
             radioCreateNewSiteColl.Checked = !Common.WorkingDefinition.UseExistingSiteCollection;
             if (!string.IsNullOrEmpty(Common.WorkingDefinition.SiteCollection)) 

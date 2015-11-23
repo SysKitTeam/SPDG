@@ -30,6 +30,7 @@ namespace Acceleratio.SPDG.Generator.Objects
         public abstract IEnumerable<SPDGUser> SiteUsers { get; } 
         public abstract IEnumerable<SPDGRoleDefinition> RoleDefinitions { get; }
         public abstract SPDGFolder GetFolder(string folderUrl);
+        public abstract IEnumerable<SPDGWebTemplate> GetWebTemplates(uint lcid);
     }
 
     public enum NavigationNodeLocation

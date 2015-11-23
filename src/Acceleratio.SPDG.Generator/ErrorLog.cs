@@ -9,7 +9,7 @@ namespace Acceleratio.SPDG.Generator
     {
         public static void Log(Exception ex)
         {
-            Acceleratio.SPDG.Generator.Log.Write("ERROR OCCURED: " + ex.Message);
+            Acceleratio.SPDG.Generator.Log.Write("ERROR OCCURED: " + ex.Message+Environment.NewLine+ex.StackTrace);
         }
     }
 }
