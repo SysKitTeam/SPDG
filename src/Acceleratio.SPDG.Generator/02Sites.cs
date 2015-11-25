@@ -11,9 +11,7 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
     {
-        string _templateName = "STS#0";
-        //bool templateInitiated = false;
-        uint lang;
+        string _templateName = "STS#0";                
 
         public static string GenerateWebUrl(SPWeb parentWeb, string childWebName)
         {
@@ -98,7 +96,7 @@ namespace Acceleratio.SPDG.Generator
             try
             {              
                 
-                childWeb = parentWeb.AddWeb(url, siteName, null, lang, _templateName, false, false);
+                childWeb = parentWeb.AddWeb(url, siteName, null, parentWeb.Language, _templateName, false, false);
                 AddToNavigationBar(childWeb);
 
                 progressDetail("Site created '" + childWeb.Url + "'");
@@ -117,7 +115,7 @@ namespace Acceleratio.SPDG.Generator
         {
             if (!string.IsNullOrEmpty(workingDefinition.SiteTemplate))
             {                 
-                foreach (var template in web.GetWebTemplates(1033))
+                foreach (var template in web.GetWebTemplates(web.Language))
                 {
                     if (template.Title == workingDefinition.SiteTemplate)
                     {

@@ -36,11 +36,11 @@
             this.radioCurrentCredentials = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblUserName = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtDomain = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.txtTenantName = new System.Windows.Forms.TextBox();
+            this.lblTenantName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,7 +113,6 @@
             this.radioCustomCredentials.Name = "radioCustomCredentials";
             this.radioCustomCredentials.Size = new System.Drawing.Size(127, 19);
             this.radioCustomCredentials.TabIndex = 1;
-            this.radioCustomCredentials.TabStop = true;
             this.radioCustomCredentials.Text = "Custom credentials";
             this.radioCustomCredentials.UseVisualStyleBackColor = true;
             this.radioCustomCredentials.CheckedChanged += new System.EventHandler(this.uiEventHandler);
@@ -121,6 +120,7 @@
             // radioCurrentCredentials
             // 
             this.radioCurrentCredentials.AutoSize = true;
+            this.radioCurrentCredentials.Checked = true;
             this.radioCurrentCredentials.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.radioCurrentCredentials.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.radioCurrentCredentials.Location = new System.Drawing.Point(0, 3);
@@ -146,26 +146,26 @@
             // txtUserName
             // 
             this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtUserName.Location = new System.Drawing.Point(425, 329);
+            this.txtUserName.Location = new System.Drawing.Point(474, 329);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(213, 23);
             this.txtUserName.TabIndex = 17;
             // 
-            // label5
+            // lblUserName
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label5.Location = new System.Drawing.Point(290, 332);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 15);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Username:";
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblUserName.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUserName.Location = new System.Drawing.Point(290, 332);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(63, 15);
+            this.lblUserName.TabIndex = 16;
+            this.lblUserName.Text = "Username:";
             // 
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtPassword.Location = new System.Drawing.Point(425, 355);
+            this.txtPassword.Location = new System.Drawing.Point(474, 355);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(213, 23);
@@ -182,35 +182,35 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Password:";
             // 
-            // txtDomain
+            // txtTenantName
             // 
-            this.txtDomain.Location = new System.Drawing.Point(425, 381);
-            this.txtDomain.Name = "txtDomain";
-            this.txtDomain.Size = new System.Drawing.Size(213, 20);
-            this.txtDomain.TabIndex = 21;
+            this.txtTenantName.Location = new System.Drawing.Point(474, 381);
+            this.txtTenantName.Name = "txtTenantName";
+            this.txtTenantName.Size = new System.Drawing.Size(213, 20);
+            this.txtTenantName.TabIndex = 21;
             // 
-            // label7
+            // lblTenantName
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label7.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label7.Location = new System.Drawing.Point(290, 383);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 15);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Domain:";
+            this.lblTenantName.AutoSize = true;
+            this.lblTenantName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblTenantName.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblTenantName.Location = new System.Drawing.Point(290, 383);
+            this.lblTenantName.Name = "lblTenantName";
+            this.lblTenantName.Size = new System.Drawing.Size(82, 15);
+            this.lblTenantName.TabIndex = 20;
+            this.lblTenantName.Text = "Tenant Name:";
             // 
             // frm01Connect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 644);
-            this.Controls.Add(this.txtDomain);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtTenantName);
+            this.Controls.Add(this.lblTenantName);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtUserName);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radioConnectSPOnPremise);
@@ -230,12 +230,12 @@
             this.Controls.SetChildIndex(this.radioConnectSPOnPremise, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.lblUserName, 0);
             this.Controls.SetChildIndex(this.txtUserName, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.txtPassword, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.txtDomain, 0);
+            this.Controls.SetChildIndex(this.lblTenantName, 0);
+            this.Controls.SetChildIndex(this.txtTenantName, 0);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -253,10 +253,10 @@
         private System.Windows.Forms.RadioButton radioCurrentCredentials;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtUserName;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtDomain;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtTenantName;
+        private System.Windows.Forms.Label lblTenantName;
     }
 }

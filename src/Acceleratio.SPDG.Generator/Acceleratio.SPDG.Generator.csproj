@@ -150,6 +150,7 @@
     <Compile Include="AD.cs" />
     <Compile Include="ClientDataGenerator.cs" />
     <Compile Include="ClientHelper.cs" />
+    <Compile Include="CredentialValidationException.cs" />
     <Compile Include="Objects\Client\ClientRoleAssignmentHelper.cs" />
     <Compile Include="Objects\Client\SPDGClientFile.cs" />
     <Compile Include="Objects\Client\SPDGClientFolder.cs" />
@@ -189,6 +190,8 @@
     <Compile Include="Objects\SPDGUser.cs" />
     <Compile Include="Objects\SPDGWeb.cs" />
     <Compile Include="Objects\SPDGWebTemplate.cs" />
+    <Compile Include="ServerDataGenerator.cs" />
+    <Compile Include="ServerGeneratorDefinition.cs" />
     <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\Path.cs" />
     <Compile Include="Utilities\Site.cs" />

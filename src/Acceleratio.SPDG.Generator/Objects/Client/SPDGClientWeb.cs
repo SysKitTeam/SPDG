@@ -20,6 +20,7 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
                 includeExpression.Add(web => web.ServerRelativeUrl);
                 includeExpression.Add(web => web.RootFolder);
                 includeExpression.Add(web => web.CurrentUser);
+                includeExpression.Add(web => web.Language);
                 includeExpression.Add(web => web.HasUniqueRoleAssignments);
 
 
@@ -366,6 +367,11 @@ namespace Acceleratio.SPDG.Generator.Objects.Client
             }
             return _webTemplates;
 
+        }
+
+        public override uint Language
+        {
+            get { return _web.Language; }
         }
     }
 }

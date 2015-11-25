@@ -29,9 +29,8 @@ namespace Acceleratio.SPDG.UI
 
             if(appStart)
             {
-                //Common.InitServerDefinition();
-                Common.InitClientDefinition();
-                radioConnectSPOnline.Checked = true;                                               
+                Common.InitServerDefinition();
+                //Common.InitClientDefinition();                
             }
 
             loadData();
@@ -528,18 +527,19 @@ namespace Acceleratio.SPDG.UI
         public override void loadData()
         {
             SampleData.PrepareSampleCollections();
-            //AD.createUser();
 
-           // txtSharePointSiteURL.Text = Common.WorkingDefinition.SharePointURL;
-            //radioConnectSPOnPremise.Checked = Common.WorkingDefinition.ConnectToSPOnPremise;
-            //radioConnectSPOnline.Checked = !Common.WorkingDefinition.ConnectToSPOnPremise;
+            if (Common.WorkingDefinition.IsClientObjectModel)
+            {
+                lblTenantName.Visible = false;
+                txtTenantName.Visible = false;
+            }
             if (Common.WorkingDefinition.CredentialsOfCurrentUser)
             {
                 radioCurrentCredentials.Checked = true;
                 radioCustomCredentials.Checked = false;
                 txtUserName.Text = string.Empty;
                 txtPassword.Text = string.Empty;
-                txtDomain.Text = string.Empty;
+                txtTenantName.Text = string.Empty;
             }
             else
             {
@@ -549,20 +549,17 @@ namespace Acceleratio.SPDG.UI
                 txtPassword.Text = Common.WorkingDefinition.Password;
                 if (WorkingDefinition.IsClientObjectModel)
                 {
-                    txtDomain.Text = ((ClientGeneratorDefinition) WorkingDefinition).TenantName;
+                    txtTenantName.Text = ((ClientGeneratorDefinition) WorkingDefinition).TenantName;
                 }
                 else
                 {
-                    txtDomain.Text = Common.WorkingDefinition.Domain;
+                    txtTenantName.Text = Common.WorkingDefinition.Domain;
                 }
             }
 
-        }
+            setUIState();
 
-        private void validateClient()
-        {
-            
-        }
+        }   
 
         public override bool saveData()
         {
@@ -570,71 +567,20 @@ namespace Acceleratio.SPDG.UI
             {
                 WorkingDefinition.Username = txtUserName.Text;
                 WorkingDefinition.Password = txtPassword.Text;
+                WorkingDefinition.CredentialsOfCurrentUser = radioCurrentCredentials.Checked;                
                 if (WorkingDefinition.IsClientObjectModel)
                 {
-                    ((ClientGeneratorDefinition) WorkingDefinition).TenantName = txtDomain.Text;                    
+                    ((ClientGeneratorDefinition) WorkingDefinition).TenantName = txtTenantName.Text;                    
                 }
-                WorkingDefinition.ValidateCredentials();
-
-                //if (SPFarm.Local == null)
-                //{
-                //    MessageBox.Show("SharePoint is not installed on current machine!");
-                //    return false;
-                //}
-
-                //TODO:rf vratiti validaciju
-                //if (radioCustomCredentials.Checked && (txtUserName.Text == string.Empty || txtPassword.Text == string.Empty || txtDomain.Text == string.Empty))
-                //{
-                //    MessageBox.Show("Please, provide custom credentials!");
-                //    return false;
-                //}
-                //TODO:rf vratiti validaciju
-                bool isFarmAdmin = true;
-
-                //if (radioCustomCredentials.Checked)
-                //{
-                //    isFarmAdmin = false;
-
-                //    //TODO:rf vratiti validaciju
-                //    //if (Common.impersonateValidUser(txtUserName.Text, txtDomain.Text, txtPassword.Text))
-                //    //{
-                //    //    Common.undoImpersonation();
-                //    //}
-                //    //else
-                //    //{
-                //    //    MessageBox.Show("Provided custom credentials are not valid!");
-                //    //    return false;
-                //    //}
-
-                //    //isFarmAdmin = SPFarm.Local.CurrentUserIsAdministrator();
-                //    SPSecurity.RunWithElevatedPrivileges(delegate()
-                //    {
-                //        SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
-                //        foreach (SPUser user in adminGroup.Users)
-                //        {
-                //            if (user.LoginName.ToLower() == txtDomain.Text.ToLower() + "\\" + txtUserName.Text.ToLower())
-                //            {
-                //                isFarmAdmin = true;
-                //                break;
-                //            }
-                //        }
-                //    });
-                //}
-
-                //if (!isFarmAdmin)
-                //{
-                //    MessageBox.Show("Provided user is not Farm Admin on SharePoint!");
-                //    return false;
-                //}
-
-               // Common.WorkingDefinition.SharePointURL = txtSharePointSiteURL.Text;
-                //Common.WorkingDefinition.ConnectToSPOnPremise = radioConnectSPOnPremise.Checked;
-                Common.WorkingDefinition.CredentialsOfCurrentUser = radioCurrentCredentials.Checked;
-
-                Common.impersonateUserName = txtUserName.Text;
-                Common.impersonatePassword = txtPassword.Text;
-                Common.impersonateDomain = txtDomain.Text;
-                
+                try
+                {
+                    WorkingDefinition.ValidateCredentials();
+                }
+                catch (CredentialValidationException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
                 return true;
             }
             catch(Exception ex)
@@ -678,18 +624,22 @@ namespace Acceleratio.SPDG.UI
         {
             
             bool isSPOnline = radioConnectSPOnline.Checked;
-            
-            
+
+            txtTenantName.Visible = isSPOnline;
+            lblTenantName.Visible = isSPOnline;
+            lblUserName.Text = isSPOnline ? "Username:" : "Username (domain\\username)";
             if (isSPOnline)
             {
                 radioCustomCredentials.Checked = true;
+                
             }
             radioCurrentCredentials.Enabled = !isSPOnline;
             var customCredentials = radioCustomCredentials.Checked;
 
-            txtDomain.Enabled = customCredentials;
+            txtTenantName.Enabled = customCredentials;
             txtPassword.Enabled = customCredentials;
             txtUserName.Enabled = customCredentials;
+            
         }
     }
 }

@@ -223,25 +223,8 @@ namespace Acceleratio.SPDG.UI
             this.Show();
             this.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
-            Application.DoEvents();
-            if( !string.IsNullOrEmpty( Common.impersonateUserName ))
-            {
-                if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
-                {
-                    //Insert your code that runs under the security context of a specific user here.
-                    loadWebApplications();
-                    Common.undoImpersonation();
-                }
-                else
-                {
-                    MessageBox.Show("Impersonation Failed!");
-                }
-            }
-            else
-            {
-                loadWebApplications();
-            }
-            
+            Application.DoEvents();            
+            loadWebApplications();            
             loadData();
             this.Enabled = true;
             this.Cursor = Cursors.Default;

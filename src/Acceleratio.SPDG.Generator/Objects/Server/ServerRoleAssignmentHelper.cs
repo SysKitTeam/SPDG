@@ -28,7 +28,7 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
                 var spRoleDef = ((SPDGServerRoleDefinition)spdgRoleDefinition).RoleDefinition;
                 roleAss.RoleDefinitionBindings.Add(spRoleDef);
             }
-            roleAss.Update();
+            securableObject.RoleAssignments.Add(roleAss);            
         }
 
         public static SPDGRoleAssignment GetRoleAssignmentByPrincipal(SPSecurableObject securableObject, SPDGPrincipal principal)

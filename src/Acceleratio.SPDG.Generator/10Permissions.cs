@@ -233,12 +233,19 @@ namespace Acceleratio.SPDG.Generator
                 var groups = web.SiteGroups.ToList();
                 foreach (var @group in createdGroups)
                 {
-                    candidates.Shuffle();
-                    var elementsToTake = Math.Min(candidates.Count, 10);
-                    var users = candidates.Take(elementsToTake).ToList();
-                    var grp = groups.First(x => x.Name == @group);
-                    grp.AddUsers(users);
-                    Log.Write(string.Format("added {0} users to group {1}:",users.Count, @group));
+                    try
+                    {
+                        candidates.Shuffle();
+                        var elementsToTake = Math.Min(candidates.Count, 10);
+                        var users = candidates.Take(elementsToTake).ToList();
+                        var grp = groups.First(x => x.Name == @group);
+                        grp.AddUsers(users);
+                        Log.Write(string.Format("added {0} users to group {1}:", users.Count, @group));
+                    }
+                    catch (Exception ex)
+                    {
+                        Errors.Log(ex);
+                    }
                 }
             }
         }

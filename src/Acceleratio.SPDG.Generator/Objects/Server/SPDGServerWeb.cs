@@ -131,7 +131,15 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
         }
         public override SPDGList TryGetList(string title)
         {
-           return new SPDGServerList(_spWeb.Lists.TryGetList(title));
+           var lst=_spWeb.Lists.TryGetList(title);
+            if (lst == null)
+            {
+                return null;
+            }
+            else
+            {
+                return new SPDGServerList(lst);
+            }
         }
 
         public override SPDGRoleAssignment GetRoleAssignmentByPrincipal(SPDGPrincipal principal)
@@ -219,6 +227,11 @@ namespace Acceleratio.SPDG.Generator.Objects.Server
             {
                 yield return new SPDGWebTemplate(template.Name, template.Title);
             }
+        }
+
+        public override uint Language
+        {
+            get { return _spWeb.Language; }
         }
     }
 }

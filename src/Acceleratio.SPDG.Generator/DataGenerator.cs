@@ -8,96 +8,6 @@ using Acceleratio.SPDG.Generator.Objects;
 
 namespace Acceleratio.SPDG.Generator
 {
-    public partial class ServerDataGenerator : DataGenerator
-    {
-        public ServerDataGenerator(ServerGeneratorDefinition definition) : base(definition)
-        {
-        }
-
-        protected new ServerGeneratorDefinition WorkingDefinition
-        {
-            get { return (ServerGeneratorDefinition) base.WorkingDefinition; }
-        }
-
-        protected override SPDGObjectsFactory CreateObjectsFactory()
-        {
-            return new SPDGServerObjectsFactory();
-        }
-
-
-        protected override int CalculateTotalItemsForProgressReporting()
-        {
-            var total = base.CalculateTotalItemsForProgressReporting();
-
-            if (WorkingDefinition.CreateNewWebApplications > 0)
-            {
-                total = total * WorkingDefinition.CreateNewWebApplications;
-            }
-            return total;
-        }
-
-        protected override int CalculateTotalListsForProgressReporting()
-        {
-            var total = base.CalculateTotalListsForProgressReporting();
-            if (WorkingDefinition.CreateNewWebApplications > 0)
-            {
-                total = total * WorkingDefinition.CreateNewWebApplications;
-            }
-            return total;
-        }
-
-        protected override int CalculateTotalFoldersForProgressReporting()
-        {
-            var total = base.CalculateTotalFoldersForProgressReporting();
-            if (WorkingDefinition.CreateNewWebApplications > 0)
-            {
-                total = total * WorkingDefinition.CreateNewWebApplications;
-            }
-
-            return total;
-        }
-
-        protected override int CalculateTotalColumnsAndViewsForProgressReporting()
-        {
-            var total = base.CalculateTotalColumnsAndViewsForProgressReporting();
-            if (WorkingDefinition.CreateNewWebApplications > 0)
-            {
-                total = total * WorkingDefinition.CreateNewWebApplications;
-            }
-            return total;
-        }
-
-        protected override int CalculateTotalContentTypesForProgressReporting()
-        {
-            var total = base.CalculateTotalContentTypesForProgressReporting();
-            if (WorkingDefinition.CreateNewWebApplications > 0)
-            {
-                total = total * WorkingDefinition.CreateNewWebApplications;
-            }
-            return total;
-        }
-
-        protected override int CalculateOverallPermissionsForProgressReporting(int totalInSiteCollection)
-        {
-            var total= base.CalculateOverallPermissionsForProgressReporting(totalInSiteCollection);
-            if (WorkingDefinition.CreateNewWebApplications > 0)
-            {
-                total = total * WorkingDefinition.CreateNewWebApplications;
-            }
-            return total;
-        }
-
-        protected override int CalculateTotalSitesForProgressReporting()
-        {
-            var total= base.CalculateTotalSitesForProgressReporting();
-            if (WorkingDefinition.CreateNewWebApplications > 0)
-            {
-                total = total * WorkingDefinition.CreateNewWebApplications;
-            }
-            return total;
-        }
-    }
-
     public abstract partial class DataGenerator
     {
         private GeneratorDefinitionBase workingDefinition;
@@ -272,7 +182,7 @@ namespace Acceleratio.SPDG.Generator
         protected abstract void ResolveWebAppsAndSiteCollections();
 
 
-        public bool startDataGeneration(BackgroundWorker backgroundWorker)
+        public virtual bool startDataGeneration(BackgroundWorker backgroundWorker)
         {
             try
             {

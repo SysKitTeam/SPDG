@@ -25,8 +25,31 @@ namespace Acceleratio.SPDG.Generator
         [XmlIgnore]
         public abstract bool IsClientObjectModel { get; }
         public bool CredentialsOfCurrentUser { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        private string _userName;
+        public string Username {
+            get
+            {
+                if (CredentialsOfCurrentUser)
+                {
+                    return "";
+                }
+                return _userName;
+            }
+            set { _userName = value; }
+        }
+
+        private string _password;
+        public string Password {
+            get
+            {
+                if (CredentialsOfCurrentUser)
+                {
+                    return "";
+                }
+                return _password;
+            }
+            set { _password = value; }
+        }
         public string Domain { get; set; }
         public string SiteCollOwnerLogin { get; set; }
         public string SiteCollOwnerEmail { get; set; }
@@ -260,30 +283,5 @@ namespace Acceleratio.SPDG.Generator
             //    context.ExecuteQuery();
             //}
         }
-    }
-
-    public class ServerGeneratorDefinition : GeneratorDefinitionBase
-    {
-        public override void ValidateCredentials()
-        {
-            
-        }
-
-        public override bool IsClientObjectModel { get { return false; } }
-        public string SharePointURL { get; set; }
-       
-      //  public bool ConnectToSPOnPremise { get; set; }
-
-        public string WebAppOwnerLogin { get; set; }
-        public string WebAppOwnerPassword { get; set; }
-        public string WebAppOwnerEmail { get; set; }
-        public string DatabaseServer { get; set; }
-        public string ADDomainName { get; set; }
-        public string ADOrganizationalUnit { get; set; }
-        public int CreateNewWebApplications { get; set; }
-        public string UseExistingWebApplication { get; set; }
-        public string UseExistingWebApplicationName { get; set; }
-        public bool CreateOutOfTheBoxWorkflowsToList { get; set; }
-        public bool AttachCustomWorkflowToList { get; set; }
     }
 }
