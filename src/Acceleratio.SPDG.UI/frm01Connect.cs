@@ -528,11 +528,10 @@ namespace Acceleratio.SPDG.UI
         {
             SampleData.PrepareSampleCollections();
 
-            if (Common.WorkingDefinition.IsClientObjectModel)
-            {
-                lblTenantName.Visible = false;
-                txtTenantName.Visible = false;
-            }
+            lblTenantName.Visible = Common.WorkingDefinition.IsClientObjectModel;
+            txtTenantName.Visible = Common.WorkingDefinition.IsClientObjectModel;
+            radioConnectSPOnPremise.Checked = !WorkingDefinition.IsClientObjectModel;
+            radioConnectSPOnline.Checked = WorkingDefinition.IsClientObjectModel;
             if (Common.WorkingDefinition.CredentialsOfCurrentUser)
             {
                 radioCurrentCredentials.Checked = true;
@@ -619,11 +618,10 @@ namespace Acceleratio.SPDG.UI
         }
 
 
-
+        private bool _eventEnabled = false;
         private void setUIState()
         {
-            
-            bool isSPOnline = radioConnectSPOnline.Checked;
+            bool isSPOnline = radioConnectSPOnline.Checked;            
 
             txtTenantName.Visible = isSPOnline;
             lblTenantName.Visible = isSPOnline;
