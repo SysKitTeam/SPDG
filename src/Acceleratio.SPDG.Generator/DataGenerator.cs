@@ -307,9 +307,12 @@ namespace Acceleratio.SPDG.Generator
                var result =  DllExistanceTester.QueryAssemblyInfo("Microsoft.SharePoint");
                 if (!string.IsNullOrEmpty(result))
                 {
-                    Regex.Match(result, "_\\d+\\.\\d+\\.\\d+\\.\\d+_")
-                }
-                
+                    var m = Regex.Match(result, "(\\d+\\.\\d+\\.\\d+\\.\\d+)_");
+                    if (m.Success)
+                    {
+                       return new Version(m.Groups[1].Value);   
+                    }
+                }                
             }
             catch (Exception ex)
             {
