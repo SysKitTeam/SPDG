@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Acceleratio.SPDG.Generator.Model;
-using Acceleratio.SPDG.Generator.Server.Model;
+using Acceleratio.SPDG.Generator.Server.SPModel;
+using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.SharePoint;
 
-namespace Acceleratio.SPDG.Generator.Objects.Server
+namespace Acceleratio.SPDG.Generator.Server
 {
     class ServerRoleAssignmentHelper
     {

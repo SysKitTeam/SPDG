@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Acceleratio.SPDG.Generator;
-using System.Security.Principal;
-using System.Runtime.InteropServices;
+using Acceleratio.SPDG.Generator.UI;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -55,10 +48,9 @@ namespace Acceleratio.SPDG.UI
         {
             try
             {
-                SPWebService spWebService = SPWebService.ContentService;
-                SPWebApplicationCollection webAppColl = spWebService.WebApplications;
+                var helper = SPDGDataHelper.Create(WorkingDefinition);                
 
-                foreach (SPWebApplication webApplication in webAppColl)
+                foreach (var webApplication in helper.GetWebApplications())
                 {
                     ComboboxItem item = new ComboboxItem();
                     item.Text = webApplication.Name;

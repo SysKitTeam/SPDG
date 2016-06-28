@@ -1,4 +1,6 @@
-﻿namespace Acceleratio.SPDG.UI
+﻿using Acceleratio.SPDG.Generator.UI;
+
+namespace Acceleratio.SPDG.UI
 {
     partial class frm03WebApplications
     {
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
+            this.ucSteps1 = new ucSteps();
             this.radioCreateNewWebApp = new System.Windows.Forms.RadioButton();
             this.cboUseExistingWebApp = new System.Windows.Forms.ComboBox();
             this.radioUseExistingWebApp = new System.Windows.Forms.RadioButton();

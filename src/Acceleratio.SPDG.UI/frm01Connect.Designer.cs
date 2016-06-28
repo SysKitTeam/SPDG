@@ -1,4 +1,6 @@
-﻿namespace Acceleratio.SPDG.UI
+﻿using Acceleratio.SPDG.Generator.UI;
+
+namespace Acceleratio.SPDG.UI
 {
     partial class frm01Connect
     {
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
+            this.ucSteps1 = new ucSteps();
             this.radioConnectSPOnline = new System.Windows.Forms.RadioButton();
             this.radioConnectSPOnPremise = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();

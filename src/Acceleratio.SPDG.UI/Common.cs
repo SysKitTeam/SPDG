@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Acceleratio.SPDG.Generator;
-using System.Xml.Serialization;
 using System.IO;
-using System.Security.Principal;
-using System.Runtime.InteropServices;
+using System.Xml.Serialization;
+using Acceleratio.SPDG.Generator;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -31,19 +26,12 @@ namespace Acceleratio.SPDG.UI
             public GeneratorDefinitionBase Definition { get; set; }
         }
         public static void SerializeDefinition(string path)
-        {
-            //GeneratorDefinition definition = new GeneratorDefinition();
-            //definition.SharePointURL = "http://sp-kreso";
-            //definition.CredentialsOfCurrentUser = false;
-            //definition.Username = "kresimir.korovljevic";
-            //definition.Password = "XXXX";
-            //definition.Domain = "acceleratio";
-            
-            XmlSerializer serializer = new XmlSerializer(typeof(SerializeWrapper), new Type[] { typeof(ClientGeneratorDefinition), typeof(ServerGeneratorDefinition)});
+        {            
+            XmlSerializer serializer = new XmlSerializer(typeof(SerializeWrapper), new Type[] { typeof(ClientGeneratorDefinition), typeof(ServerGeneratorDefinition) });
             using (TextWriter writer = new StreamWriter(path))
             {
-                serializer.Serialize(writer, new SerializeWrapper() {Definition = WorkingDefinition});
-            } 
+                serializer.Serialize(writer, new SerializeWrapper() { Definition = WorkingDefinition });
+            }            
         }
 
         public static void DeserializeDefinition(string path)
@@ -52,7 +40,7 @@ namespace Acceleratio.SPDG.UI
             TextReader reader = new StreamReader(path);
             object obj = deserializer.Deserialize(reader);
             WorkingDefinition = ((SerializeWrapper)obj).Definition;
-            reader.Close();
+            reader.Close();            
         }
 
 
@@ -67,7 +55,7 @@ namespace Acceleratio.SPDG.UI
         {
             var serverDefinition = new ServerGeneratorDefinition();
             SetCommonDefaults(serverDefinition);
-                        
+
             serverDefinition.CredentialsOfCurrentUser = true;
             serverDefinition.CreateNewWebApplications = 0;
 

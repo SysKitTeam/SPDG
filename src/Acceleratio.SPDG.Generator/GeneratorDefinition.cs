@@ -253,9 +253,7 @@ namespace Acceleratio.SPDG.Generator
                 }
             }
             set { _maxNumberOfUsersInCreatedSecurityGroups = value; }
-        }
-
-        public abstract void ValidateCredentials();
+        }       
 
     }
 }

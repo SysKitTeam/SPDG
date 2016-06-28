@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Acceleratio.SPDG.Generator;
 using System.Diagnostics;
+using Acceleratio.SPDG.Generator.UI;
 
 
 namespace Acceleratio.SPDG.UI

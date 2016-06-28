@@ -1,5 +1,6 @@
 ﻿using System;
-using Acceleratio.SPDG.Generator.Model;
+using Acceleratio.SPDG.Generator.SPModel;
+using Acceleratio.SPDG.Generator.Structures;
 
 namespace Acceleratio.SPDG.Generator
 {

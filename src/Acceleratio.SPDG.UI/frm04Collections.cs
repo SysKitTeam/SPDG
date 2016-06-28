@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Security.Principal;
 using System.Runtime.InteropServices;
 using Acceleratio.SPDG.Generator;
+using Acceleratio.SPDG.Generator.UI;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -76,51 +77,31 @@ namespace Acceleratio.SPDG.UI
         {
             changeRadio();
         }
-
-
-        private void loadSiteCollectionsClient()
-        {
-            var helper=new ClientHelper((ClientGeneratorDefinition) WorkingDefinition);
-            foreach (var url in helper.GetAllSiteCollections())
-            {
-                ComboboxItem item = new ComboboxItem();
-                item.Text = url;
-                item.Value = url;
-                cboSiteCollection.Items.Add(item);
-            }            
-        }
-
-        private void loadSiteCollectionsServer()
-        {
-            ServerGeneratorDefinition serverDefinition= WorkingDefinition as ServerGeneratorDefinition;
-            if (serverDefinition == null)
-            {
-                return;
-            }
-            if (serverDefinition.UseExistingWebApplication != string.Empty)
-            {
-                SPWebService spWebService = SPWebService.ContentService;
-                SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == new Guid(serverDefinition.UseExistingWebApplication));
-
-                foreach (SPSite siteColl in webApp.Sites)
-                {
-                    ComboboxItem item = new ComboboxItem();
-                    item.Text = siteColl.Url;
-                    item.Value = siteColl.Url;
-                    cboSiteCollection.Items.Add(item);
-                }
-            }
-        }
-
+             
         private void loadSiteCollections()
         {
-            if (WorkingDefinition is ServerGeneratorDefinition)
+            var helper = SPDGDataHelper.Create(WorkingDefinition);
+
+            ServerGeneratorDefinition serverDefinition = WorkingDefinition as ServerGeneratorDefinition;
+            IEnumerable<string> siteCollections;
+            if (serverDefinition == null)
             {
-                loadSiteCollectionsServer();
+                siteCollections = helper.GetAllSiteCollections(Guid.Empty);
+            }
+            else if (serverDefinition.UseExistingWebApplication != string.Empty)
+            {
+                siteCollections = helper.GetAllSiteCollections(new Guid(serverDefinition.UseExistingWebApplication));
             }
             else
             {
-                loadSiteCollectionsClient();
+                return;
+            }
+            foreach (var siteColl in siteCollections)
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = siteColl;
+                item.Value = siteColl;
+                cboSiteCollection.Items.Add(item);
             }
         }
 

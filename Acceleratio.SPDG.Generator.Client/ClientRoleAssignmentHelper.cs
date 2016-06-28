@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Acceleratio.SPDG.Generator.Model;
+using Acceleratio.SPDG.Generator.Client.SPModel;
+using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.SharePoint.Client;
 
-namespace Acceleratio.SPDG.Generator.Objects.Client
+namespace Acceleratio.SPDG.Generator.Client
 {
     static class ClientRoleAssignmentHelper
     {

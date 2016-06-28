@@ -35,20 +35,20 @@ namespace Acceleratio.SPDG.Generator.Utilities
             //getting active connections
             TcpConnectionInformation[] connections = properties.GetActiveTcpConnections();
             portArray.AddRange(from n in connections
-                               where n.LocalEndPoint.Port >= startingPort
-                               select n.LocalEndPoint.Port);
+                where n.LocalEndPoint.Port >= startingPort
+                select n.LocalEndPoint.Port);
 
             //getting active tcp listners - WCF service listening in tcp
             endPoints = properties.GetActiveTcpListeners();
             portArray.AddRange(from n in endPoints
-                               where n.Port >= startingPort
-                               select n.Port);
+                where n.Port >= startingPort
+                select n.Port);
 
             //getting active udp listeners
             endPoints = properties.GetActiveUdpListeners();
             portArray.AddRange(from n in endPoints
-                               where n.Port >= startingPort
-                               select n.Port);
+                where n.Port >= startingPort
+                select n.Port);
 
             portArray.Sort();
 
@@ -116,10 +116,6 @@ namespace Acceleratio.SPDG.Generator.Utilities
             impersonationContext.Undo();
         }
     }
-}
-
-namespace System.Collections.Generic
-{
 
     public static class ListExtensions
     {
@@ -137,5 +133,4 @@ namespace System.Collections.Generic
             }
         }
     }
-
 }

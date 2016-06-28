@@ -1,5 +1,5 @@
-﻿using Acceleratio.SPDG.Generator.Model;
-using Acceleratio.SPDG.Generator.Server.Model;
+﻿using Acceleratio.SPDG.Generator.Server.SPModel;
+using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.SharePoint;
 
 namespace Acceleratio.SPDG.Generator.Server

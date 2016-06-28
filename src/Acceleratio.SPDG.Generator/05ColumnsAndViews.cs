@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Acceleratio.SPDG.Generator.Model;
+using Acceleratio.SPDG.Generator.SPModel;
+using Acceleratio.SPDG.Generator.Structures;
+using Acceleratio.SPDG.Generator.Utilities;
 
 namespace Acceleratio.SPDG.Generator
 {

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Acceleratio.SPDG.Generator.UI;
+using Acceleratio.SPDG.UI.Properties;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -45,7 +41,7 @@ namespace Acceleratio.SPDG.UI
                             Control[] ctrls = this.Controls.Find("pictureBox" + lblNumber, false);
                             if (ctrls.Length > 0)
                             {
-                                ((PictureBox) ctrls[0]).Image = Properties.Resources.temp_icona_12;
+                                ((PictureBox) ctrls[0]).Image = Resources.temp_icona_12;
                             }
                         }
                     }

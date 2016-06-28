@@ -1,4 +1,4 @@
-﻿namespace Acceleratio.SPDG.UI
+﻿namespace Acceleratio.SPDG.Generator.UI
 {
     partial class frmWizardMaster
     {

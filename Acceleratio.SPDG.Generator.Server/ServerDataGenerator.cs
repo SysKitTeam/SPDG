@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using Acceleratio.SPDG.Generator.Model;
-using Acceleratio.SPDG.Generator.Objects;
-using Acceleratio.SPDG.Generator.Server;
+using Acceleratio.SPDG.Generator.SPModel;
+using Acceleratio.SPDG.Generator.Structures;
 using Acceleratio.SPDG.Generator.Utilities;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.Workflow;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.Server
 {
     public partial class ServerDataGenerator : DataGenerator
     {

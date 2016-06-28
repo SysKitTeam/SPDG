@@ -4,12 +4,10 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
 using Ionic.Zip;
-using PdfSharp;
-using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
+using PdfSharp.Pdf;
 
 namespace Acceleratio.SPDG.Generator
 {

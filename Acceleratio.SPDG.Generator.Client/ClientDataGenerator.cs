@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Acceleratio.SPDG.Generator.Model;
-using Acceleratio.SPDG.Generator.Objects;
+using Acceleratio.SPDG.Generator.SPModel;
+using Acceleratio.SPDG.Generator.Structures;
+using Acceleratio.SPDG.Generator.Utilities;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 using Microsoft.SharePoint.Client;
 using Group = Microsoft.Azure.ActiveDirectory.GraphClient.Group;
 using User = Microsoft.Azure.ActiveDirectory.GraphClient.User;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.Client
 {
     public partial class ClientDataGenerator : DataGenerator
     {
@@ -97,7 +98,7 @@ namespace Acceleratio.SPDG.Generator
 
         private string GetToken()
         {
-            return WorkingDefinition.AzureAdAccessToken;
+           throw new NotImplementedException();
         }
 
         private ActiveDirectoryClient _adClient = null;

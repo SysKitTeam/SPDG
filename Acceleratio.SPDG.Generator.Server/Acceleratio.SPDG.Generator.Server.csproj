@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,20 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AD.cs" />
-    <Compile Include="Model\SPDGServerFile.cs" />
-    <Compile Include="Model\SPDGServerFolder.cs" />
-    <Compile Include="Model\SPDGServerGroup.cs" />
-    <Compile Include="Model\SPDGServerList.cs" />
-    <Compile Include="Model\SPDGServerListItem.cs" />
-    <Compile Include="Model\SPDGServerRoleAssignment.cs" />
-    <Compile Include="Model\SPDGServerRoleDefinition.cs" />
-    <Compile Include="Model\SPDGServerSite.cs" />
-    <Compile Include="Model\SPDGServerUser.cs" />
-    <Compile Include="Model\SPDGServerWeb.cs" />
+    <Compile Include="SPDGServerDataHelper.cs" />
+    <Compile Include="SPModel\SPDGServerFile.cs" />
+    <Compile Include="SPModel\SPDGServerFolder.cs" />
+    <Compile Include="SPModel\SPDGServerGroup.cs" />
+    <Compile Include="SPModel\SPDGServerList.cs" />
+    <Compile Include="SPModel\SPDGServerListItem.cs" />
+    <Compile Include="SPModel\SPDGServerRoleAssignment.cs" />
+    <Compile Include="SPModel\SPDGServerRoleDefinition.cs" />
+    <Compile Include="SPModel\SPDGServerSite.cs" />
+    <Compile Include="SPModel\SPDGServerUser.cs" />
+    <Compile Include="SPModel\SPDGServerWeb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerDataGenerator.cs" />
-    <Compile Include="ServerGeneratorDefinition.cs" />
     <Compile Include="ServerRoleAssignmentHelper.cs" />
     <Compile Include="SPDGServerObjectsFactory.cs" />
   </ItemGroup>
@@ -67,7 +67,12 @@
       <Name>Acceleratio.SPDG.Generator</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

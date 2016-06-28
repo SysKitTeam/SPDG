@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Acceleratio.SPDG.Generator;
+using Acceleratio.SPDG.Generator.UI;
 
 namespace Acceleratio.SPDG.UI
 {
@@ -25,11 +20,24 @@ namespace Acceleratio.SPDG.UI
             this.Text = Common.APP_TITLE;
             DataGenerator.SessionID = "Session " + DateTime.Now.ToString("yy-MM-dd") + " " + DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString();
 
-            if(appStart)
+            if (appStart)
             {
-                Common.InitServerDefinition();
-                //Common.InitClientDefinition();                
+                if (DataGenerator.SupportsServer)
+                {
+                    Common.InitServerDefinition();
+                }
+                else if (DataGenerator.SupportsClient)
+                {
+                    Common.InitClientDefinition();
+                }
+                else
+                {
+                    MessageBox.Show("To use SPDG you must either run it on a >=SharePoint 2010 machine, or on a machine that has .Net 4.5 framework installed");
+                    Environment.Exit(0);
+                }
             }
+            
+            
 
             loadData();
             setUIState();
@@ -64,6 +72,7 @@ namespace Acceleratio.SPDG.UI
 
         internal void MoveNext(object fromForm)
         {
+
             if (fromForm is frm01Connect)
             {
                 if (!saveForm(fromForm))
@@ -71,8 +80,8 @@ namespace Acceleratio.SPDG.UI
                     return;
                 }
 
-                frmWizardMaster frm = null;                
-                frm = new frm02UsersGroups();                                 
+                frmWizardMaster frm = null;
+                frm = new frm02UsersGroups();
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -93,7 +102,7 @@ namespace Acceleratio.SPDG.UI
                 {
                     frm = new frm03WebApplications();
                 }
-               // frm03WebApplications frm = new frm03WebApplications();
+                // frm03WebApplications frm = new frm03WebApplications();
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -125,8 +134,8 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-                             
-                var frm = new frm06Lists();                
+
+                var frm = new frm06Lists();
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -136,8 +145,8 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-                var frm = new frm07ViewsColumns();                
-                frm = new frm07ViewsColumns();               
+                var frm = new frm07ViewsColumns();
+                frm = new frm07ViewsColumns();
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -147,7 +156,7 @@ namespace Acceleratio.SPDG.UI
                 {
                     return;
                 }
-                var frm = new frm08ListItems();               
+                var frm = new frm08ListItems();
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -166,7 +175,7 @@ namespace Acceleratio.SPDG.UI
                 else
                 {
                     frm = new frm09ContentTypes();
-                }                
+                }
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -227,11 +236,11 @@ namespace Acceleratio.SPDG.UI
                 Common.PreventAppClosing = false;
 
             }
-            
+
         }
 
         internal void MovePrevious(object fromForm)
-        {
+        {            
             this.Hide();
 
             if (fromForm is frm03WebApplications)
@@ -341,7 +350,7 @@ namespace Acceleratio.SPDG.UI
                 frm.RootForm = this;
                 frm.Show();
             }
-            else if (fromForm is frm11Permissions )
+            else if (fromForm is frm11Permissions)
             {
                 if (!saveForm(fromForm))
                 {
@@ -355,7 +364,7 @@ namespace Acceleratio.SPDG.UI
                 else
                 {
                     frm = new frm10Workflows();
-                }                
+                }
                 frm.RootForm = this;
                 frm.Show();
             }
@@ -377,7 +386,7 @@ namespace Acceleratio.SPDG.UI
         }
 
         internal void MoveAt(int stepNumber, Form currentForm)
-        {
+        {            
             if (stepNumber == 1)
             {
                 if (currentForm != null && !saveForm(currentForm))
@@ -511,11 +520,11 @@ namespace Acceleratio.SPDG.UI
                 frm.Show();
             }
 
-            if( currentForm != null )
+            if (currentForm != null)
             {
                 currentForm.Hide();
             }
-            
+
         }
 
         private void frm01Connect_VisibleChanged(object sender, EventArgs e)
@@ -571,7 +580,8 @@ namespace Acceleratio.SPDG.UI
                 }
                 try
                 {
-                    WorkingDefinition.ValidateCredentials();
+                    //TODO:rf 
+                    //WorkingDefinition.ValidateCredentials();
                 }
                 catch (CredentialValidationException ex)
                 {

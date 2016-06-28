@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Acceleratio.SPDG.Generator.Model;
+using Acceleratio.SPDG.Generator.SPModel;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.Structures
 {
     public class SiteCollInfo
     {

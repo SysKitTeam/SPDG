@@ -1,9 +1,8 @@
-using System;
-using Acceleratio.SPDG.Generator.Model;
-using Acceleratio.SPDG.Generator.Objects.Client;
+using Acceleratio.SPDG.Generator.Client.SPModel;
+using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.SharePoint.Client;
 
-namespace Acceleratio.SPDG.Generator.Objects
+namespace Acceleratio.SPDG.Generator.Client
 {
     public class SPDGClientObjectsFactory: SPDGObjectsFactory
     {

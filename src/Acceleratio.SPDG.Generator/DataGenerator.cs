@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
-using Acceleratio.SPDG.Generator.Model;
+using Acceleratio.SPDG.Generator.SPModel;
+using Acceleratio.SPDG.Generator.Structures;
 using Acceleratio.SPDG.Generator.Utilities;
 
 namespace Acceleratio.SPDG.Generator
@@ -61,7 +63,12 @@ namespace Acceleratio.SPDG.Generator
             if (!definition.IsClientObjectModel && SupportsServer)
             {
                 assemblyName = "Acceleratio.SPDG.Generator.Server";
-                typeName = "Acceleratio.SPDG.Generator.Server.ServerGeneratorDefinition";
+                typeName = "Acceleratio.SPDG.Generator.Server.ServerDataGenerator";
+            }
+            else if(definition.IsClientObjectModel && SupportsClient)
+            {
+                assemblyName = "Acceleratio.SPDG.Generator.Client";
+                typeName = "Acceleratio.SPDG.Generator.Server.ClientDataGenerator";
             }
             else
             {
@@ -264,7 +271,8 @@ namespace Acceleratio.SPDG.Generator
             {
                 if (_supportsClient == null)
                 {
-                    throw new NotImplementedException();
+
+                    _supportsClient = Environment.Version.Major == 4;
                 }
                 return _supportsClient.Value;
             }
@@ -282,7 +290,7 @@ namespace Acceleratio.SPDG.Generator
                         DllExistanceTester.QueryAssemblyInfo("Microsoft.SharePoint");
                         _supportsServer = true;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         _supportsServer = false;
                         
@@ -290,6 +298,25 @@ namespace Acceleratio.SPDG.Generator
                 }
                 return _supportsServer.Value;
             }
+        }
+
+        public static Version GetSharePointOnPremVersion()
+        {
+            try
+            {
+               var result =  DllExistanceTester.QueryAssemblyInfo("Microsoft.SharePoint");
+                if (!string.IsNullOrEmpty(result))
+                {
+                    Regex.Match(result, "_\\d+\\.\\d+\\.\\d+\\.\\d+_")
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                _supportsServer = false;
+
+            }
+            return null;
         }
     }
 }
