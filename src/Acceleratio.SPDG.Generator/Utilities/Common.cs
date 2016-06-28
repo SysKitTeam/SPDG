@@ -9,9 +9,9 @@ using System.Security.Principal;
 
 namespace Acceleratio.SPDG.Generator.Utilities
 {
-    internal class Common
+    public class Common
     {
-        internal static SecureString StringToSecureString(string someString)
+        public static SecureString StringToSecureString(string someString)
         {
             SecureString secureStr = new SecureString();
             for (int i = 0; i < someString.Length; i++)
@@ -23,7 +23,7 @@ namespace Acceleratio.SPDG.Generator.Utilities
             return secureStr;
         }
 
-        internal static int GetNextAvailablePort(int startingPort)
+        public static int GetNextAvailablePort(int startingPort)
         {
             List<int> portArray;
 
@@ -80,7 +80,7 @@ namespace Acceleratio.SPDG.Generator.Utilities
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         public static extern bool CloseHandle(IntPtr handle);
 
-        internal static bool ImpersonateValidUser(String userName, String domain, String password)
+        public static bool ImpersonateValidUser(String userName, String domain, String password)
         {
             WindowsIdentity tempWindowsIdentity;
             IntPtr token = IntPtr.Zero;
@@ -111,7 +111,7 @@ namespace Acceleratio.SPDG.Generator.Utilities
             return false;
         }
 
-        internal static void UndoImpersonation()
+        public static void UndoImpersonation()
         {
             impersonationContext.Undo();
         }

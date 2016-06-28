@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Acceleratio.SPDG.Generator;
-using Microsoft.SharePoint.Administration;
-using Microsoft.SharePoint;
 
 namespace Acceleratio.SPDG.UI
 {

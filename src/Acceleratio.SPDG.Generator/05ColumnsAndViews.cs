@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Acceleratio.SPDG.Generator.Objects;
-using Microsoft.SharePoint;
+using Acceleratio.SPDG.Generator.Model;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -11,16 +10,16 @@ namespace Acceleratio.SPDG.Generator
     {
         private List<SPDGFieldInfo> _availableFieldInfos = new List<SPDGFieldInfo>()
         {
-            new SPDGFieldInfo("First Name", SPFieldType.Text),
-            new SPDGFieldInfo("Last Name", SPFieldType.Text),
-            new SPDGFieldInfo("Address", SPFieldType.Text),
-            new SPDGFieldInfo("Birthday", SPFieldType.DateTime),
-            new SPDGFieldInfo("Salary", SPFieldType.Integer),
-            new SPDGFieldInfo("Company", SPFieldType.Text),
-            new SPDGFieldInfo("Email", SPFieldType.Text),
-            new SPDGFieldInfo("City", SPFieldType.Text),
-            new SPDGFieldInfo("Phone", SPFieldType.Text),
-            new SPDGFieldInfo("Web", SPFieldType.Text)
+            new SPDGFieldInfo("First Name", SPDGFieldType.Text),
+            new SPDGFieldInfo("Last Name", SPDGFieldType.Text),
+            new SPDGFieldInfo("Address", SPDGFieldType.Text),
+            new SPDGFieldInfo("Birthday", SPDGFieldType.DateTime),
+            new SPDGFieldInfo("Salary", SPDGFieldType.Integer),
+            new SPDGFieldInfo("Company", SPDGFieldType.Text),
+            new SPDGFieldInfo("Email", SPDGFieldType.Text),
+            new SPDGFieldInfo("City", SPDGFieldType.Text),
+            new SPDGFieldInfo("Phone", SPDGFieldType.Text),
+            new SPDGFieldInfo("Web", SPDGFieldType.Text)
         };
 
         public void CreateColumnsAndViews()
@@ -32,7 +31,7 @@ namespace Acceleratio.SPDG.Generator
 
             int totalProgress = CalculateTotalColumnsAndViewsForProgressReporting();
 
-            progressOverall("Creating Columns and Views", totalProgress);
+            updateProgressOverall("Creating Columns and Views", totalProgress);
 
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
@@ -46,14 +45,14 @@ namespace Acceleratio.SPDG.Generator
                             {
                                 var list = web.GetList(listInfo.Name);
 
-                                progressDetail("Creating columns in List '" + list.RootFolder.Url + "'", 0);
+                                updateProgressDetail("Creating columns in List '" + list.RootFolder.Url + "'", 0);
                                
                                 var newFields = _availableFieldInfos.Take(workingDefinition.MaxNumberOfColumnsPerList).ToList();
                                 list.AddFields(newFields, true);
 
-                                progressDetail("Columns created in List '" + list.RootFolder.Url + "'", newFields.Count);
+                                updateProgressDetail("Columns created in List '" + list.RootFolder.Url + "'", newFields.Count);
 
-                                progressDetail("Creating views in list  '" + list.RootFolder.Url + "'", 0);
+                                updateProgressDetail("Creating views in list  '" + list.RootFolder.Url + "'", 0);
                                 
                                
                                 var listFields = list.Fields.ToList();
@@ -74,7 +73,7 @@ namespace Acceleratio.SPDG.Generator
                                     }
                                     list.AddView("View " + (c+1).ToString(), viewFields, null, 100, true, false );
                                 }
-                                progressDetail("Created views in list '" + list.RootFolder.Url + "'", workingDefinition.MaxNumberOfViewsPerList);
+                                updateProgressDetail("Created views in list '" + list.RootFolder.Url + "'", workingDefinition.MaxNumberOfViewsPerList);
                             }
                         }
                     }

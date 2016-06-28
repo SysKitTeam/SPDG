@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Acceleratio.SPDG.Generator.Objects;
-using Microsoft.SharePoint;
+using Acceleratio.SPDG.Generator.Model;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -15,7 +11,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 int totalProgress = CalculateTotalFoldersForProgressReporting();
 
-                progressOverall("Creating Folders", totalProgress);
+                updateProgressOverall("Creating Folders", totalProgress);
             }
 
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
@@ -46,7 +42,7 @@ namespace Acceleratio.SPDG.Generator
                                             folderInfo.URL = folder.Url;
                                             listInfo.Folders.Add(folderInfo);
 
-                                            progressDetail("Folder created '" + folderInfo.Name + "'");
+                                            updateProgressDetail("Folder created '" + folderInfo.Name + "'");
 
                                             for (int l = 0; l < workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
                                             {
@@ -66,7 +62,7 @@ namespace Acceleratio.SPDG.Generator
                                                 folderInfo2.URL = folder.Url;
                                                 listInfo.Folders.Add(folderInfo2);
 
-                                                progressDetail("Folder created '" + folderInfo2.Name + "'");
+                                                updateProgressDetail("Folder created '" + folderInfo2.Name + "'");
                                             }
 
                                        }

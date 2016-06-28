@@ -1,6 +1,4 @@
-﻿using Microsoft.SharePoint;
-using Microsoft.SharePoint.Administration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.SharePoint;
 using System.IO;
-using Acceleratio.SPDG.Generator.Objects;
+using Acceleratio.SPDG.Generator.Model;
 using Acceleratio.SPDG.Generator.Utilities;
 
 namespace Acceleratio.SPDG.Generator
@@ -28,7 +27,7 @@ namespace Acceleratio.SPDG.Generator
                 return;
             }
 
-            progressOverall("Creating Items and Documents", totalProgress);
+            updateProgressOverall("Creating Items and Documents", totalProgress);
 
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
@@ -48,30 +47,30 @@ namespace Acceleratio.SPDG.Generator
                                 {
                                     var list = web.GetList(listInfo.Name);
 
-                                    if( listInfo.TemplateType == SPListTemplateType.Tasks )
+                                    if( listInfo.TemplateType == SPDGListTemplateType.Tasks )
                                     {
-                                        progressDetail("Start adding items to tasks list: " + listInfo.Name + " in site: " + web.Url,0);
+                                        updateProgressDetail("Start adding items to tasks list: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
-                                    else if (listInfo.TemplateType == SPListTemplateType.Events)
+                                    else if (listInfo.TemplateType == SPDGListTemplateType.Events)
                                     {
-                                        progressDetail("Start adding events to calendar: " + listInfo.Name + " in site: " + web.Url,0);
+                                        updateProgressDetail("Start adding events to calendar: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     else
                                     {
-                                        progressDetail("Start adding items to list: " + listInfo.Name + " in site: " + web.Url,0);
+                                        updateProgressDetail("Start adding items to list: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     
-                                    List<SPDGListItemInfo> batch=new List<SPDGListItemInfo>();
+                                    List<ISPDGListItemInfo> batch=new List<ISPDGListItemInfo>();
                                     int itemCount = listInfo.isBigList ? workingDefinition.MaxNumberofItemsBigListToGenerate : workingDefinition.MaxNumberofItemsToGenerate;
                                     itemCount = SampleData.GetRandomNumber(itemCount*3/4, itemCount);
                                     for (int i = 0; i < itemCount; i++ )
                                     {
                                         var itemInfo=new SPDGListItemInfo();
-                                        if (listInfo.TemplateType == SPListTemplateType.Tasks)
+                                        if (listInfo.TemplateType == SPDGListTemplateType.Tasks)
                                         {
                                             populateTask(itemInfo);
                                         }
-                                        else if (listInfo.TemplateType == SPListTemplateType.Events)
+                                        else if (listInfo.TemplateType == SPDGListTemplateType.Events)
                                         {
                                             populateEvent(itemInfo);
                                         }
@@ -85,14 +84,14 @@ namespace Acceleratio.SPDG.Generator
                                         if (batch.Count > 400)
                                         {
                                             list.AddItems(batch);
-                                            progressDetail(string.Format("Created {0}/{1} items for list {2}: ", i + 1, itemCount, list.RootFolder.Url), batch.Count);                                            
+                                            updateProgressDetail(string.Format("Created {0}/{1} items for list {2}: ", i + 1, itemCount, list.RootFolder.Url), batch.Count);                                            
                                             batch.Clear();
                                         }
                                     }
                                     if (batch.Count > 0)
                                     {
                                         list.AddItems(batch);
-                                        progressDetail(string.Format("Created {0} items for list {1}: ", itemCount, list.RootFolder.Url), batch.Count);
+                                        updateProgressDetail(string.Format("Created {0} items for list {1}: ", itemCount, list.RootFolder.Url), batch.Count);
                                         batch.Clear();
                                     }
                                     listInfo.ItemCount = itemCount;
@@ -101,7 +100,7 @@ namespace Acceleratio.SPDG.Generator
                                 {
                                     docsAdded = 0;
                                     var list = web.GetList(listInfo.Name);
-                                    progressDetail("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url,0);
+                                    updateProgressDetail("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url,0);
                                                                        
                                     while (docsAdded < workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
                                     {
@@ -143,7 +142,7 @@ namespace Acceleratio.SPDG.Generator
                     addDocumentToFolder(docLib, childFolder);
                 }
             }
-            progressDetail("Adding document to folder: " + folder.Url);
+            updateProgressDetail("Adding document to folder: " + folder.Url);
         }
 
         private byte[] getFileContent()

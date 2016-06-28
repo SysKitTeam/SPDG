@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Acceleratio.SPDG.Generator.Objects;
+using Acceleratio.SPDG.Generator.Model;
 using Acceleratio.SPDG.Generator.Utilities;
-using Microsoft.SharePoint;
-using Microsoft.SharePoint.Navigation;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -13,18 +11,7 @@ namespace Acceleratio.SPDG.Generator
     {
         string _templateName = "STS#0";                
 
-        public static string GenerateWebUrl(SPWeb parentWeb, string childWebName)
-        {
-            string sessionUrl =  Utilities.Path.GenerateSlug(childWebName, 256 - parentWeb.Url.Length - 38 - 1);
-
-            //if url already exists, add guid
-            if (Path.ContainsUrl(parentWeb.Webs, sessionUrl))
-            {
-                sessionUrl += "_" + Guid.NewGuid().ToString();
-            }
-
-            return sessionUrl;
-        }
+    
 
         internal void CreateSubsites(ref List<SiteInfo> sites, SPDGWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
         {            
@@ -66,7 +53,7 @@ namespace Acceleratio.SPDG.Generator
         {
 
             var totalSites = CalculateTotalSitesForProgressReporting();
-            progressOverall("Creating Sites", totalSites);
+            updateProgressOverall("Creating Sites", totalSites);
             foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
             {
                 using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
@@ -90,7 +77,7 @@ namespace Acceleratio.SPDG.Generator
             string siteName, url;
             findAvailableSiteName(parentWeb, out siteName, out url, parentBaseName, level, out baseName);
 
-            progressDetail("Creating Site '" + parentWeb.Url + "/" + url + "'",0);
+            updateProgressDetail("Creating Site '" + parentWeb.Url + "/" + url + "'",0);
 
             SPDGWeb childWeb = null;
             try
@@ -99,12 +86,12 @@ namespace Acceleratio.SPDG.Generator
                 childWeb = parentWeb.AddWeb(url, siteName, null, parentWeb.Language, _templateName, false, false);
                 AddToNavigationBar(childWeb);
 
-                progressDetail("Site created '" + childWeb.Url + "'");
+                updateProgressDetail("Site created '" + childWeb.Url + "'");
             }
             catch (Exception ex)
             {
                 Log.Write("Could not create site '" + url + "'");
-                progressDetail("");
+                updateProgressDetail("");
                 Errors.Log(ex);
             }
            
@@ -134,8 +121,8 @@ namespace Acceleratio.SPDG.Generator
         private void findAvailableSiteName(SPDGWeb web, out string siteName, out string siteUrl, string parentBaseName, int level, out string baseName)
         {
             baseName = "";
-            List<string> primaryCollection;
-            List<string> secondaryCollection;
+            IList<string> primaryCollection;
+            IList<string> secondaryCollection;
 
             if (level%3 == 0)
             {

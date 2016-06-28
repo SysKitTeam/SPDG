@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Acceleratio.SPDG.Generator.Objects;
-using Microsoft.SharePoint;
+using Acceleratio.SPDG.Generator.Model;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -85,7 +84,7 @@ namespace Acceleratio.SPDG.Generator
                  //enum + eventual permissions change
                  totalProgress += allItemsCount+ withUnique;
             }                
-            progressOverall("Creating Permissions", totalProgress);
+            updateProgressOverall("Creating Permissions", totalProgress);
 
             
            
@@ -98,7 +97,7 @@ namespace Acceleratio.SPDG.Generator
                     _siteAdGroupSpUsers = new List<SPDGUser>();
                     _siteSpGroups=new List<SPDGGroup>();
 
-                    progressDetail("Ensuring users and groups on '" + siteCollInfo.URL + "'");
+                    updateProgressDetail("Ensuring users and groups on '" + siteCollInfo.URL + "'");
                     EnsureUsersAndGroups(siteColl.RootWeb);
 
                  
@@ -107,7 +106,7 @@ namespace Acceleratio.SPDG.Generator
                     {
                         using (var web = siteColl.OpenWeb(siteInfo.ID))
                         {                          
-                            progressDetail("Crawling site",0);
+                            updateProgressDetail("Crawling site",0);
                             if(allSitesWithUniquePermissions.Contains(siteInfo))
                             {                             
                                 setSitePermissions(web);
@@ -118,7 +117,7 @@ namespace Acceleratio.SPDG.Generator
                             {
                                 foreach (ListInfo listInfo in siteInfo.Lists)
                                 {
-                                    progressDetail("Crawling list " + web.Url + "/" + listInfo.Name, 0);
+                                    updateProgressDetail("Crawling list " + web.Url + "/" + listInfo.Name, 0);
                                     if (allListsWithUniquePermissions.Contains(listInfo))
                                     {                                        
                                         setListPermissions(web, listInfo.Name);
@@ -132,7 +131,7 @@ namespace Acceleratio.SPDG.Generator
                                             {                                                
                                                 setFolderPermissions(web, folderInfo.URL);
                                             }
-                                            progressDetail("Crawled folder" + web.Url + "/" + listInfo.Name);
+                                            updateProgressDetail("Crawled folder" + web.Url + "/" + listInfo.Name);
                                         }
                                     }
 
@@ -141,11 +140,11 @@ namespace Acceleratio.SPDG.Generator
                                         setItemPermissions(web, listInfo.Name);
                                         Log.Write("Unique permissions added to items in list:" + listInfo.Name + " in site: " + web.Url);
                                     }
-                                    progressDetail("Crawled list " + web.Url + "/" + listInfo.Name);
+                                    updateProgressDetail("Crawled list " + web.Url + "/" + listInfo.Name);
                                 }
                             }
 
-                            progressDetail("Crawled site "+ web.Url);
+                            updateProgressDetail("Crawled site "+ web.Url);
                         }
                     }
                 }
@@ -252,7 +251,7 @@ namespace Acceleratio.SPDG.Generator
 
         private void setSitePermissions(SPDGWeb web)
         {
-            progressDetail("Adding permissions to site " + web.Url + "'", 0);
+            updateProgressDetail("Adding permissions to site " + web.Url + "'", 0);
             if (!web.HasUniqueRoleAssignments)
             {
                 web.BreakRoleInheritance(true);
@@ -274,7 +273,7 @@ namespace Acceleratio.SPDG.Generator
 
         private void setListPermissions(SPDGWeb web, string listName)
         {
-            progressDetail("Adding permissions to list " + web.Url + "/" + listName, 0);
+            updateProgressDetail("Adding permissions to list " + web.Url + "/" + listName, 0);
             var list = web.GetList(listName);
             if (!list.HasUniqueRoleAssignments)
             {
@@ -286,12 +285,12 @@ namespace Acceleratio.SPDG.Generator
                 setupNextRoleAssignment(web, list);                
             }
 
-            progressDetail("Unique permissions added to list: " + listName + ", site: " + web.Url);
+            updateProgressDetail("Unique permissions added to list: " + listName + ", site: " + web.Url);
         }
 
         private void setFolderPermissions(SPDGWeb web, string folderURL)
         {
-            progressDetail("Adding permissions to folder: " + folderURL + " in site: " + web.Url, 0);
+            updateProgressDetail("Adding permissions to folder: " + folderURL + " in site: " + web.Url, 0);
             SPDGFolder folder = web.GetFolder(folderURL);
             if (!folder.Item.HasUniqueRoleAssignments)
             {
@@ -303,7 +302,7 @@ namespace Acceleratio.SPDG.Generator
                setupNextRoleAssignment(web, folder.Item);
             }
 
-            progressDetail("Unique permissions added to folder: " + folderURL + " in site: " + web.Url);            
+            updateProgressDetail("Unique permissions added to folder: " + folderURL + " in site: " + web.Url);            
         }
 
         private void setItemPermissions(SPDGWeb web, string listName)
@@ -313,7 +312,7 @@ namespace Acceleratio.SPDG.Generator
             {                
                 if (SampleData.GetRandomNumber(1, 100) < workingDefinition.PermissionsPercentOfListItems)
                 {
-                    progressDetail("Adding permissions for item/document '" + item.DisplayName + "' in list '" + list.Title, 0);
+                    updateProgressDetail("Adding permissions for item/document '" + item.DisplayName + "' in list '" + list.Title, 0);
                     if (!item.HasUniqueRoleAssignments)
                     {
                         item.BreakRoleInheritance(true);
@@ -324,19 +323,18 @@ namespace Acceleratio.SPDG.Generator
                         setupNextRoleAssignment(web, item);                    
                     }
 
-                    progressDetail("Unique permissions added for item/document '" + item.DisplayName + "' in list '"+list.Title);
+                    updateProgressDetail("Unique permissions added for item/document '" + item.DisplayName + "' in list '"+list.Title);
                 }
                 else
                 {
-                    progressDetail("");
+                    updateProgressDetail("");
                 }
             }
         }
 
 
         private void setupNextRoleAssignment(SPDGWeb web, SPDGSecurableObject securableObject)
-        {
-            SPRoleAssignment roleAssignement = null;
+        {            
             SPDGPrincipal principal = null;            
             var rnd = SampleData.GetRandomNumber(0, 100);
             if (rnd< WorkingDefinition.PermissionsPercentForUsers)

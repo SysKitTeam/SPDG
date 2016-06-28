@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Acceleratio.SPDG.Generator</RootNamespace>
     <AssemblyName>Acceleratio.SPDG.Generator</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -76,10 +76,6 @@
       <HintPath>..\..\packages\Microsoft.SharePointOnline.CSOM.16.1.3912.1204\lib\net40-full\Microsoft.Online.SharePoint.Client.Tenant.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Common Files\microsoft shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.SharePoint.Client, Version=16.1.3912.1204, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.SharePointOnline.CSOM.16.1.3912.1204\lib\net40-full\Microsoft.SharePoint.Client.dll</HintPath>
       <Private>True</Private>
@@ -137,64 +133,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="01WebAppsAndSiteCollections.cs" />
     <Compile Include="02Sites.cs" />
     <Compile Include="03Lists.cs" />
     <Compile Include="04Folders.cs" />
     <Compile Include="05ColumnsAndViews.cs" />
-    <Compile Include="06ContentTypes.cs" />
     <Compile Include="07ItemsAndDocuments.cs" />
-    <Compile Include="00ADCreateUsersGroups.cs" />
-    <Compile Include="09Workflows.cs" />
     <Compile Include="10Permissions.cs" />
-    <Compile Include="AD.cs" />
-    <Compile Include="ClientDataGenerator.cs" />
-    <Compile Include="ClientHelper.cs" />
     <Compile Include="CredentialValidationException.cs" />
-    <Compile Include="Objects\Client\ClientRoleAssignmentHelper.cs" />
-    <Compile Include="Objects\Client\SPDGClientFile.cs" />
-    <Compile Include="Objects\Client\SPDGClientFolder.cs" />
-    <Compile Include="Objects\Client\SPDGClientGroup.cs" />
-    <Compile Include="Objects\Client\SPDGClientList.cs" />
-    <Compile Include="Objects\Client\SPDGClientListItem.cs" />
-    <Compile Include="Objects\Client\SPDGClientRoleAssignment.cs" />
-    <Compile Include="Objects\Client\SPDGClientRoleDefinition.cs" />
-    <Compile Include="Objects\Client\SPDGClientSite.cs" />
-    <Compile Include="Objects\Client\SPDGClientUser.cs" />
-    <Compile Include="Objects\Client\SPDGClientWeb.cs" />
-    <Compile Include="Objects\ISPDGListItemInfo.cs" />
-    <Compile Include="Objects\Server\ServerRoleAssignmentHelper.cs" />
-    <Compile Include="Objects\Server\SPDGServerFile.cs" />
-    <Compile Include="Objects\Server\SPDGServerFolder.cs" />
-    <Compile Include="Objects\Server\SPDGServerGroup.cs" />
-    <Compile Include="Objects\Server\SPDGServerList.cs" />
-    <Compile Include="Objects\Server\SPDGServerListItem.cs" />
-    <Compile Include="Objects\Server\SPDGServerRoleAssignment.cs" />
-    <Compile Include="Objects\Server\SPDGServerRoleDefinition.cs" />
-    <Compile Include="Objects\Server\SPDGServerUser.cs" />
-    <Compile Include="Objects\Server\SPDGServerWeb.cs" />
-    <Compile Include="Objects\Server\SPDGServerSite.cs" />
-    <Compile Include="Objects\SPDGClientObjectsFactory.cs" />
-    <Compile Include="Objects\SPDGField.cs" />
-    <Compile Include="Objects\SPDGFieldInfo.cs" />
-    <Compile Include="Objects\SPDGFile.cs" />
-    <Compile Include="Objects\SPDGFolder.cs" />
-    <Compile Include="Objects\SPDGList.cs" />
-    <Compile Include="Objects\SPDGListItem.cs" />
-    <Compile Include="Objects\SPDGListItemInfo.cs" />
-    <Compile Include="Objects\SPDGObjectsFactory.cs" />
-    <Compile Include="Objects\SPDGRoleAssignment.cs" />
-    <Compile Include="Objects\SPDGRoleDefinition.cs" />
-    <Compile Include="Objects\SPDGSecurableObject.cs" />
-    <Compile Include="Objects\SPDGSite.cs" />
-    <Compile Include="Objects\SPDGUser.cs" />
-    <Compile Include="Objects\SPDGWeb.cs" />
-    <Compile Include="Objects\SPDGWebTemplate.cs" />
-    <Compile Include="ServerDataGenerator.cs" />
-    <Compile Include="ServerGeneratorDefinition.cs" />
+    <Compile Include="Model\ISPDGListItemInfo.cs" />
+    <Compile Include="Model\SPDGField.cs" />
+    <Compile Include="Model\SPDGFieldInfo.cs" />
+    <Compile Include="Model\SPDGFile.cs" />
+    <Compile Include="Model\SPDGFolder.cs" />
+    <Compile Include="Model\SPDGList.cs" />
+    <Compile Include="Model\SPDGListItem.cs" />
+    <Compile Include="Model\SPDGListItemInfo.cs" />
+    <Compile Include="Model\SPDGObjectsFactory.cs" />
+    <Compile Include="Model\SPDGRoleAssignment.cs" />
+    <Compile Include="Model\SPDGRoleDefinition.cs" />
+    <Compile Include="Model\SPDGSecurableObject.cs" />
+    <Compile Include="Model\SPDGSite.cs" />
+    <Compile Include="Model\SPDGUser.cs" />
+    <Compile Include="Model\SPDGWeb.cs" />
+    <Compile Include="Model\SPDGWebTemplate.cs" />
+    <Compile Include="Model\SPDGListTemplateType.cs" />
     <Compile Include="Utilities\Common.cs" />
+    <Compile Include="Utilities\DllExistanceChecker.cs" />
     <Compile Include="Utilities\Path.cs" />
-    <Compile Include="Utilities\Site.cs" />
     <Compile Include="DataGenerator.cs" />
     <Compile Include="ErrorLog.cs" />
     <Compile Include="GeneratorDefinition.cs" />

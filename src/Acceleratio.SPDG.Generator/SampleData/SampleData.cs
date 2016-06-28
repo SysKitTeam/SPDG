@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,22 +21,22 @@ namespace Acceleratio.SPDG.Generator
 
     public class SampleData
     {
-        internal static List<string> Accounts;
-        internal static List<string> Years;
-        internal static List<string> BusinessDocsTypes;
-        internal static List<string> Countries;
-        internal static List<string> Offices;
-        internal static List<string> Dates;
-        internal static List<string> FirstNames;
-        internal static List<string> LastNames;
-        internal static List<string> Addresses;
-        internal static List<string> Companies;
-        internal static List<string> Cities;
-        internal static List<string> PhoneNumbers;
-        internal static List<string> EmailAddreses;
-        internal static List<string> WebSites;
-        internal static List<DepartmentData> Departments;
-        internal static List<string> Customers;
+        public static ReadOnlyCollection<string> Accounts;
+        public static ReadOnlyCollection<string> Years;
+        public static ReadOnlyCollection<string> BusinessDocsTypes;
+        public static ReadOnlyCollection<string> Countries;
+        public static ReadOnlyCollection<string> Offices;
+        public static ReadOnlyCollection<string> Dates;
+        public static ReadOnlyCollection<string> FirstNames;
+        public static ReadOnlyCollection<string> LastNames;
+        public static ReadOnlyCollection<string> Addresses;
+        public static ReadOnlyCollection<string> Companies;
+        public static ReadOnlyCollection<string> Cities;
+        public static ReadOnlyCollection<string> PhoneNumbers;
+        public static ReadOnlyCollection<string> EmailAddreses;
+        public static ReadOnlyCollection<string> WebSites;
+        public static ReadOnlyCollection<DepartmentData> Departments;
+        public static ReadOnlyCollection<string> Customers;
         private static Random randomGen = new Random();
 
         public static void PrepareSampleCollections()
@@ -58,7 +59,7 @@ namespace Acceleratio.SPDG.Generator
             Customers = CreateSampleCollection("Customers.csv");
         }
 
-        internal static string GetRandomName(List<string> primaryCollection, List<string> secondaryCollection, List<string> tertiaryCollection, ref int attempt, out string baseName)
+        public static string GetRandomName(IList<string> primaryCollection, IList<string> secondaryCollection, IList<string> tertiaryCollection, ref int attempt, out string baseName)
         {
             string retVal = "";
             attempt++;
@@ -103,15 +104,15 @@ namespace Acceleratio.SPDG.Generator
             return retVal;
         }
 
-        internal static List<DepartmentData> ImportDepartments(string csvFileName)
+        internal static ReadOnlyCollection<DepartmentData> ImportDepartments(string csvFileName)
         {
-            return File.ReadLines(@"SampleData\" + csvFileName)
+            return new ReadOnlyCollection<DepartmentData>(File.ReadAllLines(@"SampleData\" + csvFileName)
                .Select(line => line.Split(','))
                .Select(tokens => new DepartmentData() { Department = tokens[0], Subdepartment = tokens[1] })
-               .ToList();
+               .ToList());
         }
 
-        internal static List<string> CreateSampleCollection(string csvFileName)
+        internal static ReadOnlyCollection<string> CreateSampleCollection(string csvFileName)
         {
             var reader = new StreamReader(File.OpenRead(@"SampleData\" + csvFileName));
             List<string> listA = new List<string>();
@@ -122,19 +123,19 @@ namespace Acceleratio.SPDG.Generator
                 listA.Add(line);
             }
 
-            return listA;
+            return new ReadOnlyCollection<string>(listA);
         }
 
-        internal static string GetSampleValueAt(List<string> sampleCollection, int index)
+        public static string GetSampleValueAt(List<string> sampleCollection, int index)
         {
             return sampleCollection[index];
         }
 
-        internal static string GetSampleValueRandom(List<string> sampleCollection)
+        public static string GetSampleValueRandom(IList<string> sampleCollection)
         {
             try
             {
-                int randomNumber = randomGen.Next(0, sampleCollection.Count() - 1);
+                int randomNumber = randomGen.Next(0, sampleCollection.Count - 1);
 
                 return sampleCollection[randomNumber];
             }
@@ -160,24 +161,24 @@ namespace Acceleratio.SPDG.Generator
         //    return val;
         //}
 
-        internal static int GetRandomNumber(int min, int max)
+        public static int GetRandomNumber(int min, int max)
         {
             return randomGen.Next(min, max);
         }
 
-        internal static DateTime GetRandomDate(int yearMin, int yearMax)
+        public static DateTime GetRandomDate(int yearMin, int yearMax)
         {
             DateTime randomDate = new DateTime(GetRandomNumber(yearMin, yearMax), GetRandomNumber(1, 12), GetRandomNumber(1, 28));
             return randomDate;
         }
 
-        internal static DateTime GetRandomDateCurrentMonth()
+        public static DateTime GetRandomDateCurrentMonth()
         {
             DateTime randomDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, GetRandomNumber(1, 28));
             return randomDate;
         }
 
-        internal static byte[] CreateDocx()
+        public static byte[] CreateDocx()
         {
             string text = File.ReadAllText("SampleData\\document.xml");
             text = text.Replace("SPDGTitle", SampleData.GetSampleValueRandom ( SampleData.BusinessDocsTypes) );

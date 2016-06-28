@@ -1,23 +1,10 @@
 ﻿using System.Text.RegularExpressions;
-using Microsoft.SharePoint;
 
 namespace Acceleratio.SPDG.Generator.Utilities
 {
     public static class Path
     {
-        public static bool ContainsUrl(SPWebCollection SubWebsCollection, string Url)
-        {
-            foreach (SPWeb web in SubWebsCollection)
-            {
-                if (web.Url.EndsWith(Url))
-                {
-                    return true;
-                }
-                web.Dispose();
-            }
-
-            return false;
-        }
+       
 
         public static string GenerateSlug(string phrase, int maxLength)
         {

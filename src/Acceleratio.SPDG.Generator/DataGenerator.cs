@@ -4,7 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Acceleratio.SPDG.Generator.Objects;
+using Acceleratio.SPDG.Generator.Model;
+using Acceleratio.SPDG.Generator.Utilities;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -55,17 +56,31 @@ namespace Acceleratio.SPDG.Generator
 
         public static DataGenerator Create(GeneratorDefinitionBase definition)
         {
-            if (definition is ServerGeneratorDefinition)
+            string assemblyName = "";
+            string typeName = "";
+            if (!definition.IsClientObjectModel && SupportsServer)
             {
-                return  new ServerDataGenerator((ServerGeneratorDefinition) definition);
+                assemblyName = "Acceleratio.SPDG.Generator.Server";
+                typeName = "Acceleratio.SPDG.Generator.Server.ServerGeneratorDefinition";
             }
             else
             {
-                return new ClientDataGenerator((ClientGeneratorDefinition) definition);
+              throw new InvalidOperationException();
+            }
+
+            if(!string.IsNullOrEmpty(assemblyName) && !string.IsNullOrEmpty(typeName))
+            {
+                var assembly = AppDomain.CurrentDomain.Load(assemblyName);
+                var type = assembly.GetType(typeName);
+                return (DataGenerator) Activator.CreateInstance(type, definition);
+            }       
+            else
+            {
+                throw new InvalidOperationException();
             }
         }
 
-        internal void progressOverall(string overallCurrentStepDescription, int detailsMaxSteps)
+        protected void updateProgressOverall(string overallCurrentStepDescription, int detailsMaxSteps)
         {
             OverallCurrentStep++;
             OverallCurrentStepDescription = overallCurrentStepDescription;
@@ -75,9 +90,9 @@ namespace Acceleratio.SPDG.Generator
             Log.Write("***" + overallCurrentStepDescription.ToUpper() + "***"); 
         }
 
-        
 
-        internal void progressDetail(string detailStepDescription, int incrementInProgress=1)
+
+        protected void updateProgressDetail(string detailStepDescription, int incrementInProgress=1)
         {
             DetailCurrentStep+= incrementInProgress;
             if (!string.IsNullOrEmpty(detailStepDescription))
@@ -240,5 +255,41 @@ namespace Acceleratio.SPDG.Generator
         protected abstract void AssociateWorkflows();
         protected abstract void AssociateCustomWorkflows();
 
+
+
+        private static bool? _supportsClient;
+        public static bool SupportsClient
+        {
+            get
+            {
+                if (_supportsClient == null)
+                {
+                    throw new NotImplementedException();
+                }
+                return _supportsClient.Value;
+            }
+        }
+
+        private static bool? _supportsServer;
+        public static bool SupportsServer
+        {
+            get
+            {
+                if (_supportsServer == null)
+                {
+                    try
+                    {
+                        DllExistanceTester.QueryAssemblyInfo("Microsoft.SharePoint");
+                        _supportsServer = true;
+                    }
+                    catch (Exception)
+                    {
+                        _supportsServer = false;
+                        
+                    }
+                }
+                return _supportsServer.Value;
+            }
+        }
     }
 }
