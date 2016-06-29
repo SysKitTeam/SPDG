@@ -17,27 +17,59 @@ namespace Acceleratio.SPDG.Generator.Server
             _generatorDefinition = definition;
         }
 
+        private void runAs(Action action)
+        {
+            if (!_generatorDefinition.CredentialsOfCurrentUser)
+            {
+                var parts = _generatorDefinition.Username.Split('\\');
+
+                if (Common.ImpersonateValidUser(parts[1], parts[0], _generatorDefinition.Password))
+                {
+                    try
+                    {
+                        action();
+                    }
+                    finally
+                    {
+                        Common.UndoImpersonation();
+                    }
+                    
+                }
+            }
+            else
+            {
+                action();
+            }
+        }
+
         public override IEnumerable<SPDGWebApplication> GetWebApplications()
         {
-            SPWebService spWebService = SPWebService.ContentService;
-            SPWebApplicationCollection webAppColl = spWebService.WebApplications;
-            
-
-            return webAppColl.Select(x => new SPDGWebApplication() {Id = x.Id, Name = x.Name});
-
+            List<SPDGWebApplication> webApps=new List<SPDGWebApplication>();
+            runAs(() =>
+            {
+                SPWebService spWebService = SPWebService.ContentService;
+                SPWebApplicationCollection webAppColl = spWebService.WebApplications;
+                webApps = webAppColl.Select(x => new SPDGWebApplication() { Id = x.Id, Name = x.Name }).ToList();
+            });           
+            return webApps;            
         }
 
         public override IEnumerable<string> GetAllSiteCollections(Guid webApplicationId)
         {
-            
-            SPWebService spWebService = SPWebService.ContentService;
-            SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == webApplicationId);
-
-            foreach (SPSite siteColl in webApp.Sites)
+            List<string> siteCollections=new List<string>();
+            runAs(() =>
             {
-                yield return siteColl.Url;                
-            }
-            
+                SPWebService spWebService = SPWebService.ContentService;
+                SPWebApplication webApp = spWebService.WebApplications.First(a => a.Id == webApplicationId);
+
+                foreach (SPSite siteColl in webApp.Sites)
+                {
+                    siteCollections.Add(siteColl.Url);
+
+                }
+            });
+           
+            return siteCollections;
         }
 
 
@@ -64,38 +96,39 @@ namespace Acceleratio.SPDG.Generator.Server
             }
             if (Common.ImpersonateValidUser(accountName, domainName, _generatorDefinition.Password))
             {
-                Common.UndoImpersonation();
+                try
+                {
+                    SPSecurity.RunWithElevatedPrivileges(delegate()
+                    {
+                        SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
+                        foreach (SPUser user in adminGroup.Users)
+                        {
+                            if (user.LoginName.ToLower() == domainName + "\\" + accountName)
+                            {
+                                isFarmAdmin = true;
+                                break;
+                            }
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    isFarmAdmin = false;
+                    Errors.Log(ex);
+                }
+                finally
+                {
+                    Common.UndoImpersonation();
+                }
+
+                if (!isFarmAdmin)
+                {
+                    throw new CredentialValidationException("The provided user is not a Farm Admin!");
+                }
             }
             else
             {
                 throw new CredentialValidationException("Provided custom credentials are not valid!");
-            }
-
-            //isFarmAdmin = SPFarm.Local.CurrentUserIsAdministrator();
-            try
-            {
-                SPSecurity.RunWithElevatedPrivileges(delegate ()
-                {
-                    SPGroup adminGroup = SPAdministrationWebApplication.Local.Sites[0].AllWebs[0].SiteGroups["Farm Administrators"];
-                    foreach (SPUser user in adminGroup.Users)
-                    {
-                        if (user.LoginName.ToLower() == domainName + "\\" + accountName)
-                        {
-                            isFarmAdmin = true;
-                            break;
-                        }
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                isFarmAdmin = false;
-                Errors.Log(ex);
-            }
-
-            if (!isFarmAdmin)
-            {
-                throw new CredentialValidationException("The provided user is not a Farm Admin!");
             }
         }
     }
