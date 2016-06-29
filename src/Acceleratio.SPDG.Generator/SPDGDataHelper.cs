@@ -21,7 +21,7 @@ namespace Acceleratio.SPDG.Generator
                 assemblyName = "Acceleratio.SPDG.Generator.Server";
                 typeName = "Acceleratio.SPDG.Generator.Server.SPDGServerDataHelper";
             }
-            else if (definition.IsClientObjectModel && DataGenerator.SupportsServer)
+            else if (definition.IsClientObjectModel && DataGenerator.SupportsClient)
             {
                 assemblyName = "Acceleratio.SPDG.Generator.Client";
                 typeName = "Acceleratio.SPDG.Generator.Client.SPDGClientDataHelper";
