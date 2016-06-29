@@ -479,11 +479,12 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <ServerFiles Include="$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.pdb"/>
-    <ClientFiles Include="$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.pdb"/>
-  </ItemGroup>
+ 
   <Target Name="AfterBuild">
+    <ItemGroup>
+      <ServerFiles Include="$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.pdb"/>
+      <ClientFiles Include="$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.pdb"/>
+    </ItemGroup>
     <Copy SourceFiles= "@(ServerFiles)" DestinationFolder="$(TargetDir)" />
     <Copy SourceFiles="@(ClientFiles)" DestinationFolder="$(TargetDir)" />
   </Target>
