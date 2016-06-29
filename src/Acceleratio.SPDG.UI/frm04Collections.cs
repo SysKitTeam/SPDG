@@ -201,26 +201,8 @@ namespace Acceleratio.SPDG.UI
             this.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            loadData();
-            //TODO:rf return impersonation validation
-            //if (!string.IsNullOrEmpty(Common.impersonateUserName))
-            //{
-            //    if (Common.impersonateValidUser(Common.impersonateUserName, Common.impersonateDomain, Common.impersonatePassword))
-            //    {
-            //        //Insert your code that runs under the security context of a specific user here.
-            //        loadSiteCollections();
-            //        Common.undoImpersonation();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Impersonation Failed!");
-            //    }
-            //}
-            //else
-            {
-                loadSiteCollections();
-            }
-            
+            loadData();           
+            loadSiteCollections();                       
          
             this.Enabled = true;
             this.Cursor = Cursors.Default;
