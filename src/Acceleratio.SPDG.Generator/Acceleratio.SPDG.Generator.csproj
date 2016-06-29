@@ -82,11 +82,6 @@
     <Compile Include="SPModel\SPDGWeb.cs" />
     <Compile Include="SPModel\SPDGWebTemplate.cs" />
     <Compile Include="SPModel\SPDGListTemplateType.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\DllExistanceChecker.cs" />
     <Compile Include="Utilities\Path.cs" />
@@ -103,21 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Library\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Ilustracija.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\temp_icona-11.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\temp_icona-12.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

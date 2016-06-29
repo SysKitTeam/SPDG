@@ -25,7 +25,7 @@ namespace Acceleratio.SPDG.UI
         [STAThread]
         static void Main()
         {            
-            EnsureCorrectRuntime();
+            ensureCorrectRuntime();
 
 
             Application.EnableVisualStyles();
@@ -34,7 +34,7 @@ namespace Acceleratio.SPDG.UI
                         
         }
 
-        private static void EnsureCorrectRuntime()
+        private static void ensureCorrectRuntime()
         {
             if (Debugger.IsAttached)
             {
