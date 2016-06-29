@@ -590,13 +590,18 @@ namespace Acceleratio.SPDG.UI
                 }
                 try
                 {
-                    //TODO:rf 
-                    //WorkingDefinition.ValidateCredentials();
+                    this.Cursor = Cursors.WaitCursor;                    
+                    var helper = SPDGDataHelper.Create(WorkingDefinition);
+                    helper.ValidateCredentials();
                 }
                 catch (CredentialValidationException ex)
                 {
                     MessageBox.Show(ex.Message);
                     return false;
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
                 }
                 return true;
             }

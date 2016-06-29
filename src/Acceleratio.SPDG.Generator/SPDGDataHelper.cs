@@ -11,6 +11,7 @@ namespace Acceleratio.SPDG.Generator
 
         public abstract IEnumerable<string> GetAllSiteCollections(Guid webApplicationId);
 
+        public abstract void ValidateCredentials();
         public static SPDGDataHelper Create(GeneratorDefinitionBase definition)
         {
             string assemblyName = "";

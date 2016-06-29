@@ -44,7 +44,27 @@ namespace Acceleratio.SPDG.Generator.Client
             return new List<string>();
         }
 
-      
+        public override void ValidateCredentials()
+        {
+            try
+            {
+                var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
+                using (ClientContext context = new ClientContext(url))
+                {
+                    context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utilities.Common.StringToSecureString(_generatorDefinition.Password));
+                    var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
+                    context.Load(officeTenant);
+                    context.ExecuteQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new CredentialValidationException(ex.Message);
+            }
+            
+        }
+
+
         public void CreateNewSiteCollection(string title, string name, string owner)
         {
             var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
