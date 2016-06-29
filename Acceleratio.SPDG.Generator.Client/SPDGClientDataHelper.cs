@@ -6,16 +6,21 @@ using Microsoft.SharePoint.Client;
 
 namespace Acceleratio.SPDG.Generator.Client
 {
-    public class ClientHelper
+    public class SPDGClientDataHelper : SPDGDataHelper
     {
         private readonly ClientGeneratorDefinition _generatorDefinition;
 
-        public ClientHelper(ClientGeneratorDefinition generatorDefinition)
+        public SPDGClientDataHelper(ClientGeneratorDefinition generatorDefinition)
         {
             _generatorDefinition = generatorDefinition;
         }
 
-        public List<string> GetAllSiteCollections()
+        public override IEnumerable<SPDGWebApplication> GetWebApplications()
+        {
+            return new List<SPDGWebApplication>();
+        }
+
+        public override IEnumerable<string> GetAllSiteCollections(Guid webApplicationId)
         {
             try
             {
@@ -32,13 +37,14 @@ namespace Acceleratio.SPDG.Generator.Client
                 }
             }
             catch (Exception ex)
-            {                
+            {
                 Errors.Log(ex);
             }
-            
+
             return new List<string>();
         }
 
+      
         public void CreateNewSiteCollection(string title, string name, string owner)
         {
             var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
@@ -65,5 +71,7 @@ namespace Acceleratio.SPDG.Generator.Client
                 }                                                
             }
         }
+
+        
     }
 }

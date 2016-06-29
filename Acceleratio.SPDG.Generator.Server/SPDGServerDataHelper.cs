@@ -9,6 +9,13 @@ namespace Acceleratio.SPDG.Generator.Server
 {
     class SPDGServerDataHelper : SPDGDataHelper
     {
+        private readonly GeneratorDefinitionBase _generatorDefinition;
+
+        public SPDGServerDataHelper(GeneratorDefinitionBase definition)
+        {
+            _generatorDefinition = definition;
+        }
+
         public override IEnumerable<SPDGWebApplication> GetWebApplications()
         {
             SPWebService spWebService = SPWebService.ContentService;

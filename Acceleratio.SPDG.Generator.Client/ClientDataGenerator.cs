@@ -98,7 +98,7 @@ namespace Acceleratio.SPDG.Generator.Client
 
         private string GetToken()
         {
-           throw new NotImplementedException();
+            return TokenHelper.GetUserAccessToken(WorkingDefinition.Username, WorkingDefinition.Password);            
         }
 
         private ActiveDirectoryClient _adClient = null;
@@ -304,9 +304,9 @@ namespace Acceleratio.SPDG.Generator.Client
                 int totalProgress = WorkingDefinition.CreateNewSiteCollections;                  
                 updateProgressOverall("Creating Web Applications / Site Collections", totalProgress);
                 
-                ClientHelper helper=new ClientHelper(WorkingDefinition);
+                SPDGClientDataHelper helper=new SPDGClientDataHelper(WorkingDefinition);
                 HashSet<string> existingSites=new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                foreach (var siteCollectionUrl in helper.GetAllSiteCollections())
+                foreach (var siteCollectionUrl in helper.GetAllSiteCollections(Guid.Empty))
                 {
                     existingSites.Add(siteCollectionUrl);
                 }

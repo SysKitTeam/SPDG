@@ -30,7 +30,11 @@ namespace Acceleratio.SPDG.Generator
                 {
                     return "";
                 }
-                return _userName;
+                if (_userName == null)
+                {
+                    _userName = "";
+                }
+                return _userName.Trim();
             }
             set { _userName = value; }
         }

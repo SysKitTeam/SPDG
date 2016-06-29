@@ -581,12 +581,12 @@ namespace Acceleratio.SPDG.UI
         {
             try
             {
-                WorkingDefinition.Username = txtUserName.Text;
-                WorkingDefinition.Password = txtPassword.Text;
+                WorkingDefinition.Username = txtUserName.Text.Trim();
+                WorkingDefinition.Password = txtPassword.Text.Trim();
                 WorkingDefinition.CredentialsOfCurrentUser = radioCurrentCredentials.Checked;                
                 if (WorkingDefinition.IsClientObjectModel)
                 {
-                    ((ClientGeneratorDefinition) WorkingDefinition).TenantName = txtTenantName.Text;                    
+                    ((ClientGeneratorDefinition) WorkingDefinition).TenantName = txtTenantName.Text.Trim();                    
                 }
                 try
                 {

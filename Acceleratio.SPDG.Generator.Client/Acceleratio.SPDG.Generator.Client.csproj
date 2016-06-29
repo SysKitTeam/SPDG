@@ -121,8 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientDataGenerator.cs" />
-    <Compile Include="ClientGeneratorDefinition.cs" />
-    <Compile Include="ClientHelper.cs" />
+    <Compile Include="SPDGClientDataHelper.cs" />
     <Compile Include="ClientRoleAssignmentHelper.cs" />
     <Compile Include="SPModel\SPDGClientFile.cs" />
     <Compile Include="SPModel\SPDGClientFolder.cs" />

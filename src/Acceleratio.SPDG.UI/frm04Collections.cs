@@ -174,8 +174,8 @@ namespace Acceleratio.SPDG.UI
                 Common.WorkingDefinition.UseExistingSiteCollection = false;
                 Common.WorkingDefinition.SiteCollection = string.Empty;
 
-                Common.WorkingDefinition.SiteCollOwnerLogin = txtOwnerUserName.Text;
-                Common.WorkingDefinition.SiteCollOwnerEmail = txtOwnerEmail.Text;
+                Common.WorkingDefinition.SiteCollOwnerLogin = txtOwnerUserName.Text.Trim();
+                Common.WorkingDefinition.SiteCollOwnerEmail = txtOwnerEmail.Text.Trim();
             }
             else
             {

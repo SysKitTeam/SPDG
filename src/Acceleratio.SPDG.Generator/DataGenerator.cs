@@ -68,7 +68,7 @@ namespace Acceleratio.SPDG.Generator
             else if(definition.IsClientObjectModel && SupportsClient)
             {
                 assemblyName = "Acceleratio.SPDG.Generator.Client";
-                typeName = "Acceleratio.SPDG.Generator.Server.ClientDataGenerator";
+                typeName = "Acceleratio.SPDG.Generator.Client.ClientDataGenerator";
             }
             else
             {
