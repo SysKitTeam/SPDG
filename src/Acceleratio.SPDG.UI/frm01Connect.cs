@@ -35,9 +35,19 @@ namespace Acceleratio.SPDG.UI
                     MessageBox.Show("To use SPDG you must either run it on a >=SharePoint 2010 machine, or on a machine that has .Net 4.5 framework installed");
                     Environment.Exit(0);
                 }
+                if (!DataGenerator.SupportsServer)
+                {
+                    radioConnectSPOnPremise.Enabled = false;
+                    radioConnectSPOnPremise.Checked = false;
+                    radioConnectSPOnline.Checked = true;
+                }
+                else if (!DataGenerator.SupportsClient)
+                {
+                    radioConnectSPOnline.Enabled = false;
+                    radioConnectSPOnline.Checked = false;
+                    radioConnectSPOnPremise.Checked = true;
+                }
             }
-            
-            
 
             loadData();
             setUIState();
