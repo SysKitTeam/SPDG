@@ -13,10 +13,9 @@ using System.Diagnostics;
 namespace Acceleratio.SPDG.UI
 {
     public partial class frmDataGeneration : frmWizardMaster
-    {
-        DataGenerator generator = null;
-        BackgroundWorker bgWorker = null;
-        bool isRunning = false;
+    {        
+        BackgroundWorker _bgWorker = null;
+        bool _isRunning = false;
         private Timer _timer;
         public frmDataGeneration()
         {
@@ -56,16 +55,16 @@ namespace Acceleratio.SPDG.UI
 
         private void startDataGeneration()
         {
-            generator = DataGenerator.Create(Common.WorkingDefinition);
+            var generator = DataGenerator.Create(Common.WorkingDefinition);
             generator.ProgressChanged += Generator_ProgressChanged;            
             this.Cursor = Cursors.WaitCursor;
-            isRunning = true;
-
-            bgWorker = new BackgroundWorker();
-            bgWorker.WorkerReportsProgress = true;
-            bgWorker.RunWorkerCompleted += bgWorker_RunWorkerCompleted;
-            bgWorker.DoWork += bgWorker_DoWork;            
-            bgWorker.RunWorkerAsync(generator);
+            _isRunning = true;
+            _timer.Enabled = true;
+            _bgWorker = new BackgroundWorker();
+            _bgWorker.WorkerReportsProgress = true;
+            _bgWorker.RunWorkerCompleted += bgWorker_RunWorkerCompleted;
+            _bgWorker.DoWork += bgWorker_DoWork;            
+            _bgWorker.RunWorkerAsync(generator);
 
         }
 
@@ -98,6 +97,10 @@ namespace Acceleratio.SPDG.UI
 
         private void _timer_Tick(object sender, EventArgs e)
         {
+            if (!_isRunning)
+            {
+                return;
+            }
             var args = _lastDetailsArgs;
             if (args != null)
             {
@@ -108,38 +111,47 @@ namespace Acceleratio.SPDG.UI
 
         void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            DataGenerator generator = e.Argument as DataGenerator;
-            bool success = generator.startDataGeneration();
-           
-            isRunning = false;
-            //btnClose.Text = "Close";
+            var success = false;
+            try
+            {
+                DataGenerator generator = e.Argument as DataGenerator;
+                success = generator.startDataGeneration();
 
-            if (success)
-            {
-                MessageBox.Show("SharePoint Data Generation Done!");
-                
-                
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error occured during data generation!");
+                Errors.Log(ex);                
             }
-            
+            _isRunning = false;                        
+            e.Result = success;
         }
 
         void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            _timer.Enabled = false;
+            bool success = (bool) e.Result;
+            
             this.Cursor = Cursors.Default;
             btnOpenLog.Visible = true;
             progressOverall.Value = progressOverall.Maximum;
             if (progressDetails.Maximum == 0) progressDetails.Maximum = 1;
             progressDetails.Value = progressDetails.Maximum;
+
+
+            if (success)
+            {
+                MessageBox.Show("SharePoint Data Generation Done!");
+            }
+            else
+            {
+                MessageBox.Show("Error occured during data generation!");
+            }
         }
 
 
         void btnClose_Click(object sender, EventArgs e)
         {
-            if( isRunning )
+            if( _isRunning )
             {
                 DialogResult result = MessageBox.Show("Are you sure you want to cancel data generation?", "SharePoint Data Generation", MessageBoxButtons.YesNo);
                 if (result == System.Windows.Forms.DialogResult.Yes)

@@ -105,7 +105,7 @@ namespace Acceleratio.SPDG.Generator
         protected void updateProgressDetail(string detailStepDescription, int incrementInProgress=1)
         {
             _detailCurrentStep+= incrementInProgress;
-            int pct = (int)((float)_detailCurrentStep / _detailProgressMaxSteps*100);
+            int pct = (int)((float)_detailCurrentStep / _detailProgressMaxSteps * 100);
             if (!string.IsNullOrEmpty(detailStepDescription))
             {                
                 Log.Write(detailStepDescription);
