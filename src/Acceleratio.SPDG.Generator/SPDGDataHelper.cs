@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Acceleratio.SPDG.Generator.SPModel;
 
 namespace Acceleratio.SPDG.Generator
 {
@@ -36,11 +37,5 @@ namespace Acceleratio.SPDG.Generator
             throw new InvalidOperationException();
 
         }
-    }
-
-    public class SPDGWebApplication
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
     }
 }

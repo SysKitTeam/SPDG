@@ -12,15 +12,15 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
     {
-        private int docsAdded = 0;
-        private string currentFileType = null;
+        private int _docsAdded = 0;
+        private string _currentFileType = null;
 
         public void CreateItemsAndDocuments()
         {
             int totalProgress = 0;
-            if( workingDefinition.MaxNumberofItemsToGenerate > 0 
-                || workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate > 0
-                || workingDefinition.MaxNumberofItemsBigListToGenerate >0)
+            if( _workingDefinition.MaxNumberofItemsToGenerate > 0 
+                || _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate > 0
+                || _workingDefinition.MaxNumberofItemsBigListToGenerate >0)
             {
                 totalProgress = CalculateTotalItemsForProgressReporting();
             }
@@ -44,7 +44,7 @@ namespace Acceleratio.SPDG.Generator
                             available.Shuffle();
                             foreach (ListInfo listInfo in available)
                             {
-                                titleUsage.Clear();
+                                _titleUsage.Clear();
                                 if (!listInfo.isLib)
                                 {
                                     var list = web.GetList(listInfo.Name);
@@ -63,7 +63,7 @@ namespace Acceleratio.SPDG.Generator
                                     }
                                     
                                     List<ISPDGListItemInfo> batch=new List<ISPDGListItemInfo>();
-                                    int itemCount = listInfo.isBigList ? workingDefinition.MaxNumberofItemsBigListToGenerate : workingDefinition.MaxNumberofItemsToGenerate;
+                                    int itemCount = listInfo.isBigList ? _workingDefinition.MaxNumberofItemsBigListToGenerate : _workingDefinition.MaxNumberofItemsToGenerate;
                                     itemCount = SampleData.GetRandomNumber(itemCount*3/4, itemCount);
                                     for (int i = 0; i < itemCount; i++ )
                                     {
@@ -100,11 +100,11 @@ namespace Acceleratio.SPDG.Generator
                                 }
                                 else
                                 {
-                                    docsAdded = 0;
+                                    _docsAdded = 0;
                                     var list = web.GetList(listInfo.Name);
                                     updateProgressDetail("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url,0);
                                                                        
-                                    while (docsAdded < workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
+                                    while (_docsAdded < _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
                                     {
                                         addDocumentToFolder(list,list.RootFolder);
                                     }
@@ -121,7 +121,7 @@ namespace Acceleratio.SPDG.Generator
         {                        
             fileTypeRotator();
             byte[] fileContent = getFileContent();
-            var url = SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames) + " " + SampleData.GetRandomNumber(1, 30000) + "." + currentFileType;
+            var url = SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames) + " " + SampleData.GetRandomNumber(1, 30000) + "." + _currentFileType;
             var spFile = folder.AddFile(url, fileContent, true);
             var fileItem = spFile.Item;
             if (fileItem != null)
@@ -129,12 +129,12 @@ namespace Acceleratio.SPDG.Generator
                 populateItemInfo(docLib, fileItem, true);
                 fileItem.Update();                
             }
-            docsAdded++;
+            _docsAdded++;
             
 
             foreach(var childFolder in folder.SubFolders)
             {
-                if( docsAdded >= workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
+                if( _docsAdded >= _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
                 {
                     break;
                 }
@@ -150,26 +150,26 @@ namespace Acceleratio.SPDG.Generator
         private byte[] getFileContent()
         {
             byte[] content = null;
-            if( currentFileType == "test")
+            if( _currentFileType == "test")
             {
                 FileStream fstream = File.OpenRead("C:\\Temp\\test.docx");
                 content = new byte[fstream.Length];
                 fstream.Read(content, 0, (int)fstream.Length);
                 fstream.Close();
             }
-            else if (currentFileType == "docx")
+            else if (_currentFileType == "docx")
             {
                 content = SampleData.CreateDocx();
             }
-            else if (currentFileType == "xlsx")
+            else if (_currentFileType == "xlsx")
             {
                 content = SampleData.CreateExcel();
             }
-            else if (currentFileType == "pdf")
+            else if (_currentFileType == "pdf")
             {
-                content = SampleData.CreatePDF(workingDefinition.MinDocumentSizeKB, workingDefinition.MaxDocumentSizeMB * 1024);
+                content = SampleData.CreatePDF(_workingDefinition.MinDocumentSizeKB, _workingDefinition.MaxDocumentSizeMB * 1024);
             }
-            else if (currentFileType == "png")
+            else if (_currentFileType == "png")
             {
                 content = SampleData.AddRandomPngFile();
             }
@@ -178,7 +178,7 @@ namespace Acceleratio.SPDG.Generator
         }
 
 
-        private static Dictionary<string,int> titleUsage=new Dictionary<string, int>();
+        private static Dictionary<string,int> _titleUsage=new Dictionary<string, int>();
         private void populateItemInfo(SPDGList list, ISPDGListItemInfo item, bool isDocLib )
         {
             List<string> userFields = new List<string>();
@@ -191,14 +191,14 @@ namespace Acceleratio.SPDG.Generator
             }
 
             string title = getFieldValue("First Name") + " "  + getFieldValue("Last Name");
-            if (!titleUsage.ContainsKey(title))
+            if (!_titleUsage.ContainsKey(title))
             {
-                titleUsage[title] = 0;
+                _titleUsage[title] = 0;
             }
-            titleUsage[title]++;
-            if (titleUsage[title] != 1)
+            _titleUsage[title]++;
+            if (_titleUsage[title] != 1)
             {
-                title += " No. " + titleUsage[title];
+                title += " No. " + _titleUsage[title];
             }
             item["Title"] = title;
 
@@ -294,44 +294,44 @@ namespace Acceleratio.SPDG.Generator
         {
             bool changed = false;
 
-            if (currentFileType == null)
+            if (_currentFileType == null)
             {
-                if (workingDefinition.IncludeDocTypeDOCX) { currentFileType = "docx"; return; }
-                if (workingDefinition.IncludeDocTypeXLSX) {currentFileType = "xlsx"; return;}
-                if (workingDefinition.IncludeDocTypePDF){ currentFileType = "pdf"; return;}
-                if (workingDefinition.IncludeDocTypeImages) { currentFileType = "png"; return; }
+                if (_workingDefinition.IncludeDocTypeDOCX) { _currentFileType = "docx"; return; }
+                if (_workingDefinition.IncludeDocTypeXLSX) {_currentFileType = "xlsx"; return;}
+                if (_workingDefinition.IncludeDocTypePDF){ _currentFileType = "pdf"; return;}
+                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
                 return;
             }
 
-            if( currentFileType == "docx" )
+            if( _currentFileType == "docx" )
             {
-                if (workingDefinition.IncludeDocTypeXLSX) {currentFileType = "xlsx"; return;}
-                if (workingDefinition.IncludeDocTypePDF) {currentFileType = "pdf"; return;}
-                if (workingDefinition.IncludeDocTypeImages) { currentFileType = "png"; return; }
+                if (_workingDefinition.IncludeDocTypeXLSX) {_currentFileType = "xlsx"; return;}
+                if (_workingDefinition.IncludeDocTypePDF) {_currentFileType = "pdf"; return;}
+                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
                 return;
             }
 
-            if (currentFileType == "xlsx")
+            if (_currentFileType == "xlsx")
             {
-                if (workingDefinition.IncludeDocTypePDF) {currentFileType = "pdf"; return;}
-                if (workingDefinition.IncludeDocTypeImages) { currentFileType = "png"; return; }
-                if (workingDefinition.IncludeDocTypeDOCX) {currentFileType = "docx"; return;}
+                if (_workingDefinition.IncludeDocTypePDF) {_currentFileType = "pdf"; return;}
+                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
+                if (_workingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
                 return;
             }
 
-            if (currentFileType == "pdf")
+            if (_currentFileType == "pdf")
             {
-                if (workingDefinition.IncludeDocTypeImages) { currentFileType = "png"; return; }
-                if (workingDefinition.IncludeDocTypeDOCX) {currentFileType = "docx"; return;}
-                if (workingDefinition.IncludeDocTypeXLSX){ currentFileType = "xlsx"; return;}
+                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
+                if (_workingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
+                if (_workingDefinition.IncludeDocTypeXLSX){ _currentFileType = "xlsx"; return;}
                 return;
             }
 
-            if( currentFileType == "png" )
+            if( _currentFileType == "png" )
             {
-                if (workingDefinition.IncludeDocTypeDOCX) {currentFileType = "docx"; return;}
-                if (workingDefinition.IncludeDocTypeXLSX){ currentFileType = "xlsx"; return;}
-                if (workingDefinition.IncludeDocTypePDF) { currentFileType = "pdf"; return; }
+                if (_workingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
+                if (_workingDefinition.IncludeDocTypeXLSX){ _currentFileType = "xlsx"; return;}
+                if (_workingDefinition.IncludeDocTypePDF) { _currentFileType = "pdf"; return; }
                 
             }
 

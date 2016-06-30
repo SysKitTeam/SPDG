@@ -69,7 +69,7 @@ namespace Acceleratio.SPDG.Generator.Client
                         result = result.GetNextPageAsync().Result;
                     }
                     foreach (Group group in result.CurrentPage)
-                    {
+                    {                 
                         _allGroups.Add(group);
                     }
                 } while (result.MorePagesAvailable);

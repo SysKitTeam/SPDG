@@ -35,7 +35,7 @@ namespace Acceleratio.SPDG.Generator
         public static ReadOnlyCollection<string> WebSites;
         public static ReadOnlyCollection<DepartmentData> Departments;
         public static ReadOnlyCollection<string> Customers;
-        private static Random randomGen = new Random();
+        private static Random _randomGen = new Random();
 
         public static void PrepareSampleCollections()
         {
@@ -96,7 +96,7 @@ namespace Acceleratio.SPDG.Generator
             
             if (attempt > 40)
             {
-                retVal += string.Format("{0} {1}", retVal, randomGen.Next(10000).ToString());
+                retVal += string.Format("{0} {1}", retVal, _randomGen.Next(10000).ToString());
             }
 
             return retVal;
@@ -133,7 +133,7 @@ namespace Acceleratio.SPDG.Generator
         {
             try
             {
-                int randomNumber = randomGen.Next(0, sampleCollection.Count - 1);
+                int randomNumber = _randomGen.Next(0, sampleCollection.Count - 1);
 
                 return sampleCollection[randomNumber];
             }
@@ -143,25 +143,11 @@ namespace Acceleratio.SPDG.Generator
                 throw ex;
             }
             
-        }
-
-        //internal static string Clean(string val)
-        //{
-        //    val = val.Replace(" ", "");
-        //    val = val.Replace(",", "");
-        //    val = val.Replace(".", "");
-        //    val = val.Replace("/", "");
-        //    val = val.Replace("\\", "");
-        //    val = val.Replace("(", "");
-        //    val = val.Replace(")", "");
-        //    val = val.Replace("&", "");
-
-        //    return val;
-        //}
+        }      
 
         public static int GetRandomNumber(int min, int max)
         {
-            return randomGen.Next(min, max);
+            return _randomGen.Next(min, max);
         }
 
         public static DateTime GetRandomDate(int yearMin, int yearMax)

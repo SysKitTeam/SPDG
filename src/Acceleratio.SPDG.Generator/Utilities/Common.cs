@@ -61,7 +61,7 @@ namespace Acceleratio.SPDG.Generator.Utilities
 
         public const int LOGON32_LOGON_INTERACTIVE = 2;
         public const int LOGON32_PROVIDER_DEFAULT = 0;
-        internal static WindowsImpersonationContext impersonationContext;
+        static WindowsImpersonationContext _impersonationContext;
 
         [DllImport("advapi32.dll")]
         public static extern int LogonUserA(String lpszUserName,
@@ -94,8 +94,8 @@ namespace Acceleratio.SPDG.Generator.Utilities
                     if (DuplicateToken(token, 2, ref tokenDuplicate) != 0)
                     {
                         tempWindowsIdentity = new WindowsIdentity(tokenDuplicate);
-                        impersonationContext = tempWindowsIdentity.Impersonate();
-                        if (impersonationContext != null)
+                        _impersonationContext = tempWindowsIdentity.Impersonate();
+                        if (_impersonationContext != null)
                         {
                             CloseHandle(token);
                             CloseHandle(tokenDuplicate);
@@ -113,7 +113,7 @@ namespace Acceleratio.SPDG.Generator.Utilities
 
         public static void UndoImpersonation()
         {
-            impersonationContext.Undo();
+            _impersonationContext.Undo();
         }
     }
 

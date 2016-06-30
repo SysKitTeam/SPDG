@@ -26,7 +26,7 @@ namespace Acceleratio.SPDG.Generator
 
         public void CreateColumnsAndViews()
         {
-            if( !workingDefinition.CreateColumns || workingDefinition.MaxNumberOfColumnsPerList == 0)
+            if( !_workingDefinition.CreateColumns || _workingDefinition.MaxNumberOfColumnsPerList == 0)
             {
                 return;
             }
@@ -49,7 +49,7 @@ namespace Acceleratio.SPDG.Generator
 
                                 updateProgressDetail("Creating columns in List '" + list.RootFolder.Url + "'", 0);
                                
-                                var newFields = _availableFieldInfos.Take(workingDefinition.MaxNumberOfColumnsPerList).ToList();
+                                var newFields = _availableFieldInfos.Take(_workingDefinition.MaxNumberOfColumnsPerList).ToList();
                                 list.AddFields(newFields, true);
 
                                 updateProgressDetail("Columns created in List '" + list.RootFolder.Url + "'", newFields.Count);
@@ -58,7 +58,7 @@ namespace Acceleratio.SPDG.Generator
                                 
                                
                                 var listFields = list.Fields.ToList();
-                                for (int c = 0; c < workingDefinition.MaxNumberOfViewsPerList; c++)
+                                for (int c = 0; c < _workingDefinition.MaxNumberOfViewsPerList; c++)
                                 {                                
                                     var viewFields = new List<string>();
                                     newFields.Shuffle();
@@ -75,7 +75,7 @@ namespace Acceleratio.SPDG.Generator
                                     }
                                     list.AddView("View " + (c+1).ToString(), viewFields, null, 100, true, false );
                                 }
-                                updateProgressDetail("Created views in list '" + list.RootFolder.Url + "'", workingDefinition.MaxNumberOfViewsPerList);
+                                updateProgressDetail("Created views in list '" + list.RootFolder.Url + "'", _workingDefinition.MaxNumberOfViewsPerList);
                             }
                         }
                     }

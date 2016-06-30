@@ -9,11 +9,8 @@ using Acceleratio.SPDG.Generator.Utilities;
 namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
-    {
-        
-
-        int permissionsPerObject = 1;
-        
+    {       
+        int _permissionsPerObject = 1;        
         List<SPDGUser> _siteSpUsers = null ;
         List<SPDGGroup> _siteSpGroups = null;
         List<SPDGUser> _siteAdGroupSpUsers = null;
@@ -25,10 +22,10 @@ namespace Acceleratio.SPDG.Generator
             var allFolders = workingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists.SelectMany(z => z.Folders))).ToList();
             var allItemsCount = allLists.Sum(x => x.ItemCount);
 
-            bool doSitePermissions = workingDefinition.PermissionsPercentOfSites > 0 && allSites.Count > 0;
-            bool doListPermissions = workingDefinition.PermissionsPercentOfLists > 0 && allLists.Count > 0;
-            bool doListItemPermissions = workingDefinition.PermissionsPercentOfListItems > 0 && allItemsCount > 0;
-            bool dofolderPermissions = workingDefinition.PermissionsPercentOfFolders > 0 && allFolders.Count > 0;
+            bool doSitePermissions = _workingDefinition.PermissionsPercentOfSites > 0 && allSites.Count > 0;
+            bool doListPermissions = _workingDefinition.PermissionsPercentOfLists > 0 && allLists.Count > 0;
+            bool doListItemPermissions = _workingDefinition.PermissionsPercentOfListItems > 0 && allItemsCount > 0;
+            bool dofolderPermissions = _workingDefinition.PermissionsPercentOfFolders > 0 && allFolders.Count > 0;
             bool stuffTodo = doSitePermissions
                              || doListPermissions
                              || doListItemPermissions
@@ -41,7 +38,7 @@ namespace Acceleratio.SPDG.Generator
             List<SiteInfo> allSitesWithUniquePermissions = new List<SiteInfo>();
             foreach (var site in allSites)
             {
-                if (SampleData.GetRandomNumber(1, 100) <= workingDefinition.PermissionsPercentOfSites)
+                if (SampleData.GetRandomNumber(1, 100) <= _workingDefinition.PermissionsPercentOfSites)
                 {
                     allSitesWithUniquePermissions.Add(site);
                 }
@@ -50,7 +47,7 @@ namespace Acceleratio.SPDG.Generator
             List<ListInfo> allListsWithUniquePermissions = new List<ListInfo>();
             foreach (var list in allLists)
             {
-                if (SampleData.GetRandomNumber(1, 100) <= workingDefinition.PermissionsPercentOfLists)
+                if (SampleData.GetRandomNumber(1, 100) <= _workingDefinition.PermissionsPercentOfLists)
                 {
                     allListsWithUniquePermissions.Add(list);
                 }
@@ -59,7 +56,7 @@ namespace Acceleratio.SPDG.Generator
             List<FolderInfo> allFoldersWithUniquePermissions = new List<FolderInfo>();
             foreach (var folder in allFolders)
             {
-                if (SampleData.GetRandomNumber(1, 100) <= workingDefinition.PermissionsPercentOfLists)
+                if (SampleData.GetRandomNumber(1, 100) <= _workingDefinition.PermissionsPercentOfLists)
                 {
                     allFoldersWithUniquePermissions.Add(folder);
                 }
@@ -82,7 +79,7 @@ namespace Acceleratio.SPDG.Generator
             }
             if (doListItemPermissions)
             {
-                var withUnique=(allItemsCount*workingDefinition.PermissionsPercentOfListItems)/100;
+                var withUnique=(allItemsCount*_workingDefinition.PermissionsPercentOfListItems)/100;
                  //enum + eventual permissions change
                  totalProgress += allItemsCount+ withUnique;
             }                
@@ -258,7 +255,7 @@ namespace Acceleratio.SPDG.Generator
             {
                 web.BreakRoleInheritance(true);
             }
-            for (int i = 0; i < permissionsPerObject; i++)
+            for (int i = 0; i < _permissionsPerObject; i++)
             {
                 try
                 {
@@ -282,7 +279,7 @@ namespace Acceleratio.SPDG.Generator
                 list.BreakRoleInheritance(true);
             }
 
-            for (int i = 0; i < permissionsPerObject; i++)
+            for (int i = 0; i < _permissionsPerObject; i++)
             {
                 setupNextRoleAssignment(web, list);                
             }
@@ -299,7 +296,7 @@ namespace Acceleratio.SPDG.Generator
                 folder.Item.BreakRoleInheritance(true);
             }
 
-            for (int i = 0; i < permissionsPerObject; i++)
+            for (int i = 0; i < _permissionsPerObject; i++)
             {
                setupNextRoleAssignment(web, folder.Item);
             }
@@ -312,7 +309,7 @@ namespace Acceleratio.SPDG.Generator
             var list = web.GetList(listName);
             foreach (var item in list.Items)
             {                
-                if (SampleData.GetRandomNumber(1, 100) < workingDefinition.PermissionsPercentOfListItems)
+                if (SampleData.GetRandomNumber(1, 100) < _workingDefinition.PermissionsPercentOfListItems)
                 {
                     updateProgressDetail("Adding permissions for item/document '" + item.DisplayName + "' in list '" + list.Title, 0);
                     if (!item.HasUniqueRoleAssignments)
@@ -320,7 +317,7 @@ namespace Acceleratio.SPDG.Generator
                         item.BreakRoleInheritance(true);
                     }
 
-                    for (int i = 0; i < permissionsPerObject; i++)
+                    for (int i = 0; i < _permissionsPerObject; i++)
                     {
                         setupNextRoleAssignment(web, item);                    
                     }

@@ -8,7 +8,7 @@ namespace Acceleratio.SPDG.Generator
     {
         public void CreateFolders()
         {
-            if( workingDefinition.MaxNumberOfFoldersToGenerate > 0 )
+            if( _workingDefinition.MaxNumberOfFoldersToGenerate > 0 )
             {
                 int totalProgress = CalculateTotalFoldersForProgressReporting();
 
@@ -27,7 +27,7 @@ namespace Acceleratio.SPDG.Generator
                             {
                                 if(listInfo.isLib)
                                 {
-                                    for (int counter = 1; counter <= workingDefinition.MaxNumberOfFoldersToGenerate; counter++)
+                                    for (int counter = 1; counter <= _workingDefinition.MaxNumberOfFoldersToGenerate; counter++)
                                     {
                                         try
                                         {
@@ -45,10 +45,10 @@ namespace Acceleratio.SPDG.Generator
 
                                             updateProgressDetail("Folder created '" + folderInfo.Name + "'");
 
-                                            for (int l = 0; l < workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
+                                            for (int l = 0; l < _workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
                                             {
                                                 counter++;
-                                                if (counter >= workingDefinition.MaxNumberOfFoldersToGenerate)
+                                                if (counter >= _workingDefinition.MaxNumberOfFoldersToGenerate)
                                                 {
                                                     break;
                                                 }

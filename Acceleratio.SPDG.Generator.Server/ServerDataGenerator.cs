@@ -14,11 +14,11 @@ namespace Acceleratio.SPDG.Generator.Server
 {
     public partial class ServerDataGenerator : DataGenerator
     {
-        static bool containsUrl(SPWebCollection SubWebsCollection, string Url)
+        static bool containsUrl(SPWebCollection subWebsCollection, string url)
         {            
-            foreach (SPWeb web in SubWebsCollection)
+            foreach (SPWeb web in subWebsCollection)
             {
-                if (web.Url.EndsWith(Url))
+                if (web.Url.EndsWith(url))
                 {
                     return true;
                 }
@@ -601,9 +601,7 @@ namespace Acceleratio.SPDG.Generator.Server
         }
 
 
-
-
-        public static List<string> allSiteColumns;
+       
 
         public void CreateContentTypes()
         {
@@ -699,36 +697,38 @@ namespace Acceleratio.SPDG.Generator.Server
             }
         }
 
+
+        public static List<string> _allSiteColumns;
         private static List<string> GetRandomSiteColumns()
         {
-            if (allSiteColumns == null)
+            if (_allSiteColumns == null)
             {
-                allSiteColumns = new List<string>();
-                allSiteColumns.Add("Address");
-                allSiteColumns.Add("Birthday");
-                allSiteColumns.Add("Business Phone");
-                allSiteColumns.Add("Car Phone");
-                allSiteColumns.Add("City");
-                allSiteColumns.Add("Company");
-                allSiteColumns.Add("Department");
-                allSiteColumns.Add("E-Mail");
-                allSiteColumns.Add("First Name");
-                allSiteColumns.Add("Home Phone");
-                allSiteColumns.Add("Other Address City");
-                allSiteColumns.Add("Related Company");
-                allSiteColumns.Add("Radio Phone");
-                allSiteColumns.Add("E-mail 2");
-                allSiteColumns.Add("E-mail 3");
+                _allSiteColumns = new List<string>();
+                _allSiteColumns.Add("Address");
+                _allSiteColumns.Add("Birthday");
+                _allSiteColumns.Add("Business Phone");
+                _allSiteColumns.Add("Car Phone");
+                _allSiteColumns.Add("City");
+                _allSiteColumns.Add("Company");
+                _allSiteColumns.Add("Department");
+                _allSiteColumns.Add("E-Mail");
+                _allSiteColumns.Add("First Name");
+                _allSiteColumns.Add("Home Phone");
+                _allSiteColumns.Add("Other Address City");
+                _allSiteColumns.Add("Related Company");
+                _allSiteColumns.Add("Radio Phone");
+                _allSiteColumns.Add("E-mail 2");
+                _allSiteColumns.Add("E-mail 3");
             }
 
             List<string> randomSites = new List<string>();
             Random random = new Random();
             for (int i = 0; i < 7; i++)
             {
-                int randomNumber = random.Next(0, allSiteColumns.Count - 1);
-                if (!randomSites.Any(x => x == allSiteColumns[randomNumber]))
+                int randomNumber = random.Next(0, _allSiteColumns.Count - 1);
+                if (!randomSites.Any(x => x == _allSiteColumns[randomNumber]))
                 {
-                    randomSites.Add(allSiteColumns[randomNumber]);
+                    randomSites.Add(_allSiteColumns[randomNumber]);
                 }
             }
 

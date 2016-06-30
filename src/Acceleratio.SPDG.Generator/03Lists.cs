@@ -7,12 +7,12 @@ namespace Acceleratio.SPDG.Generator
 {
     public partial class DataGenerator
     {
-        SPDGListTemplateType lastTemplateType = SPDGListTemplateType.NoListTemplate;
-        string lastListPrefix = "List";
+        SPDGListTemplateType _lastTemplateType = SPDGListTemplateType.NoListTemplate;
+        string _lastListPrefix = "List";
 
         public void CreateLists()
         {
-            if (workingDefinition.MaxNumberOfListsAndLibrariesPerSite > 0 || workingDefinition.NumberOfBigListsPerSite>0)
+            if (_workingDefinition.MaxNumberOfListsAndLibrariesPerSite > 0 || _workingDefinition.NumberOfBigListsPerSite>0)
             {
                 int progressTotal = CalculateTotalListsForProgressReporting();
                 updateProgressOverall("Creating Lists and Libraries", progressTotal);
@@ -31,8 +31,8 @@ namespace Acceleratio.SPDG.Generator
                         using(var web = siteColl.OpenWeb(siteInfo.ID)) 
                         {
                             Random rnd = new Random();
-                            int listsToCreate = rnd.Next(workingDefinition.MaxNumberOfListsAndLibrariesPerSite+1);                            
-                            int bigListsToCreate = workingDefinition.NumberOfBigListsPerSite;
+                            int listsToCreate = rnd.Next(_workingDefinition.MaxNumberOfListsAndLibrariesPerSite+1);                            
+                            int bigListsToCreate = _workingDefinition.NumberOfBigListsPerSite;
                             Log.Write("Creating lists in site '" + web.Url + "'");
                             listsToCreate += bigListsToCreate;
                             int bigListsCreated = 0;
@@ -45,11 +45,11 @@ namespace Acceleratio.SPDG.Generator
                                     {
                                         getNextTemplateType();
                                         
-                                        listTemplate = lastTemplateType;
+                                        listTemplate = _lastTemplateType;
                                     }
                                     else
                                     {
-                                        lastListPrefix = "List";
+                                        _lastListPrefix = "List";
                                         listTemplate = SPDGListTemplateType.GenericList;                                        
                                     }
                                     
@@ -87,134 +87,134 @@ namespace Acceleratio.SPDG.Generator
 
         private SPDGListTemplateType getNextTemplateType()
         {
-            if (lastTemplateType == SPDGListTemplateType.NoListTemplate)
+            if (_lastTemplateType == SPDGListTemplateType.NoListTemplate)
             {
-                if( workingDefinition.LibTypeList)
+                if( _workingDefinition.LibTypeList)
                 {
-                    lastTemplateType = SPDGListTemplateType.GenericList;
-                    lastListPrefix = "List";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.GenericList;
+                    _lastListPrefix = "List";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeDocument)
+                else if (_workingDefinition.LibTypeDocument)
                 {
-                    lastTemplateType = SPDGListTemplateType.DocumentLibrary;
-                    lastListPrefix = "Library";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.DocumentLibrary;
+                    _lastListPrefix = "Library";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeTasks)
+                else if (_workingDefinition.LibTypeTasks)
                 {
-                    lastTemplateType = SPDGListTemplateType.Tasks;
-                    lastListPrefix = "Tasks";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.Tasks;
+                    _lastListPrefix = "Tasks";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeCalendar)
+                else if (_workingDefinition.LibTypeCalendar)
                 {
-                    lastTemplateType = SPDGListTemplateType.Events;
-                    lastListPrefix = "Events";
-                    return lastTemplateType ;
+                    _lastTemplateType = SPDGListTemplateType.Events;
+                    _lastListPrefix = "Events";
+                    return _lastTemplateType ;
                 }
             }
 
-            if (lastTemplateType == SPDGListTemplateType.GenericList)
+            if (_lastTemplateType == SPDGListTemplateType.GenericList)
             {
-                if (workingDefinition.LibTypeDocument)
+                if (_workingDefinition.LibTypeDocument)
                 {
-                    lastTemplateType = SPDGListTemplateType.DocumentLibrary;
-                    lastListPrefix = "Library";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.DocumentLibrary;
+                    _lastListPrefix = "Library";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeTasks)
+                else if (_workingDefinition.LibTypeTasks)
                 {
-                    lastTemplateType = SPDGListTemplateType.Tasks;
-                    lastListPrefix = "Tasks";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.Tasks;
+                    _lastListPrefix = "Tasks";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeCalendar)
+                else if (_workingDefinition.LibTypeCalendar)
                 {
-                    lastTemplateType = SPDGListTemplateType.Events;
-                    lastListPrefix = "Events";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.Events;
+                    _lastListPrefix = "Events";
+                    return _lastTemplateType;
                 }
             }
 
-            if (lastTemplateType == SPDGListTemplateType.DocumentLibrary)
+            if (_lastTemplateType == SPDGListTemplateType.DocumentLibrary)
             {
-                if (workingDefinition.LibTypeTasks)
+                if (_workingDefinition.LibTypeTasks)
                 {
-                    lastTemplateType = SPDGListTemplateType.Tasks;
-                    lastListPrefix = "Tasks";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.Tasks;
+                    _lastListPrefix = "Tasks";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeCalendar)
+                else if (_workingDefinition.LibTypeCalendar)
                 {
-                    lastTemplateType = SPDGListTemplateType.Events;
-                    lastListPrefix = "Events";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.Events;
+                    _lastListPrefix = "Events";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeList)
+                else if (_workingDefinition.LibTypeList)
                 {
-                    lastTemplateType = SPDGListTemplateType.GenericList;
-                    lastListPrefix = "List";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.GenericList;
+                    _lastListPrefix = "List";
+                    return _lastTemplateType;
                 }
             }
 
-            if (lastTemplateType == SPDGListTemplateType.Tasks)
+            if (_lastTemplateType == SPDGListTemplateType.Tasks)
             {
-                if (workingDefinition.LibTypeCalendar)
+                if (_workingDefinition.LibTypeCalendar)
                 {
-                    lastTemplateType = SPDGListTemplateType.Events;
-                    lastListPrefix = "Events";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.Events;
+                    _lastListPrefix = "Events";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeList)
+                else if (_workingDefinition.LibTypeList)
                 {
-                    lastTemplateType = SPDGListTemplateType.GenericList;
-                    lastListPrefix = "List";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.GenericList;
+                    _lastListPrefix = "List";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeDocument)
+                else if (_workingDefinition.LibTypeDocument)
                 {
-                    lastTemplateType = SPDGListTemplateType.DocumentLibrary;
-                    lastListPrefix = "Library";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.DocumentLibrary;
+                    _lastListPrefix = "Library";
+                    return _lastTemplateType;
                 }
             }
 
-            if (lastTemplateType == SPDGListTemplateType.Events)
+            if (_lastTemplateType == SPDGListTemplateType.Events)
             {
-                if (workingDefinition.LibTypeList)
+                if (_workingDefinition.LibTypeList)
                 {
-                    lastTemplateType = SPDGListTemplateType.GenericList;
-                    lastListPrefix = "List";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.GenericList;
+                    _lastListPrefix = "List";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeDocument)
+                else if (_workingDefinition.LibTypeDocument)
                 {
-                    lastTemplateType = SPDGListTemplateType.DocumentLibrary;
-                    lastListPrefix = "Library";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.DocumentLibrary;
+                    _lastListPrefix = "Library";
+                    return _lastTemplateType;
                 }
-                else if (workingDefinition.LibTypeTasks)
+                else if (_workingDefinition.LibTypeTasks)
                 {
-                    lastTemplateType = SPDGListTemplateType.Tasks;
-                    lastListPrefix = "Tasks";
-                    return lastTemplateType;
+                    _lastTemplateType = SPDGListTemplateType.Tasks;
+                    _lastListPrefix = "Tasks";
+                    return _lastTemplateType;
                 }
             }
 
-            return lastTemplateType;
+            return _lastTemplateType;
         }
 
         private string findAvailableListName(SPDGWeb web)
         {
             string candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
 
-            if (lastTemplateType == SPDGListTemplateType.Tasks)
+            if (_lastTemplateType == SPDGListTemplateType.Tasks)
             {
                 candidate += " Tasks";
             }
-            else if (lastTemplateType == SPDGListTemplateType.Events)
+            else if (_lastTemplateType == SPDGListTemplateType.Events)
             {
                 candidate += " Calendar";
             }

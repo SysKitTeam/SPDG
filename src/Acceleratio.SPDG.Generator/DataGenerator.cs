@@ -13,10 +13,10 @@ namespace Acceleratio.SPDG.Generator
 {
     public abstract partial class DataGenerator
     {
-        private GeneratorDefinitionBase workingDefinition;
+        private readonly GeneratorDefinitionBase _workingDefinition;
         protected  GeneratorDefinitionBase WorkingDefinition
         {
-            get { return workingDefinition; }
+            get { return _workingDefinition; }
         }
 
         private SPDGObjectsFactory _objectsFactory;
@@ -49,11 +49,11 @@ namespace Acceleratio.SPDG.Generator
         public string OverallCurrentStepDescription = string.Empty;
         public string DetailCurrentStepDescription = string.Empty;
         public static string SessionID;
-        internal BackgroundWorker bgWorker;
+        private BackgroundWorker _bgWorker;
 
         public DataGenerator(GeneratorDefinitionBase definition)
         {
-            workingDefinition = definition;
+            _workingDefinition = definition;
         }
 
         public static DataGenerator Create(GeneratorDefinitionBase definition)
@@ -93,7 +93,7 @@ namespace Acceleratio.SPDG.Generator
             OverallCurrentStepDescription = overallCurrentStepDescription;
             DetailProgressMaxSteps = detailsMaxSteps;
             DetailCurrentStep = 0;
-            bgWorker.ReportProgress(1);
+            _bgWorker.ReportProgress(1);
             Log.Write("***" + overallCurrentStepDescription.ToUpper() + "***"); 
         }
 
@@ -107,7 +107,7 @@ namespace Acceleratio.SPDG.Generator
                 DetailCurrentStepDescription = detailStepDescription;
                 Log.Write(detailStepDescription);
             }
-            bgWorker.ReportProgress(2);
+            _bgWorker.ReportProgress(2);
             
         }
 
@@ -115,14 +115,14 @@ namespace Acceleratio.SPDG.Generator
 
         protected virtual int CalculateTotalItemsForProgressReporting()
         {
-           var totalProgress = workingDefinition.NumberOfSitesToCreate *
-                              (workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
-                          (workingDefinition.MaxNumberofItemsToGenerate + workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate) 
-                          + workingDefinition.NumberOfBigListsPerSite* workingDefinition.MaxNumberofItemsBigListToGenerate);
+           var totalProgress = _workingDefinition.NumberOfSitesToCreate *
+                              (_workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
+                          (_workingDefinition.MaxNumberofItemsToGenerate + _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate) 
+                          + _workingDefinition.NumberOfBigListsPerSite* _workingDefinition.MaxNumberofItemsBigListToGenerate);
 
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            if (_workingDefinition.CreateNewSiteCollections > 0)
             {
-                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
             }
             return totalProgress;
         }
@@ -130,48 +130,48 @@ namespace Acceleratio.SPDG.Generator
         protected virtual int CalculateTotalListsForProgressReporting()
         {
             
-            int progressTotal = workingDefinition.MaxNumberOfListsAndLibrariesPerSite*workingDefinition.NumberOfSitesToCreate;
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            int progressTotal = _workingDefinition.MaxNumberOfListsAndLibrariesPerSite*_workingDefinition.NumberOfSitesToCreate;
+            if (_workingDefinition.CreateNewSiteCollections > 0)
             {
-                progressTotal = progressTotal*workingDefinition.CreateNewSiteCollections;
+                progressTotal = progressTotal*_workingDefinition.CreateNewSiteCollections;
             }
             return progressTotal;            
         }
 
         protected virtual int CalculateTotalFoldersForProgressReporting()
         {
-            int totalProgress = workingDefinition.NumberOfSitesToCreate *
-                       workingDefinition.MaxNumberOfFoldersToGenerate;
+            int totalProgress = _workingDefinition.NumberOfSitesToCreate *
+                       _workingDefinition.MaxNumberOfFoldersToGenerate;
 
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            if (_workingDefinition.CreateNewSiteCollections > 0)
             {
-                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
             }
             return totalProgress;
         }
 
         protected virtual int CalculateTotalColumnsAndViewsForProgressReporting()
         {
-            int totalProgress = workingDefinition.MaxNumberOfColumnsPerList *
-                      workingDefinition.NumberOfSitesToCreate *
-                      workingDefinition.MaxNumberOfListsAndLibrariesPerSite +
-                      (workingDefinition.MaxNumberOfViewsPerList *
-                      workingDefinition.NumberOfSitesToCreate *
-                      workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
+            int totalProgress = _workingDefinition.MaxNumberOfColumnsPerList *
+                      _workingDefinition.NumberOfSitesToCreate *
+                      _workingDefinition.MaxNumberOfListsAndLibrariesPerSite +
+                      (_workingDefinition.MaxNumberOfViewsPerList *
+                      _workingDefinition.NumberOfSitesToCreate *
+                      _workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
 
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            if (_workingDefinition.CreateNewSiteCollections > 0)
             {
-                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
             }
             return totalProgress;
         }
 
         protected virtual int CalculateTotalSitesForProgressReporting()
         {
-            int totalProgress = workingDefinition.NumberOfSitesToCreate;
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            int totalProgress = _workingDefinition.NumberOfSitesToCreate;
+            if (_workingDefinition.CreateNewSiteCollections > 0)
             {
-                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
             }
             return totalProgress;
         }
@@ -179,12 +179,12 @@ namespace Acceleratio.SPDG.Generator
         protected virtual int CalculateTotalContentTypesForProgressReporting()
         {
 
-            int totalProgress = workingDefinition.MaxNumberOfContentTypesPerSiteCollection *
-                        workingDefinition.NumberOfSitesToCreate;
+            int totalProgress = _workingDefinition.MaxNumberOfContentTypesPerSiteCollection *
+                        _workingDefinition.NumberOfSitesToCreate;
 
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            if (_workingDefinition.CreateNewSiteCollections > 0)
             {
-                totalProgress = totalProgress * workingDefinition.CreateNewSiteCollections;
+                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
             }
             return totalProgress;
         }
@@ -192,9 +192,9 @@ namespace Acceleratio.SPDG.Generator
         protected virtual int CalculateOverallPermissionsForProgressReporting(int totalInSiteCollection)
         {
             var total = totalInSiteCollection;
-            if (workingDefinition.CreateNewSiteCollections > 0)
+            if (_workingDefinition.CreateNewSiteCollections > 0)
             {
-                total = totalInSiteCollection * workingDefinition.CreateNewSiteCollections;
+                total = totalInSiteCollection * _workingDefinition.CreateNewSiteCollections;
             }
 
             return total;
@@ -208,7 +208,7 @@ namespace Acceleratio.SPDG.Generator
         {
             try
             {
-                bgWorker = backgroundWorker;
+                _bgWorker = backgroundWorker;
                 
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION STARTS ***");
 
@@ -244,14 +244,14 @@ namespace Acceleratio.SPDG.Generator
                 CreatePermissions();
 
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION COMPLETED ***");
-                bgWorker.ReportProgress(3);
+                _bgWorker.ReportProgress(3);
 
                 return true;
             }
             catch(Exception ex)
             {
                 Errors.Log(ex);
-                bgWorker.ReportProgress(3);
+                _bgWorker.ReportProgress(3);
             }
 
             return false;

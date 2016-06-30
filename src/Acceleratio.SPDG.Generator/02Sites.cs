@@ -12,8 +12,6 @@ namespace Acceleratio.SPDG.Generator
     {
         string _templateName = "STS#0";                
 
-    
-
         internal void CreateSubsites(ref List<SiteInfo> sites, SPDGWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
         {            
             Random rnd = new Random();
@@ -66,7 +64,7 @@ namespace Acceleratio.SPDG.Generator
                     int sitecounter = 0;
 
                     List<SiteInfo> sites = new List<SiteInfo>(); 
-                    CreateSubsites(ref sites, siteColl.RootWeb, 0, workingDefinition.MaxNumberOfLevelsForSites, ref sitecounter, workingDefinition.NumberOfSitesToCreate, "");
+                    CreateSubsites(ref sites, siteColl.RootWeb, 0, _workingDefinition.MaxNumberOfLevelsForSites, ref sitecounter, _workingDefinition.NumberOfSitesToCreate, "");
                    
                     siteCollInfo.Sites = sites;
                 }
@@ -101,11 +99,11 @@ namespace Acceleratio.SPDG.Generator
         
         private void InitWebTemplate(SPDGWeb web)
         {
-            if (!string.IsNullOrEmpty(workingDefinition.SiteTemplate))
+            if (!string.IsNullOrEmpty(_workingDefinition.SiteTemplate))
             {                 
                 foreach (var template in web.GetWebTemplates(web.Language))
                 {
-                    if (template.Title == workingDefinition.SiteTemplate)
+                    if (template.Title == _workingDefinition.SiteTemplate)
                     {
                         _templateName = template.Name;
                         break;

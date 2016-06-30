@@ -4,8 +4,6 @@ namespace Acceleratio.SPDG.Generator.Utilities
 {
     public static class Path
     {
-       
-
         public static string GenerateSlug(string phrase, int maxLength)
         {
             string str = phrase.ToLower();

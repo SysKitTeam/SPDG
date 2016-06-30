@@ -64,12 +64,7 @@ namespace Acceleratio.SPDG.UI
 
 
         private static void SetCommonDefaults(GeneratorDefinitionBase definition)
-        {
-           // WorkingDefinition = new ServerGeneratorDefinition();
-
-            //WorkingDefinition.ConnectToSPOnPremise = true;
-          //  WorkingDefinition.CredentialsOfCurrentUser = true;
-
+        {          
             definition.NumberOfSecurityGroupsToCreate = 0;
             definition.NumberOfUsersToCreate = 0;
             definition.NumberOfSitesToCreate = 50;
@@ -79,8 +74,7 @@ namespace Acceleratio.SPDG.UI
             definition.MaxNumberofItemsToGenerate = 0;
             definition.MaxNumberOfLevelsForSites = 3;
             definition.MaxNumberOfListsAndLibrariesPerSite = 3;
-            definition.MaxNumberOfViewsPerList = 0;
-           // WorkingDefinition.CreateNewWebApplications = 0;
+            definition.MaxNumberOfViewsPerList = 0;         
             definition.CreateNewSiteCollections = 1;
             definition.SiteTemplate = "Team Site";
             definition.LibTypeList = true;
