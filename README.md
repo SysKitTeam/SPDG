@@ -18,6 +18,6 @@ SPDG uses random names from the .csv files stored in the directory. Based on tha
 Please note that SPDG does not support SharePoint 2007. 
 
 ##Requirements
-To build this solution you must have .net 4.5, however once built Acceleratio SPDG can also be used on machines with .net 3.5 (potential SP2010 environments).
+To build this solution you must have .net 4.5, however once built Acceleratio SPDG can also be used on machines with .net 3.5 (potential SP2010 environments). Visual Studio 2015 is recommended.
 
 SPDG can be run on either a workstation or a SharePoint server. However, please note that for On Premises data generation it MUST be run from a SharePoint server, since the Server Object Model is used is the generation procedure. 
