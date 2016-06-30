@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acceleratio.SPDG.Generator", "src\Acceleratio.SPDG.Generator\Acceleratio.SPDG.Generator.csproj", "{919B54D3-24BB-4B71-A6B4-AC9FA74339A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acceleratio.SPDG.Generator", "Acceleratio.SPDG.Generator\Acceleratio.SPDG.Generator.csproj", "{919B54D3-24BB-4B71-A6B4-AC9FA74339A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acceleratio.SPDG.UI", "src\Acceleratio.SPDG.UI\Acceleratio.SPDG.UI.csproj", "{1A548AB3-5D2E-44E0-8DAE-4178C4D303C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acceleratio.SPDG.UI", "Acceleratio.SPDG.UI\Acceleratio.SPDG.UI.csproj", "{1A548AB3-5D2E-44E0-8DAE-4178C4D303C4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5E89033A-131B-4C1C-AFA9-7555CDABF10C} = {5E89033A-131B-4C1C-AFA9-7555CDABF10C}
 		{B1EED83B-4C11-4D01-9EC7-244271548F85} = {B1EED83B-4C11-4D01-9EC7-244271548F85}
