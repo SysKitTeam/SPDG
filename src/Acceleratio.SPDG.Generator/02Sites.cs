@@ -148,7 +148,18 @@ namespace Acceleratio.SPDG.Generator
             while (candidate==parentBaseName || web.Webs.Any(s => s.Url.Equals(web.Url + "/" + leafName)))
             {
                 candidate = SampleData.GetRandomName(primaryCollection, secondaryCollection, null, ref i, out baseName);
-                leafName = Utilities.Path.GenerateSlug(candidate, 7);
+                if (i < 3)
+                {
+                    leafName = Utilities.Path.GenerateSlug(candidate, 7);
+                }
+                else if(i<5)
+                {
+                    leafName = Utilities.Path.GenerateSlug(candidate, 15);
+                }
+                else
+                {
+                    leafName = Utilities.Path.GenerateSlug(candidate, 100);
+                }
             }
 
             siteName = candidate;
