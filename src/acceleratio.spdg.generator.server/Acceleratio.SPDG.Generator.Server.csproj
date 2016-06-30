@@ -63,7 +63,7 @@
     <Compile Include="SPDGServerObjectsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Acceleratio.SPDG.Generator\Acceleratio.SPDG.Generator.csproj">
+    <ProjectReference Include="..\Acceleratio.SPDG.Generator\Acceleratio.SPDG.Generator.csproj">
       <Project>{919b54d3-24bb-4b71-a6b4-ac9fa74339a8}</Project>
       <Name>Acceleratio.SPDG.Generator</Name>
     </ProjectReference>
