@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Acceleratio.SPDG.Generator.UI;
 using Acceleratio.SPDG.UI.Properties;
 
 namespace Acceleratio.SPDG.UI

@@ -13,6 +13,9 @@ namespace Acceleratio.SPDG.Generator
 {
     public abstract partial class DataGenerator
     {
+        public event EventHandler<ProgressChangedEventArgs> ProgressChanged = delegate { };
+
+
         private readonly GeneratorDefinitionBase _workingDefinition;
         protected  GeneratorDefinitionBase WorkingDefinition
         {
@@ -39,17 +42,16 @@ namespace Acceleratio.SPDG.Generator
         protected List<SiteCollInfo> workingSiteCollections = new List<SiteCollInfo>();
 
 
-        public event OverallProgressHandler OverallProgressChanged;
-        public EventArgs e = null;
+        
         public delegate void OverallProgressHandler(EventArgs e);
-        public int OverallProgressMaxSteps = 10;
-        public int OverallCurrentStep = 0;
-        public int DetailProgressMaxSteps = 0;
-        public int DetailCurrentStep = 0;
-        public string OverallCurrentStepDescription = string.Empty;
-        public string DetailCurrentStepDescription = string.Empty;
-        public static string SessionID;
-        private BackgroundWorker _bgWorker;
+        public EventArgs e = null;
+        
+        private int _overallProgressMaxSteps = 10;
+        private int _overallCurrentStep = 0;
+        private int _detailProgressMaxSteps = 0;
+        private int _detailCurrentStep = 0;                
+
+        public static string SessionID;        
 
         public DataGenerator(GeneratorDefinitionBase definition)
         {
@@ -89,11 +91,12 @@ namespace Acceleratio.SPDG.Generator
 
         protected void updateProgressOverall(string overallCurrentStepDescription, int detailsMaxSteps)
         {
-            OverallCurrentStep++;
-            OverallCurrentStepDescription = overallCurrentStepDescription;
-            DetailProgressMaxSteps = detailsMaxSteps;
-            DetailCurrentStep = 0;
-            _bgWorker.ReportProgress(1);
+            _overallCurrentStep++;
+            int pct = (int) ((float) _overallCurrentStep/_overallProgressMaxSteps*100);
+            ProgressChanged(this, new ProgressChangedEventArgs(ProgressChangeType.Overall, overallCurrentStepDescription, pct));
+                        
+            _detailProgressMaxSteps = detailsMaxSteps;
+            _detailCurrentStep = 0;            
             Log.Write("***" + overallCurrentStepDescription.ToUpper() + "***"); 
         }
 
@@ -101,14 +104,13 @@ namespace Acceleratio.SPDG.Generator
 
         protected void updateProgressDetail(string detailStepDescription, int incrementInProgress=1)
         {
-            DetailCurrentStep+= incrementInProgress;
+            _detailCurrentStep+= incrementInProgress;
+            int pct = (int)((float)_detailCurrentStep / _detailProgressMaxSteps*100);
             if (!string.IsNullOrEmpty(detailStepDescription))
-            {
-                DetailCurrentStepDescription = detailStepDescription;
+            {                
                 Log.Write(detailStepDescription);
             }
-            _bgWorker.ReportProgress(2);
-            
+            ProgressChanged(this, new ProgressChangedEventArgs(ProgressChangeType.Details, detailStepDescription, pct));
         }
 
         protected abstract void CreateUsersAndGroups();
@@ -204,11 +206,10 @@ namespace Acceleratio.SPDG.Generator
         protected abstract void ResolveWebAppsAndSiteCollections();
 
 
-        public virtual bool startDataGeneration(BackgroundWorker backgroundWorker)
+        public virtual bool startDataGeneration()
         {
             try
-            {
-                _bgWorker = backgroundWorker;
+            {                
                 
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION STARTS ***");
 
@@ -243,15 +244,13 @@ namespace Acceleratio.SPDG.Generator
                 //Create permissions
                 CreatePermissions();
 
-                Log.Write("*** SHAREPOINT DATA GENERATION SESSION COMPLETED ***");
-                _bgWorker.ReportProgress(3);
+                Log.Write("*** SHAREPOINT DATA GENERATION SESSION COMPLETED ***");                
 
                 return true;
             }
             catch(Exception ex)
             {
-                Errors.Log(ex);
-                _bgWorker.ReportProgress(3);
+                Errors.Log(ex);                
             }
 
             return false;

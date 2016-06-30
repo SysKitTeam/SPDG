@@ -1,6 +1,4 @@
-﻿using Acceleratio.SPDG.Generator.UI;
-
-namespace Acceleratio.SPDG.UI
+﻿namespace Acceleratio.SPDG.UI
 {
     partial class frm01Connect
     {

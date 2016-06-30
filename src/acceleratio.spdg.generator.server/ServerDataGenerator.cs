@@ -128,7 +128,7 @@ namespace Acceleratio.SPDG.Generator.Server
             return total;
         }
 
-        public override bool startDataGeneration(BackgroundWorker backgroundWorker)
+        public override bool startDataGeneration()
         {
             if (!WorkingDefinition.CredentialsOfCurrentUser)
             {
@@ -138,7 +138,7 @@ namespace Acceleratio.SPDG.Generator.Server
                 {
                     try
                     {
-                        return base.startDataGeneration(backgroundWorker);
+                        return base.startDataGeneration();
                     }
                     finally
                     {
@@ -148,7 +148,7 @@ namespace Acceleratio.SPDG.Generator.Server
             }
             else
             {
-                return base.startDataGeneration(backgroundWorker);
+                return base.startDataGeneration();
             }
             return false;
         }

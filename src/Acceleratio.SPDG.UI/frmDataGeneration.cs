@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using Acceleratio.SPDG.Generator;
 using System.Diagnostics;
-using Acceleratio.SPDG.Generator.UI;
 
 
 namespace Acceleratio.SPDG.UI
@@ -18,11 +17,14 @@ namespace Acceleratio.SPDG.UI
         DataGenerator generator = null;
         BackgroundWorker bgWorker = null;
         bool isRunning = false;
-
+        private Timer _timer;
         public frmDataGeneration()
         {
             InitializeComponent();
-
+            _timer=new Timer();
+            _timer.Tick += _timer_Tick;
+            _timer.Interval = 200;
+            _timer.Enabled = true;
             this.Text = Common.APP_TITLE;
 
             base.lblTitle.Text = "Data generation in progress";
@@ -39,10 +41,13 @@ namespace Acceleratio.SPDG.UI
             btnClose.Click += btnClose_Click;
 
             btnOpenLog.Click += btnOpenLog_Click;
-
+            progressOverall.Maximum = 100;
+            progressDetails.Maximum = 100;
             startDataGeneration();
 
         }
+
+      
 
         void btnOpenLog_Click(object sender, EventArgs e)
         {
@@ -52,59 +57,59 @@ namespace Acceleratio.SPDG.UI
         private void startDataGeneration()
         {
             generator = DataGenerator.Create(Common.WorkingDefinition);
-
-            progressOverall.Maximum = generator.OverallProgressMaxSteps;
-
+            generator.ProgressChanged += Generator_ProgressChanged;            
             this.Cursor = Cursors.WaitCursor;
             isRunning = true;
 
             bgWorker = new BackgroundWorker();
             bgWorker.WorkerReportsProgress = true;
-            //bgWorker.RunWorkerCompleted += bgWorker_RunWorkerCompleted;
-            bgWorker.DoWork += bgWorker_DoWork;
-            bgWorker.ProgressChanged += bgWorker_ProgressChanged;
+            bgWorker.RunWorkerCompleted += bgWorker_RunWorkerCompleted;
+            bgWorker.DoWork += bgWorker_DoWork;            
             bgWorker.RunWorkerAsync(generator);
 
         }
 
-        void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+
+        private Generator.ProgressChangedEventArgs _lastDetailsArgs = null;        
+        private void Generator_ProgressChanged(object sender, Generator.ProgressChangedEventArgs e)
         {
-            if( e.ProgressPercentage == 1 )
+            if (e.ChangeType == ProgressChangeType.Details)
             {
-                if (generator.OverallCurrentStep <= progressOverall.Maximum)
+                //details will be updated periodically so we need to save them
+                //if we were to update them here and now, we could freeze the UI if they are generated to quickly
+                _lastDetailsArgs = e;                
+            }
+            else
+            {
+                this.Invoke(new MethodInvoker(() =>
                 {
-                    progressOverall.Value = generator.OverallCurrentStep;
-                }
-                lblOverview.Text = generator.OverallCurrentStepDescription;
+                    if (e.ChangeType == ProgressChangeType.Overall)
+                    {
+                        lblOverview.Text = e.Message;
+                        lblDetails.Text = "";
+                        progressDetails.Value = 0;
+                        progressOverall.Value = e.ProgressPctValue;
+                        _lastDetailsArgs = null;
+                    }
+                }));
+            }
+            
+        }
 
-                lblDetails.Text = string.Empty;
-                progressDetails.Value = 0;
-                progressDetails.Maximum = generator.DetailProgressMaxSteps;
-            }
-            else if (e.ProgressPercentage == 2)
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            var args = _lastDetailsArgs;
+            if (args != null)
             {
-                if (generator.DetailCurrentStep <= progressDetails.Maximum)
-                { 
-                    progressDetails.Value = generator.DetailCurrentStep;
-                }
-                lblDetails.Text = generator.DetailCurrentStepDescription;
+                lblDetails.Text = args.Message;
+                progressDetails.Value = args.ProgressPctValue;
             }
-            else if (e.ProgressPercentage == 3)
-            {
-                this.Cursor = Cursors.Default;
-                btnOpenLog.Visible = true;
-                progressOverall.Value = progressOverall.Maximum;
-                if (progressDetails.Maximum == 0) progressDetails.Maximum = 1;
-                progressDetails.Value = progressDetails.Maximum;
-            }
-
-            Application.DoEvents();
         }
 
         void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             DataGenerator generator = e.Argument as DataGenerator;
-            bool success = generator.startDataGeneration(bgWorker);
+            bool success = generator.startDataGeneration();
            
             isRunning = false;
             //btnClose.Text = "Close";
@@ -124,7 +129,11 @@ namespace Acceleratio.SPDG.UI
 
         void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            this.Cursor = Cursors.Default;
+            btnOpenLog.Visible = true;
+            progressOverall.Value = progressOverall.Maximum;
+            if (progressDetails.Maximum == 0) progressDetails.Maximum = 1;
+            progressDetails.Value = progressDetails.Maximum;
         }
 
 

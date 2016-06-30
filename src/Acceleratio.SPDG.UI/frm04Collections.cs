@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Security.Principal;
 using System.Runtime.InteropServices;
 using Acceleratio.SPDG.Generator;
-using Acceleratio.SPDG.Generator.UI;
 
 namespace Acceleratio.SPDG.UI
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using Acceleratio.SPDG.UI;
+using Acceleratio.SPDG.Generator;
 
-namespace Acceleratio.SPDG.Generator.UI
+namespace Acceleratio.SPDG.UI
 {
     public partial class frmWizardMaster : Form
     {
