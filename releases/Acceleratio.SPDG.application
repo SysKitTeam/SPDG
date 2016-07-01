@@ -8,7 +8,7 @@
         <beforeApplicationStartup />
       </update>
     </subscription>
-    <deploymentProvider codebase="http://sharepoint-vink/Acceleratio.SPDG/Acceleratio.SPDG.application" />
+    <deploymentProvider codebase="https://rawgithub.com/Acceleratio/SPDG/master/releases/Acceleratio.SPDG.application" />
   </deployment>
   <dependency>
     <dependentAssembly dependencyType="install" codebase="Application Files\Acceleratio.SPDG_0_5_0_8\Acceleratio.SPDG.exe.manifest" size="34337">
