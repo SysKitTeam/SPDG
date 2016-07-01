@@ -19,17 +19,7 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
             : base(member, new List<SPDGRoleDefinition>())
         {
         }
-
-        //public override void ImportRoleDefinitionBindings(IEnumerable<SPDocKitRoleDefinition> roleDefinitions)
-        //{
-        //    RoleDefinitionBindingCollection roleBindingsFromSelection = new RoleDefinitionBindingCollection(_roleAssignment.Context);
-        //    foreach (var spDocKitRoleDefinition in roleDefinitions)
-        //    {
-        //        roleBindingsFromSelection.Add((spDocKitRoleDefinition as ClientRoleDefinition).RoleDefinition);
-        //    }
-        //    _roleAssignment.ImportRoleDefinitionBindings(roleBindingsFromSelection);
-        //}
-
+        
         public override void Update()
         {
             _roleAssignment.Update();

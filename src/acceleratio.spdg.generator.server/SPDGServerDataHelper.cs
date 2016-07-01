@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Acceleratio.SPDG.Generator.SPModel;
-using Acceleratio.SPDG.Generator.Utilities;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 
@@ -24,7 +23,7 @@ namespace Acceleratio.SPDG.Generator.Server
             {
                 var parts = _generatorDefinition.Username.Split('\\');
 
-                if (Common.ImpersonateValidUser(parts[1], parts[0], _generatorDefinition.Password))
+                if (Utils.ImpersonateValidUser(parts[1], parts[0], _generatorDefinition.Password))
                 {
                     try
                     {
@@ -32,7 +31,7 @@ namespace Acceleratio.SPDG.Generator.Server
                     }
                     finally
                     {
-                        Common.UndoImpersonation();
+                        Utils.UndoImpersonation();
                     }
                     
                 }
@@ -73,7 +72,6 @@ namespace Acceleratio.SPDG.Generator.Server
             return siteCollections;
         }
 
-
         public override void ValidateCredentials()
         {
 
@@ -95,7 +93,7 @@ namespace Acceleratio.SPDG.Generator.Server
                 accountName = parts[1];
                 domainName = parts[0];
             }
-            if (Common.ImpersonateValidUser(accountName, domainName, _generatorDefinition.Password))
+            if (Utils.ImpersonateValidUser(accountName, domainName, _generatorDefinition.Password))
             {
                 try
                 {
@@ -119,7 +117,7 @@ namespace Acceleratio.SPDG.Generator.Server
                 }
                 finally
                 {
-                    Common.UndoImpersonation();
+                    Utils.UndoImpersonation();
                 }
 
                 if (!isFarmAdmin)

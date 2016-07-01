@@ -5,22 +5,45 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Acceleratio.SPDG.Generator.GenerationTasks;
 using Acceleratio.SPDG.Generator.SPModel;
 using Acceleratio.SPDG.Generator.Structures;
-using Acceleratio.SPDG.Generator.Utilities;
 
 namespace Acceleratio.SPDG.Generator
 {
-    public abstract partial class DataGenerator
+    public abstract class DataGenerator : IDataGenerationTaskOwner
     {
         public event EventHandler<ProgressChangedEventArgs> ProgressChanged = delegate { };
 
-
+        List<DataGenerationTaskBase> _tasks = new List<DataGenerationTaskBase>();
         private readonly GeneratorDefinitionBase _workingDefinition;
         protected  GeneratorDefinitionBase WorkingDefinition
         {
             get { return _workingDefinition; }
         }
+
+        SPDGObjectsFactory IDataGenerationTaskOwner.ObjectsFactory
+        {
+            get { return ObjectsFactory; }
+        }
+
+        public List<SiteCollInfo> WorkingSiteCollections
+        {
+            get { return _workingSiteCollections; }
+        }
+
+        public void IncrementCurrentTaskProgress(string message, int incrementInProgress = 1)
+        {
+            updateProgressDetail(message, incrementInProgress);
+        }
+
+        
+        GeneratorDefinitionBase IDataGenerationTaskOwner.WorkingDefinition
+        {
+            get { return WorkingDefinition; }
+        }
+
+        protected abstract SPDGObjectsFactory CreateObjectsFactory();
 
         private SPDGObjectsFactory _objectsFactory;
 
@@ -36,15 +59,8 @@ namespace Acceleratio.SPDG.Generator
             }
         }
 
-        protected abstract SPDGObjectsFactory CreateObjectsFactory();
-        
-
-        protected List<SiteCollInfo> workingSiteCollections = new List<SiteCollInfo>();
-
-
-        
-        public delegate void OverallProgressHandler(EventArgs e);
-        public EventArgs e = null;
+               
+        protected List<SiteCollInfo> _workingSiteCollections = new List<SiteCollInfo>();                       
         
         private int _overallProgressMaxSteps = 10;
         private int _overallCurrentStep = 0;
@@ -92,7 +108,16 @@ namespace Acceleratio.SPDG.Generator
         protected void updateProgressOverall(string overallCurrentStepDescription, int detailsMaxSteps)
         {
             _overallCurrentStep++;
-            int pct = (int) ((float) _overallCurrentStep/_overallProgressMaxSteps*100);
+            int pct;
+            if (_overallProgressMaxSteps == 0)
+            {
+                pct = 100;
+            }
+            else
+            {
+                pct = (int)((float)_overallCurrentStep / _overallProgressMaxSteps * 100);
+            }
+            
             ProgressChanged(this, new ProgressChangedEventArgs(ProgressChangeType.Overall, overallCurrentStepDescription, pct));
                         
             _detailProgressMaxSteps = detailsMaxSteps;
@@ -100,166 +125,66 @@ namespace Acceleratio.SPDG.Generator
             Log.Write("***" + overallCurrentStepDescription.ToUpper() + "***"); 
         }
 
-
-
         protected void updateProgressDetail(string detailStepDescription, int incrementInProgress=1)
         {
             _detailCurrentStep+= incrementInProgress;
-            int pct = (int)((float)_detailCurrentStep / _detailProgressMaxSteps * 100);
+            int pct;
+            if (_detailProgressMaxSteps == 0)
+            {
+                pct = _detailProgressMaxSteps;
+            }
+            else
+            {
+                pct = (int)((float)_detailCurrentStep / _detailProgressMaxSteps * 100);
+            }
+            
             if (!string.IsNullOrEmpty(detailStepDescription))
             {                
                 Log.Write(detailStepDescription);
             }
             ProgressChanged(this, new ProgressChangedEventArgs(ProgressChangeType.Details, detailStepDescription, pct));
         }
-
-        protected abstract void CreateUsersAndGroups();
-
-        protected virtual int CalculateTotalItemsForProgressReporting()
+        
+        protected void RegisterTask<T>() where T : DataGenerationTaskBase
         {
-           var totalProgress = _workingDefinition.NumberOfSitesToCreate *
-                              (_workingDefinition.MaxNumberOfListsAndLibrariesPerSite *
-                          (_workingDefinition.MaxNumberofItemsToGenerate + _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate) 
-                          + _workingDefinition.NumberOfBigListsPerSite* _workingDefinition.MaxNumberofItemsBigListToGenerate);
-
-            if (_workingDefinition.CreateNewSiteCollections > 0)
-            {
-                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
-            }
-            return totalProgress;
-        }
-
-        protected virtual int CalculateTotalListsForProgressReporting()
-        {
+            _tasks.Add((DataGenerationTaskBase)Activator.CreateInstance(typeof(T), this));
             
-            int progressTotal = _workingDefinition.MaxNumberOfListsAndLibrariesPerSite*_workingDefinition.NumberOfSitesToCreate;
-            if (_workingDefinition.CreateNewSiteCollections > 0)
-            {
-                progressTotal = progressTotal*_workingDefinition.CreateNewSiteCollections;
-            }
-            return progressTotal;            
         }
-
-        protected virtual int CalculateTotalFoldersForProgressReporting()
-        {
-            int totalProgress = _workingDefinition.NumberOfSitesToCreate *
-                       _workingDefinition.MaxNumberOfFoldersToGenerate;
-
-            if (_workingDefinition.CreateNewSiteCollections > 0)
-            {
-                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
-            }
-            return totalProgress;
-        }
-
-        protected virtual int CalculateTotalColumnsAndViewsForProgressReporting()
-        {
-            int totalProgress = _workingDefinition.MaxNumberOfColumnsPerList *
-                      _workingDefinition.NumberOfSitesToCreate *
-                      _workingDefinition.MaxNumberOfListsAndLibrariesPerSite +
-                      (_workingDefinition.MaxNumberOfViewsPerList *
-                      _workingDefinition.NumberOfSitesToCreate *
-                      _workingDefinition.MaxNumberOfListsAndLibrariesPerSite);
-
-            if (_workingDefinition.CreateNewSiteCollections > 0)
-            {
-                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
-            }
-            return totalProgress;
-        }
-
-        protected virtual int CalculateTotalSitesForProgressReporting()
-        {
-            int totalProgress = _workingDefinition.NumberOfSitesToCreate;
-            if (_workingDefinition.CreateNewSiteCollections > 0)
-            {
-                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
-            }
-            return totalProgress;
-        }
-
-        protected virtual int CalculateTotalContentTypesForProgressReporting()
-        {
-
-            int totalProgress = _workingDefinition.MaxNumberOfContentTypesPerSiteCollection *
-                        _workingDefinition.NumberOfSitesToCreate;
-
-            if (_workingDefinition.CreateNewSiteCollections > 0)
-            {
-                totalProgress = totalProgress * _workingDefinition.CreateNewSiteCollections;
-            }
-            return totalProgress;
-        }
-
-        protected virtual int CalculateOverallPermissionsForProgressReporting(int totalInSiteCollection)
-        {
-            var total = totalInSiteCollection;
-            if (_workingDefinition.CreateNewSiteCollections > 0)
-            {
-                total = totalInSiteCollection * _workingDefinition.CreateNewSiteCollections;
-            }
-
-            return total;
-        }
-
-
-        protected abstract void ResolveWebAppsAndSiteCollections();
-
-
+        
         public virtual bool startDataGeneration()
         {
             try
-            {                
-                
+            {                                
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION STARTS ***");
 
-                //Create AD users and groups
-                CreateUsersAndGroups();
-              
-                //Creates or sets Web applications and Site Collections
-                ResolveWebAppsAndSiteCollections();
+                //if we are using and existing site collection and not creating any new ones
+                if (!string.IsNullOrEmpty(WorkingDefinition.SiteCollection))
+                {
+                    SiteCollInfo siteCollInfo = new SiteCollInfo();
+                    siteCollInfo.URL = WorkingDefinition.SiteCollection;
+                    WorkingSiteCollections.Add(siteCollInfo);
+                }
 
-                //Create sites in previously defined Site Collections
-                CreateSites();
-
-                //Create lists and libraries
-                CreateLists();
-
-                //Create folders with nested folder levels
-                CreateFolders();
-
-                //Create columns and views
-                CreateColumnsAndViews();
-
-                //Create content types
-               // CreateContentTypes();
-
-                //Create items and documents
-                CreateItemsAndDocuments();
-
-                //AssociateWorkflows                
-                AssociateWorkflows();
-                AssociateCustomWorkflows();
-
-                //Create permissions
-                CreatePermissions();
-
+                var activeTasks = _tasks.Where(x => x.IsActive);
+                _overallProgressMaxSteps = activeTasks.Count();
+                foreach (var task in activeTasks)
+                {
+                    if (task.IsActive)
+                    {
+                        var totalSteps = task.CalculateTotalSteps();
+                        updateProgressOverall(task.Title, totalSteps);
+                        task.Execute();
+                    }
+                }                                
                 Log.Write("*** SHAREPOINT DATA GENERATION SESSION COMPLETED ***");                
-
                 return true;
             }
             catch(Exception ex)
             {
                 Errors.Log(ex);                
             }
-
             return false;
-
-            
-        }
-
-        protected abstract void AssociateWorkflows();
-        protected abstract void AssociateCustomWorkflows();
+        }        
 
 
 
@@ -286,7 +211,7 @@ namespace Acceleratio.SPDG.Generator
                 {
                     try
                     {
-                        DllExistanceTester.QueryAssemblyInfo("Microsoft.SharePoint");
+                        Utils.QueryAssemblyInfo("Microsoft.SharePoint");
                         _supportsServer = true;
                     }
                     catch (Exception ex)
@@ -303,7 +228,7 @@ namespace Acceleratio.SPDG.Generator
         {
             try
             {
-               var result =  DllExistanceTester.QueryAssemblyInfo("Microsoft.SharePoint");
+               var result = Utils.QueryAssemblyInfo("Microsoft.SharePoint");
                 if (!string.IsNullOrEmpty(result))
                 {
                     var m = Regex.Match(result, "(\\d+\\.\\d+\\.\\d+\\.\\d+)_");
@@ -313,12 +238,11 @@ namespace Acceleratio.SPDG.Generator
                     }
                 }                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _supportsServer = false;
-
             }
             return null;
-        }
+        }   
     }
 }

@@ -39,22 +39,22 @@ namespace Acceleratio.SPDG.Generator
 
         public static void PrepareSampleCollections()
         {
-            Accounts = CreateSampleCollection("Accounts.csv");
-            Years = CreateSampleCollection("Years.csv");
-            BusinessDocsTypes = CreateSampleCollection("BusinessDocsTypes.csv");
-            Countries = CreateSampleCollection("Countries.csv");
-            Cities = CreateSampleCollection("Cities.csv");
-            Companies = CreateSampleCollection("Companies.csv");
-            FirstNames = CreateSampleCollection("FirstName.csv");
-            LastNames = CreateSampleCollection("LastName.csv");
-            Addresses = CreateSampleCollection("address.csv");
-            PhoneNumbers = CreateSampleCollection("PhoneNumbers.csv");
-            EmailAddreses = CreateSampleCollection("emails.csv");
-            WebSites = CreateSampleCollection("WebSites.csv");
-            Offices = CreateSampleCollection("Offices.csv");
-            Dates = CreateSampleCollection("Dates.csv");
-            Departments = ImportDepartments("departments.csv");
-            Customers = CreateSampleCollection("Customers.csv");
+            Accounts = createSampleCollection("Accounts.csv");
+            Years = createSampleCollection("Years.csv");
+            BusinessDocsTypes = createSampleCollection("BusinessDocsTypes.csv");
+            Countries = createSampleCollection("Countries.csv");
+            Cities = createSampleCollection("Cities.csv");
+            Companies = createSampleCollection("Companies.csv");
+            FirstNames = createSampleCollection("FirstName.csv");
+            LastNames = createSampleCollection("LastName.csv");
+            Addresses = createSampleCollection("address.csv");
+            PhoneNumbers = createSampleCollection("PhoneNumbers.csv");
+            EmailAddreses = createSampleCollection("emails.csv");
+            WebSites = createSampleCollection("WebSites.csv");
+            Offices = createSampleCollection("Offices.csv");
+            Dates = createSampleCollection("Dates.csv");
+            Departments = importDepartments("departments.csv");
+            Customers = createSampleCollection("Customers.csv");
         }
 
         public static string GetRandomName(IList<string> primaryCollection, IList<string> secondaryCollection, IList<string> tertiaryCollection, ref int attempt, out string baseName)
@@ -102,7 +102,7 @@ namespace Acceleratio.SPDG.Generator
             return retVal;
         }
 
-        internal static ReadOnlyCollection<DepartmentData> ImportDepartments(string csvFileName)
+        private static ReadOnlyCollection<DepartmentData> importDepartments(string csvFileName)
         {
             return new ReadOnlyCollection<DepartmentData>(File.ReadAllLines(@"SampleData\" + csvFileName)
                .Select(line => line.Split(','))
@@ -110,7 +110,7 @@ namespace Acceleratio.SPDG.Generator
                .ToList());
         }
 
-        internal static ReadOnlyCollection<string> CreateSampleCollection(string csvFileName)
+        private static ReadOnlyCollection<string> createSampleCollection(string csvFileName)
         {
             var reader = new StreamReader(File.OpenRead(@"SampleData\" + csvFileName));
             List<string> listA = new List<string>();
@@ -213,17 +213,9 @@ namespace Acceleratio.SPDG.Generator
                     sb.Append(lorem);
                 }
                 else
-                {
-                    //string[] sentences = lorem.Split('.');
-                    //foreach(string s in sentences)
-                    //{
-                    //    sb.Append(s + Guid.NewGuid().ToString());
-                    //}
-
+                {                    
                     var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                    var random = new Random();
-                    //char ch1 = chars[random.Next(chars.Length)];
-                    //char ch2 = chars[random.Next(chars.Length)];
+                    var random = new Random();                 
                     string modifiedLorem = lorem;
 
                     for (int a = 0; a < 100; a++ )

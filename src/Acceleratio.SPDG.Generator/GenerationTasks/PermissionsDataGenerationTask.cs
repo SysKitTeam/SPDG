@@ -1,31 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Acceleratio.SPDG.Generator.SPModel;
 using Acceleratio.SPDG.Generator.Structures;
-using Acceleratio.SPDG.Generator.Utilities;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.GenerationTasks
 {
-    public partial class DataGenerator
+    public abstract class PermissionsDataGenerationTaskBase : DataGenerationTaskBase
     {       
         int _permissionsPerObject = 1;        
         List<SPDGUser> _siteSpUsers = null ;
         List<SPDGGroup> _siteSpGroups = null;
         List<SPDGUser> _siteAdGroupSpUsers = null;
 
-        public void CreatePermissions()
+        List<SiteInfo> _allSitesToHaveUniquePermissions = new List<SiteInfo>();
+        List<ListInfo> _allListsToHavehUniquePermissions = new List<ListInfo>();
+        List<FolderInfo> _allFoldersToHaveUniquePermissions = new List<FolderInfo>();
+
+        private bool _doSitePermissions;
+        private bool _doListPermissions;
+        bool _doListItemPermissions;
+        private bool _dofolderPermissions;
+        private int _totalSteps;
+        public PermissionsDataGenerationTaskBase(IDataGenerationTaskOwner owner) : base(owner)
         {
-            var allSites=workingSiteCollections.SelectMany(x => x.Sites).ToList();
-            var allLists = workingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists)).ToList();
-            var allFolders = workingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists.SelectMany(z => z.Folders))).ToList();
+            Init();
+        }
+
+        public override string Title
+        {
+            get { return "Creating Permissions"; }
+        }
+
+
+        private void Init()
+        {
+            var allSites = Owner.WorkingSiteCollections.SelectMany(x => x.Sites).ToList();
+            var allLists = Owner.WorkingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists)).ToList();
+            var allFolders = Owner.WorkingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists.SelectMany(z => z.Folders))).ToList();
+
+            foreach (var site in allSites)
+            {
+                if (SampleData.GetRandomNumber(1, 100) <= WorkingDefinition.PermissionsPercentOfSites)
+                {
+                    _allSitesToHaveUniquePermissions.Add(site);
+                }
+            }
+
+            foreach (var list in allLists)
+            {
+                if (SampleData.GetRandomNumber(1, 100) <= WorkingDefinition.PermissionsPercentOfLists)
+                {
+                    _allListsToHavehUniquePermissions.Add(list);
+                }
+            }
+
+            foreach (var folder in allFolders)
+            {
+                if (SampleData.GetRandomNumber(1, 100) <= WorkingDefinition.PermissionsPercentOfLists)
+                {
+                    _allFoldersToHaveUniquePermissions.Add(folder);
+                }
+            }
+
             var allItemsCount = allLists.Sum(x => x.ItemCount);
 
-            bool doSitePermissions = _workingDefinition.PermissionsPercentOfSites > 0 && allSites.Count > 0;
-            bool doListPermissions = _workingDefinition.PermissionsPercentOfLists > 0 && allLists.Count > 0;
-            bool doListItemPermissions = _workingDefinition.PermissionsPercentOfListItems > 0 && allItemsCount > 0;
-            bool dofolderPermissions = _workingDefinition.PermissionsPercentOfFolders > 0 && allFolders.Count > 0;
+            bool doSitePermissions = WorkingDefinition.PermissionsPercentOfSites > 0 && allSites.Count > 0;
+            bool doListPermissions = WorkingDefinition.PermissionsPercentOfLists > 0 && allLists.Count > 0;
+            bool doListItemPermissions = WorkingDefinition.PermissionsPercentOfListItems > 0 && allItemsCount > 0;
+            bool dofolderPermissions = WorkingDefinition.PermissionsPercentOfFolders > 0 && allFolders.Count > 0;
             bool stuffTodo = doSitePermissions
                              || doListPermissions
                              || doListItemPermissions
@@ -35,115 +78,95 @@ namespace Acceleratio.SPDG.Generator
                 return;
             }
 
-            List<SiteInfo> allSitesWithUniquePermissions = new List<SiteInfo>();
-            foreach (var site in allSites)
-            {
-                if (SampleData.GetRandomNumber(1, 100) <= _workingDefinition.PermissionsPercentOfSites)
-                {
-                    allSitesWithUniquePermissions.Add(site);
-                }
-            }
-
-            List<ListInfo> allListsWithUniquePermissions = new List<ListInfo>();
-            foreach (var list in allLists)
-            {
-                if (SampleData.GetRandomNumber(1, 100) <= _workingDefinition.PermissionsPercentOfLists)
-                {
-                    allListsWithUniquePermissions.Add(list);
-                }
-            }
-
-            List<FolderInfo> allFoldersWithUniquePermissions = new List<FolderInfo>();
-            foreach (var folder in allFolders)
-            {
-                if (SampleData.GetRandomNumber(1, 100) <= _workingDefinition.PermissionsPercentOfLists)
-                {
-                    allFoldersWithUniquePermissions.Add(folder);
-                }
-            }
-
-            int totalProgress =
+            _totalSteps =
                 //user ensure
-                workingSiteCollections.Count
+                Owner.WorkingSiteCollections.Count
                 //enum + eventual permissions change
-                + allSites.Count + allSitesWithUniquePermissions.Count;
+                + allSites.Count + _allSitesToHaveUniquePermissions.Count;
             if (doListItemPermissions || doListPermissions || dofolderPermissions)
             {
                 //enum + eventual permissions change
-                totalProgress += allLists.Count + allListsWithUniquePermissions.Count;
+                _totalSteps += allLists.Count + _allListsToHavehUniquePermissions.Count;
             }
             if (dofolderPermissions)
             {
                 //enum + eventual permissions change
-                totalProgress += allFolders.Count+ allFoldersWithUniquePermissions.Count;
+                _totalSteps += allFolders.Count + _allFoldersToHaveUniquePermissions.Count;
             }
             if (doListItemPermissions)
             {
-                var withUnique=(allItemsCount*_workingDefinition.PermissionsPercentOfListItems)/100;
-                 //enum + eventual permissions change
-                 totalProgress += allItemsCount+ withUnique;
-            }                
-            updateProgressOverall("Creating Permissions", totalProgress);
+                var withUnique = (allItemsCount * WorkingDefinition.PermissionsPercentOfListItems) / 100;
+                //enum + eventual permissions change
+                _totalSteps += allItemsCount + withUnique;
+            }
+        }
 
-            
-           
 
-            foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
+        public override bool IsActive { get { return _totalSteps > 0; } }
+
+
+        public override int CalculateTotalSteps()
+        {
+           return _totalSteps;
+        }
+
+
+        public override void Execute()
+        {                         
+            foreach (SiteCollInfo siteCollInfo in Owner.WorkingSiteCollections)
             {
-                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
+                using (var siteColl = Owner.ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     _siteSpUsers = new List<SPDGUser>();
                     _siteAdGroupSpUsers = new List<SPDGUser>();
                     _siteSpGroups=new List<SPDGGroup>();
 
-                    updateProgressDetail("Ensuring users and groups on '" + siteCollInfo.URL + "'");
+                    Owner.IncrementCurrentTaskProgress("Ensuring users and groups on '" + siteCollInfo.URL + "'");
                     EnsureUsersAndGroups(siteColl.RootWeb);
 
-                 
-                  
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
                         using (var web = siteColl.OpenWeb(siteInfo.ID))
                         {                          
-                            updateProgressDetail("Crawling site",0);
-                            if(allSitesWithUniquePermissions.Contains(siteInfo))
+                            Owner.IncrementCurrentTaskProgress("Crawling site",0);
+                            if(_allSitesToHaveUniquePermissions.Contains(siteInfo))
                             {                             
                                 setSitePermissions(web);
                                 
                             }
 
-                            if (doListPermissions || doListItemPermissions || dofolderPermissions)
+                            if (_doListPermissions || _doListItemPermissions || _dofolderPermissions)
                             {
                                 foreach (ListInfo listInfo in siteInfo.Lists)
                                 {
-                                    updateProgressDetail("Crawling list " + web.Url + "/" + listInfo.Name, 0);
-                                    if (allListsWithUniquePermissions.Contains(listInfo))
+                                    Owner.IncrementCurrentTaskProgress("Crawling list " + web.Url + "/" + listInfo.Name, 0);
+                                    if (_allListsToHavehUniquePermissions.Contains(listInfo))
                                     {                                        
                                         setListPermissions(web, listInfo.Name);
                                     }
 
-                                    if (dofolderPermissions)
+                                    if (_dofolderPermissions)
                                     {
                                         foreach (FolderInfo folderInfo in listInfo.Folders)
                                         {
-                                            if (allFoldersWithUniquePermissions.Contains(folderInfo))
+                                            if (_allFoldersToHaveUniquePermissions.Contains(folderInfo))
                                             {                                                
                                                 setFolderPermissions(web, folderInfo.URL);
                                             }
-                                            updateProgressDetail("Crawled folder" + web.Url + "/" + listInfo.Name);
+                                            Owner.IncrementCurrentTaskProgress("Crawled folder" + web.Url + "/" + listInfo.Name);
                                         }
                                     }
 
-                                    if (doListItemPermissions)
+                                    if (_doListItemPermissions)
                                     {
                                         setItemPermissions(web, listInfo.Name);
                                         Log.Write("Unique permissions added to items in list:" + listInfo.Name + " in site: " + web.Url);
                                     }
-                                    updateProgressDetail("Crawled list " + web.Url + "/" + listInfo.Name);
+                                    Owner.IncrementCurrentTaskProgress("Crawled list " + web.Url + "/" + listInfo.Name);
                                 }
                             }
 
-                            updateProgressDetail("Crawled site "+ web.Url);
+                            Owner.IncrementCurrentTaskProgress("Crawled site "+ web.Url);
                         }
                     }
                 }
@@ -250,7 +273,7 @@ namespace Acceleratio.SPDG.Generator
 
         private void setSitePermissions(SPDGWeb web)
         {
-            updateProgressDetail("Adding permissions to site " + web.Url + "'", 0);
+            Owner.IncrementCurrentTaskProgress("Adding permissions to site " + web.Url + "'", 0);
             if (!web.HasUniqueRoleAssignments)
             {
                 web.BreakRoleInheritance(true);
@@ -272,7 +295,7 @@ namespace Acceleratio.SPDG.Generator
 
         private void setListPermissions(SPDGWeb web, string listName)
         {
-            updateProgressDetail("Adding permissions to list " + web.Url + "/" + listName, 0);
+            Owner.IncrementCurrentTaskProgress("Adding permissions to list " + web.Url + "/" + listName, 0);
             var list = web.GetList(listName);
             if (!list.HasUniqueRoleAssignments)
             {
@@ -284,12 +307,12 @@ namespace Acceleratio.SPDG.Generator
                 setupNextRoleAssignment(web, list);                
             }
 
-            updateProgressDetail("Unique permissions added to list: " + listName + ", site: " + web.Url);
+            Owner.IncrementCurrentTaskProgress("Unique permissions added to list: " + listName + ", site: " + web.Url);
         }
 
         private void setFolderPermissions(SPDGWeb web, string folderURL)
         {
-            updateProgressDetail("Adding permissions to folder: " + folderURL + " in site: " + web.Url, 0);
+            Owner.IncrementCurrentTaskProgress("Adding permissions to folder: " + folderURL + " in site: " + web.Url, 0);
             SPDGFolder folder = web.GetFolder(folderURL);
             if (!folder.Item.HasUniqueRoleAssignments)
             {
@@ -301,7 +324,7 @@ namespace Acceleratio.SPDG.Generator
                setupNextRoleAssignment(web, folder.Item);
             }
 
-            updateProgressDetail("Unique permissions added to folder: " + folderURL + " in site: " + web.Url);            
+            Owner.IncrementCurrentTaskProgress("Unique permissions added to folder: " + folderURL + " in site: " + web.Url);            
         }
 
         private void setItemPermissions(SPDGWeb web, string listName)
@@ -309,9 +332,9 @@ namespace Acceleratio.SPDG.Generator
             var list = web.GetList(listName);
             foreach (var item in list.Items)
             {                
-                if (SampleData.GetRandomNumber(1, 100) < _workingDefinition.PermissionsPercentOfListItems)
+                if (SampleData.GetRandomNumber(1, 100) < WorkingDefinition.PermissionsPercentOfListItems)
                 {
-                    updateProgressDetail("Adding permissions for item/document '" + item.DisplayName + "' in list '" + list.Title, 0);
+                    Owner.IncrementCurrentTaskProgress("Adding permissions for item/document '" + item.DisplayName + "' in list '" + list.Title, 0);
                     if (!item.HasUniqueRoleAssignments)
                     {
                         item.BreakRoleInheritance(true);
@@ -322,11 +345,11 @@ namespace Acceleratio.SPDG.Generator
                         setupNextRoleAssignment(web, item);                    
                     }
 
-                    updateProgressDetail("Unique permissions added for item/document '" + item.DisplayName + "' in list '"+list.Title);
+                    Owner.IncrementCurrentTaskProgress("Unique permissions added for item/document '" + item.DisplayName + "' in list '"+list.Title);
                 }
                 else
                 {
-                    updateProgressDetail("");
+                    Owner.IncrementCurrentTaskProgress("");
                 }
             }
         }
@@ -356,6 +379,6 @@ namespace Acceleratio.SPDG.Generator
                 var selected = availableRoledefinitions[SampleData.GetRandomNumber(0, availableRoledefinitions.Count - 1)];
                 securableObject.AddRoleAssignment(principal, new List<SPDGRoleDefinition> {selected});
             }
-        }
+        } 
     }
 }

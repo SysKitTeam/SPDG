@@ -1,16 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using Acceleratio.SPDG.Generator.SPModel;
 using Acceleratio.SPDG.Generator.Structures;
-using Acceleratio.SPDG.Generator.Utilities;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.GenerationTasks
 {
-    public partial class DataGenerator
+    public class ColumnsAndViewsGenerationTask : DataGenerationTaskBase
     {
-        private List<SPDGFieldInfo> _availableFieldInfos = new List<SPDGFieldInfo>()
+        public ColumnsAndViewsGenerationTask(IDataGenerationTaskOwner owner) : base(owner)
+        {
+        }
+
+        public override string Title
+        {
+            get { return "Creating Columns and Views"; }
+        }
+
+        public override int CalculateTotalSteps()
+        {
+            int totalProgress = WorkingDefinition.MaxNumberOfColumnsPerList *
+                       WorkingDefinition.NumberOfSitesToCreate *
+                       WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite +
+                       (WorkingDefinition.MaxNumberOfViewsPerList *
+                       WorkingDefinition.NumberOfSitesToCreate *
+                       WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite);
+
+            
+            totalProgress = totalProgress * Owner.WorkingSiteCollections.Count;            
+            return totalProgress;
+        }
+
+
+        private static List<SPDGFieldInfo> _availableFieldInfos = new List<SPDGFieldInfo>()
         {
             new SPDGFieldInfo("First Name", SPDGFieldType.Text),
             new SPDGFieldInfo("Last Name", SPDGFieldType.Text),
@@ -24,20 +46,14 @@ namespace Acceleratio.SPDG.Generator
             new SPDGFieldInfo("Web", SPDGFieldType.Text)
         };
 
-        public void CreateColumnsAndViews()
+        public static ReadOnlyCollection<SPDGFieldInfo> AvailableFieldInfos = new ReadOnlyCollection<SPDGFieldInfo>(_availableFieldInfos);
+
+        public override void Execute()
         {
-            if( !_workingDefinition.CreateColumns || _workingDefinition.MaxNumberOfColumnsPerList == 0)
+           
+            foreach (SiteCollInfo siteCollInfo in Owner.WorkingSiteCollections)
             {
-                return;
-            }
-
-            int totalProgress = CalculateTotalColumnsAndViewsForProgressReporting();
-
-            updateProgressOverall("Creating Columns and Views", totalProgress);
-
-            foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
-            {
-                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
+                using (var siteColl = Owner.ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
@@ -47,18 +63,18 @@ namespace Acceleratio.SPDG.Generator
                             {
                                 var list = web.GetList(listInfo.Name);
 
-                                updateProgressDetail("Creating columns in List '" + list.RootFolder.Url + "'", 0);
+                                Owner.IncrementCurrentTaskProgress("Creating columns in List '" + list.RootFolder.Url + "'", 0);
                                
-                                var newFields = _availableFieldInfos.Take(_workingDefinition.MaxNumberOfColumnsPerList).ToList();
+                                var newFields = _availableFieldInfos.Take(WorkingDefinition.MaxNumberOfColumnsPerList).ToList();
                                 list.AddFields(newFields, true);
 
-                                updateProgressDetail("Columns created in List '" + list.RootFolder.Url + "'", newFields.Count);
+                                Owner.IncrementCurrentTaskProgress("Columns created in List '" + list.RootFolder.Url + "'", newFields.Count);
 
-                                updateProgressDetail("Creating views in list  '" + list.RootFolder.Url + "'", 0);
+                                Owner.IncrementCurrentTaskProgress("Creating views in list  '" + list.RootFolder.Url + "'", 0);
                                 
                                
                                 var listFields = list.Fields.ToList();
-                                for (int c = 0; c < _workingDefinition.MaxNumberOfViewsPerList; c++)
+                                for (int c = 0; c < WorkingDefinition.MaxNumberOfViewsPerList; c++)
                                 {                                
                                     var viewFields = new List<string>();
                                     newFields.Shuffle();
@@ -75,15 +91,12 @@ namespace Acceleratio.SPDG.Generator
                                     }
                                     list.AddView("View " + (c+1).ToString(), viewFields, null, 100, true, false );
                                 }
-                                updateProgressDetail("Created views in list '" + list.RootFolder.Url + "'", _workingDefinition.MaxNumberOfViewsPerList);
+                                Owner.IncrementCurrentTaskProgress("Created views in list '" + list.RootFolder.Url + "'", WorkingDefinition.MaxNumberOfViewsPerList);
                             }
                         }
                     }
                 }
             }
         }
-
-
-
     }
 }

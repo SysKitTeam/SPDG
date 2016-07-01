@@ -2,22 +2,40 @@
 using Acceleratio.SPDG.Generator.SPModel;
 using Acceleratio.SPDG.Generator.Structures;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.GenerationTasks
 {
-    public partial class DataGenerator
+    public class FoldersDataGenerationTask : DataGenerationTaskBase
     {
-        public void CreateFolders()
+
+        public FoldersDataGenerationTask(IDataGenerationTaskOwner owner) : base(owner)
         {
-            if( _workingDefinition.MaxNumberOfFoldersToGenerate > 0 )
-            {
-                int totalProgress = CalculateTotalFoldersForProgressReporting();
 
-                updateProgressOverall("Creating Folders", totalProgress);
-            }
+        }
 
-            foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
+        public override string Title
+        {
+            get { return "Creating Folders"; }
+        }
+
+        public override bool IsActive
+        {
+            get { return CalculateTotalSteps() > 0; }
+        }
+
+
+        public override int CalculateTotalSteps()
+        {
+            int totalSteps = WorkingDefinition.NumberOfSitesToCreate *
+                      WorkingDefinition.MaxNumberOfFoldersToGenerate;            
+            totalSteps = totalSteps * Owner.WorkingSiteCollections.Count;            
+            return totalSteps;
+        }
+
+        public override void Execute()
+        {
+            foreach (SiteCollInfo siteCollInfo in Owner.WorkingSiteCollections)
             {
-                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
+                using (var siteColl = Owner.ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
@@ -25,9 +43,9 @@ namespace Acceleratio.SPDG.Generator
                         {
                             foreach (ListInfo listInfo in siteInfo.Lists)
                             {
-                                if(listInfo.isLib)
+                                if (listInfo.isLib)
                                 {
-                                    for (int counter = 1; counter <= _workingDefinition.MaxNumberOfFoldersToGenerate; counter++)
+                                    for (int counter = 1; counter <= WorkingDefinition.MaxNumberOfFoldersToGenerate; counter++)
                                     {
                                         try
                                         {
@@ -43,12 +61,12 @@ namespace Acceleratio.SPDG.Generator
                                             folderInfo.URL = folder.Url;
                                             listInfo.Folders.Add(folderInfo);
 
-                                            updateProgressDetail("Folder created '" + folderInfo.Name + "'");
+                                            Owner.IncrementCurrentTaskProgress("Folder created '" + folderInfo.Name + "'");
 
-                                            for (int l = 0; l < _workingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
+                                            for (int l = 0; l < WorkingDefinition.MaxNumberOfNestedFolderLevelPerLibrary; l++)
                                             {
                                                 counter++;
-                                                if (counter >= _workingDefinition.MaxNumberOfFoldersToGenerate)
+                                                if (counter >= WorkingDefinition.MaxNumberOfFoldersToGenerate)
                                                 {
                                                     break;
                                                 }
@@ -63,18 +81,14 @@ namespace Acceleratio.SPDG.Generator
                                                 folderInfo2.URL = folder.Url;
                                                 listInfo.Folders.Add(folderInfo2);
 
-                                                updateProgressDetail("Folder created '" + folderInfo2.Name + "'");
+                                                Owner.IncrementCurrentTaskProgress("Folder created '" + folderInfo2.Name + "'");
                                             }
-
-                                       }
-                                        catch(Exception ex)
+                                        }
+                                        catch (Exception ex)
                                         {
                                             Errors.Log(ex);
                                         }
                                     }
-
-                                     
-
                                 }
                             }
                         }
@@ -86,8 +100,9 @@ namespace Acceleratio.SPDG.Generator
         private string findAvailableFolderName(SPDGList list)
         {
             string candidate = SampleData.GetSampleValueRandom(SampleData.Countries);
-
             return candidate;
         }
+
+        
     }
 }

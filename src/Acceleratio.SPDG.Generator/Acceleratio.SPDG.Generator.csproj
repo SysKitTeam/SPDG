@@ -54,15 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="02Sites.cs" />
-    <Compile Include="03Lists.cs" />
-    <Compile Include="04Folders.cs" />
-    <Compile Include="05ColumnsAndViews.cs" />
-    <Compile Include="07ItemsAndDocuments.cs" />
-    <Compile Include="10Permissions.cs" />
+    <Compile Include="GenerationTasks\IDataGenerationTaskOwner.cs" />
+    <Compile Include="GenerationTasks\SitesDataGenerationTask.cs" />
+    <Compile Include="GenerationTasks\ListsDataGenerationTask.cs" />
+    <Compile Include="GenerationTasks\FoldersDataGenerationTask.cs" />
+    <Compile Include="GenerationTasks\ColumnsAndViewsGenerationTask.cs" />
+    <Compile Include="GenerationTasks\ItemsAndDocumentsDataGenerationTask.cs" />
+    <Compile Include="GenerationTasks\PermissionsDataGenerationTask.cs" />
     <Compile Include="AD.cs" />
     <Compile Include="ClientGeneratorDefinition.cs" />
     <Compile Include="CredentialValidationException.cs" />
+    <Compile Include="GenerationTasks\DataGenerationTaskBase.cs" />
     <Compile Include="ProgressChangedEventArgs.cs" />
     <Compile Include="ProgressChangeType.cs" />
     <Compile Include="ServerGeneratorDefinition.cs" />
@@ -85,9 +87,7 @@
     <Compile Include="SPModel\SPDGWeb.cs" />
     <Compile Include="SPModel\SPDGWebTemplate.cs" />
     <Compile Include="SPModel\SPDGListTemplateType.cs" />
-    <Compile Include="Utilities\Common.cs" />
-    <Compile Include="Utilities\DllExistanceChecker.cs" />
-    <Compile Include="Utilities\Path.cs" />
+    <Compile Include="Utilities\Utils.cs" />
     <Compile Include="DataGenerator.cs" />
     <Compile Include="ErrorLog.cs" />
     <Compile Include="GeneratorDefinition.cs" />

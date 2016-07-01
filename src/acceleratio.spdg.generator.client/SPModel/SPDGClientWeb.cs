@@ -216,7 +216,7 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
             }
             catch (Exception)
             {
-                //ignore, vec postoji
+                //ignore, already exists
             }
             
         }
@@ -225,10 +225,7 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
         {
             get
             {
-                return _web.RootFolder.Name;
-                //var url= this.Url.TrimEnd('/');
-                //var name = url.Substring(url.LastIndexOf("/") + 1);
-                //return name;
+                return _web.RootFolder.Name;                
             }
         }
 

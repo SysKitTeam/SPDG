@@ -5,21 +5,18 @@ using Acceleratio.SPDG.Generator.SPModel;
 namespace Acceleratio.SPDG.Generator.Structures
 {
     public class SiteCollInfo
-    {
-        
+    {        
         public SiteCollInfo()
         {
             Sites = new List<SiteInfo>();
         }
 
         public List<SiteInfo> Sites {get;set;}
-        public string URL {get;set;}
-        
+        public string URL {get;set;}        
     }
 
     public class SiteInfo
-    {
-        
+    {        
         public SiteInfo()
         {
             Lists = new List<ListInfo>();
@@ -32,7 +29,6 @@ namespace Acceleratio.SPDG.Generator.Structures
 
     public class ListInfo
     {
-
         public ListInfo()
         {
             Folders = new List<FolderInfo>();

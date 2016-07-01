@@ -1,16 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Acceleratio.SPDG.Generator.SPModel;
 using Acceleratio.SPDG.Generator.Structures;
-using Acceleratio.SPDG.Generator.Utilities;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.GenerationTasks
 {
-    public partial class DataGenerator
+    public class SitesDataGenerationTask : DataGenerationTaskBase
     {
-        string _templateName = "STS#0";                
+        string _templateName = "STS#0";
+
+        public override string Title
+        {
+            get { return "Creating Sites"; }
+        }
+
+        public SitesDataGenerationTask(IDataGenerationTaskOwner owner) : base(owner)
+        {
+
+        }
+
+
+        public override int CalculateTotalSteps()
+        {
+            int totalSteps = WorkingDefinition.NumberOfSitesToCreate;
+            totalSteps = totalSteps * Owner.WorkingSiteCollections.Count;
+            return totalSteps;
+        }        
+
+        public override bool IsActive
+        {
+            get { return true; }
+        }
 
         internal void CreateSubsites(ref List<SiteInfo> sites, SPDGWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
         {            
@@ -37,25 +58,16 @@ namespace Acceleratio.SPDG.Generator
                             CreateSubsites(ref sites, childSubsite, currentLevel + 1, maxLevels, ref siteCounter, maxSitesToCreate, baseName);
                         }
                     }
-
-                    
-
-                    
                 }
             }
         }
-
-
         
-
-        internal void CreateSites()
+        public override void Execute()
         {
-
-            var totalSites = CalculateTotalSitesForProgressReporting();
-            updateProgressOverall("Creating Sites", totalSites);
-            foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
+            
+            foreach (SiteCollInfo siteCollInfo in Owner.WorkingSiteCollections)
             {
-                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
+                using (var siteColl = Owner.ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     
                     InitWebTemplate(siteColl.RootWeb);
@@ -64,7 +76,7 @@ namespace Acceleratio.SPDG.Generator
                     int sitecounter = 0;
 
                     List<SiteInfo> sites = new List<SiteInfo>(); 
-                    CreateSubsites(ref sites, siteColl.RootWeb, 0, _workingDefinition.MaxNumberOfLevelsForSites, ref sitecounter, _workingDefinition.NumberOfSitesToCreate, "");
+                    CreateSubsites(ref sites, siteColl.RootWeb, 0, WorkingDefinition.MaxNumberOfLevelsForSites, ref sitecounter, WorkingDefinition.NumberOfSitesToCreate, "");
                    
                     siteCollInfo.Sites = sites;
                 }
@@ -74,9 +86,8 @@ namespace Acceleratio.SPDG.Generator
         private SPDGWeb CreateSubsite(SPDGWeb parentWeb, string parentBaseName, int level, out string baseName)
         {
             string siteName, url;
-            findAvailableSiteName(parentWeb, out siteName, out url, parentBaseName, level, out baseName);
-
-            updateProgressDetail("Creating Site '" + parentWeb.Url + "/" + url + "'",0);
+            findAvailableSiteName(parentWeb, out siteName, out url, parentBaseName, level, out baseName);            
+            Owner.IncrementCurrentTaskProgress("Creating Site '" + parentWeb.Url + "/" + url + "'",0);
 
             SPDGWeb childWeb = null;
             try
@@ -85,12 +96,12 @@ namespace Acceleratio.SPDG.Generator
                 childWeb = parentWeb.AddWeb(url, siteName, null, parentWeb.Language, _templateName, false, false);
                 AddToNavigationBar(childWeb);
 
-                updateProgressDetail("Site created '" + childWeb.Url + "'");
+                Owner.IncrementCurrentTaskProgress("Site created '" + childWeb.Url + "'");
             }
             catch (Exception ex)
             {
                 Log.Write("Could not create site '" + url + "'");
-                updateProgressDetail("");
+                Owner.IncrementCurrentTaskProgress("");
                 Errors.Log(ex);
             }
            
@@ -99,11 +110,11 @@ namespace Acceleratio.SPDG.Generator
         
         private void InitWebTemplate(SPDGWeb web)
         {
-            if (!string.IsNullOrEmpty(_workingDefinition.SiteTemplate))
+            if (!string.IsNullOrEmpty(WorkingDefinition.SiteTemplate))
             {                 
                 foreach (var template in web.GetWebTemplates(web.Language))
                 {
-                    if (template.Title == _workingDefinition.SiteTemplate)
+                    if (template.Title == WorkingDefinition.SiteTemplate)
                     {
                         _templateName = template.Name;
                         break;
@@ -141,7 +152,7 @@ namespace Acceleratio.SPDG.Generator
 
             
             string candidate = SampleData.GetSampleValueRandom(primaryCollection);
-            string leafName = Utilities.Path.GenerateSlug(candidate, 7);
+            string leafName = Utils.GenerateSlug(candidate, 7);
             baseName = candidate;
             
             int i = 0;
@@ -150,15 +161,15 @@ namespace Acceleratio.SPDG.Generator
                 candidate = SampleData.GetRandomName(primaryCollection, secondaryCollection, null, ref i, out baseName);
                 if (i < 3)
                 {
-                    leafName = Utilities.Path.GenerateSlug(candidate, 7);
+                    leafName = Utils.GenerateSlug(candidate, 7);
                 }
                 else if(i<5)
                 {
-                    leafName = Utilities.Path.GenerateSlug(candidate, 15);
+                    leafName = Utils.GenerateSlug(candidate, 15);
                 }
                 else
                 {
-                    leafName = Utilities.Path.GenerateSlug(candidate, 100);
+                    leafName = Utils.GenerateSlug(candidate, 100);
                 }
             }
 

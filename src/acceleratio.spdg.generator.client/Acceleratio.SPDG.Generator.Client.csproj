@@ -121,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientDataGenerator.cs" />
+    <Compile Include="GenerationTasks\CreateSiteCollectionsGenerationTask.cs" />
+    <Compile Include="GenerationTasks\CreateUsersAndGroupsGenerationTask.cs" />
+    <Compile Include="GenerationTasks\PermissionsDataGenerationTask.cs" />
     <Compile Include="SPDGClientDataHelper.cs" />
     <Compile Include="ClientRoleAssignmentHelper.cs" />
     <Compile Include="SPModel\SPDGClientFile.cs" />

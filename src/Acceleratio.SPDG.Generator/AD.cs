@@ -44,7 +44,6 @@ namespace Acceleratio.SPDG.Generator
                     domainList.Add(domainName.ToString());
                 }
             }
-
             return domainList;
         }
 
@@ -68,11 +67,7 @@ namespace Acceleratio.SPDG.Generator
 
             srcResults = dsFindDomains.FindAll();
             foreach (System.DirectoryServices.SearchResult srDomain in srcResults)
-            {
-                //System.Console.WriteLine(srDomain.Properties["name"][0].ToString()
-                //    + " - "
-                //    + srDomain.Properties["distinguishedName"][0].ToString());
-
+            {                
                 domainList.Add(srDomain.Properties["name"][0].ToString());
             }
 
@@ -83,8 +78,7 @@ namespace Acceleratio.SPDG.Generator
         {
             List<string> retVal=new List<string>();
             try
-            {
-                //domainName = Server.UrlDecode(domainName);
+            {                
                 ContextType contextType = ContextType.Domain;
                 string strName = System.Security.Principal.WindowsIdentity.GetCurrent().Name; 
                 string domainName = strName.Split('\\')[0];
@@ -112,10 +106,8 @@ namespace Acceleratio.SPDG.Generator
             {
                 Errors.Log(ex);
             }
-
             return retVal;
         }
-
 
         public static List<string> GetGroupsFromAD()
         {
@@ -142,8 +134,7 @@ namespace Acceleratio.SPDG.Generator
                     foreach (GroupPrincipal groupPrincipal in results)
                     {
                         retVal.Add(domainName + "\\" + groupPrincipal.Name + ";");
-                    }
-                   
+                    }                   
                 }
             }
             catch (Exception ex)
@@ -174,62 +165,6 @@ namespace Acceleratio.SPDG.Generator
                 searcher.Dispose();
             }
             return ous;
-        }
-
-        public static void createUsers(string domain, string ou, int numOfUsers)
-        {
-            ContextType contextType = ContextType.Domain;
-
-            using (PrincipalContext ctx = new PrincipalContext(contextType, domain, ou))
-            {
-                for(int i=0; i<numOfUsers; i++)
-                {
-                    try
-                    {
-                        UserPrincipal userPrincipal = new UserPrincipal(ctx);
-                        userPrincipal.Surname = SampleData.GetSampleValueRandom(SampleData.LastNames);
-                        userPrincipal.GivenName = SampleData.GetSampleValueRandom(SampleData.FirstNames); ;
-                        userPrincipal.SamAccountName = userPrincipal.GivenName.ToLower() + "." + userPrincipal.Surname.ToLower();
-                        userPrincipal.Name = userPrincipal.GivenName + " " + userPrincipal.Surname;
-                        userPrincipal.DisplayName = userPrincipal.GivenName + " " + userPrincipal.Surname;
-                 
-                        string pwdOfNewlyCreatedUser = "Acce1234!";
-
-                        userPrincipal.SetPassword(pwdOfNewlyCreatedUser);
-                        userPrincipal.Enabled = true;
-                        userPrincipal.PasswordNeverExpires = true;
-                        userPrincipal.Save();
-                    }
-                    catch (Exception ex)
-                    {
-                        Errors.Log(ex);
-                    }
-                }
-            }
-        }
-
-        public static void createGroups(string domain, string ou, int numOfGroups)
-        {
-            ContextType contextType = ContextType.Domain;
-
-            using (PrincipalContext ctx = new PrincipalContext(contextType, domain, ou))
-            {
-                for (int i = 0; i < numOfGroups; i++)
-                {
-                    try
-                    {
-                        GroupPrincipal groupPrincipal = new GroupPrincipal(ctx);
-                        groupPrincipal.Name = SampleData.GetSampleValueRandom(SampleData.Accounts);
-                        groupPrincipal.DisplayName = groupPrincipal.Name;
-
-                        groupPrincipal.Save();                        
-                    }
-                    catch (Exception ex)
-                    {
-                        Errors.Log(ex);
-                    }
-                }
-            }
         }
     }
 }

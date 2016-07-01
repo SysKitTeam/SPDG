@@ -9,17 +9,29 @@ namespace Acceleratio.SPDG.UI
     public class Common
     {
         public const string APP_TITLE = "SharePoint Data Generator";
-      
+
+        public static bool PreventAppClosing { get; set; }
 
         public static GeneratorDefinitionBase WorkingDefinition { get; set; }
-        public static string impersonateUserName { get; set; }
-        public static string impersonateDomain { get; set; }
-        public static string impersonatePassword { get; set; }
 
-       
 
-    
-        public static bool PreventAppClosing { get; set; }
+        public static void InitClientDefinition()
+        {
+            var clientDefinition = new ClientGeneratorDefinition();
+            SetCommonDefaults(clientDefinition);
+            WorkingDefinition = clientDefinition;
+        }
+
+        public static void InitServerDefinition()
+        {
+            var serverDefinition = new ServerGeneratorDefinition();
+            SetCommonDefaults(serverDefinition);
+
+            serverDefinition.CredentialsOfCurrentUser = true;
+            serverDefinition.CreateNewWebApplications = 0;
+
+            WorkingDefinition = serverDefinition;
+        }
 
         public class SerializeWrapper
         {
@@ -44,23 +56,7 @@ namespace Acceleratio.SPDG.UI
         }
 
 
-        public static void InitClientDefinition()
-        {
-            var clientDefinition = new ClientGeneratorDefinition();
-            SetCommonDefaults(clientDefinition);
-            WorkingDefinition = clientDefinition;
-        }
-
-        public static void InitServerDefinition()
-        {
-            var serverDefinition = new ServerGeneratorDefinition();
-            SetCommonDefaults(serverDefinition);
-
-            serverDefinition.CredentialsOfCurrentUser = true;
-            serverDefinition.CreateNewWebApplications = 0;
-
-            WorkingDefinition = serverDefinition;
-        }
+        
 
 
         private static void SetCommonDefaults(GeneratorDefinitionBase definition)

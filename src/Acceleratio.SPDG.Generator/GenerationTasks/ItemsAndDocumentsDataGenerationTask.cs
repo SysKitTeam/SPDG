@@ -1,39 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using Acceleratio.SPDG.Generator.SPModel;
+using System.Linq;
 using Acceleratio.SPDG.Generator.SPModel;
 using Acceleratio.SPDG.Generator.Structures;
-using Acceleratio.SPDG.Generator.Utilities;
 
-namespace Acceleratio.SPDG.Generator
+namespace Acceleratio.SPDG.Generator.GenerationTasks
 {
-    public partial class DataGenerator
+    public class ItemsAndDocumentsDataGenerationTask : DataGenerationTaskBase
     {
         private int _docsAdded = 0;
         private string _currentFileType = null;
 
-        public void CreateItemsAndDocuments()
+
+        public ItemsAndDocumentsDataGenerationTask(IDataGenerationTaskOwner owner) : base(owner)
         {
-            int totalProgress = 0;
-            if( _workingDefinition.MaxNumberofItemsToGenerate > 0 
-                || _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate > 0
-                || _workingDefinition.MaxNumberofItemsBigListToGenerate >0)
-            {
-                totalProgress = CalculateTotalItemsForProgressReporting();
-            }
-            else
-            {
-                return;
-            }
+        }
 
-            updateProgressOverall("Creating Items and Documents", totalProgress);
+        public override string Title
+        {
+            get { return "Creating Items and Documents"; }
+        }
 
-            foreach (SiteCollInfo siteCollInfo in workingSiteCollections)
+        public override int CalculateTotalSteps()
+        {
+            var totalSteps  = WorkingDefinition.NumberOfSitesToCreate *
+                              (WorkingDefinition.MaxNumberOfListsAndLibrariesPerSite *
+                          (WorkingDefinition.MaxNumberofItemsToGenerate + WorkingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
+                          + WorkingDefinition.NumberOfBigListsPerSite * WorkingDefinition.MaxNumberofItemsBigListToGenerate);
+            totalSteps = totalSteps*Owner.WorkingSiteCollections.Count;
+            return totalSteps;
+        }
+
+        public override void Execute()
+        {
+            foreach (SiteCollInfo siteCollInfo in Owner.WorkingSiteCollections)
             {
-                using (var siteColl = ObjectsFactory.GetSite(siteCollInfo.URL))
+                using (var siteColl = Owner.ObjectsFactory.GetSite(siteCollInfo.URL))
                 {
                     foreach (SiteInfo siteInfo in siteCollInfo.Sites)
                     {
@@ -51,19 +54,19 @@ namespace Acceleratio.SPDG.Generator
 
                                     if( listInfo.TemplateType == SPDGListTemplateType.Tasks )
                                     {
-                                        updateProgressDetail("Start adding items to tasks list: " + listInfo.Name + " in site: " + web.Url,0);
+                                        Owner.IncrementCurrentTaskProgress("Start adding items to tasks list: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     else if (listInfo.TemplateType == SPDGListTemplateType.Events)
                                     {
-                                        updateProgressDetail("Start adding events to calendar: " + listInfo.Name + " in site: " + web.Url,0);
+                                        Owner.IncrementCurrentTaskProgress("Start adding events to calendar: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     else
                                     {
-                                        updateProgressDetail("Start adding items to list: " + listInfo.Name + " in site: " + web.Url,0);
+                                        Owner.IncrementCurrentTaskProgress("Start adding items to list: " + listInfo.Name + " in site: " + web.Url,0);
                                     }
                                     
                                     List<ISPDGListItemInfo> batch=new List<ISPDGListItemInfo>();
-                                    int itemCount = listInfo.isBigList ? _workingDefinition.MaxNumberofItemsBigListToGenerate : _workingDefinition.MaxNumberofItemsToGenerate;
+                                    int itemCount = listInfo.isBigList ? WorkingDefinition.MaxNumberofItemsBigListToGenerate : WorkingDefinition.MaxNumberofItemsToGenerate;
                                     itemCount = SampleData.GetRandomNumber(itemCount*3/4, itemCount);
                                     for (int i = 0; i < itemCount; i++ )
                                     {
@@ -86,14 +89,14 @@ namespace Acceleratio.SPDG.Generator
                                         if (batch.Count > 400)
                                         {
                                             list.AddItems(batch);
-                                            updateProgressDetail(string.Format("Created {0}/{1} items for list {2}: ", i + 1, itemCount, list.RootFolder.Url), batch.Count);                                            
+                                            Owner.IncrementCurrentTaskProgress(string.Format("Created {0}/{1} items for list {2}: ", i + 1, itemCount, list.RootFolder.Url), batch.Count);                                            
                                             batch.Clear();
                                         }
                                     }
                                     if (batch.Count > 0)
                                     {
                                         list.AddItems(batch);
-                                        updateProgressDetail(string.Format("Created {0} items for list {1}: ", itemCount, list.RootFolder.Url), batch.Count);
+                                        Owner.IncrementCurrentTaskProgress(string.Format("Created {0} items for list {1}: ", itemCount, list.RootFolder.Url), batch.Count);
                                         batch.Clear();
                                     }
                                     listInfo.ItemCount = itemCount;
@@ -102,9 +105,9 @@ namespace Acceleratio.SPDG.Generator
                                 {
                                     _docsAdded = 0;
                                     var list = web.GetList(listInfo.Name);
-                                    updateProgressDetail("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url,0);
+                                    Owner.IncrementCurrentTaskProgress("Start adding documents to library: " + listInfo.Name + " in site: " + web.Url,0);
                                                                        
-                                    while (_docsAdded < _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
+                                    while (_docsAdded < WorkingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
                                     {
                                         addDocumentToFolder(list,list.RootFolder);
                                     }
@@ -130,11 +133,10 @@ namespace Acceleratio.SPDG.Generator
                 fileItem.Update();                
             }
             _docsAdded++;
-            
-
+                       
             foreach(var childFolder in folder.SubFolders)
             {
-                if( _docsAdded >= _workingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
+                if( _docsAdded >= WorkingDefinition.MaxNumberofDocumentLibraryItemsToGenerate)
                 {
                     break;
                 }
@@ -144,7 +146,7 @@ namespace Acceleratio.SPDG.Generator
                     addDocumentToFolder(docLib, childFolder);
                 }
             }
-            updateProgressDetail("Adding document to folder: " + folder.Url);
+            Owner.IncrementCurrentTaskProgress("Adding document to folder: " + folder.Url);
         }
 
         private byte[] getFileContent()
@@ -167,7 +169,7 @@ namespace Acceleratio.SPDG.Generator
             }
             else if (_currentFileType == "pdf")
             {
-                content = SampleData.CreatePDF(_workingDefinition.MinDocumentSizeKB, _workingDefinition.MaxDocumentSizeMB * 1024);
+                content = SampleData.CreatePDF(WorkingDefinition.MinDocumentSizeKB, WorkingDefinition.MaxDocumentSizeMB * 1024);
             }
             else if (_currentFileType == "png")
             {
@@ -184,7 +186,7 @@ namespace Acceleratio.SPDG.Generator
             List<string> userFields = new List<string>();
             foreach(var field in list.Fields)
             {
-                if( _availableFieldInfos.Any(x=>x.DisplayName==field.Title))
+                if(ColumnsAndViewsGenerationTask.AvailableFieldInfos.Any(x=>x.DisplayName==field.Title))
                 {
                     userFields.Add(field.InternalName);
                 }
@@ -296,45 +298,47 @@ namespace Acceleratio.SPDG.Generator
 
             if (_currentFileType == null)
             {
-                if (_workingDefinition.IncludeDocTypeDOCX) { _currentFileType = "docx"; return; }
-                if (_workingDefinition.IncludeDocTypeXLSX) {_currentFileType = "xlsx"; return;}
-                if (_workingDefinition.IncludeDocTypePDF){ _currentFileType = "pdf"; return;}
-                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
+                if (WorkingDefinition.IncludeDocTypeDOCX) { _currentFileType = "docx"; return; }
+                if (WorkingDefinition.IncludeDocTypeXLSX) {_currentFileType = "xlsx"; return;}
+                if (WorkingDefinition.IncludeDocTypePDF){ _currentFileType = "pdf"; return;}
+                if (WorkingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
                 return;
             }
 
             if( _currentFileType == "docx" )
             {
-                if (_workingDefinition.IncludeDocTypeXLSX) {_currentFileType = "xlsx"; return;}
-                if (_workingDefinition.IncludeDocTypePDF) {_currentFileType = "pdf"; return;}
-                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
+                if (WorkingDefinition.IncludeDocTypeXLSX) {_currentFileType = "xlsx"; return;}
+                if (WorkingDefinition.IncludeDocTypePDF) {_currentFileType = "pdf"; return;}
+                if (WorkingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
                 return;
             }
 
             if (_currentFileType == "xlsx")
             {
-                if (_workingDefinition.IncludeDocTypePDF) {_currentFileType = "pdf"; return;}
-                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
-                if (_workingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
+                if (WorkingDefinition.IncludeDocTypePDF) {_currentFileType = "pdf"; return;}
+                if (WorkingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
+                if (WorkingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
                 return;
             }
 
             if (_currentFileType == "pdf")
             {
-                if (_workingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
-                if (_workingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
-                if (_workingDefinition.IncludeDocTypeXLSX){ _currentFileType = "xlsx"; return;}
+                if (WorkingDefinition.IncludeDocTypeImages) { _currentFileType = "png"; return; }
+                if (WorkingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
+                if (WorkingDefinition.IncludeDocTypeXLSX){ _currentFileType = "xlsx"; return;}
                 return;
             }
 
             if( _currentFileType == "png" )
             {
-                if (_workingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
-                if (_workingDefinition.IncludeDocTypeXLSX){ _currentFileType = "xlsx"; return;}
-                if (_workingDefinition.IncludeDocTypePDF) { _currentFileType = "pdf"; return; }
+                if (WorkingDefinition.IncludeDocTypeDOCX) {_currentFileType = "docx"; return;}
+                if (WorkingDefinition.IncludeDocTypeXLSX){ _currentFileType = "xlsx"; return;}
+                if (WorkingDefinition.IncludeDocTypePDF) { _currentFileType = "pdf"; return; }
                 
             }
 
         }
+
+       
     }
 }

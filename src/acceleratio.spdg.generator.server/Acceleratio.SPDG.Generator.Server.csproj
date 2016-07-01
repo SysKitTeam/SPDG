@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenerationTasks\CreateContentTypesGenerationTask.cs" />
+    <Compile Include="GenerationTasks\AssociateOotbWorkflowsGenerationTask.cs" />
+    <Compile Include="GenerationTasks\CreateAndAssociateDeclarativeWorkflowsGenerationTask.cs" />
+    <Compile Include="GenerationTasks\CreateUsersAndGroupsGenerationTask.cs" />
+    <Compile Include="GenerationTasks\CreateWebAppsAndSiteCollectionsTask.cs" />
+    <Compile Include="GenerationTasks\PermissionsDataGenerationTask.cs" />
     <Compile Include="SPDGServerDataHelper.cs" />
     <Compile Include="SPModel\SPDGServerFile.cs" />
     <Compile Include="SPModel\SPDGServerFolder.cs" />

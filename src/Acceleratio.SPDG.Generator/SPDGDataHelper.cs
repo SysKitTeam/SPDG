@@ -9,10 +9,9 @@ namespace Acceleratio.SPDG.Generator
     public abstract class SPDGDataHelper
     {
         public abstract IEnumerable<SPDGWebApplication> GetWebApplications();
-
         public abstract IEnumerable<string> GetAllSiteCollections(Guid webApplicationId);
-
         public abstract void ValidateCredentials();
+
         public static SPDGDataHelper Create(GeneratorDefinitionBase definition)
         {
             string assemblyName = "";
@@ -35,7 +34,6 @@ namespace Acceleratio.SPDG.Generator
                 return (SPDGDataHelper)Activator.CreateInstance(type, definition);
             }
             throw new InvalidOperationException();
-
         }
     }
 }
