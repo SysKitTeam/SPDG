@@ -26,7 +26,7 @@
     <InstallUrl>https://rawgithub.com/Acceleratio/SPDG/master/releases/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>0.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -248,7 +248,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    </Compile>           
     <Content Include="SampleData\Accounts.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -352,6 +352,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.pdb">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>false</Visible>
+    </Content>
+    <Content Include="$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.pdb">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>false</Visible>
+    </Content>
     <Content Include="SampleData\document.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -460,6 +470,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -468,12 +479,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="AfterBuild">
-    <ItemGroup>
-      <ServerFiles Include="$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Server\bin\$(Configuration)\*.pdb" />
-      <ClientFiles Include="$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.dll;$(SolutionDir)Acceleratio.SPDG.Generator.Client\bin\$(Configuration)\*.pdb" />
-    </ItemGroup>
-    <Copy SourceFiles="@(ServerFiles)" DestinationFolder="$(TargetDir)" />
-    <Copy SourceFiles="@(ClientFiles)" DestinationFolder="$(TargetDir)" />
-  </Target>
+
+
 </Project>
