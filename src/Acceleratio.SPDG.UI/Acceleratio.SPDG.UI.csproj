@@ -26,7 +26,7 @@
     <InstallUrl>https://rawgithub.com/Acceleratio/SPDG/master/releases/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>41</ApplicationRevision>
     <ApplicationVersion>0.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -57,16 +57,20 @@
     <ApplicationIcon>SPDGRed.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>DD5BA741041E910AB4D4926A7806AE273088D6E8</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Acceleratio.SPDG.UI_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('C:\BuildTools\')">
+    <SignAssembly>true</SignAssembly>
+    <SignManifests>true</SignManifests>
+    <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
+    <ManifestCertificateThumbprint>89D2738F1CE9C29EE41CBD929339563F0F23616B</ManifestCertificateThumbprint>
+    <ManifestKeyFile>C:\BuildTools\Acceleratio.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -503,6 +507,9 @@
     </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release  if exist "C:\buildTools\" call  C:\buildTools\sign.bat $(TargetPath)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
