@@ -26,8 +26,9 @@
     <InstallUrl>https://rawgithub.com/Acceleratio/SPDG/master/releases/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>41</ApplicationRevision>
-    <ApplicationVersion>0.5.0.%2a</ApplicationVersion>
+    <ApplicationRevision>42</ApplicationRevision>    
+    <ApplicationVersion Condition="'$(build_number)' == ''">0.5.0.%2a</ApplicationVersion>
+    <ApplicationVersion Condition="'$(build_number)' != ''">0.5.1.$(build_number)</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
