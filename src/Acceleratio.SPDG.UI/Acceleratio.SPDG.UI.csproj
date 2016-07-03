@@ -44,7 +44,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://rawgithub.com/Acceleratio/SPDG/master/releases/</InstallUrl>
+    <InstallUrl>https://rawgithub.com/Acceleratio/SPDG/master/releases/ClickOnce/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>44</ApplicationRevision>
