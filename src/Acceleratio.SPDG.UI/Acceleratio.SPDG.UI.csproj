@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>..\..\releases\</PublishUrl>
+    <PublishUrl>..\..\releases\ClickOnce</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
