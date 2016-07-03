@@ -24,7 +24,7 @@ SPDG can be run on either a workstation or a SharePoint server. However, please 
 
 ##Usage
 To use SPDG you can:
-1. Build the binaries yourself
-2. Use the [ClickOnce](https://github.com/Acceleratio/SPDG/raw/master/releases/ClickOnce/setup.exe) installer
-3. [Download](https://github.com/Acceleratio/SPDG/raw/master/releases/binaries/SPDG.zip) the latest binaries
+* Build the binaries yourself
+* Use the [ClickOnce](https://github.com/Acceleratio/SPDG/raw/master/releases/ClickOnce/setup.exe) installer
+* [Download](https://github.com/Acceleratio/SPDG/raw/master/releases/binaries/SPDG.zip) the latest binaries
 
