@@ -12,6 +12,10 @@ namespace Acceleratio.SPDG.Generator
         {
             ChangeType = type;
             Message = message;
+            if (progressPctValue > 100)
+            {
+                progressPctValue = 100;
+            }
             ProgressPctValue = progressPctValue;
         }
     }
