@@ -14,7 +14,7 @@ You can create data to test SharePoint, to simulate and recreate specific scenar
 * Customized SharePoint groups
 * Unique permissions 
 
-SPDG uses random names from the .csv files stored in the directory. Based on that data, it generates user names, web applications, sites, site collections, and other SharePoint content. 
+SPDG uses random names from the .csv files stored in the directory. Based on that data, it generates user names, web applications, sites, site collections, and other SharePoint content. [Learn more...](https://github.com/Acceleratio/SPDG/wiki/Help)
 
 Please note that SPDG does not support SharePoint 2007. 
 
