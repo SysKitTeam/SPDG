@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
+using System.Linq;
 using Acceleratio.SPDG.Generator.GenerationTasks;
 
 namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
@@ -33,12 +35,13 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
 
         public override void Execute()
         {
+            var users = new List<Principal>();
             if (WorkingDefinition.NumberOfUsersToCreate > 0)
             {
                 try
                 {
                     Log.Write("Creating Active Directory users.");
-                    createUsers(WorkingDefinition.ADDomainName, WorkingDefinition.ADOrganizationalUnit, WorkingDefinition.NumberOfUsersToCreate);
+                    users = createUsers(WorkingDefinition.ADDomainName, WorkingDefinition.ADOrganizationalUnit, WorkingDefinition.NumberOfUsersToCreate);
                 }
                 catch (Exception ex)
                 {
@@ -51,7 +54,7 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
                 try
                 {
                     Log.Write("Creating Active Directory groups.");
-                    createGroups(WorkingDefinition.ADDomainName, WorkingDefinition.ADOrganizationalUnit, WorkingDefinition.NumberOfSecurityGroupsToCreate);
+                    createGroups(WorkingDefinition.ADDomainName, WorkingDefinition.ADOrganizationalUnit, WorkingDefinition.NumberOfSecurityGroupsToCreate, users);
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +64,7 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
             }
         }
 
-        public void createUsers(string domain, string ou, int numOfUsers)
+        public List<Principal> createUsers(string domain, string ou, int numOfUsers)
         {
             ContextType contextType = ContextType.Domain;
             //must pass null parameter to principalcontext if no ou selected
@@ -69,6 +72,7 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
             {
                 ou = null;
             }
+            var createdPrincipals = new List<Principal>();
             using (PrincipalContext ctx = new PrincipalContext(contextType, domain, ou))
             {
                 for (int i = 0; i < numOfUsers; i++)
@@ -89,6 +93,7 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
                         userPrincipal.PasswordNeverExpires = true;
                         userPrincipal.Save();
                         Owner.IncrementCurrentTaskProgress(string.Format("Created {0}/{1} users.", i, numOfUsers));
+                        createdPrincipals.Add(userPrincipal);
                     }
                     catch (Exception ex)
                     {
@@ -96,9 +101,11 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
                     }
                 }
             }
+
+            return createdPrincipals;
         }
 
-        public void createGroups(string domain, string ou, int numOfGroups)
+        public void createGroups(string domain, string ou, int numOfGroups, List<Principal> principalList)
         {
             ContextType contextType = ContextType.Domain;
             //must pass null parameter to principalcontext if no ou selected
@@ -115,14 +122,32 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
                         GroupPrincipal groupPrincipal = new GroupPrincipal(ctx);
                         groupPrincipal.Name = SampleData.GetSampleValueRandom(SampleData.Accounts);
                         groupPrincipal.DisplayName = groupPrincipal.Name;
+                        addPrincipalsToGroup(groupPrincipal, principalList);
 
                         groupPrincipal.Save();
                         Owner.IncrementCurrentTaskProgress(string.Format("Created {0}/{1} groups.", i, numOfGroups));
+                        principalList.Add(groupPrincipal);
                     }
                     catch (Exception ex)
                     {
                         Errors.Log(ex);
                     }
+                }
+            }
+        }
+
+        private void addPrincipalsToGroup(GroupPrincipal group, List<Principal> availablePrincipals)
+        {
+            var userCount = Math.Min(WorkingDefinition.MaxNumberOfUsersInCreatedSecurityGroups, availablePrincipals.Count);
+
+            if (userCount > 0)
+            {
+                availablePrincipals.Shuffle();
+                var randomPrincipals = availablePrincipals.Take(userCount);
+
+                foreach (var randomPrincipal in randomPrincipals)
+                {
+                    group.Members.Add(group.Context, IdentityType.Sid, randomPrincipal.Sid.Value);
                 }
             }
         }
