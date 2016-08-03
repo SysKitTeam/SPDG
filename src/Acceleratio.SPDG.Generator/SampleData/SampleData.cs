@@ -33,6 +33,7 @@ namespace Acceleratio.SPDG.Generator
         public static ReadOnlyCollection<string> PhoneNumbers;
         public static ReadOnlyCollection<string> EmailAddreses;
         public static ReadOnlyCollection<string> WebSites;
+        public static ReadOnlyCollection<string> WebApplications;
         public static ReadOnlyCollection<DepartmentData> Departments;
         public static ReadOnlyCollection<string> Customers;
         private static Random _randomGen = new Random();
@@ -55,6 +56,35 @@ namespace Acceleratio.SPDG.Generator
             Dates = createSampleCollection("Dates.csv");
             Departments = importDepartments("departments.csv");
             Customers = createSampleCollection("Customers.csv");
+            WebApplications = createSampleCollection("WebApplications.csv");
+        }
+
+        public static IList<string> GetRandomNonRepeatingValues(IList<string> collection, int valuesCount, int defaultValueIndex = 0)
+        {
+            var indexes = new List<int>();
+            var collectionCount = collection.Count;
+
+            for (var i = 0; i < collectionCount; i++)
+            {
+                indexes.Add(i);
+            }
+
+            indexes.Shuffle();
+
+            var randomValues = new List<string>();
+            for (var i = 0; i < valuesCount; i++)
+            {
+                if (i >= collectionCount)
+                {
+                    randomValues.Add(collection[defaultValueIndex]);
+                }
+                else
+                {
+                    randomValues.Add(collection[indexes[i]]);
+                }
+            }
+
+            return randomValues;
         }
 
         public static string GetRandomName(IList<string> primaryCollection, IList<string> secondaryCollection, IList<string> tertiaryCollection, ref int attempt, out string baseName)

@@ -349,6 +349,9 @@
     <Content Include="SampleData\customers.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SampleData\WebApplications.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Acceleratio.SPDG.Generator\Acceleratio.SPDG.Generator.csproj">
