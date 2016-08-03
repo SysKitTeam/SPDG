@@ -86,7 +86,7 @@ namespace Acceleratio.SPDG.Generator
                 using (PrincipalContext ctx = new PrincipalContext(contextType, domainName))
                 {
                     var searchPrinciple = new UserPrincipal(ctx);
-                    searchPrinciple.EmailAddress = "*";
+                    //searchPrinciple.EmailAddress = "*";
                     searchPrinciple.Enabled = true;
 
                     System.DirectoryServices.AccountManagement.PrincipalSearcher search = new PrincipalSearcher();
@@ -133,7 +133,7 @@ namespace Acceleratio.SPDG.Generator
 
                     foreach (GroupPrincipal groupPrincipal in results)
                     {
-                        retVal.Add(domainName + "\\" + groupPrincipal.Name + ";");
+                        retVal.Add(groupPrincipal.Sid.Value);
                     }                   
                 }
             }

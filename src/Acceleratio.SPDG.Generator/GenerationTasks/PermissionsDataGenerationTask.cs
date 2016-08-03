@@ -38,6 +38,7 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
             var allSites = Owner.WorkingSiteCollections.SelectMany(x => x.Sites).ToList();
             var allLists = Owner.WorkingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists)).ToList();
             var allFolders = Owner.WorkingSiteCollections.SelectMany(x => x.Sites.SelectMany(y => y.Lists.SelectMany(z => z.Folders))).ToList();
+            _permissionsPerObject = Owner.WorkingDefinition.PermissionsPerObject;
 
             foreach (var site in allSites)
             {
@@ -65,14 +66,14 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
 
             var allItemsCount = allLists.Sum(x => x.ItemCount);
 
-            bool doSitePermissions = WorkingDefinition.PermissionsPercentOfSites > 0 && allSites.Count > 0;
-            bool doListPermissions = WorkingDefinition.PermissionsPercentOfLists > 0 && allLists.Count > 0;
-            bool doListItemPermissions = WorkingDefinition.PermissionsPercentOfListItems > 0 && allItemsCount > 0;
-            bool dofolderPermissions = WorkingDefinition.PermissionsPercentOfFolders > 0 && allFolders.Count > 0;
-            bool stuffTodo = doSitePermissions
-                             || doListPermissions
-                             || doListItemPermissions
-                             || dofolderPermissions;
+            _doSitePermissions = WorkingDefinition.PermissionsPercentOfSites > 0 && allSites.Count > 0;
+            _doListPermissions = WorkingDefinition.PermissionsPercentOfLists > 0 && allLists.Count > 0;
+            _doListItemPermissions = WorkingDefinition.PermissionsPercentOfListItems > 0 && allItemsCount > 0;
+            _dofolderPermissions = WorkingDefinition.PermissionsPercentOfFolders > 0 && allFolders.Count > 0;
+            bool stuffTodo = _doSitePermissions
+                             || _doListPermissions
+                             || _doListItemPermissions
+                             || _dofolderPermissions;
             if (!stuffTodo)
             {
                 return;
@@ -83,17 +84,17 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
                 Owner.WorkingSiteCollections.Count
                 //enum + eventual permissions change
                 + allSites.Count + _allSitesToHaveUniquePermissions.Count;
-            if (doListItemPermissions || doListPermissions || dofolderPermissions)
+            if (_doListItemPermissions || _doListPermissions || _dofolderPermissions)
             {
                 //enum + eventual permissions change
                 _totalSteps += allLists.Count + _allListsToHavehUniquePermissions.Count;
             }
-            if (dofolderPermissions)
+            if (_dofolderPermissions)
             {
                 //enum + eventual permissions change
                 _totalSteps += allFolders.Count + _allFoldersToHaveUniquePermissions.Count;
             }
-            if (doListItemPermissions)
+            if (_doListItemPermissions)
             {
                 var withUnique = (allItemsCount * WorkingDefinition.PermissionsPercentOfListItems) / 100;
                 //enum + eventual permissions change
@@ -101,13 +102,14 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
             }
         }
 
-
-        public override bool IsActive { get { return _totalSteps > 0; } }
-
-
         public override int CalculateTotalSteps()
         {
-           return _totalSteps;
+            if (_totalSteps == 0)
+            {
+                Init();
+            }
+
+            return _totalSteps;
         }
 
 
@@ -132,7 +134,6 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
                             if(_allSitesToHaveUniquePermissions.Contains(siteInfo))
                             {                             
                                 setSitePermissions(web);
-                                
                             }
 
                             if (_doListPermissions || _doListItemPermissions || _dofolderPermissions)
