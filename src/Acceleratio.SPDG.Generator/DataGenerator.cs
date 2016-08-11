@@ -163,11 +163,9 @@ namespace Acceleratio.SPDG.Generator
                     SiteCollInfo siteCollInfo = new SiteCollInfo();
                     siteCollInfo.URL = WorkingDefinition.SiteCollection;
                     WorkingSiteCollections.Add(siteCollInfo);
-                }
-
-                var activeTasks = _tasks.Where(x => x.IsActive);
-                _overallProgressMaxSteps = activeTasks.Count();
-                foreach (var task in activeTasks)
+                } 
+                _overallProgressMaxSteps = _tasks.Count();
+                foreach (var task in _tasks)
                 {
                     if (task.IsActive)
                     {
