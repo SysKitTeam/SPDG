@@ -107,25 +107,28 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
             try
             {
                 int currentPort = 80;
+                var webAppNames = SampleData.GetRandomNonRepeatingValues(SampleData.WebApplications, WorkingDefinition.CreateNewWebApplications);
                 for (int a = 0; a < WorkingDefinition.CreateNewWebApplications; a++)
                 {                 
                     SPWebApplication newApplication;
                     SPWebApplicationBuilder webAppBuilder = new SPWebApplicationBuilder(SPFarm.Local);
 
                     currentPort = Utils.GetNextAvailablePort(currentPort + 1);
-                    Owner.IncrementCurrentTaskProgress("Creating Web application '" + "SPDG Site " + currentPort.ToString("00") + "'");
+
+                    var webApplicationName = string.Format("SharePoint {0} - {1}", webAppNames[a], currentPort.ToString("00"));
+                    Owner.IncrementCurrentTaskProgress("Creating Web application '" + webApplicationName);
                     webAppBuilder.Port = currentPort;
                     webAppBuilder.RootDirectory = new DirectoryInfo("C:\\inetpub\\wwwroot\\wss\\" + currentPort.ToString());
-                    webAppBuilder.ApplicationPoolId = "SPDG Pool " + currentPort.ToString();
+                    webAppBuilder.ApplicationPoolId = string.Format("SharePoint {0} - {1} Pool", webAppNames[a], currentPort.ToString("00"));
                     webAppBuilder.IdentityType = IdentityType.SpecificUser;
                     webAppBuilder.ApplicationPoolUsername = WorkingDefinition.WebAppOwnerLogin;
                     webAppBuilder.ApplicationPoolPassword = Utils.StringToSecureString(WorkingDefinition.WebAppOwnerPassword);
 
 
-                    webAppBuilder.ServerComment = "SPDG Site " + currentPort.ToString("00");
+                    webAppBuilder.ServerComment = webApplicationName;
                     webAppBuilder.CreateNewDatabase = true;
                     webAppBuilder.DatabaseServer = WorkingDefinition.DatabaseServer; // DB server name
-                    webAppBuilder.DatabaseName = "WSS_Content_SPDG_" + currentPort.ToString("00");// DB Name
+                    webAppBuilder.DatabaseName = string.Format("WSS_Content_{0}_{1}", webAppNames[a], currentPort.ToString("00"));// DB Name
                     //webAppBuilder.HostHeader = "SPDG" + appNumer.ToString("00") + ".com"; //if any 
 
                     webAppBuilder.UseNTLMExclusively = true;  // authentication provider for NTLM
