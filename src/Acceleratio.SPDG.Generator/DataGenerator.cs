@@ -162,6 +162,7 @@ namespace Acceleratio.SPDG.Generator
                 {
                     SiteCollInfo siteCollInfo = new SiteCollInfo();
                     siteCollInfo.URL = WorkingDefinition.SiteCollection;
+                    siteCollInfo.Sites = getSitesForSiteCollection();
                     WorkingSiteCollections.Add(siteCollInfo);
                 } 
                 _overallProgressMaxSteps = _tasks.Count();
@@ -182,9 +183,27 @@ namespace Acceleratio.SPDG.Generator
                 Errors.Log(ex);                
             }
             return false;
-        }        
+        }
 
+        private List<SiteInfo> getSitesForSiteCollection()
+        {
+            try
+            {
+                List<SiteInfo> sites = new List<SiteInfo>();
+                var rootSite = ObjectsFactory.GetSite(WorkingDefinition.SiteCollection);
 
+                foreach (var site in rootSite.RootWeb.Webs)
+                {
+                    sites.Add(new SiteInfo() { URL = site.Url, ID = site.ID });
+                }
+
+                return sites;
+            }
+            catch
+            {
+                return new List<SiteInfo>();
+            }
+        } 
 
         private static bool? _supportsClient;
         public static bool SupportsClient

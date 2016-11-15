@@ -30,7 +30,7 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
 
         public override bool IsActive
         {
-            get { return true; }
+            get { return !WorkingDefinition.UseOnlyExistingSites; }
         }
 
         internal void CreateSubsites(ref List<SiteInfo> sites, SPDGWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
@@ -64,7 +64,6 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
         
         public override void Execute()
         {
-            
             foreach (SiteCollInfo siteCollInfo in Owner.WorkingSiteCollections)
             {
                 using (var siteColl = Owner.ObjectsFactory.GetSite(siteCollInfo.URL))
@@ -78,7 +77,7 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
                     List<SiteInfo> sites = new List<SiteInfo>(); 
                     CreateSubsites(ref sites, siteColl.RootWeb, 0, WorkingDefinition.MaxNumberOfLevelsForSites, ref sitecounter, WorkingDefinition.NumberOfSitesToCreate, "");
                    
-                    siteCollInfo.Sites = sites;
+                    siteCollInfo.Sites.AddRange(sites);
                 }
             }
         }

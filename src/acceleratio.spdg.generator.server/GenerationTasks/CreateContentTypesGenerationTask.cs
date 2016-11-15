@@ -35,6 +35,7 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
         public override void Execute()
         {
             CreateContentTypes();
+            AddCustomContentTypesToLists();           
         }
 
         public void CreateContentTypes()
@@ -100,7 +101,47 @@ namespace Acceleratio.SPDG.Generator.Server.GenerationTasks
             }
         }
 
-        private string findAvailableContentTypeName(SPWeb web)
+        public void AddCustomContentTypesToLists()
+        {
+            foreach (SiteCollInfo siteCollInfo in Owner.WorkingSiteCollections)
+            {
+                using (SPSite siteColl = new SPSite(siteCollInfo.URL))
+                {
+                    foreach (SiteInfo siteInfo in siteCollInfo.Sites)
+                    {
+                        using (SPWeb web = siteColl.OpenWeb(siteInfo.ID))
+                        {
+                            int listCount = web.Lists.Count;
+                            if (listCount == 0)
+                            {
+                                continue;
+                            }
+
+                            foreach (SPContentType contentType in web.ContentTypes)
+                            {
+                                for (int i = 0; i < (listCount/3); i++)
+                                {
+                                    var listIndex = SampleData.GetRandomNumber(0, listCount);
+                                    if (!web.Lists[listIndex].ContentTypesEnabled)
+                                    {
+                                        continue;
+                                    }
+
+                                    if (web.Lists[listIndex].ContentTypes[contentType.Name] == null)
+                                    {
+                                        web.Lists[listIndex].ContentTypes.Add(contentType);
+                                    }
+                                }
+                            }
+                                                        
+                        }
+                    }
+                }
+            }
+        }
+
+        private
+            string findAvailableContentTypeName(SPWeb web)
         {
             string candidate = SampleData.GetSampleValueRandom(SampleData.BusinessDocsTypes);
             bool alreadyExists = false;
