@@ -194,7 +194,7 @@ namespace Acceleratio.SPDG.Generator
 
                 foreach (var site in rootSite.RootWeb.Webs)
                 {
-                    sites.Add(new SiteInfo() { URL = site.Url, ID = site.ID });
+                    sites.AddRange(getSubsites(site));
                 }
 
                 return sites;
@@ -203,7 +203,25 @@ namespace Acceleratio.SPDG.Generator
             {
                 return new List<SiteInfo>();
             }
-        } 
+        }
+
+        private List<SiteInfo> getSubsites(SPDGWeb parentWeb, int maxDepth = 32)
+        {
+            List<SiteInfo> sites = new List<SiteInfo>();
+            sites.Add(new SiteInfo() { URL = parentWeb.Url, ID = parentWeb.ID });
+
+            if (parentWeb.Webs.Count() == 0 || maxDepth == 0)
+            {
+                return sites;
+            }
+
+            foreach (var subsite in parentWeb.Webs)
+            {
+                sites.AddRange(getSubsites(subsite, maxDepth - 1));
+            }
+
+            return sites;
+        }  
 
         private static bool? _supportsClient;
         public static bool SupportsClient
