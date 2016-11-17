@@ -162,6 +162,7 @@ namespace Acceleratio.SPDG.Generator
                 {
                     SiteCollInfo siteCollInfo = new SiteCollInfo();
                     siteCollInfo.URL = WorkingDefinition.SiteCollection;
+                    siteCollInfo.Sites = getSitesForSiteCollection();
                     WorkingSiteCollections.Add(siteCollInfo);
                 } 
                 _overallProgressMaxSteps = _tasks.Count();
@@ -182,9 +183,45 @@ namespace Acceleratio.SPDG.Generator
                 Errors.Log(ex);                
             }
             return false;
-        }        
+        }
 
+        private List<SiteInfo> getSitesForSiteCollection()
+        {
+            try
+            {
+                List<SiteInfo> sites = new List<SiteInfo>();
+                var rootSite = ObjectsFactory.GetSite(WorkingDefinition.SiteCollection);
 
+                foreach (var site in rootSite.RootWeb.Webs)
+                {
+                    sites.AddRange(getSubsites(site));
+                }
+
+                return sites;
+            }
+            catch
+            {
+                return new List<SiteInfo>();
+            }
+        }
+
+        private List<SiteInfo> getSubsites(SPDGWeb parentWeb, int maxDepth = 32)
+        {
+            List<SiteInfo> sites = new List<SiteInfo>();
+            sites.Add(new SiteInfo() { URL = parentWeb.Url, ID = parentWeb.ID });
+
+            if (parentWeb.Webs.Count() == 0 || maxDepth == 0)
+            {
+                return sites;
+            }
+
+            foreach (var subsite in parentWeb.Webs)
+            {
+                sites.AddRange(getSubsites(subsite, maxDepth - 1));
+            }
+
+            return sites;
+        }  
 
         private static bool? _supportsClient;
         public static bool SupportsClient

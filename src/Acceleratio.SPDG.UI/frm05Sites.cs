@@ -23,8 +23,47 @@ namespace Acceleratio.SPDG.UI
             ucSteps1.showStep(5);
             this.Text = Common.APP_TITLE;
 
+            determineChkUseOnlyExistingSitesVisibility();
             initTemplates();
             loadData();
+            determineOptionsStatus();
+        }
+
+        private void determineChkUseOnlyExistingSitesVisibility()
+        {
+            if (Common.WorkingDefinition.UseExistingSiteCollection)
+            {
+                chkUseOnlyExistingSites.Visible = true;
+            }
+            else
+            {
+                chkUseOnlyExistingSites.Visible = false;
+            } 
+        }
+
+        private void determineOptionsStatus()
+        {
+            if (chkUseOnlyExistingSites.Checked)
+            {
+                panelSiteOptions.Enabled = false;
+            }
+            else
+            {
+                panelSiteOptions.Enabled = true;
+            }
+        }
+
+        private bool UseOnlyExistingSites
+        {
+            get
+            {
+                if (!Common.WorkingDefinition.UseExistingSiteCollection)
+                {
+                    return false;
+                }
+
+                return chkUseOnlyExistingSites.Checked;
+            }
         }
 
         void btnBack_Click(object sender, EventArgs e)
@@ -57,6 +96,7 @@ namespace Acceleratio.SPDG.UI
         {
             trackNumSitesToCreate.Value = Common.WorkingDefinition.NumberOfSitesToCreate;
             trackMaxNumberLevels.Value = Common.WorkingDefinition.MaxNumberOfLevelsForSites;
+            chkUseOnlyExistingSites.Checked = Common.WorkingDefinition.UseOnlyExistingSites;
 
             if (!string.IsNullOrEmpty(Common.WorkingDefinition.SiteTemplate))
             {
@@ -68,6 +108,7 @@ namespace Acceleratio.SPDG.UI
         {
             Common.WorkingDefinition.NumberOfSitesToCreate = trackNumSitesToCreate.Value;
             Common.WorkingDefinition.MaxNumberOfLevelsForSites = trackMaxNumberLevels.Value;
+            Common.WorkingDefinition.UseOnlyExistingSites = UseOnlyExistingSites;
 
             if (cboSiteTemplates.SelectedItem != null)
             {
@@ -85,6 +126,11 @@ namespace Acceleratio.SPDG.UI
         private void trackMaxNumberLevels_ValueChanged(object sender, EventArgs e)
         {
             lblNumberLevels.Text = trackMaxNumberLevels.Value.ToString();
+        }
+
+        private void chkUseOnlyExistingSites_CheckedChanged(object sender, EventArgs e)
+        {
+            determineOptionsStatus();
         }
     }
 }
