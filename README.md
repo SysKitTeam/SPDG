@@ -1,4 +1,4 @@
-[<img src="https://cloud.githubusercontent.com/assets/19644161/16901791/945c8cd8-4c4d-11e6-8858-4dc084223af3.png">](https://github.com/Acceleratio/SPDG/raw/master/releases/binaries/SPDG.zip)
+[<img src="https://cloud.githubusercontent.com/assets/19644161/16901791/945c8cd8-4c4d-11e6-8858-4dc084223af3.png">](https://github.com/Acceleratio/SPDG/raw/master/releases/ClickOnce/setup.exe)
 # SPDG
 SharePoint Data Generator
 SPDG is an open-source tool developed by [Acceleratio Ltd.](https://acceleratio.net/) to generate mock data for SharePoint. The tool can be used to populate SharePoint On-Premises or SharePoint Online. 
