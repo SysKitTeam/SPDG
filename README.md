@@ -3,7 +3,7 @@
 SharePoint Data Generator
 SPDG is an open-source tool developed by [SysKit Ltd.](https://www.syskit.com/) to generate mock data for SharePoint. The tool can be used to populate SharePoint On-Premises or SharePoint Online. 
 
-You can create data to test SharePoint, to simulate and recreate specific scenarios in which you can engage multiple SharePoint features, or to give SharePoint or SharePoint-related demos. For example, we use it to showcase and conduct demos for [SPDocKit](https://www.spdockit.com/), our SharePoint admin tool.
+You can create data to test SharePoint, to simulate and recreate specific scenarios in which you can engage multiple SharePoint features, or to give SharePoint or SharePoint-related demos. For example, we use it to showcase and conduct demos for [SPDocKit](https://www.syskit.com/products/spdockit/) and [Security Manager](https://www.syskit.com/products/security-manager/), our SharePoint admin tools.
 
 ## SPDG can generate the following SharePoint demo and sample data: 
 * Active Directory or Azure Directory 
