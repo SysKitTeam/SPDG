@@ -70,32 +70,56 @@ namespace Acceleratio.SPDG.Generator.Client
         }
 
 
-        public void CreateNewSiteCollection(string title, string name, string owner)
+        public void CreateNewSiteCollection(string title, string siteCollectionUrl, string owner)
         {
+            bool isSiteCollectionExists = false;
+
             var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
-            using (ClientContext context = new ClientContext(url))
+            
+
+            using (ClientContext siteContext = new ClientContext(siteCollectionUrl))
             {
-                context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utils.StringToSecureString(_generatorDefinition.Password));
-                var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
-                var newSiteProperties = new SiteCreationProperties()
+                try
                 {
-                    Url = string.Format("https://{0}.sharepoint.com/sites/{1}", _generatorDefinition.TenantName, name),
-                    Owner = _generatorDefinition.SiteCollOwnerLogin,
-                    Template = "STS#0",
-                 
-                };
-                var spo= officeTenant.CreateSite(newSiteProperties);
-                context.Load(spo, i => i.IsComplete);
-                context.ExecuteQuery();
-                                
-                while (!spo.IsComplete)
-                {                    
-                    System.Threading.Thread.Sleep(10000);
-                    spo.RefreshLoad();
-                    context.ExecuteQuery();
-                }                                                
+                    var site = siteContext.Site;
+                    siteContext.Load(site);
+                    siteContext.ExecuteQuery();
+                    isSiteCollectionExists = true;
+                }
+                catch (Exception ex)
+                {
+                    isSiteCollectionExists = false;
+                }
             }
-        }
+
+            if (!isSiteCollectionExists)
+            {
+                using (ClientContext context = new ClientContext(url))
+                {
+
+
+                    context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username,
+                        Utils.StringToSecureString(_generatorDefinition.Password));
+                    var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
+                    var newSiteProperties = new SiteCreationProperties()
+                    {
+                        Url = siteCollectionUrl,
+                        Owner = _generatorDefinition.SiteCollOwnerLogin,
+                        Template = "STS#0"
+                    };
+                    var spo = officeTenant.CreateSite(newSiteProperties);
+                    context.Load(spo, i => i.IsComplete);
+                    context.ExecuteQuery();
+
+                    while (!spo.IsComplete)
+                    {
+                        System.Threading.Thread.Sleep(10000);
+                        spo.RefreshLoad();
+                        context.ExecuteQuery();
+                    }
+                }
+            }
+       }
 
         private string GetToken()
         {

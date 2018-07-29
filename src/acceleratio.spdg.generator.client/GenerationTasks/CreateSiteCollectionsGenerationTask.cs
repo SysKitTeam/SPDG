@@ -51,13 +51,15 @@ namespace Acceleratio.SPDG.Generator.Client.GenerationTasks
                     siteUrl = string.Format("https://{0}.sharepoint.com/sites/{1}", WorkingDefinition.TenantName, leafName);
                 } while (existingSites.Contains(siteUrl));
 
+                existingSites.Add(siteUrl);
+
                 Owner.IncrementCurrentTaskProgress("Creating site collection '" + siteUrl + "'");
                 var owner = WorkingDefinition.SiteCollOwnerLogin;
                 if (string.IsNullOrEmpty(owner))
                 {
                     owner = WorkingDefinition.Username;
                 }
-                helper.CreateNewSiteCollection(siteName, leafName, owner);
+                helper.CreateNewSiteCollection(siteName, siteUrl, owner);
                 SiteCollInfo siteCollInfo = new SiteCollInfo();
                 siteCollInfo.URL = siteUrl;
                 Owner.WorkingSiteCollections.Add(siteCollInfo);
