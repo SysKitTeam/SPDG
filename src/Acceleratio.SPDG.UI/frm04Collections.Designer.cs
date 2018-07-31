@@ -181,6 +181,8 @@
             this.Controls.Add(this.trackNumSiteColls);
             this.Controls.Add(this.radioUseExisting);
             this.Controls.Add(this.radioCreateNewSiteColl);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm04Collections";
             this.Text = "frm04Collections";
             this.Load += new System.EventHandler(this.frm04Collections_Load);

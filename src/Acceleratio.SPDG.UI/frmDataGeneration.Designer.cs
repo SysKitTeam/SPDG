@@ -108,6 +108,8 @@
             this.Controls.Add(this.progressDetails);
             this.Controls.Add(this.lblOverview);
             this.Controls.Add(this.progressOverall);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frmDataGeneration";
             this.Text = "frmDataGeneration";
             this.Controls.SetChildIndex(this.lblTitle, 0);

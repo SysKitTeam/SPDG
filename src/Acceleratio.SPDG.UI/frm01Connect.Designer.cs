@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSteps1 = new ucSteps();
+            this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
             this.radioConnectSPOnline = new System.Windows.Forms.RadioButton();
             this.radioConnectSPOnPremise = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -148,7 +148,7 @@
             this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtUserName.Location = new System.Drawing.Point(474, 329);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(213, 23);
+            this.txtUserName.Size = new System.Drawing.Size(383, 23);
             this.txtUserName.TabIndex = 17;
             // 
             // lblUserName
@@ -168,7 +168,7 @@
             this.txtPassword.Location = new System.Drawing.Point(474, 355);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(213, 23);
+            this.txtPassword.Size = new System.Drawing.Size(383, 23);
             this.txtPassword.TabIndex = 19;
             // 
             // label6
@@ -186,7 +186,7 @@
             // 
             this.txtTenantName.Location = new System.Drawing.Point(474, 381);
             this.txtTenantName.Name = "txtTenantName";
-            this.txtTenantName.Size = new System.Drawing.Size(213, 20);
+            this.txtTenantName.Size = new System.Drawing.Size(383, 20);
             this.txtTenantName.TabIndex = 21;
             // 
             // lblTenantName
@@ -196,7 +196,7 @@
             this.lblTenantName.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblTenantName.Location = new System.Drawing.Point(290, 383);
             this.lblTenantName.Name = "lblTenantName";
-            this.lblTenantName.Size = new System.Drawing.Size(82, 15);
+            this.lblTenantName.Size = new System.Drawing.Size(81, 15);
             this.lblTenantName.TabIndex = 20;
             this.lblTenantName.Text = "Tenant Name:";
             // 
@@ -216,6 +216,8 @@
             this.Controls.Add(this.radioConnectSPOnPremise);
             this.Controls.Add(this.radioConnectSPOnline);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm01Connect";
             this.Text = "frm01Connect";
             this.VisibleChanged += new System.EventHandler(this.frm01Connect_VisibleChanged);

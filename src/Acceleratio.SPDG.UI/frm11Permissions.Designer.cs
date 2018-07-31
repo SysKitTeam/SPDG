@@ -358,6 +358,8 @@
             this.Controls.Add(this.txtPercentSites);
             this.Controls.Add(this.chkAssignPermissions);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm11Permissions";
             this.Text = "frm11Permissions";
             this.Controls.SetChildIndex(this.lblTitle, 0);

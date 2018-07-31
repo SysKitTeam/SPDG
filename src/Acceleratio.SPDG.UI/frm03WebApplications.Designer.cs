@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSteps1 = new ucSteps();
+            this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
             this.radioCreateNewWebApp = new System.Windows.Forms.RadioButton();
             this.cboUseExistingWebApp = new System.Windows.Forms.ComboBox();
             this.radioUseExistingWebApp = new System.Windows.Forms.RadioButton();
@@ -221,6 +221,8 @@
             this.Controls.Add(this.radioUseExistingWebApp);
             this.Controls.Add(this.radioCreateNewWebApp);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm03WebApplications";
             this.Text = "frm03WebApplications";
             this.Load += new System.EventHandler(this.frm03WebApplications_Load);

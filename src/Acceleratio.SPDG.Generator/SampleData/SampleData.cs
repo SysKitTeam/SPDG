@@ -34,6 +34,7 @@ namespace Acceleratio.SPDG.Generator
         public static ReadOnlyCollection<string> EmailAddreses;
         public static ReadOnlyCollection<string> WebSites;
         public static ReadOnlyCollection<string> WebApplications;
+        public static ReadOnlyCollection<string> Documents;
         public static ReadOnlyCollection<DepartmentData> Departments;
         public static ReadOnlyCollection<string> Customers;
         private static Random _randomGen = new Random();
@@ -57,6 +58,7 @@ namespace Acceleratio.SPDG.Generator
             Departments = importDepartments("departments.csv");
             Customers = createSampleCollection("Customers.csv");
             WebApplications = createSampleCollection("WebApplications.csv");
+            Documents = createSampleCollection("Documents.csv");
         }
 
         public static IList<string> GetRandomNonRepeatingValues(IList<string> collection, int valuesCount, int defaultValueIndex = 0)

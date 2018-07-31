@@ -103,6 +103,7 @@
             this.trackMaxNumberOfItems.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberOfItems.TabIndex = 20;
             this.trackMaxNumberOfItems.TickFrequency = 5;
+            this.trackMaxNumberOfItems.Value = 25;
             this.trackMaxNumberOfItems.ValueChanged += new System.EventHandler(this.trackMaxNumberOfItems_ValueChanged);
             // 
             // label2
@@ -123,7 +124,7 @@
             this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label3.Location = new System.Drawing.Point(6, 87);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 15);
+            this.label3.Size = new System.Drawing.Size(146, 15);
             this.label3.TabIndex = 21;
             this.label3.Text = "Required Document Types";
             // 
@@ -206,6 +207,7 @@
             this.trackMaxDocSize.Name = "trackMaxDocSize";
             this.trackMaxDocSize.Size = new System.Drawing.Size(543, 45);
             this.trackMaxDocSize.TabIndex = 29;
+            this.trackMaxDocSize.Value = 1;
             this.trackMaxDocSize.ValueChanged += new System.EventHandler(this.trackMaxDocSize_ValueChanged);
             // 
             // label5
@@ -226,9 +228,9 @@
             this.lblNumItems.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumItems.Location = new System.Drawing.Point(808, 212);
             this.lblNumItems.Name = "lblNumItems";
-            this.lblNumItems.Size = new System.Drawing.Size(13, 15);
+            this.lblNumItems.Size = new System.Drawing.Size(19, 15);
             this.lblNumItems.TabIndex = 30;
-            this.lblNumItems.Text = "0";
+            this.lblNumItems.Text = "25";
             // 
             // lblMinSize
             // 
@@ -250,7 +252,7 @@
             this.lblMaxSize.Name = "lblMaxSize";
             this.lblMaxSize.Size = new System.Drawing.Size(34, 15);
             this.lblMaxSize.TabIndex = 32;
-            this.lblMaxSize.Text = "0 MB";
+            this.lblMaxSize.Text = "1 MB";
             // 
             // grpDocumentLibrarySettings
             // 
@@ -282,9 +284,9 @@
             this.lblNumDocLibItems.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumDocLibItems.Location = new System.Drawing.Point(552, 50);
             this.lblNumDocLibItems.Name = "lblNumDocLibItems";
-            this.lblNumDocLibItems.Size = new System.Drawing.Size(13, 15);
+            this.lblNumDocLibItems.Size = new System.Drawing.Size(19, 15);
             this.lblNumDocLibItems.TabIndex = 35;
-            this.lblNumDocLibItems.Text = "0";
+            this.lblNumDocLibItems.Text = "25";
             // 
             // trackMaxNumberOrDocLibItems
             // 
@@ -294,6 +296,7 @@
             this.trackMaxNumberOrDocLibItems.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberOrDocLibItems.TabIndex = 34;
             this.trackMaxNumberOrDocLibItems.TickFrequency = 5;
+            this.trackMaxNumberOrDocLibItems.Value = 25;
             this.trackMaxNumberOrDocLibItems.ValueChanged += new System.EventHandler(this.trackMaxNumberOrDocLibItems_ValueChanged);
             // 
             // label6
@@ -353,6 +356,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chkPrefil);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm08ListItems";
             this.Text = "frm08ListItems";
             this.Controls.SetChildIndex(this.lblTitle, 0);
