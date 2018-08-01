@@ -661,5 +661,26 @@ namespace Acceleratio.SPDG.UI
             txtUserName.Enabled = customCredentials;
             
         }
+
+        private void txtUserName_Enter(object sender, EventArgs e)
+        {
+            texboxToolTip.Show("Enter your username. If you are using SharePoint Online an email will do e.g. \"jon@contoso.com\" or \"jon@contoso.onmicrosoft.com\". For on-prem farms e.g. \"contoso\\ned\" will do.\nWe recommend this user is Global Admin for SharePoint Online or Farm Admin for on-prem.", txtUserName, 0);
+        }
+
+        private void txtUserName_Leave(object sender, EventArgs e)
+        {
+            texboxToolTip.Hide(txtUserName);
+        }
+
+
+        private void txtTenantName_Enter(object sender, EventArgs e)
+        {
+            texboxToolTip.Show("If your SharePoint online URL is contoso.sharepoint.com then enter \"contoso\" as the tenant name.", txtTenantName, 0);
+        }
+
+        private void txtTenantName_Leave(object sender, EventArgs e)
+        {
+            texboxToolTip.Hide(txtTenantName);
+        }
     }
 }

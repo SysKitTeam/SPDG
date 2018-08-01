@@ -88,6 +88,8 @@
             this.Controls.Add(this.chkAttachCustomWF);
             this.Controls.Add(this.chkCreateSomeOutOfTheBoxSPworkflows);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm10Workflows";
             this.Text = "frm10Workflows";
             this.Controls.SetChildIndex(this.lblTitle, 0);

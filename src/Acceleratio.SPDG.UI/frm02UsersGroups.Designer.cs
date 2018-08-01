@@ -40,11 +40,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.trackNumberOfSecGroups = new System.Windows.Forms.TrackBar();
             this.lblGroups = new System.Windows.Forms.Label();
-            this.cboDomains = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.trackMaxNumberOfUsersInSecurityGroups = new System.Windows.Forms.TrackBar();
             this.lblMaxNumberOfUsersInSecurityGroups = new System.Windows.Forms.Label();
+            this.cboDomains = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackNumberOfUsers)).BeginInit();
@@ -198,27 +198,6 @@
             this.lblGroups.TabIndex = 7;
             this.lblGroups.Text = "0";
             // 
-            // cboDomains
-            // 
-            this.cboDomains.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cboDomains.FormattingEnabled = true;
-            this.cboDomains.Location = new System.Drawing.Point(580, 152);
-            this.cboDomains.Name = "cboDomains";
-            this.cboDomains.Size = new System.Drawing.Size(237, 23);
-            this.cboDomains.TabIndex = 10;
-            this.cboDomains.Leave += new System.EventHandler(this.cboDomains_Leave);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label1.Location = new System.Drawing.Point(265, 155);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(300, 15);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Use this domain to create SharePoint users and groups: ";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -250,6 +229,27 @@
             this.lblMaxNumberOfUsersInSecurityGroups.TabIndex = 10;
             this.lblMaxNumberOfUsersInSecurityGroups.Text = "0";
             // 
+            // cboDomains
+            // 
+            this.cboDomains.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cboDomains.FormattingEnabled = true;
+            this.cboDomains.Location = new System.Drawing.Point(580, 152);
+            this.cboDomains.Name = "cboDomains";
+            this.cboDomains.Size = new System.Drawing.Size(237, 23);
+            this.cboDomains.TabIndex = 10;
+            this.cboDomains.Leave += new System.EventHandler(this.cboDomains_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label1.Location = new System.Drawing.Point(265, 155);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(300, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Use this domain to create SharePoint users and groups: ";
+            // 
             // frm02UsersGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,6 +260,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkGenerateUsers);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm02UsersGroups";
             this.Text = "frm02UsersGroups";
             this.Controls.SetChildIndex(this.ucSteps1, 0);

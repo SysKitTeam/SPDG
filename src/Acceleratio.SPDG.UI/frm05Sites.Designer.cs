@@ -151,7 +151,7 @@
             this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label1.Location = new System.Drawing.Point(16, 204);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 15);
+            this.label1.Size = new System.Drawing.Size(100, 15);
             this.label1.TabIndex = 18;
             this.label1.Text = "Use Site Template";
             // 
@@ -197,6 +197,8 @@
             this.ClientSize = new System.Drawing.Size(921, 644);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm05Sites";
             this.Text = "frm05Sites";
             this.Controls.SetChildIndex(this.ucSteps1, 0);

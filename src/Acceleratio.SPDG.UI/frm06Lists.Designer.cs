@@ -84,6 +84,7 @@
             this.trackMaxNumberListLibraries.Name = "trackMaxNumberListLibraries";
             this.trackMaxNumberListLibraries.Size = new System.Drawing.Size(543, 45);
             this.trackMaxNumberListLibraries.TabIndex = 14;
+            this.trackMaxNumberListLibraries.Value = 10;
             this.trackMaxNumberListLibraries.ValueChanged += new System.EventHandler(this.trackMaxNumberListLibraries_ValueChanged);
             // 
             // label3
@@ -104,6 +105,7 @@
             this.trackMaxFoldersInLib.Name = "trackMaxFoldersInLib";
             this.trackMaxFoldersInLib.Size = new System.Drawing.Size(543, 45);
             this.trackMaxFoldersInLib.TabIndex = 16;
+            this.trackMaxFoldersInLib.Value = 5;
             this.trackMaxFoldersInLib.ValueChanged += new System.EventHandler(this.trackMaxFoldersInLib_ValueChanged);
             // 
             // label2
@@ -144,7 +146,7 @@
             this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label5.Location = new System.Drawing.Point(265, 284);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(127, 15);
+            this.label5.Size = new System.Drawing.Size(126, 15);
             this.label5.TabIndex = 19;
             this.label5.Text = "Types of Lists/Libraries";
             // 
@@ -168,7 +170,7 @@
             this.chkTasks.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkTasks.Location = new System.Drawing.Point(493, 309);
             this.chkTasks.Name = "chkTasks";
-            this.chkTasks.Size = new System.Drawing.Size(55, 19);
+            this.chkTasks.Size = new System.Drawing.Size(54, 19);
             this.chkTasks.TabIndex = 21;
             this.chkTasks.Text = "Tasks";
             this.chkTasks.UseVisualStyleBackColor = true;
@@ -188,6 +190,8 @@
             // chkCreateFolders
             // 
             this.chkCreateFolders.AutoSize = true;
+            this.chkCreateFolders.Checked = true;
+            this.chkCreateFolders.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCreateFolders.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkCreateFolders.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkCreateFolders.Location = new System.Drawing.Point(268, 373);
@@ -217,9 +221,9 @@
             this.lblNumOfLists.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblNumOfLists.Location = new System.Drawing.Point(810, 176);
             this.lblNumOfLists.Name = "lblNumOfLists";
-            this.lblNumOfLists.Size = new System.Drawing.Size(13, 15);
+            this.lblNumOfLists.Size = new System.Drawing.Size(19, 15);
             this.lblNumOfLists.TabIndex = 25;
-            this.lblNumOfLists.Text = "0";
+            this.lblNumOfLists.Text = "10";
             // 
             // lblNumOfFolders
             // 
@@ -230,7 +234,7 @@
             this.lblNumOfFolders.Name = "lblNumOfFolders";
             this.lblNumOfFolders.Size = new System.Drawing.Size(13, 15);
             this.lblNumOfFolders.TabIndex = 26;
-            this.lblNumOfFolders.Text = "0";
+            this.lblNumOfFolders.Text = "5";
             // 
             // lblNumLevels
             // 
@@ -298,6 +302,8 @@
             this.Controls.Add(this.trackMaxNumberListLibraries);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm06Lists";
             this.Text = "frm06Lists";
             this.Controls.SetChildIndex(this.lblTitle, 0);

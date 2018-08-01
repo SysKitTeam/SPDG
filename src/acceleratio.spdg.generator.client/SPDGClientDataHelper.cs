@@ -70,7 +70,7 @@ namespace Acceleratio.SPDG.Generator.Client
         }
 
 
-        public void CreateNewSiteCollection(string title, string siteCollectionUrl, string owner)
+       public void CreateNewSiteCollection(string title, string siteCollectionUrl, string owner)
         {
             bool isSiteCollectionExists = false;
 

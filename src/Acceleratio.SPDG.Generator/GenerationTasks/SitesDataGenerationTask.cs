@@ -26,36 +26,43 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
             int totalSteps = WorkingDefinition.NumberOfSitesToCreate;
             totalSteps = totalSteps * Owner.WorkingSiteCollections.Count;
             return totalSteps;
-        }        
+        }
 
         public override bool IsActive
         {
             get { return !WorkingDefinition.UseOnlyExistingSites; }
         }
 
-        internal void CreateSubsites(ref List<SiteInfo> sites, SPDGWeb parentWeb, int currentLevel, int maxLevels, ref int siteCounter, int maxSitesToCreate, string parentBaseName)
+        private int SiteCounter { get; set; }
+        private List<SiteInfo> Sites { get; set; }
+       
+        internal void CreateSubsites(SPDGWeb parentWeb, int currentLevel, int maxLevels, int maxSitesToCreate, string parentBaseName)
         {            
             Random rnd = new Random();
             string baseName = "";
 
-            int sitesToCreate = (int)((rnd.Next(3) + 1) / ((currentLevel+1) / (float)maxLevels));
+            int value = rnd.Next(7) + 1;
+
+            int sitesToCreate = (int)(value / ((currentLevel+1) / (float)maxLevels));
+
+            Log.Write($"{parentWeb.Title} (int)({value}) / (({currentLevel + 1}) / (float){maxLevels})), sitesToCreate: {sitesToCreate}");
 
             for (int i = 0; i < sitesToCreate; i++)
             {
-                if (siteCounter < maxSitesToCreate)
+                if (SiteCounter < maxSitesToCreate)
                 {
                     var childSubsite = CreateSubsite(parentWeb, parentBaseName, currentLevel, out baseName);
-                    siteCounter++;
+                    SiteCounter++;
                     if (childSubsite != null)
                     {
                         SiteInfo siteInfo = new SiteInfo();
                         siteInfo.URL = childSubsite.Url;
                         Guid siteID = childSubsite.ID;
                         siteInfo.ID = siteID;
-                        sites.Add(siteInfo);
+                        Sites.Add(siteInfo);
                         if (currentLevel < maxLevels)
                         {
-                            CreateSubsites(ref sites, childSubsite, currentLevel + 1, maxLevels, ref siteCounter, maxSitesToCreate, baseName);
+                            CreateSubsites(childSubsite, currentLevel + 1, maxLevels, maxSitesToCreate, baseName);
                         }
                     }
                 }
@@ -70,14 +77,11 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
                 {
                     
                     InitWebTemplate(siteColl.RootWeb);
-
                     
-                    int sitecounter = 0;
-
-                    List<SiteInfo> sites = new List<SiteInfo>(); 
-                    CreateSubsites(ref sites, siteColl.RootWeb, 0, WorkingDefinition.MaxNumberOfLevelsForSites, ref sitecounter, WorkingDefinition.NumberOfSitesToCreate, "");
+                    this.Sites = new List<SiteInfo>(); 
+                    CreateSubsites(siteColl.RootWeb, 0, WorkingDefinition.MaxNumberOfLevelsForSites, WorkingDefinition.NumberOfSitesToCreate, "");
                    
-                    siteCollInfo.Sites.AddRange(sites);
+                    siteCollInfo.Sites.AddRange(Sites);
                 }
             }
         }
@@ -85,7 +89,9 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
         private SPDGWeb CreateSubsite(SPDGWeb parentWeb, string parentBaseName, int level, out string baseName)
         {
             string siteName, url;
-            findAvailableSiteName(parentWeb, out siteName, out url, parentBaseName, level, out baseName);            
+
+            findAvailableSiteName(parentWeb, out siteName, out url, parentBaseName, level, out baseName);
+
             Owner.IncrementCurrentTaskProgress("Creating Site '" + parentWeb.Url + "/" + url + "'",0);
 
             SPDGWeb childWeb = null;
@@ -133,29 +139,28 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
             IList<string> primaryCollection;
             IList<string> secondaryCollection;
 
-            if (level%3 == 0)
-            {
-                primaryCollection = SampleData.Offices;
-                secondaryCollection = SampleData.Dates;
-            }
-            else if (level%3 == 1)
+           if (level%3 == 0)
             {
                 primaryCollection = SampleData.Departments.GroupBy(s => s.Department).Select(grp => grp.First()).Select(d => d.Department).ToList();
                 secondaryCollection = SampleData.Dates;
             }
-            else 
+            else if (level % 3 == 1)
             {
                 primaryCollection = SampleData.Departments.Where(s => s.Department == parentBaseName).Select(s => s.Subdepartment).ToList();
                 secondaryCollection = SampleData.Dates;
             }
+            else
+            {
+                primaryCollection = SampleData.Offices;
+                secondaryCollection = SampleData.Dates;
+            }
 
-            
             string candidate = SampleData.GetSampleValueRandom(primaryCollection);
             string leafName = Utils.GenerateSlug(candidate, 7);
             baseName = candidate;
             
             int i = 0;
-            while (candidate==parentBaseName || web.Webs.Any(s => s.Url.Equals(web.Url + "/" + leafName)))
+            while (candidate==parentBaseName || web.Webs.Any(s => s.Url.Equals(web.Url + "/" + leafName) || s.Title == candidate))
             {
                 candidate = SampleData.GetRandomName(primaryCollection, secondaryCollection, null, ref i, out baseName);
                 if (i < 3)

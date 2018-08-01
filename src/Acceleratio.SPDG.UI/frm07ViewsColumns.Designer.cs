@@ -166,6 +166,8 @@
             this.Controls.Add(this.trackNumViewsPerList);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm07ViewsColumns";
             this.Text = "frm07ViewsColumns";
             this.Controls.SetChildIndex(this.lblTitle, 0);

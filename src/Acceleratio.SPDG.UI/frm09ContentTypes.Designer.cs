@@ -103,7 +103,7 @@
             this.chkAddSiteColumns.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkAddSiteColumns.Location = new System.Drawing.Point(265, 279);
             this.chkAddSiteColumns.Name = "chkAddSiteColumns";
-            this.chkAddSiteColumns.Size = new System.Drawing.Size(212, 19);
+            this.chkAddSiteColumns.Size = new System.Drawing.Size(211, 19);
             this.chkAddSiteColumns.TabIndex = 32;
             this.chkAddSiteColumns.Text = "Add site columns to Content Types";
             this.chkAddSiteColumns.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@
             this.chkContentTypesCanInherit.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.chkContentTypesCanInherit.Location = new System.Drawing.Point(265, 365);
             this.chkContentTypesCanInherit.Name = "chkContentTypesCanInherit";
-            this.chkContentTypesCanInherit.Size = new System.Drawing.Size(340, 19);
+            this.chkContentTypesCanInherit.Size = new System.Drawing.Size(339, 19);
             this.chkContentTypesCanInherit.TabIndex = 34;
             this.chkContentTypesCanInherit.Text = "Content Types can inherit from other custom content types";
             this.chkContentTypesCanInherit.UseVisualStyleBackColor = true;
@@ -165,6 +165,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.chkCreateSomeConentTypes);
             this.Controls.Add(this.ucSteps1);
+            this.MaximumSize = new System.Drawing.Size(937, 683);
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm09ContentTypes";
             this.Text = "frm09ContentTypes";
             this.Controls.SetChildIndex(this.lblTitle, 0);

@@ -124,7 +124,32 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
         {                        
             fileTypeRotator();
             byte[] fileContent = getFileContent();
-            var url = SampleData.GetSampleValueRandom(SampleData.FirstNames) + " " + SampleData.GetSampleValueRandom(SampleData.LastNames) + " " + SampleData.GetRandomNumber(1, 30000) + "." + _currentFileType;
+
+            Random rnd = new Random();
+            int randomValue = rnd.Next(7);
+            string url = "";
+
+            if ((randomValue % 6) == 0)
+            {
+                url = SampleData.GetSampleValueRandom(SampleData.Documents) + " " + SampleData.GetSampleValueRandom(SampleData.Departments.Select(d => d.Department).ToList()) + "." + _currentFileType;
+            }
+            else if ((randomValue % 5) == 0)
+            {
+                url = SampleData.GetSampleValueRandom(SampleData.Years) + " " + SampleData.GetSampleValueRandom(SampleData.Documents) + " " + SampleData.GetSampleValueRandom(SampleData.Departments.Select(d => d.Department).ToList()) + "." + _currentFileType;
+            }
+            else if ((randomValue % 4) == 0)
+            {
+                url = SampleData.GetSampleValueRandom(SampleData.Documents) + " " + SampleData.GetSampleValueRandom(SampleData.FirstNames) + "." + _currentFileType;
+            }
+            else if ((randomValue % 3) == 0)
+            {
+                url = SampleData.GetSampleValueRandom(SampleData.Documents) + " " + SampleData.GetSampleValueRandom(SampleData.Years) + "." + _currentFileType;
+            }
+            else
+            {
+                url = SampleData.GetSampleValueRandom(SampleData.Documents) + "." + _currentFileType;
+            }
+
             var spFile = folder.AddFile(url, fileContent, true);
             var fileItem = spFile.Item;
             if (fileItem != null)
