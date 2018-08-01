@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ucSteps1 = new Acceleratio.SPDG.UI.ucSteps();
             this.radioConnectSPOnline = new System.Windows.Forms.RadioButton();
             this.radioConnectSPOnPremise = new System.Windows.Forms.RadioButton();
@@ -41,6 +42,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtTenantName = new System.Windows.Forms.TextBox();
             this.lblTenantName = new System.Windows.Forms.Label();
+            this.texboxToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,6 +152,8 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(383, 23);
             this.txtUserName.TabIndex = 17;
+            this.txtUserName.Enter += new System.EventHandler(this.txtUserName_Enter);
+            this.txtUserName.Leave += new System.EventHandler(this.txtUserName_Leave);
             // 
             // lblUserName
             // 
@@ -188,6 +192,8 @@
             this.txtTenantName.Name = "txtTenantName";
             this.txtTenantName.Size = new System.Drawing.Size(383, 20);
             this.txtTenantName.TabIndex = 21;
+            this.txtTenantName.Enter += new System.EventHandler(this.txtTenantName_Enter);
+            this.txtTenantName.Leave += new System.EventHandler(this.txtTenantName_Leave);
             // 
             // lblTenantName
             // 
@@ -199,6 +205,11 @@
             this.lblTenantName.Size = new System.Drawing.Size(81, 15);
             this.lblTenantName.TabIndex = 20;
             this.lblTenantName.Text = "Tenant Name:";
+            // 
+            // texboxToolTip
+            // 
+            this.texboxToolTip.ShowAlways = true;
+            this.texboxToolTip.ToolTipTitle = "Help";
             // 
             // frm01Connect
             // 
@@ -216,8 +227,6 @@
             this.Controls.Add(this.radioConnectSPOnPremise);
             this.Controls.Add(this.radioConnectSPOnline);
             this.Controls.Add(this.ucSteps1);
-            this.MaximumSize = new System.Drawing.Size(937, 683);
-            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frm01Connect";
             this.Text = "frm01Connect";
             this.VisibleChanged += new System.EventHandler(this.frm01Connect_VisibleChanged);
@@ -260,5 +269,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTenantName;
         private System.Windows.Forms.Label lblTenantName;
+        private System.Windows.Forms.ToolTip texboxToolTip;
     }
 }
