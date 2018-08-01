@@ -63,13 +63,13 @@ namespace Acceleratio.SPDG.UI
         {          
             definition.NumberOfSecurityGroupsToCreate = 0;
             definition.NumberOfUsersToCreate = 0;
-            definition.NumberOfSitesToCreate = 50;
+            definition.NumberOfSitesToCreate = 300;
             definition.MaxNumberOfColumnsPerList = 0;
             definition.MaxNumberOfContentTypesPerSiteCollection = 0;
             definition.MaxNumberOfFoldersToGenerate = 0;
-            definition.MaxNumberofItemsToGenerate = 0;
+            definition.MaxNumberofItemsToGenerate = 25;
             definition.MaxNumberOfLevelsForSites = 3;
-            definition.MaxNumberOfListsAndLibrariesPerSite = 3;
+            definition.MaxNumberOfListsAndLibrariesPerSite = 10;
             definition.MaxNumberOfViewsPerList = 0;         
             definition.CreateNewSiteCollections = 1;
             definition.SiteTemplate = "Team Site";
@@ -93,13 +93,14 @@ namespace Acceleratio.SPDG.UI
             definition.ContentTypesCanInheritFromOtherContentType = true;
             definition.CreateContentTypes = true;
             definition.MaxNumberOfContentTypesPerSiteCollection = 10;
-            definition.PermissionsPercentOfSites = 30;
+            definition.PermissionsPercentOfSites = 60;
             definition.PermissionsPercentOfLists = 30;
             definition.PermissionsPerObject = 10;
             definition.PermissionsPercentForUsers = 20;
             definition.PermissionsPercentForSPGroups = 40;
             definition.PermissionsPercentOfListItems = 5;
-
+            definition.MaxNumberofDocumentLibraryItemsToGenerate = 25;
+            definition.PermissionsPercentOfFolders = 25;
 
         }
     }

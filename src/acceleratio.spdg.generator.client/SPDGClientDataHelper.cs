@@ -81,8 +81,7 @@ namespace Acceleratio.SPDG.Generator.Client
                 {
                     Url = string.Format("https://{0}.sharepoint.com/sites/{1}", _generatorDefinition.TenantName, name),
                     Owner = _generatorDefinition.SiteCollOwnerLogin,
-                    Template = "STS#0",
-                 
+                    Title = title
                 };
                 var spo= officeTenant.CreateSite(newSiteProperties);
                 context.Load(spo, i => i.IsComplete);

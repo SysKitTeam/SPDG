@@ -343,8 +343,12 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
         public override SPDGFolder GetFolder(string folderUrl)
         {
             var folder = _web.GetFolderByServerRelativeUrl(folderUrl);
+            
             _context.Load(folder);
             _context.Load(folder.ListItemAllFields);
+            _context.Load(folder, f => f.ListItemAllFields.HasUniqueRoleAssignments);
+            _context.ExecuteQuery();
+
             return new SPDGClientFolder(folder, _context);
         }
 

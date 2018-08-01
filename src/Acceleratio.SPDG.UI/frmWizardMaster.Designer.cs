@@ -235,7 +235,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(937, 683);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(937, 683);
             this.Name = "frmWizardMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SharePoint Data Generator";
