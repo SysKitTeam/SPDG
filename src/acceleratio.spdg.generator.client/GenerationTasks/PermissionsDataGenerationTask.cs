@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Acceleratio.SPDG.Generator.GenerationTasks;
 
@@ -19,7 +20,24 @@ namespace Acceleratio.SPDG.Generator.Client.GenerationTasks
         }
         protected override List<string> GetAvailableGroupsInDirectory()
         {
-            return _generator.DataHelper.GetAvailableGroupObjectsInDirectory().Select(x => x.DisplayName).ToList();
+            var allGroups = _generator.DataHelper.GetAvailableGroupObjectsInDirectory();
+
+            List<string> groups = new List<string>();
+
+            try
+            {
+                // office 365 groups (there is an email)
+                groups = allGroups.Where(g => g.Mail != null && g.Mail.Contains("@")).Select(g => g.Mail).ToList();
+
+                // security groups (there is no email, using display name to ensure user)
+                groups.AddRange(allGroups.Where(g => g.Mail == null || !g.Mail.Contains("@")).Select(g => g.DisplayName).ToList());
+            }
+            catch (Exception ex)
+            {
+                Errors.Log(ex);
+            }
+
+            return groups;
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.SharePoint.Client;
 
 namespace Acceleratio.SPDG.Generator.Client.SPModel
 {
-    class SPDGClientListItem :SPDGListItem
+    class SPDGClientListItem : SPDGListItem
     {
         private readonly ListItem _item;
         private readonly ClientContext _context;
@@ -18,7 +18,8 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
                 List<Expression<Func<ListItem, object>>> includeExpression = new List<Expression<Func<ListItem, object>>>();
                 includeExpression.Add(item => item.Id);
                 includeExpression.Add(item => item.DisplayName);
-                includeExpression.Add(item => item.HasUniqueRoleAssignments);                
+                includeExpression.Add(item => item.HasUniqueRoleAssignments);
+                includeExpression.Add(item => item["EncodedAbsUrl"]);
                 return includeExpression.ToArray();
             }
         }

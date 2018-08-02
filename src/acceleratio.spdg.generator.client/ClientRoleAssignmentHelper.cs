@@ -27,6 +27,8 @@ namespace Acceleratio.SPDG.Generator.Client
             }
             securableObject.RoleAssignments.Add(p, roleDefinitionBindingCollection);
             context.ExecuteQuery();
+
+
         }
 
         public static SPDGRoleAssignment GetRoleAssignmentByPrincipal(SecurableObject securableObject, ClientContext context, SPDGPrincipal principal)

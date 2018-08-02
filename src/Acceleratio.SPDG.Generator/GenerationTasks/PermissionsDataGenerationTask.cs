@@ -332,6 +332,7 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
         private void setItemPermissions(SPDGWeb web, string listName)
         {
             var list = web.GetList(listName);
+           
             foreach (var item in list.Items)
             {
                 if (SampleData.GetRandomNumber(1, 100) < WorkingDefinition.PermissionsPercentOfListItems)
