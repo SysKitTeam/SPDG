@@ -175,7 +175,12 @@ namespace Acceleratio.SPDG.Generator
                 throw ex;
             }
             
-        }      
+        }
+
+        public static string GetRandomEmail()
+        {
+            return EmailAddreses[GetRandomNumber(0, EmailAddreses.Count - 1)];
+        }
 
         public static int GetRandomNumber(int min, int max)
         {

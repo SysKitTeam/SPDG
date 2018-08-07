@@ -349,11 +349,53 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
                     }
 
                     Owner.IncrementCurrentTaskProgress("Unique permissions added for item/document '" + item.DisplayName + "' in list '" + list.Title);
+
+                    shareItem(list, item);
                 }
                 else
                 {
                     Owner.IncrementCurrentTaskProgress("");
                 }
+            }
+        }
+
+        private void shareItem(SPDGList list, SPDGListItem item)
+        {
+           
+            if (list.IsDocumentLibrary && item.SupportsSharing)
+            {
+                // this is cached for SPO and thus fast
+                var users = GetAvailableUsersInDirectory();
+                Owner.IncrementCurrentTaskProgress("Sharing document '" + item.DisplayName + "' in library '" + list.Title, 0);
+
+                var emailsForView = new HashSet<string>();
+                var emailsForEdit = new HashSet<string>();
+                for (int i = 0; i < _permissionsPerObject; i++)
+                {
+                    var emailCollection = emailsForView;
+                    if (SampleData.GetRandomNumber(0, 100) < 30)
+                    {
+                        emailCollection = emailsForEdit;
+                    }
+
+                    if (SampleData.GetRandomNumber(0, 100) < 20)
+                    {
+                        // anonymous
+                        emailCollection.Add("");
+                    }
+                    else if (SampleData.GetRandomNumber(1, 100) < 50)
+                    {
+                        emailCollection.Add(users[SampleData.GetRandomNumber(0, users.Count - 1)]);
+                        //emailCollection.Add(getRandomSPUser().Email);
+                    }
+                    else
+                    {
+                        emailCollection.Add(SampleData.GetRandomEmail());
+                    }
+                }
+
+                item.ShareWithPeople(emailsForView, false);
+                item.ShareWithPeople(emailsForEdit, true);
             }
         }
 
@@ -364,7 +406,7 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
             var rnd = SampleData.GetRandomNumber(0, 100);
             if (rnd < WorkingDefinition.PermissionsPercentForUsers)
             {
-                principal = _siteSpUsers[SampleData.GetRandomNumber(0, _siteSpUsers.Count - 1)];
+                principal = getRandomSPUser();
             }
             else if (rnd < WorkingDefinition.PermissionsPercentForUsers + WorkingDefinition.PermissionsPercentForSPGroups)
             {
@@ -384,6 +426,17 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
                 var selected = availableRoledefinitions[SampleData.GetRandomNumber(0, availableRoledefinitions.Count - 1)];
                 securableObject.AddRoleAssignment(principal, new List<SPDGRoleDefinition> { selected });
             }
+        }
+
+        private SPDGUser getRandomSPUser()
+        {
+            SPDGUser user;
+            do
+            {
+                user = _siteSpUsers[SampleData.GetRandomNumber(0, _siteSpUsers.Count - 1)];
+            } while (user.IsGuestUser);
+
+            return user;
         }
     }
 }

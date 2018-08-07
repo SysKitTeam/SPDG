@@ -111,7 +111,7 @@ namespace Acceleratio.SPDG.Generator.GenerationTasks
                                     {
                                         addDocumentToFolder(list,list.RootFolder);
                                     }
-
+                                    listInfo.ItemCount = _docsAdded;
                                 }
                             }
                         }

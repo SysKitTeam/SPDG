@@ -13,15 +13,11 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
         private readonly List _list;
         private readonly ClientContext _context;
 
-        public override string Title
-        {
-            get { return _list.Title; }
-        }
+        public override string Title => _list.Title;
 
-        public override string DefaultViewUrl
-        {
-            get { return _list.DefaultViewUrl; }
-        }
+        public override string DefaultViewUrl => _list.DefaultViewUrl;
+
+        public override bool IsDocumentLibrary => _list.BaseTemplate == 101;
 
         public override SPDGFolder RootFolder
         {
@@ -71,6 +67,7 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
                 includeExpression.Add(web => web.DefaultViewUrl);
                 includeExpression.Add(web => web.RootFolder);
                 includeExpression.Add(web => web.HasUniqueRoleAssignments);
+                includeExpression.Add(web => web.BaseTemplate);
                 return includeExpression.ToArray();
             }
         }
@@ -190,5 +187,6 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
             _list.Views.Add(viewCreationInfo);
             _context.ExecuteQuery();            
         }
+
     }
 }
