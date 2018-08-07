@@ -8,7 +8,7 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
     {
         private readonly User _user;
 
-        public SPDGClientUser(User user) : base(user.Id, user.LoginName, user.Title)
+        public SPDGClientUser(User user) : base(user.Id, user.LoginName, user.Title, user.Email)
         {
             _user = user;
         }
@@ -21,6 +21,11 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
         public override bool IsDomainGroup
         {
             get { return _user.PrincipalType == PrincipalType.SecurityGroup; }
+        }
+
+        public override bool IsGuestUser
+        {
+            get { return _user.IsShareByEmailGuestUser || _user.IsEmailAuthenticationGuestUser; }
         }
     }
 }
