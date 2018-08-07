@@ -83,8 +83,7 @@ namespace Acceleratio.SPDG.Generator.Client
                 {
                     Url = siteUrl,
                     Owner = _generatorDefinition.SiteCollOwnerLogin,
-                    Title = title,
-                    
+                    Title = title
                 };
                 var spo= officeTenant.CreateSite(newSiteProperties);
                 context.Load(spo, i => i.IsComplete);
