@@ -5,6 +5,7 @@ using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 using Microsoft.Online.SharePoint.TenantAdministration;
+using Microsoft.Online.SharePoint.TenantManagement;
 using Microsoft.SharePoint.Client;
 using Group = Microsoft.Azure.ActiveDirectory.GraphClient.Group;
 using User = Microsoft.Azure.ActiveDirectory.GraphClient.User;
@@ -77,11 +78,13 @@ namespace Acceleratio.SPDG.Generator.Client
             {
                 context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utils.StringToSecureString(_generatorDefinition.Password));
                 var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
+                var siteUrl = string.Format("https://{0}.sharepoint.com/sites/{1}", _generatorDefinition.TenantName, name);
                 var newSiteProperties = new SiteCreationProperties()
                 {
-                    Url = string.Format("https://{0}.sharepoint.com/sites/{1}", _generatorDefinition.TenantName, name),
+                    Url = siteUrl,
                     Owner = _generatorDefinition.SiteCollOwnerLogin,
-                    Title = title
+                    Title = title,
+                    
                 };
                 var spo= officeTenant.CreateSite(newSiteProperties);
                 context.Load(spo, i => i.IsComplete);
@@ -92,7 +95,12 @@ namespace Acceleratio.SPDG.Generator.Client
                     System.Threading.Thread.Sleep(10000);
                     spo.RefreshLoad();
                     context.ExecuteQuery();
-                }                                                
+                }
+
+                var siteProps = officeTenant.GetSitePropertiesByUrl(siteUrl, true);
+                siteProps.SharingCapability = SharingCapabilities.ExternalUserAndGuestSharing;
+                siteProps.Update();
+                context.ExecuteQuery();
             }
         }
 
