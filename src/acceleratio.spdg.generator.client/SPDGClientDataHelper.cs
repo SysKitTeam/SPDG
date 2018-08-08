@@ -74,23 +74,26 @@ namespace Acceleratio.SPDG.Generator.Client
         public void CreateNewSiteCollection(string title, string name, string owner)
         {
             var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
+            string siteUrl = "";
+
             using (ClientContext context = new ClientContext(url))
+
             {
                 context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utils.StringToSecureString(_generatorDefinition.Password));
                 var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
-                var siteUrl = string.Format("https://{0}.sharepoint.com/sites/{1}", _generatorDefinition.TenantName, name);
+                siteUrl = string.Format("https://{0}.sharepoint.com/sites/{1}", _generatorDefinition.TenantName, name);
                 var newSiteProperties = new SiteCreationProperties()
                 {
                     Url = siteUrl,
                     Owner = _generatorDefinition.SiteCollOwnerLogin,
                     Title = title
                 };
-                var spo= officeTenant.CreateSite(newSiteProperties);
+                var spo = officeTenant.CreateSite(newSiteProperties);
                 context.Load(spo, i => i.IsComplete);
                 context.ExecuteQuery();
-                                
+
                 while (!spo.IsComplete)
-                {                    
+                {
                     System.Threading.Thread.Sleep(10000);
                     spo.RefreshLoad();
                     context.ExecuteQuery();
@@ -101,6 +104,47 @@ namespace Acceleratio.SPDG.Generator.Client
                 siteProps.Update();
                 context.ExecuteQuery();
             }
+
+            CreateCustomPermissionLevels(siteUrl);
+        }
+
+        private void CreateCustomPermissionLevels(string siteUrl)
+        {
+            using (ClientContext clientContext = new ClientContext(siteUrl))
+            {
+                clientContext.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utils.StringToSecureString(_generatorDefinition.Password));
+
+                Web web = clientContext.Site.RootWeb;
+                clientContext.Load(web);
+                clientContext.Load(web.AllProperties);
+                clientContext.Load(web.RoleDefinitions);
+                clientContext.ExecuteQuery();
+                var roleDefinitions = web.RoleDefinitions;
+
+                string[] rolesToCopy = new string[] {"Full Control", "Read", "Contribute"};
+
+                foreach (var role in rolesToCopy)
+                {
+                    var roleDefinition = roleDefinitions.GetByName(role);
+                    clientContext.Load(roleDefinition);
+                    clientContext.ExecuteQuery();
+
+                    if (roleDefinition != null)
+                    {
+                        RoleDefinitionCreationInformation roleDefinitionCreationInformation =
+                            new RoleDefinitionCreationInformation();
+                        roleDefinitionCreationInformation.BasePermissions = roleDefinition.BasePermissions;
+                        roleDefinitionCreationInformation.Name =$"{role} - Custom";
+                        
+                        roleDefinitions.Add(roleDefinitionCreationInformation);
+
+                        clientContext.Load(roleDefinitions);
+                        clientContext.ExecuteQuery();
+                    }
+
+                }
+            }
+
         }
 
         private string GetToken()
