@@ -71,8 +71,10 @@ namespace Acceleratio.SPDG.Generator.Client
         }
 
 
-        public void CreateNewSiteCollection(string title, string name, string owner)
+       public void CreateNewSiteCollection(string title, string siteCollectionUrl, string owner)
         {
+            bool isSiteCollectionExists = false;
+
             var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
             string siteUrl = "";
 
