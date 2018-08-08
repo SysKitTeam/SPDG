@@ -5,6 +5,7 @@ using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 using Microsoft.Online.SharePoint.TenantAdministration;
+using Microsoft.Online.SharePoint.TenantManagement;
 using Microsoft.SharePoint.Client;
 using Group = Microsoft.Azure.ActiveDirectory.GraphClient.Group;
 using User = Microsoft.Azure.ActiveDirectory.GraphClient.User;
@@ -75,51 +76,78 @@ namespace Acceleratio.SPDG.Generator.Client
             bool isSiteCollectionExists = false;
 
             var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
-            
+            string siteUrl = "";
 
-            using (ClientContext siteContext = new ClientContext(siteCollectionUrl))
+            using (ClientContext context = new ClientContext(url))
+
             {
-                try
+                context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utils.StringToSecureString(_generatorDefinition.Password));
+                var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
+                siteUrl = string.Format("https://{0}.sharepoint.com/sites/{1}", _generatorDefinition.TenantName, name);
+                var newSiteProperties = new SiteCreationProperties()
                 {
-                    var site = siteContext.Site;
-                    siteContext.Load(site);
-                    siteContext.ExecuteQuery();
-                    isSiteCollectionExists = true;
-                }
-                catch (Exception ex)
+                    Url = siteUrl,
+                    Owner = _generatorDefinition.SiteCollOwnerLogin,
+                    Title = title
+                };
+                var spo = officeTenant.CreateSite(newSiteProperties);
+                context.Load(spo, i => i.IsComplete);
+                context.ExecuteQuery();
+
+                while (!spo.IsComplete)
                 {
-                    isSiteCollectionExists = false;
-                }
-            }
-
-            if (!isSiteCollectionExists)
-            {
-                using (ClientContext context = new ClientContext(url))
-                {
-
-
-                    context.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username,
-                        Utils.StringToSecureString(_generatorDefinition.Password));
-                    var officeTenant = new Microsoft.Online.SharePoint.TenantAdministration.Tenant(context);
-                    var newSiteProperties = new SiteCreationProperties()
-                    {
-                        Url = siteCollectionUrl,
-                        Owner = _generatorDefinition.SiteCollOwnerLogin,
-                        Template = "STS#0"
-                    };
-                    var spo = officeTenant.CreateSite(newSiteProperties);
-                    context.Load(spo, i => i.IsComplete);
+                    System.Threading.Thread.Sleep(10000);
+                    spo.RefreshLoad();
                     context.ExecuteQuery();
+                }
 
-                    while (!spo.IsComplete)
+                var siteProps = officeTenant.GetSitePropertiesByUrl(siteUrl, true);
+                siteProps.SharingCapability = SharingCapabilities.ExternalUserAndGuestSharing;
+                siteProps.Update();
+                context.ExecuteQuery();
+            }
+
+            CreateCustomPermissionLevels(siteUrl);
+        }
+
+        private void CreateCustomPermissionLevels(string siteUrl)
+        {
+            using (ClientContext clientContext = new ClientContext(siteUrl))
+            {
+                clientContext.Credentials = new SharePointOnlineCredentials(_generatorDefinition.Username, Utils.StringToSecureString(_generatorDefinition.Password));
+
+                Web web = clientContext.Site.RootWeb;
+                clientContext.Load(web);
+                clientContext.Load(web.AllProperties);
+                clientContext.Load(web.RoleDefinitions);
+                clientContext.ExecuteQuery();
+                var roleDefinitions = web.RoleDefinitions;
+
+                string[] rolesToCopy = new string[] {"Full Control", "Read", "Contribute"};
+
+                foreach (var role in rolesToCopy)
+                {
+                    var roleDefinition = roleDefinitions.GetByName(role);
+                    clientContext.Load(roleDefinition);
+                    clientContext.ExecuteQuery();
+
+                    if (roleDefinition != null)
                     {
-                        System.Threading.Thread.Sleep(10000);
-                        spo.RefreshLoad();
-                        context.ExecuteQuery();
+                        RoleDefinitionCreationInformation roleDefinitionCreationInformation =
+                            new RoleDefinitionCreationInformation();
+                        roleDefinitionCreationInformation.BasePermissions = roleDefinition.BasePermissions;
+                        roleDefinitionCreationInformation.Name =$"{role} - Custom";
+                        
+                        roleDefinitions.Add(roleDefinitionCreationInformation);
+
+                        clientContext.Load(roleDefinitions);
+                        clientContext.ExecuteQuery();
                     }
+
                 }
             }
-       }
+
+        }
 
         private string GetToken()
         {

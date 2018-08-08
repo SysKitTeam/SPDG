@@ -59,5 +59,11 @@ namespace Acceleratio.SPDG.Generator.Server.SPModel
         {
             _item.Update();
         }
+
+        public override bool SupportsSharing { get; }
+        public override void ShareWithPeople(IEnumerable<string> emails, bool isEdit)
+        {
+            // nothing for on prem
+        }
     }
 }

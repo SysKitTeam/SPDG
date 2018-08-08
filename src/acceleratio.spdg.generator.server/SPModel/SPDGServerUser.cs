@@ -7,7 +7,7 @@ namespace Acceleratio.SPDG.Generator.Server.SPModel
     {
         private readonly SPUser _user;
 
-        public SPDGServerUser(SPUser user) : base(user.ID, user.LoginName, user.Name)
+        public SPDGServerUser(SPUser user) : base(user.ID, user.LoginName, user.Name, user.Email)
         {
             _user = user;
         }
@@ -21,5 +21,7 @@ namespace Acceleratio.SPDG.Generator.Server.SPModel
         {
             get { return _user.IsDomainGroup; }
         }
+
+        public override bool IsGuestUser => false;
     }
 }

@@ -124,5 +124,7 @@ namespace Acceleratio.SPDG.Generator.Server.SPModel
             strColl.AddRange(viewFields.ToArray());
             SPView view = _spList.Views.Add(viewName, strColl, strQuery, rowLimit, paged, makeDefault);
         }
+
+        public override bool IsDocumentLibrary => _spList.BaseTemplate == SPListTemplateType.DocumentLibrary;
     }
 }

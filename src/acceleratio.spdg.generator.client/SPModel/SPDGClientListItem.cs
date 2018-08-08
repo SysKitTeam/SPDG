@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.Sharing;
 
 namespace Acceleratio.SPDG.Generator.Client.SPModel
 {
-    class SPDGClientListItem :SPDGListItem
+    class SPDGClientListItem : SPDGListItem
     {
         private readonly ListItem _item;
         private readonly ClientContext _context;
@@ -18,7 +20,8 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
                 List<Expression<Func<ListItem, object>>> includeExpression = new List<Expression<Func<ListItem, object>>>();
                 includeExpression.Add(item => item.Id);
                 includeExpression.Add(item => item.DisplayName);
-                includeExpression.Add(item => item.HasUniqueRoleAssignments);                
+                includeExpression.Add(item => item.HasUniqueRoleAssignments);
+                includeExpression.Add(item => item["EncodedAbsUrl"]);
                 return includeExpression.ToArray();
             }
         }
@@ -51,9 +54,42 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
 
         public override void BreakRoleInheritance(bool copyRoleDefinitions)
         {
-            _item.BreakRoleInheritance(copyRoleDefinitions, false);
-            _context.ExecuteQuery();
+            _item.BreakRoleInheritance(copyRoleDefinitions, false);         
         }
+
+
+        public override void ShareWithPeople(IEnumerable<string> emails, bool isEdit)
+        {
+            if (emails == null || !emails.Any())
+            {
+                return;
+            }
+            var userRoles = new List<UserRoleAssignment>();
+            foreach (var user in emails)
+            {
+                UserRoleAssignment role = new UserRoleAssignment();
+                role.UserId = user;
+                role.Role = isEdit ? Role.Edit : Role.View;
+                userRoles.Add(role);
+            }
+            string message = "Please accept this invite.";
+            
+            //the parameter before the message is responsible for sending emails
+            DocumentSharingManager.UpdateDocumentSharingInfo(_context, (string) _item["EncodedAbsUrl"], userRoles, true, true, false, message, true, true);
+            
+          
+            _context.ExecuteQuery();
+
+
+            // alternatively we can do this like below, but this does not add any people
+            // Web.CreateAnonymousLink(_context, (string)_item["EncodedAbsUrl"], false);
+            // Web.CreateOrganizationSharingLink(_context, (string) _item["EncodedAbsUrl"], true);
+            // _context.ExecuteQuery();
+
+            // for web sharing the following can be used
+            //  WebSharingManager.UpdateWebSharingInformation(_context, _item.ParentList.ParentWeb, userRoles, true, message, true, true);
+        }
+
 
         public override bool HasUniqueRoleAssignments
         {
@@ -70,6 +106,8 @@ namespace Acceleratio.SPDG.Generator.Client.SPModel
         {
             get { return _item.DisplayName; }
         }
+
+        public override bool SupportsSharing => true;
 
         public override void Update()
         {
