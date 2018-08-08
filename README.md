@@ -14,18 +14,18 @@ You can create data to test SharePoint, to simulate and recreate specific scenar
 * Customized SharePoint groups
 * Unique permissions 
 
-SPDG uses random names from the .csv files stored in the directory. Based on that data, it generates user names, web applications, sites, site collections, and other SharePoint content. [Learn more...](https://github.com/Acceleratio/SPDG/wiki/Help)
+SPDG uses random names from the .csv files stored in the directory. Based on that data, it generates user names, web applications, sites, site collections, and other SharePoint content. [Learn more...](https://github.com/SysKiTeam/SPDG/wiki/Help)
 
 Please note that SPDG does not support SharePoint 2007. 
 
 ## Requirements
-To build this solution you must have .net 4.5, however once built Acceleratio SPDG can also be used on machines with .net 3.5 (potential SP2010 environments). Visual Studio 2015 is recommended.
+To build this solution you must have .net 4.5, however once built SysKit SPDG can also be used on machines with .net 3.5 (potential SP2010 environments). Visual Studio 2015 or better is recommended.
 
 SPDG can be run on either a workstation or a SharePoint server. However, please note that for On Premises data generation it MUST be run from a SharePoint server, since the Server Object Model is used is the generation procedure. 
 
 ## Usage
 To use SPDG you can:
 * Build the binaries yourself
-* Use the [ClickOnce](https://github.com/Acceleratio/SPDG/raw/master/releases/ClickOnce/setup.exe) installer
-* [Download](https://github.com/Acceleratio/SPDG/raw/master/releases/binaries/SPDG.zip) the latest binaries
+* Use the [ClickOnce](https://github.com/SysKitTeam/SPDG/raw/master/releases/ClickOnce/setup.exe) installer
+* [Download](https://github.com/SysKitTeam/SPDG/raw/master/releases/binaries/SPDG.zip) the latest binaries
 
