@@ -49,7 +49,7 @@
     <InstallUrl>https://rawgithub.com/Acceleratio/SPDG/master/releases/ClickOnce/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
     <ApplicationVersion Condition="'$(build_number)' != ''">0.5.1.$(build_number)</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
