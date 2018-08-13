@@ -14,7 +14,20 @@
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
     <PublisherName>SysKit Ltd.</PublisherName>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,10 +84,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>EC446C2D7D3542DB583492857652D500CBF5406C</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Acceleratio.SPDG.UI_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
+  </PropertyGroup>  
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
@@ -83,7 +93,7 @@
     <SignAssembly>true</SignAssembly>
     <SignManifests>true</SignManifests>
     <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
-	<ManifestCertificateThumbprint>89D2738F1CE9C29EE41CBD929339563F0F23616B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3514BDAE43722F6C21914C79ADD31661727A13F9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -256,7 +266,6 @@
     <EmbeddedResource Include="ucSteps.resx">
       <DependentUpon>ucSteps.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Acceleratio.SPDG.UI_TemporaryKey.pfx" />
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
