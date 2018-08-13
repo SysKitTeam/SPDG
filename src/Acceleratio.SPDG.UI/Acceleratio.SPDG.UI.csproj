@@ -71,15 +71,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>EC446C2D7D3542DB583492857652D500CBF5406C</ManifestCertificateThumbprint>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('C:\BuildTools\')">
     <PublishUrl>..\..\releases\ClickOnce</PublishUrl>
-	<ManifestCertificateThumbprint>3514BDAE43722F6C21914C79ADD31661727A13F9</ManifestCertificateThumbprint>
-	<ManifestKeyFile>C:\BuildTools\Acceleratio.pfx</ManifestKeyFile>
-	<SignAssembly>true</SignAssembly>
+    <ManifestCertificateThumbprint>3514BDAE43722F6C21914C79ADD31661727A13F9</ManifestCertificateThumbprint>
+    <ManifestKeyFile>C:\BuildTools\Acceleratio.pfx</ManifestKeyFile>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
