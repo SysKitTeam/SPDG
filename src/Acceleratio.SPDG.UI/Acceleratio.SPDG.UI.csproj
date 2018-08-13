@@ -83,7 +83,6 @@
     <SignAssembly>true</SignAssembly>
     <SignManifests>true</SignManifests>
     <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
-    <ManifestCertificateThumbprint>89D2738F1CE9C29EE41CBD929339563F0F23616B</ManifestCertificateThumbprint>
     <ManifestKeyFile>C:\BuildTools\Acceleratio.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
