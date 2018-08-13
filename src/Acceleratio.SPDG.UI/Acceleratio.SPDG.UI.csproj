@@ -52,7 +52,7 @@
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
-    <ApplicationVersion Condition="'$(build_number)' != ''">0.5.1.$(build_number)</ApplicationVersion>
+    <ApplicationVersion Condition="'$(build_number)' != ''">1.5.1.$(build_number)</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -73,18 +73,15 @@
     <ManifestCertificateThumbprint>EC446C2D7D3542DB583492857652D500CBF5406C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Acceleratio.SPDG.UI_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('C:\BuildTools\')">
     <PublishUrl>..\..\releases\ClickOnce</PublishUrl>
-    <SignAssembly>true</SignAssembly>
-    <SignManifests>true</SignManifests>
-    <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
-    <ManifestCertificateThumbprint>89D2738F1CE9C29EE41CBD929339563F0F23616B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3514BDAE43722F6C21914C79ADD31661727A13F9</ManifestCertificateThumbprint>
     <ManifestKeyFile>C:\BuildTools\Acceleratio.pfx</ManifestKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -257,7 +254,6 @@
     <EmbeddedResource Include="ucSteps.resx">
       <DependentUpon>ucSteps.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Acceleratio.SPDG.UI_TemporaryKey.pfx" />
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
