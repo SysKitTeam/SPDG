@@ -90,9 +90,11 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('C:\BuildTools\')">
     <PublishUrl>..\..\releases\ClickOnce</PublishUrl>
-    <SignManifests>true</SignManifests>
-    <ManifestCertificateThumbprint>3514BDAE43722F6C21914C79ADD31661727A13F9</ManifestCertificateThumbprint>
+	<ManifestCertificateThumbprint>3514BDAE43722F6C21914C79ADD31661727A13F9</ManifestCertificateThumbprint>
 	<ManifestKeyFile>C:\BuildTools\Acceleratio.pfx</ManifestKeyFile>
+	<SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
