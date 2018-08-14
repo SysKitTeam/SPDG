@@ -66,6 +66,7 @@
     <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
     <ApplicationVersion Condition="'$(build_number)' != ''">1.5.1.$(build_number)</ApplicationVersion>
+	<ApplicationRevision Condition="'$(build_number)' != ''">$(build_number)</ApplicationRevision>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
