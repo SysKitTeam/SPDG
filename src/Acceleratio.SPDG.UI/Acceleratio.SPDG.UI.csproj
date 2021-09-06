@@ -70,16 +70,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>EC446C2D7D3542DB583492857652D500CBF5406C</ManifestCertificateThumbprint>
-  </PropertyGroup>
+  </PropertyGroup>  
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('C:\buildToolsEV\')">
-    <PublishUrl>..\..\releases\ClickOnce</PublishUrl>
-    <ManifestCertificateThumbprint>7655A154F6E54C836DFA6D4D685F55BE2C5367CF</ManifestCertificateThumbprint>
+    <PublishUrl>..\..\releases\ClickOnce</PublishUrl>    
     <ManifestKeyFile>C:\buildToolsEV\SysKit.pfx</ManifestKeyFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>C:\buildToolsEV\AssemblyIdentity.snk</AssemblyOriginatorKeyFile>
