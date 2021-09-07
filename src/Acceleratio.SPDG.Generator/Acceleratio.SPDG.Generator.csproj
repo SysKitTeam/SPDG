@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' And Exists('C:\BuildTools\')">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' And Exists('C:\buildToolsEV\')">
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>C:\buildToolsEV\AssemblyIdentity.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip, Version=1.9.6.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
@@ -110,7 +110,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release  if exist "C:\buildTools\" call  C:\buildTools\sign.bat $(TargetPath)</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release  if exist "C:\buildToolsEV\" call  C:\buildToolsEV\sign.bat $(TargetPath)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -72,17 +72,13 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>EC446C2D7D3542DB583492857652D500CBF5406C</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('C:\BuildTools\')">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('C:\buildToolsEV\')">
     <PublishUrl>..\..\releases\ClickOnce</PublishUrl>
-    <ManifestCertificateThumbprint>3514BDAE43722F6C21914C79ADD31661727A13F9</ManifestCertificateThumbprint>
-    <ManifestKeyFile>C:\BuildTools\Acceleratio.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>7655A154F6E54C836DFA6D4D685F55BE2C5367CF</ManifestCertificateThumbprint>    
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>C:\BuildTools\Acceleratio.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>C:\buildToolsEV\AssemblyIdentity.snk</AssemblyOriginatorKeyFile>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
@@ -957,7 +953,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release  if exist "C:\buildTools\" call  C:\buildTools\sign.bat $(TargetPath)</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release  if exist "C:\buildToolsEV\" call  C:\buildToolsEV\sign.bat $(TargetPath)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
