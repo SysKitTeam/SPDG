@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Acceleratio.SPDG.Generator.SPModel;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 using Microsoft.Online.SharePoint.TenantAdministration;
-using Microsoft.Online.SharePoint.TenantManagement;
 using Microsoft.SharePoint.Client;
 using Group = Microsoft.Azure.ActiveDirectory.GraphClient.Group;
 using User = Microsoft.Azure.ActiveDirectory.GraphClient.User;
@@ -15,6 +15,11 @@ namespace Acceleratio.SPDG.Generator.Client
     public class SPDGClientDataHelper : SPDGDataHelper
     {
         private readonly ClientGeneratorDefinition _generatorDefinition;
+
+        static SPDGClientDataHelper()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+        }
 
         public SPDGClientDataHelper(ClientGeneratorDefinition generatorDefinition)
         {
@@ -67,11 +72,11 @@ namespace Acceleratio.SPDG.Generator.Client
             {
                 Errors.Log(ex);
                 throw new CredentialValidationException(ex.Message);
-            }            
+            }
         }
 
 
-       public void CreateNewSiteCollection(string title, string siteCollectionUrl, string owner)
+        public void CreateNewSiteCollection(string title, string siteCollectionUrl, string owner)
         {
             bool isSiteCollectionExists = false;
             var url = string.Format("https://{0}-admin.sharepoint.com", _generatorDefinition.TenantName);
@@ -133,7 +138,7 @@ namespace Acceleratio.SPDG.Generator.Client
                 clientContext.ExecuteQuery();
                 var roleDefinitions = web.RoleDefinitions;
 
-                string[] rolesToCopy = new string[] {"Full Control", "Read", "Contribute"};
+                string[] rolesToCopy = new string[] { "Full Control", "Read", "Contribute" };
 
                 foreach (var role in rolesToCopy)
                 {
@@ -146,8 +151,8 @@ namespace Acceleratio.SPDG.Generator.Client
                         RoleDefinitionCreationInformation roleDefinitionCreationInformation =
                             new RoleDefinitionCreationInformation();
                         roleDefinitionCreationInformation.BasePermissions = roleDefinition.BasePermissions;
-                        roleDefinitionCreationInformation.Name =$"{role} - Custom";
-                        
+                        roleDefinitionCreationInformation.Name = $"{role} - Custom";
+
                         roleDefinitions.Add(roleDefinitionCreationInformation);
 
                         clientContext.Load(roleDefinitions);
